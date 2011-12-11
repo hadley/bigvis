@@ -57,7 +57,6 @@ density_2d <- function(bindata, bandwidth) {
   # [1:nbin[1], 1:nbin[2]]
   # image(z, useRaster = T)
   # 
-  browser()
   
   #To ensure that there are no negative values from floating point errors,
   #we multiply z by a matrix of 1's where z had positive values and 0's where 
