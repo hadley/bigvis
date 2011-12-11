@@ -29,7 +29,7 @@ bin_1d <- function(df, x, binwidth, origin = NULL) {
   
   stopifnot(length(binwidth == 1) && is.numeric(binwidth))
     
-  nbin <- bin_num(rng[2], binwidth, origin)
+  nbin <- trunc(bin_num(rng[2], binwidth, origin))
   counts <- fast_bin_1d(df, x, binwidth, origin, nbin)
   
   list(count = counts, range = c(origin, rng[2]), nbin = nbin)
