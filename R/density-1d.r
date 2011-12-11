@@ -10,7 +10,7 @@
 #' @param bindata Output from \code{\link{bin_1d}} or otherwise - needs
 #'   to be in the same format. 
 #' @param bandwidth smoothing bandwith - higher number = more smoothing.
-#' @exaples
+#' @examples
 #' x <- rnorm(1000)
 #' bin <- bin_1d(data.frame(x), "x", 0.01)
 #' dens <- density_1d(bin, 0.5)
