@@ -7,9 +7,9 @@
 
 density_2d <- function(bindata, bandwidth) {
   # if (is.vector(bandwidth)) {
-  # 	bandwidth <- diag(bandwidth)
+  #     bandwidth <- diag(bandwidth)
   # }
-	
+    
   a <- bindata$Values[["low"]]
   b <- bindata$Values[["high"]]
   counts <- bindata$Counts
@@ -34,7 +34,7 @@ density_2d <- function(bindata, bandwidth) {
   # Set up kernel matrix
   kappa <- list(0, 0)
   for (i in 1:2) {
-  	grid <- seq(-P[i]/2, P[i]/2, length = P[i]) * bandwidth[i]
+      grid <- seq(-P[i]/2, P[i]/2, length = P[i]) * bandwidth[i]
     kappa[[i]] <- dnorm(grid * delta[i]) / (n * bandwidth[i])
     #weight <- sum(kappa[[i]]) * delta[i] * n
     #kappa[[i]] <- kappa[[i]]/weight

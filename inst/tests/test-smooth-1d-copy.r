@@ -21,7 +21,7 @@ bandwidth <- 1
 
 
 dens1 <- density_1d(binx, bandwidth)
-	
+    
 dens2 <- density(x, bw = bandwidth)
 
 dens3 <- bkde(x,bandwidth = bandwidth)
@@ -42,50 +42,50 @@ plot(grid, d1(grid) - d2(grid), type = "l")
 mean((d1(grid) - d2(grid))^2)
 
 compare_density <- function(x, binwidth = .1, bandwidth = 1) {
-	df <- data.frame(x)
-	binx <- bin_1d(df, "x", binwidth)
-	dens1 <- density_1d(binx, bandwidth)
-	
-	dens2 <- density(x, bw = bandwidth)
+    df <- data.frame(x)
+    binx <- bin_1d(df, "x", binwidth)
+    dens1 <- density_1d(binx, bandwidth)
+    
+    dens2 <- density(x, bw = bandwidth)
 
-	d1 <- approxfun(dens1$x, dens1$y)
-	d2 <- approxfun(dens2$x, dens2$y)
+    d1 <- approxfun(dens1$x, dens1$y)
+    d2 <- approxfun(dens2$x, dens2$y)
 
-	grid <- seq(min(dens2$x), max(dens2$x), length = 500)
-	mse <- mean((d1(grid) - d2(grid)) ^ 2)
-	
-	list(x = grid, y1 = d1(grid), y2 = d2(grid), mse = mse)
+    grid <- seq(min(dens2$x), max(dens2$x), length = 500)
+    mse <- mean((d1(grid) - d2(grid)) ^ 2)
+    
+    list(x = grid, y1 = d1(grid), y2 = d2(grid), mse = mse)
 }
 compare_density(c(-10, 15,30), 0.1, 1)
 
 compare_density2 <- function(x, binwidth = .1, bandwidth = 1) {
-	df <- data.frame(x)
-	binx <- bin_1d(df, "x", binwidth)
-	dens1 <- density_1d(binx, bandwidth)
-	dens3 <- bkde(x,bandwidth = bandwidth)
+    df <- data.frame(x)
+    binx <- bin_1d(df, "x", binwidth)
+    dens1 <- density_1d(binx, bandwidth)
+    dens3 <- bkde(x,bandwidth = bandwidth)
 
-	d1 <- approxfun(dens1$x, dens1$y)
-	d3 <- approxfun(dens3$x, dens3$y)
+    d1 <- approxfun(dens1$x, dens1$y)
+    d3 <- approxfun(dens3$x, dens3$y)
 
-	grid <- seq(min(dens3$x), max(dens3$x), length = 500)
-	mse <- mean((d1(grid) - d3(grid)) ^ 2)
-	
-	list(x = grid, y1 = d1(grid), y3 = d3(grid), mse = mse)
+    grid <- seq(min(dens3$x), max(dens3$x), length = 500)
+    mse <- mean((d1(grid) - d3(grid)) ^ 2)
+    
+    list(x = grid, y1 = d1(grid), y3 = d3(grid), mse = mse)
 }
 compare_density2(c(-10, 15,30), 0.1, 1)
 
 compare_density3 <- function(x, binwidth = .1, bandwidth = 1) {
-	df <- data.frame(x)
-	dens2 <- density(x, bw = bandwidth)
+    df <- data.frame(x)
+    dens2 <- density(x, bw = bandwidth)
     dens3 <- bkde(x,bandwidth = bandwidth)
 
-	d2 <- approxfun(dens2$x, dens2$y)
-	d3 <- approxfun(dens3$x, dens3$y)
+    d2 <- approxfun(dens2$x, dens2$y)
+    d3 <- approxfun(dens3$x, dens3$y)
 
-	grid <- seq(min(dens2$x), max(dens2$x), length = 500)
-	mse <- mean((d2(grid) - d3(grid)) ^ 2)
-	
-	list(x = grid, y2 = d2(grid), y3 = d3(grid), mse = mse)
+    grid <- seq(min(dens2$x), max(dens2$x), length = 500)
+    mse <- mean((d2(grid) - d3(grid)) ^ 2)
+    
+    list(x = grid, y2 = d2(grid), y3 = d3(grid), mse = mse)
 }
 compare_density3(x, 0.1, 1)
 

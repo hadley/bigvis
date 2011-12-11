@@ -45,9 +45,9 @@ bin_1d <- function(df, x, bin) {
       reportProgress = 0)
       
     xform <- function(data,x){
-	data$.rxRowSelection <- is.na(data[[1]])
-	return(data)
-	}
+    data$.rxRowSelection <- is.na(data[[1]])
+    return(data)
+    }
     rxDataStepXdf(inFile = df, outFile = "var_NA", transformFunc = xform, 
        transformVars = x, overwrite = TRUE)
     na_info <- rxGetInfoXdf("var_NA", getVarInfo = TRUE)

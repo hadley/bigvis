@@ -14,7 +14,7 @@ bin_2d <- function(df, x, y, bin) {
     a <- c(info$varInfo[[x]]$low, info$varInfo[[y]]$low)
     b <- c(info$varInfo[[x]]$high, info$varInfo[[y]]$high)
   } else { #input is a data frame
-  	
+      
     a <- c(min(df[[x]], na.rm = TRUE), min(df[[y]], na.rm = TRUE))
     b <- c(max(df[[x]], na.rm = TRUE), max(df[[y]], na.rm = TRUE))
   }
@@ -47,16 +47,16 @@ bin_2d <- function(df, x, y, bin) {
   }
   if (is.character(df)) {
     xform1 <- function(data){
-	data$.rxRowSelection <- is.na(data[[1]])
-	return(data)
-	}
+    data$.rxRowSelection <- is.na(data[[1]])
+    return(data)
+    }
     rxDataStepXdf(inFile = df, outFile = "var1_NA", transformFunc = xform1, 
        transformVars = c(x,y), overwrite = TRUE)
 
-  	xform2 <- function(data){
-	data$.rxRowSelection <- is.na(data[[2]])
-	return(data)
-	}
+      xform2 <- function(data){
+    data$.rxRowSelection <- is.na(data[[2]])
+    return(data)
+    }
     rxDataStepXdf(inFile = df, outFile = "var2_NA", transformFunc = xform2, 
        transformVars = c(x,y), overwrite = TRUE)
 
@@ -64,7 +64,7 @@ bin_2d <- function(df, x, y, bin) {
    #var1_NA <- rxReadXdf(file = "var1_NA", varsToKeep = c("ArrDelay","CRSDepTime","DayOfWeek"))
    #var2_NA <- rxReadXdf(file = "var2_NA", varsToKeep = c("ArrDelay","CRSDepTime","DayOfWeek"))
 
-  	
+      
     
     #Transformation function to be applied while reading in data    
     bin_find_interval_2d <- function(a, b, binwidth, var1, var2, xnbins, ynbins) {

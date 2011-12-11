@@ -35,10 +35,10 @@ write.table(sample_data_smooth, "Sample_500000_smooth_time.csv", sep = ",", row 
   #    data$DepHour <- as.integer(data$CRSDepTime)
    #   data$Night <- data$DepHour >= 20 | data$DepHour <= 5
     #  return(data)
-	#}
+    #}
 #rxDataStepXdf(inFile = "ADS", outFile = "subADS",transformFunc = #myTransform,transformVars = c("ArrDelay", "CRSDepTime") overwrite = TRUE)
 
-	
+    
 
 
 bin1 = (440+46)/10
@@ -72,5 +72,5 @@ subADS <- rxReadXdf(file = "ADS", varsToKeep = c("ArrDelay","CRSDepTime","DayOfW
 
 write.table(subADS,"subADS.csv",sep = ",", row = F)
 rxTextToXdf(inFile = "subADS.csv", outFile = "subADS", stringsAsFactors = TRUE, overwrite = TRUE)
-	
+    
 rxGetInfoXdf("subADS",getVarInfo = TRUE)

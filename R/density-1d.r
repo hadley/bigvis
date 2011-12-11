@@ -11,11 +11,11 @@ density_1d <- function(bindata, bandwidth) {
   
   # Drop missings out
   if (bindata$Counts[length(bindata$Counts)] != 0){
-	  counts <- bindata$Counts[-length(bindata$Counts)]
-	  nbin <- length(counts)
-	  n <- sum(counts) #total number of observations
+      counts <- bindata$Counts[-length(bindata$Counts)]
+      nbin <- length(counts)
+      n <- sum(counts) #total number of observations
   } else {
-  	  nbin <- length(bindata$Counts)
+        nbin <- length(bindata$Counts)
       n <- sum(bindata$Counts) #total number of observations
       counts <- bindata$Counts
   }

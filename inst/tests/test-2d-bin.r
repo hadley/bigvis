@@ -24,9 +24,9 @@ bin.xdf <- bin_2d("dataNA_2d", x, y, bin)
 bin.df <- bin_2d(data_NA, x, y, bin)
 
 test_that("2d binning works the same for data frame and xdf file",{
-	all.equal(bin.df$Counts,bin.xdf$Counts)
-	all.equal(bin.df$Breaks, bin.xdf$Breaks, tol = 1e-7)
-	all.equal(bin.df$Values, bin.xdf$Values, tol = 1e-7)		
+    all.equal(bin.df$Counts,bin.xdf$Counts)
+    all.equal(bin.df$Breaks, bin.xdf$Breaks, tol = 1e-7)
+    all.equal(bin.df$Values, bin.xdf$Values, tol = 1e-7)        
 })
 
 

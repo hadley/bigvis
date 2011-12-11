@@ -35,7 +35,7 @@ legend(-300, 0.006,c("density estimated by hist","my density: bw = 100","my dens
 # test on airline data
 ADS_1e6 <- rxReadXdf(file = "AirlineData87to08", varsToKeep = c("ArrDelay","CRSDepTime","DayOfWeek"), startRow = 9000000, numRows = 1000000)
 write.table(ADS_1e6,"ADS_1e6.csv",sep = ",", row = F)
-rxTextToXdf(inFile = "ADS_1e6.csv", outFile = "ADS_1e6", stringsAsFactors = TRUE, overwrite = TRUE)	
+rxTextToXdf(inFile = "ADS_1e6.csv", outFile = "ADS_1e6", stringsAsFactors = TRUE, overwrite = TRUE)    
 
 
 info =  rxGetInfoXdf("ADS_1e6", getVarInfo = TRUE)
@@ -104,19 +104,19 @@ plot(grid, d1(grid) - d2(grid), type = "l")
 mean((d1(grid) - d2(grid))^2)
 
 compare_density <- function(x, binwidth = .1, bandwidth = 1) {
-	df <- data.frame(x)
-	binx <- bin_1d(df, "x", binwidth)
-	dens1 <- density_1d(binx, bandwidth)
-	
-	dens2 <- density(x, bw = bandwidth)
+    df <- data.frame(x)
+    binx <- bin_1d(df, "x", binwidth)
+    dens1 <- density_1d(binx, bandwidth)
+    
+    dens2 <- density(x, bw = bandwidth)
 
-	d1 <- approxfun(dens1$x, dens1$y)
-	d2 <- approxfun(dens2$x, dens2$y)
+    d1 <- approxfun(dens1$x, dens1$y)
+    d2 <- approxfun(dens2$x, dens2$y)
 
-	grid <- seq(min(dens2$x), max(dens2$x), length = 500)
-	mse <- mean((d1(grid) - d2(grid)) ^ 2)
-	
-	list(x = grid, y1 = d1(grid), y2 = d2(grid), mse = mse)
+    grid <- seq(min(dens2$x), max(dens2$x), length = 500)
+    mse <- mean((d1(grid) - d2(grid)) ^ 2)
+    
+    list(x = grid, y1 = d1(grid), y2 = d2(grid), mse = mse)
 }
 compare_density(c(-10, 15,30), 0.1, 1)
 

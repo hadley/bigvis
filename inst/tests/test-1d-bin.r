@@ -18,9 +18,9 @@ rxTextToXdf(inFile = "data_NA.csv", outFile = "dataNA", reportProgress = 0, stri
 bin.xdf <- bin_1d("dataNA", "x", bin)
 bin.df <- bin_1d(data_NA, "x", bin)
 test_that("1d binning works the same for data frame and xdf file",{
-	all.equal(bin.df$Counts,bin.xdf$Counts)
-	all.equal(bin.df$Breaks, bin.xdf$Breaks, tol = 1e-7)
-	all.equal(bin.df$Values, bin.xdf$Values, tol = 1e-7)	
+    all.equal(bin.df$Counts,bin.xdf$Counts)
+    all.equal(bin.df$Breaks, bin.xdf$Breaks, tol = 1e-7)
+    all.equal(bin.df$Values, bin.xdf$Values, tol = 1e-7)    
 })
 
 
