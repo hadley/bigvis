@@ -70,5 +70,5 @@ fast_bin_1d.data.frame <- function(df, x, binwidth, origin, nbin) {
 }
 
 bin_num <- function(x, binwidth, origin) {
-  (x - origin) %/% binwidth + 1
+  (x - origin) / binwidth + 1
 }
