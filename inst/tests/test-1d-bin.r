@@ -32,7 +32,7 @@ test_that("missing values counted correct", {
 
 # Comparisons between data frames and xdfs -----------------------------------
 
-if (require("revoScaleR", quiet = TRUE)) {
+if (has_revo()) {
   
   # generate random data
   df1 <- data.frame(x = rnorm(100,0,100))

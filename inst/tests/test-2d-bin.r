@@ -13,7 +13,7 @@ data_NA$y[sample(100,5)] = NA
 bin_2d(data_NA, x, y, bin)
 
 
-if (require("revoScaleR", quiet = T)) {  
+if (has_revo()) {  
   write.csv(data_NA, "data_NA_2d.csv", row.names = FALSE)
   
   
