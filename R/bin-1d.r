@@ -15,6 +15,7 @@
 #'   \item \code{range}: a numeric vector giving the range of the data
 #'   \item \code{nbin}: a single integer giving the number of bins
 #' }
+#' @export
 #' @examples
 #' bin_1d(mtcars, "mpg", 5)
 #' bin_1d(mtcars, "mpg", 5, 0)
