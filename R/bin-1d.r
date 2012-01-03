@@ -29,7 +29,7 @@ bin_1d <- function(df, x, binwidth, origin = NULL) {
   }
   
   stopifnot(length(binwidth == 1) && is.numeric(binwidth))
-    
+  
   nbin <- trunc(bin_num(rng[2], binwidth, origin))
   counts <- fast_bin_1d(df, x, binwidth, origin, nbin)
   
@@ -42,27 +42,24 @@ fast_bin_1d <- function(df, x, binwidth, origin, nbin) {
 fast_bin_1d.character <- function(df, x, binwidth, origin, nbin) {
 
   # Create new variable giving bin number
-  bin_find_interval <- function(x, breaks) {
+  bin_find_interval <- function(x, binwidth) {
     function(data) { 
-      binnumber <- bin_num(data[[x]], binwidth, origin)
-      data$.bin <- factor(binnumber, levels = c(seq_len(nbin), NA))
-      return(data)
+      list(x = data[[x]] / binwidth)
     }
   }
+  
+  min_bin <- trunc(origin / binwidth)
+  max_bin <- min_bin + nbin
+  bin_f <- eval(substitute(~ F(x, min, max), 
+    list(min = min_bin, max = max_bin)))
 
   # Count the number in each bin      
-  cubebin <- rxCube(~ .bin, data = df, returnDataFrame = TRUE, 
-    transformFunc = bin_find_interval(x, breaks), transformVars = x,
+  cubebin <- rxCube(bin_f, data = df, returnDataFrame = TRUE, 
+    transformFunc = bin_find_interval(x, binwidth), transformVars = x,
     reportProgress = 0)
-    
-  xform <- function(data,x){
-    data$.rxRowSelection <- is.na(data[[1]])
-    return(data)
-  }
-  rxDataStepXdf(inFile = df, outFile = "var_NA", transformFunc = xform, 
-     transformVars = x, overwrite = TRUE)
-  na_info <- rxGetInfoXdf("var_NA", getVarInfo = TRUE)
-  counts <- c(cubebin$Counts, na_info[[2]])
+  n_missing <- attr(cubebin, "missingObs")
+  
+  c(cubebin$Counts, n_missing)
 }
 
 fast_bin_1d.data.frame <- function(df, x, binwidth, origin, nbin) {
