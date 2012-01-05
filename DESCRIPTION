@@ -4,6 +4,8 @@ Title: Tools for visualisation of big data sets
 Authors@R: c(person("Hadley", "Wickham", role = c("aut", "cre"),
     email = "hadley@rice.edu"),
     person("Yue", "Hue", role = "aut"))
+Author: Yue Hu, Hadley Wickham
+Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Suggests:
     RevoScaleR,
     MASS
