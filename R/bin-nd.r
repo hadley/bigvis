@@ -17,8 +17,17 @@
 #' }
 #' @export
 #' @examples
-#' bin_1d(mtcars, "mpg", 5)
-#' bin_1d(mtcars, "mpg", 5, 0)
+#' bin_nd(mtcars, "mpg", 5)
+#' bin_nd(mtcars, "mpg", 5, 0)
+#'
+#' plot(bin_nd(mtcars, c("mpg", "cyl")))
+#' plot(bin_nd(mtcars, c("mpg", "disp")))
+#' plot(bin_nd(mtcars, c("mpg", "disp"), binwidth = c(1, 20)))
+#'
+#' # Use subsetting to extract conditional
+#' b3 <- bin_nd(mtcars, c("mpg", "disp", "cyl"), binwidth = c(1, 20, 1))
+#' b3[, , 1]
+#' b3[, , 3]
 bin_nd <- function(df, vars, binwidth = 1L, origin = NULL) {
   names(vars) <- vars
 

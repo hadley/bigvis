@@ -1,5 +1,6 @@
 export(bin_nd)
 export(density_1d)
+S3method("[",binned_summary)
 S3method(as.data.frame,binned_summary)
 S3method(binned_summary,lines)
 S3method(binned_summary,points)

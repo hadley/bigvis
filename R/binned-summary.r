@@ -24,7 +24,9 @@ plot.binned_summary <- function(x, ...) {
     plot(x$centers[[1]], x$data, type = "l", 
       xlab = names(x$centers)[1], ylab = "data")
   } else if (dims == 2L) {
-    image(x$centers[[1]], x$centers[[2]], x$data, useRaster = TRUE)
+    image(x$centers[[1]], x$centers[[2]], x$data, useRaster = TRUE, 
+      xlab = names(x$centers)[1], ylab = names(x$centers)[2],
+      col = grey(seq(1, 0, length = 20)), zlim = c(0, max(x$data, 1)))
   } else {
     stop("Don't know how to plot more than 2d")
   }
@@ -42,3 +44,34 @@ points.binned_summary <- function(x, ...) {
   points(x$centers[[1]][non_zero], x$data[non_zero], ...)  
 }
 
+#' @S3method [ binned_summary 
+"[.binned_summary" <- function(x, ..., drop = TRUE) {
+  call <- match.call()
+  idx <- as.list(call[-1])
+  idx$x <- NULL
+  idx$drop <- NULL
+  stopifnot(length(idx) == length(dim(x)))
+  
+  set <- vapply(idx, identical, bquote(), 
+    FUN.VALUE = logical(1), USE.NAMES = FALSE)
+  
+  one_d <- function(list, call) {
+    eval(as.call(c(as.name("["), as.name("list"), call)))
+  }
+  x$centers <- mapply(one_d, x$centers, idx, SIMPLIFY = FALSE)
+  x$nbins <- lapply(x$centers, length)
+  
+  if (drop) {
+    x$binwidth <- x$binwidth[set]
+    x$origin <- x$origin[set]
+    x$nbin <- x$nbin[set]
+    x$centers <- x$centers[set]
+
+    x$data <- array(x$data[...], unlist(x$nbins[set]))
+    dimnames(x$data) <- x$centers
+  } else {
+    x$data <- x$data[..., drop = FALSE]
+  }
+
+  x
+}
