@@ -24,4 +24,5 @@ Collate:
     'convolve-2d.r'
     'binned-summary.r'
     'standardise.r'
+    'glyph.r'
     'movies.r'

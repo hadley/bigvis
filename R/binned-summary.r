@@ -11,7 +11,7 @@ print.binned_summary <- function(x) {
 as.data.frame.binned_summary <- function(x, ...) {
   labels <- expand.grid(x$centers, KEEP.OUT.ATTRS = FALSE,
     stringsAsFactors = FALSE)
-  cbind(labels, count = as.vector(x$data))  
+  cbind(labels, value = as.vector(x$data))  
 }
 
 #' @S3method dim binned_summary
@@ -59,22 +59,21 @@ points.binned_summary <- function(x, ...) {
   idx$drop <- NULL
   stopifnot(length(idx) == length(dim(x)))
   
-  set <- vapply(idx, identical, bquote(), 
-    FUN.VALUE = logical(1), USE.NAMES = FALSE)
   
   one_d <- function(list, call) {
     eval(as.call(c(as.name("["), as.name("list"), call)))
   }
   x$centers <- mapply(one_d, x$centers, idx, SIMPLIFY = FALSE)
   x$nbins <- lapply(x$centers, length)
-  
-  if (drop) {
-    x$binwidth <- x$binwidth[set]
-    x$origin <- x$origin[set]
-    x$nbin <- x$nbin[set]
-    x$centers <- x$centers[set]
 
-    x$data <- array(x$data[...], unlist(x$nbins[set]))
+  single <- vapply(x$centers, length, integer(1)) == 1L
+  if (drop && any(single)) {
+    x$binwidth <- x$binwidth[!single]
+    x$origin <- x$origin[!single]
+    x$nbin <- x$nbin[!single]
+    x$centers <- x$centers[!single]
+
+    x$data <- array(x$data[...], unlist(x$nbins[!single]))
     dimnames(x$data) <- x$centers
   } else {
     x$data <- x$data[..., drop = FALSE]

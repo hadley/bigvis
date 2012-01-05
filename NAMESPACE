@@ -1,5 +1,7 @@
 export(bin_nd)
 export(density_1d)
+export(glyphs)
+export(ref_boxes)
 export(standardise)
 S3method("[",binned_summary)
 S3method(as.array,binned_summary)
