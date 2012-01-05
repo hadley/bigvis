@@ -11,8 +11,8 @@ Description: Tools for visualising large datasets, particularly in conjunction
     with RevoScaleR
 License: GPL (>= 2)
 Collate:
-    'bin-1d.r'
-    'bin-2d.r'
+    'bin-nd.r'
     'density-1d.r'
     'density-2d.r'
     'range.r'
+    'summary-matrix.r'
