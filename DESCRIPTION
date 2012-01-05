@@ -6,6 +6,8 @@ Authors@R: c(person("Hadley", "Wickham", role = c("aut", "cre"),
     person("Yue", "Hue", role = "aut"))
 Author: Yue Hu, Hadley Wickham
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
+Depends:
+    mvtnorm
 Suggests:
     RevoScaleR,
     MASS

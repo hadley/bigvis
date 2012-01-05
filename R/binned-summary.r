@@ -39,6 +39,12 @@ lines.binned_summary <- function(x, ...) {
   lines(x$centers[[1]], x$data, ...)  
 }
 
+#' @S3method contour binned_summary 
+contour.binned_summary <- function(x, ..., drawlabels = FALSE) {
+  contour(x$centers[[2]], x$centers[[1]], t(x$data), ..., 
+    drawlabels = drawlabels)
+}
+
 #' @S3method points binned_summary
 points.binned_summary <- function(x, ...) {
   non_zero <- x$data > 1e-6
@@ -84,4 +90,3 @@ as.matrix.binned_summary <- function(x, ...) {
 }
 #' @S3method as.array binned_summary
 as.array.binned_summary <- function(x, ...) x$data
-

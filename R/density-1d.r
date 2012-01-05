@@ -44,16 +44,16 @@ density_1d <- function(counts, bandwidth) {
   # Smooth, by convolving data with kernel
   smooth <- array(convolve_1d(counts$data, kernel))
   
-  centers <- counts$centers[[1]]
-  n <- length(centers)
-  centers <- c(
-    centers[1] - seq.int(l, 1) * binwidth,
-    centers, 
-    centers[n] + seq.int(1, l) * binwidth
-  )
-  
   counts$data <- smooth
-  counts$centers[[1]] <- centers
+  counts$centers[[1]] <- expand_centers(counts$centers[[1]], l, binwidth)
   counts
 }
 
+expand_centers <- function(centers, by, binwidth) {
+  n <- length(centers)
+  c(
+    centers[1] - seq.int(by, 1) * binwidth,
+    centers, 
+    centers[n] + seq.int(1, by) * binwidth
+  )
+}

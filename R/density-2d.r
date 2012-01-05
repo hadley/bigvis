@@ -5,72 +5,38 @@
 #The methods used in this function are adapted from the binned kernel density 
 #estimation functions in MP Wand's "KernSmooth" package.
 
-density_2d <- function(bindata, bandwidth) {
-  # if (is.vector(bandwidth)) {
-  #     bandwidth <- diag(bandwidth)
-  # }
-    
-  a <- bindata$Values[["low"]]
-  b <- bindata$Values[["high"]]
-  counts <- bindata$Counts
-  if (length(bandwidth) == 1) bandwidth <- rep(bandwidth, 2)
-  nbin <- c(dim(counts)[1], dim(counts)[2])
-
-  binwidth <- (b - a) / nbin
-  delta <- binwidth / bandwidth
-  L <- floor(1 / delta) * 4
-  if (min(L) == 0) warning("Bandwidth is too small")
-
-  # extend range by 4 bandwidths, pad counts with 0's
-  a <- a - 4 * max(bandwidth)
-  b <- b + 4 * max(bandwidth)
-
-  n <- sum(bindata$Counts)
-  counts <- counts / n
-    
-  # Padding size - matrix needs to be big enough to hold both kernel and data counts
-  P <- 2^(ceiling(log2(pmax(L, nbin))) + 1)
-
-  # Set up kernel matrix
-  kappa <- list(0, 0)
-  for (i in 1:2) {
-      grid <- seq(-P[i]/2, P[i]/2, length = P[i]) * bandwidth[i]
-    kappa[[i]] <- dnorm(grid * delta[i]) / (n * bandwidth[i])
-    #weight <- sum(kappa[[i]]) * delta[i] * n
-    #kappa[[i]] <- kappa[[i]]/weight
-  }
-  kappa <- kappa[[1]] %*% t(kappa[[2]])
+#' 2d density estimation.
+#' 
+#' @examples
+#' b2 <- bin_nd(mtcars, c("mpg", "wt"), binwidth = 0.1)
+#' plot(b2)
+#' s2 <- density_2d(b2, c(.5, .5))
+#' contour(s2, add = T)
+#' plot(s2)
+density_2d <- function(counts, bandwidth) {
+  stopifnot(is.binned_summary(counts)) # must come from bin_nd
+  stopifnot(length(dim(counts)) == 2)  # must be 2d
   
-  # library(mvtnorm)
-  # kappa <- dmvnorm(  , mean = 0, sigma = bandwidth)
+  binwidth <- unlist(counts$binwidth)
+  stopifnot(!is.na(binwidth))          # must be continuous
+
+  stopifnot(length(bandwidth) == length(binwidth))
   
-  # Zero-padded version of counts to avoid wrap-around effects during fft
-  padded <- matrix(0, P[1], P[2])  
-  padded[1:nbin[1], 1:nbin[2]] <- counts
-  # padded[1:nbin[1] + floor(P[1] - nbin[1])/2, 1:nbin[2] + floor(P[2] - nbin[2])/2] <- counts
-  # image(padded, useRaster = T)
+  # Generate the two separable kernels
+  l_x <- trunc(bandwidth[1] / binwidth[1]) * 4L
+  grid_x <- seq(-4, 4, length = 2L * l_x + 1L)
+  kernel_x <- matrix(dnorm(grid_x, sd = bandwidth[1]), ncol = 1)
 
-  #Now we use the Fast Fourier Transform to calculate kernel density.
+  l_y <- trunc(bandwidth[1] / binwidth[1]) * 4L
+  grid_y <- seq(-4, 4, length = 2L * l_y + 1L)
+  kernel_y <- matrix(dnorm(grid_y, sd = bandwidth[2]), nrow = 1)
 
-  z <- Re(fft(fft(padded) * Conj(fft(kappa)), inverse = TRUE)/(P[1] * P[2]))
-  z <- z[nrow(z):1, ncol(z):1]
-  # [1:nbin[1], 1:nbin[2]]
-  # image(z, useRaster = T)
-  # 
+  smooth <- counts$data
+  smooth <- convolve_2d(smooth, kernel_x)
+  smooth <- convolve_2d(smooth, kernel_y)
   
-  #To ensure that there are no negative values from floating point errors,
-  #we multiply z by a matrix of 1's where z had positive values and 0's where 
-  #z had negative values.  
-  x <- seq(a[1], b[1], length = nbin[1])
-  y <- seq(a[2], b[2], length = nbin[2])
-  z <- matrix(pmax.int(0, z), nrow(z), ncol(z)) / (binwidth[1] * binwidth[2])
-
-  list("x" = x, "y" = y, "z" = z)
+  counts$data <- smooth
+  counts$centers[[1]] <- expand_centers(counts$centers[[1]], l_x, binwidth[1])
+  counts$centers[[2]] <- expand_centers(counts$centers[[2]], l_y, binwidth[2])
+  counts
 }
-
-#Note that to plot with most R plotting functions, you must turn z into a vector,
-#with the x's and y's expanded.
-
-
-# read 2d convolution
-# install.packages(, type = "source")
