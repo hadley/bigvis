@@ -63,6 +63,7 @@ fast_bin_nd <- function(df, vars, binwidth, origin, nbin) {
   UseMethod("fast_bin_nd", df)
 }
 
+#' @S3method fast_bin_nd data.frame
 fast_bin_nd.data.frame <- function(df, vars, binwidth, origin, nbin) {
   ndistinct <- unlist(nbin)
   n <- prod(ndistinct)
@@ -86,6 +87,7 @@ fast_bin_nd.data.frame <- function(df, vars, binwidth, origin, nbin) {
   array(counts, unlist(nbin))  
 }
 
+#' @S3method fast_bin_nd character
 fast_bin_nd.character <- function(df, vars, binwidth, origin, nbin) {
   mins <- lapply(vars, function(var) trunc(origin[[var]] / binwidth[[var]]))
   maxs <- lapply(vars, function(var) mins[[var]] + nbin[[var]])
