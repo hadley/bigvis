@@ -1,24 +1,24 @@
-is.summary_matrix <- function(x) {
-  inherits(x, "summary_matrix")
+is.binned_summary <- function(x) {
+  inherits(x, "binned_summary")
 }
 
-#' @S3method print summary_matrix
-print.summary_matrix <- function(x) {
+#' @S3method print binned_summary
+print.binned_summary <- function(x) {
   print(x$data)
 }
 
-#' @S3method as.data.frame summary_matrix
-as.data.frame.summary_matrix <- function(x, ...) {
+#' @S3method as.data.frame binned_summary
+as.data.frame.binned_summary <- function(x, ...) {
   labels <- expand.grid(x$centers, KEEP.OUT.ATTRS = FALSE,
     stringsAsFactors = FALSE)
   cbind(labels, count = as.vector(x$data))  
 }
 
-#' @S3method dim summary_matrix
-dim.summary_matrix <- function(x, ...) dim(x$data)
+#' @S3method dim binned_summary
+dim.binned_summary <- function(x, ...) dim(x$data)
 
-#' @S3method plot summary_matrix
-plot.summary_matrix <- function(x, ...) {
+#' @S3method plot binned_summary
+plot.binned_summary <- function(x, ...) {
   dims <- length(dim(x))
   if (dims == 1L) {
     plot(x$centers[[1]], x$data, type = "l", 
@@ -31,13 +31,14 @@ plot.summary_matrix <- function(x, ...) {
   
 }
 
-#' @S3method summary_matrix lines
-lines.summary_matrix <- function(x, ...) {
+#' @S3method binned_summary lines
+lines.binned_summary <- function(x, ...) {
   lines(x$centers[[1]], x$data, ...)  
 }
 
-#' @S3method summary_matrix points
-points.summary_matrix <- function(x, ...) {
+#' @S3method binned_summary points
+points.binned_summary <- function(x, ...) {
   non_zero <- x$data > 1e-6
   points(x$centers[[1]][non_zero], x$data[non_zero], ...)  
 }
+

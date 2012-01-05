@@ -56,7 +56,7 @@ bin_nd <- function(df, vars, binwidth = 1L, origin = NULL) {
   dimnames(counts) <- centers[vars]
   
   structure(list(data = counts, binwidth = binwidth, origin = origin, 
-    nbin = nbin, centers = centers), class = "summary_matrix")
+    nbin = nbin, centers = centers), class = "binned_summary")
 }
 
 fast_bin_nd <- function(df, vars, binwidth, origin, nbin) {

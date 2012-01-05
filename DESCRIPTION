@@ -17,7 +17,7 @@ Collate:
     'density-1d.r'
     'density-2d.r'
     'range.r'
-    'summary-matrix.r'
     'factor.r'
     'convolve-1d.r'
     'convolve-2d.r'
+    'binned-summary.r'

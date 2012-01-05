@@ -24,7 +24,7 @@
 #' plot(dens)
 #' lines(bin, col = "red")
 density_1d <- function(counts, bandwidth) { 
-  stopifnot(is.summary_matrix(counts)) # must come from bin_nd
+  stopifnot(is.binned_summary(counts)) # must come from bin_nd
   stopifnot(length(dim(counts)) == 1)  # must be 1d
   
   binwidth <- counts$binwidth[[1]]
