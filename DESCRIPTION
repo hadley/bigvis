@@ -21,3 +21,4 @@ Collate:
     'convolve-1d.r'
     'convolve-2d.r'
     'binned-summary.r'
+    'standardise.r'
