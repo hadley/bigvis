@@ -19,3 +19,5 @@ Collate:
     'range.r'
     'summary-matrix.r'
     'factor.r'
+    'convolve-1d.r'
+    'convolve-2d.r'
