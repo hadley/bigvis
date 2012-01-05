@@ -33,12 +33,12 @@ plot.binned_summary <- function(x, ...) {
   
 }
 
-#' @S3method binned_summary lines
+#' @S3method lines binned_summary 
 lines.binned_summary <- function(x, ...) {
   lines(x$centers[[1]], x$data, ...)  
 }
 
-#' @S3method binned_summary points
+#' @S3method points binned_summary
 points.binned_summary <- function(x, ...) {
   non_zero <- x$data > 1e-6
   points(x$centers[[1]][non_zero], x$data[non_zero], ...)  
@@ -75,3 +75,12 @@ points.binned_summary <- function(x, ...) {
 
   x
 }
+
+#' @S3method as.matrix binned_summary
+as.matrix.binned_summary <- function(x, ...) {
+  stopifnot(length(dim(x)) == 2) 
+  x$data  
+}
+#' @S3method as.array binned_summary
+as.array.binned_summary <- function(x, ...) x$data
+
