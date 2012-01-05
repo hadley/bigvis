@@ -18,3 +18,4 @@ Collate:
     'density-2d.r'
     'range.r'
     'summary-matrix.r'
+    'factor.r'
