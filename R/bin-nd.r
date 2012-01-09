@@ -87,7 +87,7 @@ fast_bin_nd.data.frame <- function(df, vars, binwidth, origin, nbin) {
       bin_num(df[[var]], binwidth[[var]], origin[[var]])
     }
   })
-
+  
   combs <- c(1, cumprod(ndistinct[-p]))
   mat <- do.call("cbind", bins)
   res <- c((mat - 1L) %*% combs + 1L)
@@ -115,11 +115,16 @@ fast_bin_nd.character <- function(df, vars, binwidth, origin, nbin) {
   width_one <- vapply(binwidth, "==", 1, FUN.VALUE = logical(1))
   transform_vars <- vars[!width_one]
   
-  # Count the number in each bin      
-  cubebin <- rxCube(f, data = df, means = FALSE,
-    transformVars = transform_vars,
-    transformFunc = bin_find_intervals(transform_vars, binwidth),
-    reportProgress = 2)
+  # Count the number in each bin  
+  if (length(transform_vars) == 0) {
+    cubebin <- rxCube(f, data = df, means = FALSE,
+      reportProgress = 0)    
+  } else {
+    cubebin <- rxCube(f, data = df, means = FALSE,
+      transformVars = transform_vars,
+      transformFunc = bin_find_intervals(transform_vars, binwidth),
+      reportProgress = 0)
+  }
   
   array(cubebin$Counts, unlist(nbin))
 }
@@ -133,5 +138,5 @@ bin_find_intervals <- function(vars, binwidth) {
 }
 
 bin_num <- function(x, binwidth, origin) {
-  trunc((x - origin) / binwidth) + 1L
+  trunc((x - origin) / binwidth + 1e-6) + 1L
 }

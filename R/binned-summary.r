@@ -21,12 +21,12 @@ dim.binned_summary <- function(x, ...) dim(x$data)
 plot.binned_summary <- function(x, ...) {
   dims <- length(dim(x))
   if (dims == 1L) {
-    plot(x$centers[[1]], x$data, type = "l", 
+    plot(x$centers[[1]], x$data, type = "l", ...,
       xlab = names(x$centers)[1], ylab = "data")
   } else if (dims == 2L) {
     if (max(x$data) == 0) return()
     image(x$centers[[2]], x$centers[[1]], t(x$data), useRaster = TRUE, 
-      xlab = names(x$centers)[2], ylab = names(x$centers)[1],
+      xlab = names(x$centers)[2], ylab = names(x$centers)[1], ..., 
       col = grey(seq(1, 0, length = 20)), zlim = c(0, max(x$data)))
   } else {
     stop("Don't know how to plot more than 2d")
