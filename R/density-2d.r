@@ -33,7 +33,7 @@ density_2d <- function(counts, bandwidth) {
   grid_x <- seq(-4, 4, length = 2L * l_x + 1L)
   kernel_x <- matrix(dnorm(grid_x, sd = bandwidth[1]), ncol = 1)
 
-  l_y <- trunc(bandwidth[1] / binwidth[1]) * 4L
+  l_y <- trunc(bandwidth[2] / binwidth[2]) * 4L
   grid_y <- seq(-4, 4, length = 2L * l_y + 1L)
   kernel_y <- matrix(dnorm(grid_y, sd = bandwidth[2]), nrow = 1)
 
