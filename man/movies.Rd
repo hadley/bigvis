@@ -24,8 +24,8 @@
   rating.  Average IMDB user rating.  \item votes.  Number
   of IMDB users who rated this movie.  \item mpaa.  MPAA
   rating.  \item action, animation, comedy, drama,
-  documentary, romance, short.  TRUE is movie belongs to
-  that genre. }
+  documentary, romance, short: \code{TRUE} if movie belongs
+  to that genre. }
 }
 \references{
   \url{http://had.co.nz/data/movies/}

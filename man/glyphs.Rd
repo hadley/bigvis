@@ -25,4 +25,26 @@
 \description{
   Create the data needed to generate a glyph plot.
 }
+\examples{
+time <- bin_nd(movies, c("year", "length"), c(10, 5))
+time <- time[, 1:40]
+plot(time)
+
+library(ggplot2)
+ratings <- bin_nd(movies, c("year", "length", "rating"), c(10, 5, 0.2),
+  c(1900, 0, 1))
+ratings <- ratings[, 1:40, ]
+
+ratings_df <- glyphs(ratings, "year", "rating", "length")
+qplot(gx, gy, data = ratings_df, geom = "line", group = gid)
+
+ratings_df <- glyphs(standardise(ratings, 1), "year", "rating", "length")
+qplot(gx, gy, data = ratings_df, geom = "line", group = gid)
+
+ratings_df <- glyphs(standardise(ratings, 2), "year", "rating", "length")
+qplot(gx, gy, data = ratings_df, geom = "line", group = gid)
+
+ratings_df <- glyphs(standardise(ratings, c(1, 2)), "year", "rating", "length")
+qplot(gx, gy, data = ratings_df, geom = "line", group = gid)
+}
 

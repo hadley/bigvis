@@ -59,7 +59,6 @@ points.binned_summary <- function(x, ...) {
   idx$drop <- NULL
   stopifnot(length(idx) == length(dim(x)))
   
-  
   one_d <- function(list, call) {
     eval(as.call(c(as.name("["), as.name("list"), call)))
   }

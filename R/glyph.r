@@ -12,6 +12,7 @@
 #'   a numeric vector of length 1, or relative to the binwidth of the data by
 #'   using \code{\link{rel}}.
 #' @export
+#' @examples
 #' time <- bin_nd(movies, c("year", "length"), c(10, 5))
 #' time <- time[, 1:40]
 #' plot(time)
@@ -33,8 +34,6 @@
 #' ratings_df <- glyphs(standardise(ratings, c(1, 2)), "year", "rating", "length")
 #' qplot(gx, gy, data = ratings_df, geom = "line", group = gid)
 #'
-#' ratings_df$n <- ave(ratings_df$value, ratings_df$gx, ratings_df$gy, FUN = sum)
-#' 
 glyphs <- function(summary, x_major, x_minor, y_major, y_minor = "value", height = rel(0.95), width = rel(0.95)) {
   stopifnot(is.binned_summary(summary))
   data <- as.data.frame(summary)

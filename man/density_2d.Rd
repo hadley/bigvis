@@ -13,5 +13,11 @@ plot(b2)
 s2 <- density_2d(b2, c(.5, .5))
 contour(s2, add = T)
 plot(s2)
+
+time <- bin_nd(movies, c("year", "length"))
+plot(time)
+time <- time[, 1:150]
+plot(time)
+plot(density_2d(time, c(1, 1)))
 }
 

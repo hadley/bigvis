@@ -19,3 +19,4 @@ convolve_2d <- cxxfunction(signature(sampleS = "numeric", kernelS = "numeric"), 
     return output;
 ')
 
+
