@@ -38,6 +38,11 @@ density_1d <- function(counts, bandwidth) {
   # Generate the kernel
   # length of kernel (in bins) needed to get 4 standard deviations
   l <- trunc(bandwidth / binwidth) * 4L
+  if (l < 1) {
+    warning("Bandwidth too small: no smoothing", call. = FALSE)
+    return(counts)
+  }
+
   grid <- seq(-4, 4, length = 2L * l + 1L)
   kernel <- dnorm(grid, sd = bandwidth)
 
