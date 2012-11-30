@@ -5,7 +5,7 @@ using namespace Rcpp;
 //' @author Dirk Eddelbuettel, Romain Francois
 //' @license GPL-2
 // [[Rcpp::export]]
-NumericVector convolve(NumericVector x, NumericVector kernel){
+NumericVector convolve_1d(NumericVector x, NumericVector kernel){
   int n_x = x.size(), n_k = kernel.size();
   NumericVector out(n_x + n_k - 1);
 
@@ -13,6 +13,6 @@ NumericVector convolve(NumericVector x, NumericVector kernel){
   for (int i = 0; i < n_x; i++)
     for (int j = 0; j < n_k; j++) 
       fout[i + j] += fx[i] * fkernel[j];
-
+    
   return out;
 }
