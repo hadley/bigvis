@@ -1,19 +1,16 @@
 Package: bigvis
 Version: 0.1
 Title: Tools for visualisation of big data sets
+Description: Tools for visualising large datasets.
 Authors@R: c(person("Hadley", "Wickham", role = c("aut", "cre"),
     email = "hadley@rice.edu"),
     person("Yue", "Hue", role = "aut"))
-Author: Yue Hu, Hadley Wickham
-Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Depends:
     R (> 2.15.2)
 Suggests:
     RevoScaleR,
     MASS
 LinkingTo: Rcpp
-Description: Tools for visualising large datasets, particularly in conjunction
-    with RevoScaleR
 License: GPL (>= 2)
 Collate:
     'bin-nd.r'
