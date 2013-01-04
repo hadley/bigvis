@@ -148,7 +148,7 @@ std::vector<int> bin_bin_breaks(NumericVector x, NumericVector breaks) {
 }
 
 // Try using a Fast<NumericVector> ------------------------------
-// Barely affects speed
+// Considerable speed improvement for simple binning function
 template<typename Binner>
 std::vector<int> fbin_bin(NumericVector x, Binner binner) {
   int bin, nmissing = 0;
@@ -188,22 +188,26 @@ std::vector<int> fbin_bin_breaks(NumericVector x, NumericVector breaks) {
   return fbin_bin(x, BinBreaks(breaks));
 }
 
-
-
 /*** R 
+options(digits = 3)
 library(microbenchmark)
 x <- runif(1e5)
 breaks <- seq(0, 1, length = 100)
 
+# Breaks
 microbenchmark(
+  hist(x, breaks, plot = F),
   bin(x, breaks),
   bin2(x, breaks),
   bin_bin_breaks(x, breaks),
-  fbin_bin_breaks(x, breaks),
+  fbin_bin_breaks(x, breaks)
+)
+
+# Fixed bins
+microbenchmark(
   bin3(x, 1/100, 0),
   bin_bin_fixed(x, 1/100, 0),
-  fbin_bin_fixed(x, 1/100, 0),
-  hist(x, breaks, plot = F)
+  fbin_bin_fixed(x, 1/100, 0)
 )
 
 x6 <- runif(1e6)
@@ -211,12 +215,12 @@ x7 <- runif(1e7)
 x8 <- runif(1e8)
 
 microbenchmark(
-  bin3(x6, 1/100, 0),
   bin_bin_fixed(x6, 1/100, 0),
-  bin3(x7, 1/100, 0),
+  fbin_bin_fixed(x6, 1/100, 0),
   bin_bin_fixed(x7, 1/100, 0),
-  bin3(x8, 1/100, 0),
-  bin_bin_fixed(x7, 1/100, 0),
-  times = 5)
+  fbin_bin_fixed(x7, 1/100, 0),
+  bin_bin_fixed(x8, 1/100, 0),
+  fbin_bin_fixed(x8, 1/100, 0),
+  times = 10)
 
 */

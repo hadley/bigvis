@@ -5,19 +5,8 @@
 
 using namespace Rcpp;
 
-// bin_1d
-IntegerVector bin_1d(NumericVector x, NumericVector breaks);
-RcppExport SEXP bigvis_bin_1d(SEXP xSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    IntegerVector __result = bin_1d(x, breaks);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // bin_1d_fixed
-std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin);
+std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin = 0);
 RcppExport SEXP bigvis_bin_1d_fixed(SEXP xSEXP, SEXP widthSEXP, SEXP originSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
@@ -25,6 +14,17 @@ BEGIN_RCPP
     double width = Rcpp::as<double >(widthSEXP);
     double origin = Rcpp::as<double >(originSEXP);
     std::vector<int> __result = bin_1d_fixed(x, width, origin);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// bin_1d_breaks
+std::vector<int> bin_1d_breaks(NumericVector x, NumericVector breaks);
+RcppExport SEXP bigvis_bin_1d_breaks(SEXP xSEXP, SEXP breaksSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
+    std::vector<int> __result = bin_1d_breaks(x, breaks);
     return Rcpp::wrap(__result);
 END_RCPP
 }

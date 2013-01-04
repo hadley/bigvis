@@ -2,41 +2,50 @@
 #include <algorithm>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
-IntegerVector bin_1d(NumericVector x, NumericVector breaks) {
-  // Put missing values in the last position
-  int n = breaks.size(), bin;
-  IntegerVector out(n + 1);
-
-  NumericVector::iterator x_it = x.begin(), x_end, bin_it,
-    breaks_it = breaks.begin(), breaks_end = breaks.end();
-
-  for(; x_it != x.end(); ++x_it) {
-    double val = *x_it;
-    if (ISNAN(val)) {
-      ++out[n];
-    } else {
-      bin_it = std::upper_bound(breaks_it, breaks_end, val);
-      bin = std::distance(breaks_it, bin_it);
-      ++out[bin];
+class BinFixed {
+    double width_;
+    double origin_;
+  public:
+    BinFixed (double width, double origin = 0) {
+      width_ = width;
+      origin_ = origin;
     }
-  }
+    int inline operator() (double val) const { 
+      return (val - origin_) / width_;
+    }
+};
+class BinBreaks {
+    NumericVector breaks_;
+    NumericVector::iterator breaks_it_, breaks_end_;
 
-  return(out);
-}
+  public:
+    BinBreaks (NumericVector& breaks) {
+      breaks_ = breaks;
+      breaks_it_ = breaks.begin();
+      breaks_end_ = breaks.end();
+    }
+    int inline operator() (double val) const { 
+      NumericVector::iterator 
+        bin_it = std::upper_bound(breaks_it_, breaks_end_, val);
 
-// [[Rcpp::export]]
-std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin) {
+      return std::distance(breaks_it_, bin_it);
+    }
+};
+
+template<typename Binner>
+std::vector<int> bin_1d(NumericVector x, Binner binner) {
   int bin, nmissing = 0;
   std::vector<int> out;
 
-  NumericVector::iterator x_it = x.begin(), x_end;
-  for(; x_it != x.end(); ++x_it) {
-    double val = *x_it;
+  Fast<NumericVector> fx(x);
+  int n = x.size();
+
+  for(int i = 0; i < n; ++i) {
+    double val = fx[i];
     if (ISNAN(val)) {
       ++nmissing;
     } else {
-      bin = (val - origin) / width;
+      bin = binner(val);
       if (bin < 0) continue;
     
       // Make sure there's enough space
@@ -51,3 +60,14 @@ std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin) {
   out.push_back(nmissing);
   return out;
 }
+
+// [[Rcpp::export]]
+std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin = 0) {
+  return bin_1d(x, BinFixed(width, origin));
+}
+
+// [[Rcpp::export]]
+std::vector<int> bin_1d_breaks(NumericVector x, NumericVector breaks) {
+  return bin_1d(x, BinBreaks(breaks));
+}
+
