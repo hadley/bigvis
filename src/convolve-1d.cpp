@@ -1,9 +1,11 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' Convolution: 1d
+//'
 //' Automatically zero-pads sample so that kernel trails off to zero.
+//' 
 //' @author Dirk Eddelbuettel, Romain Francois
-//' @license GPL-2
 // [[Rcpp::export]]
 NumericVector convolve_1d(NumericVector x, NumericVector kernel){
   int n_x = x.size(), n_k = kernel.size();

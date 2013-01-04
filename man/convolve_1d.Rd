@@ -1,6 +1,6 @@
 \name{convolve_1d}
 \alias{convolve_1d}
-\title{Automatically zero-pads sample so that kernel trails off to zero.}
+\title{Convolution: 1d}
 \usage{
   convolve_1d(x, kernel)
 }

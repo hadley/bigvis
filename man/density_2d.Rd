@@ -4,8 +4,17 @@
 \usage{
   density_2d(counts, bandwidth)
 }
+\arguments{
+  \item{counts}{output from \code{\link{bin_2d}}}
+
+  \item{bandwidth}{smoothing parameter, a vector of length
+  two. Should be relatively large compared to binwidth,
+  otherwise data will not be smoothed.}
+}
 \description{
-  2d density estimation.
+  The methods used in this function are adapted from the
+  binned kernel density estimation functions as used in MP
+  Wand's \pkg{KernSmooth}.
 }
 \examples{
 b2 <- bin_nd(mtcars, c("mpg", "wt"), binwidth = 0.1)
