@@ -44,7 +44,6 @@ std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin) {
         out.resize(bin + 1);
       }
       ++out[bin];
-      }
     }
   }
 

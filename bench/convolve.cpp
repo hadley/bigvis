@@ -31,7 +31,7 @@ NumericVector convolve2(NumericVector x, NumericVector kernel){
 
 /*** R 
   library(microbenchmark)
-  x <- sample(10, 1e4, rep = T)
+  x <- sample(10, 1e6, rep = T)
   kernel <- pnorm(seq(-3, 3, length = 100))
 
   microbenchmark(

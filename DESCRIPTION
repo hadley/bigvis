@@ -7,11 +7,11 @@ Authors@R: c(person("Hadley", "Wickham", role = c("aut", "cre"),
 Author: Yue Hu, Hadley Wickham
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Depends:
-    inline,
-    mvtnorm
+    R (> 2.15.2)
 Suggests:
     RevoScaleR,
     MASS
+LinkingTo: Rcpp
 Description: Tools for visualising large datasets, particularly in conjunction
     with RevoScaleR
 License: GPL (>= 2)
@@ -21,9 +21,11 @@ Collate:
     'density-2d.r'
     'range.r'
     'factor.r'
-    'convolve-1d.r'
-    'convolve-2d.r'
     'binned-summary.r'
     'standardise.r'
     'glyph.r'
     'movies.r'
+    'RcppExports.R'
+    'adjust.r'
+    'breaks-dhist.r'
+    'breaks.r'

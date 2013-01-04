@@ -23,7 +23,7 @@ IntegerVector bin(NumericVector x, NumericVector breaks) {
     }
   }
 
-  return(out);
+  return out;
 }
 
 // [[Rcpp::export]]
@@ -46,11 +46,11 @@ IntegerVector bin2(NumericVector x, NumericVector breaks) {
     }
   }
 
-  return(out);
+  return out;
 }
 
 // [[Rcpp::export]]
-std::vector<int> bin3(NumericVector x, double width, double origin) {
+std::vector<int> bin3(NumericVector x, double width, double origin = 0) {
   int bin, nmissing = 0;
   std::vector<int> out;
 
@@ -68,7 +68,6 @@ std::vector<int> bin3(NumericVector x, double width, double origin) {
         out.resize(bin + 1);
       }
       ++out[bin];
-      }
     }
   }
 
