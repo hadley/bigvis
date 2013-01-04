@@ -1,9 +1,0 @@
-* When is it faster to do convolution by hand at the c level?
-
-* When is it faster to bin directly with xdf with ~F()?
-
-* What's a better way to refer to xdf files?
-
-* What data sets are installed with revoScaleR by default?
-
-* Try installing RStudio on server again.
