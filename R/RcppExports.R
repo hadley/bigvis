@@ -14,7 +14,6 @@ bin_1d_fixed <- function(x, width, origin) {
 #' Automatically zero-pads sample so that kernel trails off to zero.
 #' 
 #' @author Dirk Eddelbuettel, Romain Francois
-#' @license GPL-2
 convolve_1d <- function(x, kernel) {
     .Call('bigvis_convolve_1d', PACKAGE = 'bigvis', x, kernel)
 }
