@@ -29,14 +29,32 @@ NumericVector convolve2(NumericVector x, NumericVector kernel){
   return out;
 }
 
+// Change order of loops - small improvement but not worth worrying about
+// [[Rcpp::export]]
+NumericVector convolve3(NumericVector x, NumericVector kernel){
+  int n_x = x.size(), n_k = kernel.size();
+  NumericVector out(n_x + n_k - 1);
+
+  Fast<NumericVector> fx(x), fkernel(kernel), fout(out);  
+  for (int i = 0; i < n_k; i++)
+    for (int j = 0; j < n_x; j++) 
+      fout[i + j] += fkernel[i] * fx[j];
+
+  return out;
+}
+
 /*** R 
   library(microbenchmark)
-  x <- sample(10, 1e6, rep = T)
+  x <- sample(10, 1e5, rep = T)
   kernel <- pnorm(seq(-3, 3, length = 100))
+  
+  all.equal(convolve1(x, kernel), convolve2(x, kernel))
+  all.equal(convolve1(x, kernel), convolve3(x, kernel))
 
   microbenchmark(
     convolve1(x, kernel),
-    convolve2(x, kernel)
+    convolve2(x, kernel),
+    convolve3(x, kernel)
   )
 
 */
