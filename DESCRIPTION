@@ -6,7 +6,7 @@ Authors@R: c(person("Hadley", "Wickham", role = c("aut", "cre"),
     email = "hadley@rice.edu"),
     person("Yue", "Hue", role = "aut"))
 Depends:
-    R (> 2.15.2)
+    Rcpp
 Suggests:
     RevoScaleR,
     MASS
