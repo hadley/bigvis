@@ -1,5 +1,5 @@
-# fixed, breaks (different args)
-# median,
+# Generate template specialisations for groupwise - these are the functions
+# that are called from R.
 
 groups <- list(
   Breaks = c(breaks = "NumericVector&"),
@@ -30,9 +30,3 @@ cpp_fun <- function(stat, group) {
 
 funs <- mapply(cpp_fun, combs$stat, combs$group)
 cat(funs, file = "groupwise.inl", append = TRUE, sep = "")
-
-# NumericVector compute_fixed_mean(const NumericVector& x, const NumericVector& y, const NumericVector& weight, width, origin = 0) {
-#   return groupwise(y, weight, GroupFixed(x, width, origin));
-# }
-# compute_fixed_median
-# compute_fixed_median
