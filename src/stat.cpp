@@ -1,3 +1,18 @@
+class StatSum {
+    double count;
+
+  public:
+    StatSum () : count(0) {}
+
+    void push(double y, double weight) {
+      count += w;
+    }
+
+    double compute() {
+      return count;
+    }
+};
+
 class StatMean {
     double count;
     double sum;
@@ -5,13 +20,37 @@ class StatMean {
   public:
     StatMean () : count(0), sum(0) {}
 
-    void push(double y, double weight) {
+    void push(double y, double w) {
       sum += y;
       count += w;
     }
 
     double compute() {
       return sum / count;
+    }
+};
+
+class StatSd {
+    double weight;
+    double mean;
+    double m2;
+
+  public:
+    StatSd () : weight(0), mean(0), m2(0) {}
+
+    // Algorithm adapted from 
+    // http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Weighted_incremental_algorithm
+    void push(double y, double w) {
+      double delta = y - mean;
+      R = delta * w / (weight + w);
+
+      weight += w;
+      mean += R;
+      M2 += weight * delta * R;
+    }
+
+    double compute() {
+      return m2 / weight;
     }
 };
 
