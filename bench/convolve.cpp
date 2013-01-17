@@ -43,6 +43,20 @@ NumericVector convolve3(NumericVector x, NumericVector kernel){
   return out;
 }
 
+// Using references instead of copies makes no impact
+// [[Rcpp::export]]
+NumericVector convolve4(const NumericVector& x, const NumericVector& kernel){
+  int n_x = x.size(), n_k = kernel.size();
+  NumericVector out(n_x + n_k - 1);
+
+  Fast<NumericVector> fx(x), fkernel(kernel), fout(out);  
+  for (int i = 0; i < n_k; i++)
+    for (int j = 0; j < n_x; j++) 
+      fout[i + j] += fkernel[i] * fx[j];
+
+  return out;
+}
+
 /*** R 
   library(microbenchmark)
   x <- sample(10, 1e5, rep = T)
@@ -54,7 +68,8 @@ NumericVector convolve3(NumericVector x, NumericVector kernel){
   microbenchmark(
     convolve1(x, kernel),
     convolve2(x, kernel),
-    convolve3(x, kernel)
+    convolve3(x, kernel),
+    convolve4(x, kernel)
   )
 
 */
