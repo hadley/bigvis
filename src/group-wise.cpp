@@ -1,3 +1,6 @@
+#include <Rcpp.h>
+using namespace Rcpp;
+
 template<typename Binner, typename Stat>
 NumericVector groupwise(NumericVector& y, NumericVector& weight, Binner binner) {
   std::vector<Stat> stat;

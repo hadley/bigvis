@@ -1,3 +1,6 @@
+#include <Rcpp.h>
+using namespace Rcpp;
+
 class StatSum {
     double count;
 

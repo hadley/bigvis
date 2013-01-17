@@ -1,3 +1,6 @@
+#include <Rcpp.h>
+using namespace Rcpp;
+
 class BinnerFixed {
     const Fast<NumericVector> x_;
     double width_;
