@@ -23,13 +23,12 @@ class GroupFixed {
 
 class GroupBreaks {
     const Fast<NumericVector> x_;
-    NumericVector breaks_;
-    NumericVector::iterator breaks_it_, breaks_end_;
+    const NumericVector& breaks_;
+    NumericVector::const_iterator breaks_it_, breaks_end_;
 
   public:
-    GroupBreaks (const NumericVector& x, NumericVector& breaks)
+    GroupBreaks (const NumericVector& x, const NumericVector& breaks)
         : x_(x), breaks_(breaks) {
-      breaks_ = breaks;
       breaks_it_ = breaks.begin();
       breaks_end_ = breaks.end();
     }
