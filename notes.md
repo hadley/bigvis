@@ -1,13 +1,11 @@
 # Summarise
 
-by x, x & y, by group, hex
-
 * bin 
-  * by x and by group
-  * need arbitrary breaks and fixed width bins
-  * just have C++ binner class that wraps this up? only needs operator()
+  * by numeric x: fixed width, arbitrary breaks
+  * by numeric x & y: fixed width, hexes
+  * by integer group
 
-* summary functions: 
+* 1d summary functions: 
   * all need to support weights
 
   * count/sum
@@ -15,6 +13,18 @@ by x, x & y, by group, hex
   * sd
   * quantiles
   * boxplot
+
+* 2d summary functions:
+  * cor
+  * lm?
+
+# Robustness
+
+Median: http://people.cs.umass.edu/~mcgregor/papers/09-streamorderstatistics.pdf
+Counting: count-min sketch, https://sites.google.com/site/countminsketch/
+http://link.springer.com.ezproxy.rice.edu/content/pdf/10.1023%2FA%3A1023296123228
+http://www.cs.virginia.edu/~son/cs851/papers/ucsb.sensys04.pdf
+http://www2.research.att.com/~marioh/sketches/index.html
 
 # Smooth
 
