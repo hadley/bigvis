@@ -27,8 +27,8 @@ class GroupBreaks {
     NumericVector::iterator breaks_it_, breaks_end_;
 
   public:
-    GroupBreaks (const NumericVector& x, NumericVector& breaks) {
-      x_ = x;
+    GroupBreaks (const NumericVector& x, NumericVector& breaks)
+        : x_(x), breaks_(breaks) {
       breaks_ = breaks;
       breaks_it_ = breaks.begin();
       breaks_end_ = breaks.end();
@@ -38,7 +38,7 @@ class GroupBreaks {
       if (ISNAN(x_[i])) return 0;
 
       NumericVector::iterator
-        bin_it = std::upper_bound(breaks_it_, breaks_end_, x[i]);
+        bin_it = std::upper_bound(breaks_it_, breaks_end_, x_[i]);
 
       return std::distance(breaks_it_, bin_it);
     }

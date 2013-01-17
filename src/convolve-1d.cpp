@@ -29,14 +29,14 @@ NumericVector convolve_1d(NumericVector x, NumericVector kernel){
 NumericVector convolver_1d(NumericVector x, NumericVector kernel){
   int n_x = x.size(), n_k = kernel.size();
 
-  if (n_k %% 2 != 0) stop("Kernel must be even")
+  if (n_k % 2 != 0) stop("Kernel must be even");
 
   NumericVector out(n_x);
 
   Fast<NumericVector> fx(x), fkernel(kernel), fout(out);  
   for (int i = 0; i < n_x; i++) {
     for (int j = 0; j < n_k; j++) {
-      pos = abs(i + j - n_k / 2);
+      int pos = abs(i + j - n_k / 2);
       fout[pos] += fx[i] * fkernel[j];
     }
   }

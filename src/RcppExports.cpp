@@ -5,29 +5,6 @@
 
 using namespace Rcpp;
 
-// bin_1d_fixed
-std::vector<int> bin_1d_fixed(NumericVector x, double width, double origin = 0);
-RcppExport SEXP bigvis_bin_1d_fixed(SEXP xSEXP, SEXP widthSEXP, SEXP originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    double width = Rcpp::as<double >(widthSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    std::vector<int> __result = bin_1d_fixed(x, width, origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// bin_1d_breaks
-std::vector<int> bin_1d_breaks(NumericVector x, NumericVector breaks);
-RcppExport SEXP bigvis_bin_1d_breaks(SEXP xSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    std::vector<int> __result = bin_1d_breaks(x, breaks);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // convolve_1d
 NumericVector convolve_1d(NumericVector x, NumericVector kernel);
 RcppExport SEXP bigvis_convolve_1d(SEXP xSEXP, SEXP kernelSEXP) {
@@ -36,6 +13,17 @@ BEGIN_RCPP
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
     NumericVector kernel = Rcpp::as<NumericVector >(kernelSEXP);
     NumericVector __result = convolve_1d(x, kernel);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// convolver_1d
+NumericVector convolver_1d(NumericVector x, NumericVector kernel);
+RcppExport SEXP bigvis_convolver_1d(SEXP xSEXP, SEXP kernelSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector kernel = Rcpp::as<NumericVector >(kernelSEXP);
+    NumericVector __result = convolver_1d(x, kernel);
     return Rcpp::wrap(__result);
 END_RCPP
 }

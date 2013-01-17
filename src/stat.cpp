@@ -7,7 +7,7 @@ class StatSum {
   public:
     StatSum () : count(0) {}
 
-    void push(double y, double weight) {
+    void push(double y, double w) {
       count += w;
     }
 
@@ -45,11 +45,11 @@ class StatSd {
     // http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Weighted_incremental_algorithm
     void push(double y, double w) {
       double delta = y - mean;
-      R = delta * w / (weight + w);
+      double R = delta * w / (weight + w);
 
       weight += w;
       mean += R;
-      M2 += weight * delta * R;
+      m2 += weight * delta * R;
     }
 
     double compute() {
