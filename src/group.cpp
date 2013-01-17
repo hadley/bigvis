@@ -1,12 +1,12 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-class BinnerFixed {
+class GroupFixedWidth {
     const Fast<NumericVector> x_;
     double width_;
     double origin_;
   public:
-    BinFixed (const NumericVector& x, double width, double origin = 0)
+    GroupFixedWidth (const NumericVector& x, double width, double origin = 0)
        : x_(x), width_(width), origin_(origin) {
     }
 
@@ -21,13 +21,13 @@ class BinnerFixed {
     }
 };
 
-class BinBreaks {
+class GroupBreaks {
     const Fast<NumericVector> x_;
     NumericVector breaks_;
     NumericVector::iterator breaks_it_, breaks_end_;
 
   public:
-    BinBreaks (const NumericVector& x, NumericVector& breaks) {
+    GroupBreaks (const NumericVector& x, NumericVector& breaks) {
       x_ = x;
       breaks_ = breaks;
       breaks_it_ = breaks.begin();

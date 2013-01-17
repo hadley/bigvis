@@ -1,13 +1,13 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-template<typename Binner, typename Stat>
-NumericVector groupwise(NumericVector& y, NumericVector& weight, Binner binner) {
+template<typename Group, typename Stat>
+NumericVector groupwise(NumericVector& y, NumericVector& weight, Group grouper) {
   std::vector<Stat> stat;
 
-  int n = binner.size();
+  int n = grouper.size();
   for(int i = 0; i < n; ++i) {
-    int bin = binner.bin(i);
+    int bin = grouper.bin(i);
     if (bin < 0) continue;
 
     if (bin >= stat.size()) {
