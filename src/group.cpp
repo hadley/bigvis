@@ -1,12 +1,12 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-class GroupFixedWidth {
+class GroupFixed {
     const Fast<NumericVector> x_;
     double width_;
     double origin_;
   public:
-    GroupFixedWidth (const NumericVector& x, double width, double origin = 0)
+    GroupFixed (const NumericVector& x, double width, double origin = 0)
        : x_(x), width_(width), origin_(origin) {
     }
 

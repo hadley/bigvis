@@ -18,3 +18,35 @@ convolve_2d <- function(sample, kernel) {
     .Call('bigvis_convolve_2d', PACKAGE = 'bigvis', sample, kernel)
 }
 
+compute_sum_breaks <- function(x, y, weight, breaks) {
+    .Call('bigvis_compute_sum_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+}
+
+compute_sum_fixed <- function(x, y, weight, width, origin) {
+    .Call('bigvis_compute_sum_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+}
+
+compute_mean_breaks <- function(x, y, weight, breaks) {
+    .Call('bigvis_compute_mean_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+}
+
+compute_mean_fixed <- function(x, y, weight, width, origin) {
+    .Call('bigvis_compute_mean_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+}
+
+compute_median_breaks <- function(x, y, weight, breaks) {
+    .Call('bigvis_compute_median_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+}
+
+compute_median_fixed <- function(x, y, weight, width, origin) {
+    .Call('bigvis_compute_median_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+}
+
+compute_sd_breaks <- function(x, y, weight, breaks) {
+    .Call('bigvis_compute_sd_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+}
+
+compute_sd_fixed <- function(x, y, weight, width, origin) {
+    .Call('bigvis_compute_sd_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+}
+

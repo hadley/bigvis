@@ -2,7 +2,8 @@
 using namespace Rcpp;
 
 template<typename Group, typename Stat>
-NumericVector groupwise(NumericVector& y, NumericVector& weight, Group grouper) {
+NumericVector groupwise(const NumericVector& y, const NumericVector& weight, 
+                        Group grouper) {
   std::vector<Stat> stat;
 
   int n = grouper.size();
