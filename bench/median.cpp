@@ -24,27 +24,27 @@ class BinFixed {
     }
 };
 class StatMedian {
-    std::vector<double> xs;
+    std::vector<double> ys;
 
   public:
     void push(double x) {
-      xs.push_back(x);
+      ys.push_back(x);
     }
 
+    // Adapted from http://stackoverflow.com/questions/1719070/
     double compute() {
-      if (xs.empty()) return NAN;
-      if (xs.size() % 2 == 0) {
-        int mid = xs.size() / 2;
-        std::nth_element(xs.begin(), xs.begin() + mid, xs.end());
-        double upper = xs[mid];
-        std::nth_element(xs.begin(), xs.begin() + mid - 1, xs.end());
-        double lower = xs[mid - 1];
+      if (ys.empty()) return NAN;
 
-        return (lower + upper) / 2;
+      int size = ys.size();
+      std::vector<double>::iterator upper = ys.begin() + (int) (size / 2);
+      std::nth_element(ys.begin(), upper, ys.end());
+
+      if (size % 2 == 1) {
+        return *upper;
       } else {
-        int mid = xs.size() / 2;
-        std::nth_element(xs.begin(), xs.begin() + mid, xs.end());
-        return xs[mid];
+        std::vector<double>::iterator lower = upper - 1;
+        std::nth_element(ys.begin(), lower, upper);
+        return (*upper + *lower) / 2.0;
       }
 
     }
