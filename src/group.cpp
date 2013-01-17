@@ -1,48 +1,24 @@
 #include <Rcpp.h>
+#include "group.hpp"
 using namespace Rcpp;
 
-class GroupFixed {
-    const Fast<NumericVector> x_;
-    double width_;
-    double origin_;
-  public:
-    GroupFixed (const NumericVector& x, double width, double origin = 0)
-       : x_(x), width_(width), origin_(origin) {
-    }
+template<typename Group>
+IntegerVector group_out(const Group& group) {
+  int n = group.size();
+  IntegerVector out(n);
+  for(int i = 0; i < n; ++i) {
+    out[i] = group.bin(i);
+  }
 
-    int bin(int i) const {
-      if (ISNAN(x_[i])) return 0;
-      
-      return (x_[i] - origin_) / width_ + 1;
-    }
+  return out;
+}
 
-    int size() const {
-      return x_.size();
-    }
-};
+// [Rcpp::export]
+IntegerVector group_fixed(const NumericVector& x, double width, double origin = 0) {
+  return group_out(GroupFixed(x, width, origin));
+}
 
-class GroupBreaks {
-    const Fast<NumericVector> x_;
-    const NumericVector& breaks_;
-    NumericVector::const_iterator breaks_it_, breaks_end_;
-
-  public:
-    GroupBreaks (const NumericVector& x, const NumericVector& breaks)
-        : x_(x), breaks_(breaks) {
-      breaks_it_ = breaks.begin();
-      breaks_end_ = breaks.end();
-    }
-
-    int bin(int i) const {
-      if (ISNAN(x_[i])) return 0;
-
-      NumericVector::iterator
-        bin_it = std::upper_bound(breaks_it_, breaks_end_, x_[i]);
-
-      return std::distance(breaks_it_, bin_it);
-    }
-
-    int size() const {
-      return x_.size();
-    }
-};
+// [Rcpp::export]
+IntegerVector group_breaks(const NumericVector& x, const NumericVector& breaks) {
+  return group_out(GroupBreaks(x, breaks));
+}

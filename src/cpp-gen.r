@@ -28,15 +28,8 @@ cpp_fun <- function(stat, group) {
 }
 
 
-cat("#include <Rcpp.h>
-#include \"stat.cpp\"
-#include \"group.cpp\"
-#include \"group-wise.cpp\"
-using namespace Rcpp;
-
-", file = "cpp-gen.cpp")
 funs <- mapply(cpp_fun, combs$stat, combs$group)
-cat(funs, file = "cpp-gen.cpp", append = TRUE, sep = "")
+cat(funs, file = "groupwise.inl", append = TRUE, sep = "")
 
 # NumericVector compute_fixed_mean(const NumericVector& x, const NumericVector& y, const NumericVector& weight, width, origin = 0) {
 #   return groupwise(y, weight, GroupFixed(x, width, origin));

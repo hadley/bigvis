@@ -1,9 +1,3 @@
-#include <Rcpp.h>
-#include "stat.cpp"
-#include "group.cpp"
-#include "group-wise.cpp"
-using namespace Rcpp;
-
 // [[Rcpp::export]]
 NumericVector compute_sum_breaks(const NumericVector& x, const NumericVector& y, const NumericVector& weight, NumericVector& breaks) {
   return groupwise<GroupBreaks, StatSum>(y, weight, GroupBreaks(x, breaks));

@@ -1,4 +1,6 @@
 #include <Rcpp.h>
+#include "group.hpp"
+#include "stat.hpp"
 using namespace Rcpp;
 
 template<typename Group, typename Stat>
@@ -25,3 +27,6 @@ NumericVector groupwise(const NumericVector& y, const NumericVector& weight,
   }
   return res;
 }
+
+// Include all the template specialisations for connection to R.
+#include "groupwise.inl"
