@@ -11,7 +11,7 @@ class StatSum {
       count += w;
     }
 
-    double compute() {
+    double compute() const  {
       return count;
     }
 };
@@ -28,7 +28,7 @@ class StatMean {
       count += w;
     }
 
-    double compute() {
+    double compute() const {
       return sum / count;
     }
 };
@@ -52,7 +52,7 @@ class StatSd {
       m2 += weight * delta * R;
     }
 
-    double compute() {
+    double compute() const  {
       return m2 / weight;
     }
 };
