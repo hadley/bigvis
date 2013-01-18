@@ -34,3 +34,16 @@ Kernel smoothing plus binned summary leads to many common statistics: density = 
 * single sided smoother for time data
 * should probably force kernel to be odd to simplify code
 * option to reflect & sum kernel values at bounds.  If TRUE length of output = length of input, otherwise = input + kernel
+
+# Syntax
+
+    summary1d(x, binwidth = 1 / 100)
+    summary1d(x, "count", binwidth = 1 / 100)
+    summary1d(x, y, "mean", binwidth = 1 / 100)
+    summary1d(x, y, "median", binwidth = 1 / 100)
+    summary1d(x, weight = w, "mean", binwidth = 1 / 100)
+
+Should return a data frame with columns left, right and count, mean, etc.
+
+    summary1d(x, y, binwidth = 1 / 100)
+    summary1d(x, "count", binwidth = 1 / 100)

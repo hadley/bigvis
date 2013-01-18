@@ -50,3 +50,7 @@ compute_sd_fixed <- function(x, y, weight, width, origin) {
     .Call('bigvis_compute_sd_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
 }
 
+frange <- function(x, na_rm) {
+    .Call('bigvis_frange', PACKAGE = 'bigvis', x, na_rm)
+}
+

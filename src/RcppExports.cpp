@@ -146,3 +146,14 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// frange
+NumericVector frange(const NumericVector& x, const bool na_rm);
+RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP na_rmSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    bool na_rm = Rcpp::as<bool >(na_rmSEXP);
+    NumericVector __result = frange(x, na_rm);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
