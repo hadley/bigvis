@@ -8,11 +8,17 @@
 * 1d summary functions: 
   * all need to support weights
 
-  * count/sum
-  * mean
-  * sd
-  * quantiles
-  * boxplot
+  * count, sum (= weighted count), mean, sd
+    * Should these be separate summaries, or just one?
+    * If separate, should (e.g.) sd also return count, sum, and mean?
+    * How to avoid duplication across classes?
+
+  * median, quantiles (need to be weighted)
+    * default to R's interpolation method O(nm)
+    * weighted might need different algorithm O(n log n): 
+      * sort whole vector
+      * find upper and lower bounds (assuming ordered, can do incrementally)
+      * interpolate between them
 
 * 2d summary functions:
   * cor
