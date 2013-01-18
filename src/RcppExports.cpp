@@ -38,6 +38,33 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// compute_count_breaks
+NumericVector compute_count_breaks(const NumericVector& x, const NumericVector& y, const NumericVector& weight, NumericVector& breaks);
+RcppExport SEXP bigvis_compute_count_breaks(SEXP xSEXP, SEXP ySEXP, SEXP weightSEXP, SEXP breaksSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
+    NumericVector __result = compute_count_breaks(x, y, weight, breaks);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// compute_count_fixed
+NumericVector compute_count_fixed(const NumericVector& x, const NumericVector& y, const NumericVector& weight, double width, double origin);
+RcppExport SEXP bigvis_compute_count_fixed(SEXP xSEXP, SEXP ySEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    double width = Rcpp::as<double >(widthSEXP);
+    double origin = Rcpp::as<double >(originSEXP);
+    NumericVector __result = compute_count_fixed(x, y, weight, width, origin);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // compute_sum_breaks
 NumericVector compute_sum_breaks(const NumericVector& x, const NumericVector& y, const NumericVector& weight, NumericVector& breaks);
 RcppExport SEXP bigvis_compute_sum_breaks(SEXP xSEXP, SEXP ySEXP, SEXP weightSEXP, SEXP breaksSEXP) {

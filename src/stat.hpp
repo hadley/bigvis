@@ -1,6 +1,21 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+class StatCount {
+    double count;
+
+  public:
+    StatCount () : count(0) {}
+
+    void push(double y, double w) {
+      ++count;
+    }
+
+    double compute() const  {
+      return count;
+    }
+};
+
 class StatSum {
     double count;
 

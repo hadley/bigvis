@@ -5,7 +5,7 @@ groups <- list(
   Breaks = c(breaks = "NumericVector&"),
   Fixed = c(width = "double", origin = "double")
 )
-stats <- c("Sum", "Mean", "Median", "Sd")
+stats <- c("Count", "Sum", "Mean", "Median", "Sd")
 
 combs <- expand.grid(group = names(groups), stat = stats)
 

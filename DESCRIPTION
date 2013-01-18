@@ -26,3 +26,4 @@ Collate:
     'adjust.r'
     'breaks-dhist.r'
     'breaks.r'
+    'summary.r'

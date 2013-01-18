@@ -18,6 +18,14 @@ convolve_2d <- function(sample, kernel) {
     .Call('bigvis_convolve_2d', PACKAGE = 'bigvis', sample, kernel)
 }
 
+compute_count_breaks <- function(x, y, weight, breaks) {
+    .Call('bigvis_compute_count_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+}
+
+compute_count_fixed <- function(x, y, weight, width, origin) {
+    .Call('bigvis_compute_count_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+}
+
 compute_sum_breaks <- function(x, y, weight, breaks) {
     .Call('bigvis_compute_sum_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
 }

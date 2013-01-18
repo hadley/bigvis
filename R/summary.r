@@ -17,8 +17,12 @@ summary1d <- function(x, y = NULL, summary = NULL, weights = NULL,
     f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
     f(x, y, weights, breaks = breaks)
   } else {
+    if (is.null(origin)) {
+      rng <- frange(x, na_rm = TRUE)
+      origin <- rng[1]
+    }
     f <- match.fun(paste("compute", summary, "fixed", sep = "_"))
-    f(x, y, weights, binwidth = binwidth, origin = origin)
+    f(x, y, weights, width = binwidth, origin = origin)
   }
 
 }
