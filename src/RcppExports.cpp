@@ -174,7 +174,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // frange
-NumericVector frange(const NumericVector& x, const bool na_rm);
+NumericVector frange(const NumericVector& x, const bool na_rm = true);
 RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP na_rmSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;

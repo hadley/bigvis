@@ -58,7 +58,20 @@ compute_sd_fixed <- function(x, y, weight, width, origin) {
     .Call('bigvis_compute_sd_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
 }
 
-frange <- function(x, na_rm) {
+#' Efficient implementation of range.
+#'
+#' This is an efficient C++ implementation of range for numeric vectors:
+#' it avoids S3 dispatch, and computes both min and max in a single pass
+#' through the input.
+#' 
+#' @param x a numeric vector
+#' @param na_rm should missing values be removed?
+#' @export
+#' @examples
+#' x <- runif(1e6)
+#' system.time(range(x))
+#' system.time(frange(x))
+frange <- function(x, na_rm = TRUE) {
     .Call('bigvis_frange', PACKAGE = 'bigvis', x, na_rm)
 }
 
