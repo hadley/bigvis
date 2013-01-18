@@ -28,3 +28,4 @@ Collate:
     'breaks.r'
     'summary.r'
     'ranged.r'
+    'bigvis.r'
