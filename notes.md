@@ -3,6 +3,7 @@
 * bin 
   * by numeric x: fixed width, arbitrary breaks
   * by numeric x & y: fixed width, hexes
+    * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
   * by integer group
 
 * 1d summary functions: 
