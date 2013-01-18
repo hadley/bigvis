@@ -35,14 +35,17 @@ summary1d <- function(x, y = NULL, summary = NULL, weights = NULL,
 
   if (!is.null(breaks)) {
     f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
-    f(x, y, weights, breaks = breaks)
+    out <- f(x, y, weights, breaks = breaks)
   } else {
     if (is.null(origin)) {
       rng <- frange(x, na_rm = TRUE)
       origin <- rng[1]
+      if (abs(origin) / abs(rng[2] - rng[1]) < 1e-3) origin <- 0
     }
     f <- match.fun(paste("compute", summary, "fixed", sep = "_"))
-    f(x, y, weights, width = binwidth, origin = origin)
+    out <- f(x, y, weights, width = binwidth, origin = origin)
+    breaks <- origin + binwidth * seq_len(length(out) - 1)
   }
 
+  data.frame(x = c(NA, breaks), y = out)
 }
