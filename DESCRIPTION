@@ -27,3 +27,4 @@ Collate:
     'breaks-dhist.r'
     'breaks.r'
     'summary.r'
+    'ranged.r'
