@@ -32,11 +32,10 @@ IntegerVector group_integer(const IntegerVector& x, double origin = 0) {
 // [[Rcpp::export]]
 IntegerVector group_rect(const NumericVector& x, const NumericVector& y, 
                          double x_width, double y_width,
-                         double x_origin, double y_origin,
-                         int x_bins) {
+                         double x_origin, double y_origin) {
   return group_out(Group2d<GroupFixed>(
     GroupFixed(x, x_width, x_origin), 
-    GroupFixed(y, y_width, y_origin), x_bins));
+    GroupFixed(y, y_width, y_origin)));
 }
 
 

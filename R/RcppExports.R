@@ -30,8 +30,8 @@ group_integer <- function(x, origin = 0) {
     .Call('bigvis_group_integer', PACKAGE = 'bigvis', x, origin)
 }
 
-group_rect <- function(x, y, x_width, y_width, x_origin, y_origin, x_bins) {
-    .Call('bigvis_group_rect', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin, x_bins)
+group_rect <- function(x, y, x_width, y_width, x_origin, y_origin) {
+    .Call('bigvis_group_rect', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin)
 }
 
 group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {

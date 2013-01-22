@@ -1,8 +1,14 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+template<typename Vector>
+inline double cached_max(const Vector& x) {
+  RObject cache = x.attr("range");
+  return (cache.sexp_type() == REALSXP) ? as<NumericVector>(cache)(0) : max(x);
+}
+
 class GroupFixed {
-    const Fast<NumericVector> x_;
+    const NumericVector x_;
     double width_;
     double origin_;
   public:
@@ -20,10 +26,15 @@ class GroupFixed {
     int size() const {
       return x_.size();
     }
+
+    int nbins() const {
+      return (cached_max(x_) - origin_) / width_ + 1;
+    }
+
 };
 
 class GroupInteger {
-    const Fast<IntegerVector> x_;
+    const IntegerVector x_;
     double origin_;
   public:
     GroupInteger (const IntegerVector& x, double origin = 0) : 
@@ -40,11 +51,16 @@ class GroupInteger {
     int size() const {
       return x_.size();
     }
+
+    int nbins() const {
+      return (cached_max(x_) - origin_) + 1;
+    }
+
 };
 
 
 class GroupBreaks {
-    const Fast<NumericVector> x_;
+    const NumericVector x_;
     const NumericVector& breaks_;
     NumericVector::const_iterator breaks_it_, breaks_end_;
 
@@ -70,6 +86,11 @@ class GroupBreaks {
     int size() const {
       return x_.size();
     }
+
+    int nbins() const {
+      return breaks_.size();
+    }
+
 };
 
 
@@ -80,11 +101,11 @@ class Group2d {
     int x_bins_;
 
   public:
-    Group2d (const Group& x, const Group& y, int x_bins) 
-      : x_(x), y_(y), x_bins_(x_bins) {
+    Group2d (const Group& x, const Group& y) : x_(x), y_(y) {
       if (x.size() != y.size()) {
         stop("x and y are not equal sizes");
       }
+      x_bins_ = x_.nbins();
     }
 
     unsigned int bin(unsigned int i) const {
@@ -94,6 +115,10 @@ class Group2d {
 
     int size() const {
       return x_.size();
+    }
+
+    int nbins() const {
+      return x_bins_ * y_.nbins();
     }
 };
 
