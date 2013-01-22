@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include "group.hpp"
+#include "group-hex.hpp"
 using namespace Rcpp;
 
 template<typename Group>
@@ -21,4 +22,26 @@ IntegerVector group_fixed(const NumericVector& x, double width, double origin = 
 // [Rcpp::export]
 IntegerVector group_breaks(const NumericVector& x, const NumericVector& breaks) {
   return group_out(GroupBreaks(x, breaks));
+}
+
+// [Rcpp::export]
+IntegerVector group_integer(const IntegerVector& x, double origin = 0) {
+  return group_out(GroupInteger(x, origin));
+}
+
+// [Rcpp::export]
+IntegerVector group_rect(const NumericVector& x, const NumericVector& y, 
+                         double x_width, double y_width,
+                         double x_origin, double y_origin,
+                         double x_max) {
+  return group_out(GroupRect(x, y, x_width, y_width, x_origin, y_origin, x_max));
+}
+
+
+// [Rcpp::export]
+IntegerVector group_hex(const NumericVector& x, const NumericVector& y, 
+                         double x_width, double y_width,
+                         double x_origin, double y_origin,
+                         double x_max) {
+  return group_out(GroupHex(x, y, x_width, y_width, x_origin, y_origin, x_max));
 }
