@@ -14,22 +14,22 @@ IntegerVector group_out(const Group& group) {
   return out;
 }
 
-// [Rcpp::export]
+// [[Rcpp::export]]
 IntegerVector group_fixed(const NumericVector& x, double width, double origin = 0) {
   return group_out(GroupFixed(x, width, origin));
 }
 
-// [Rcpp::export]
+// [[Rcpp::export]]
 IntegerVector group_breaks(const NumericVector& x, const NumericVector& breaks) {
   return group_out(GroupBreaks(x, breaks));
 }
 
-// [Rcpp::export]
+// [[Rcpp::export]]
 IntegerVector group_integer(const IntegerVector& x, double origin = 0) {
   return group_out(GroupInteger(x, origin));
 }
 
-// [Rcpp::export]
+// [[Rcpp::export]]
 IntegerVector group_rect(const NumericVector& x, const NumericVector& y, 
                          double x_width, double y_width,
                          double x_origin, double y_origin,
@@ -38,7 +38,7 @@ IntegerVector group_rect(const NumericVector& x, const NumericVector& y,
 }
 
 
-// [Rcpp::export]
+// [[Rcpp::export]]
 IntegerVector group_hex(const NumericVector& x, const NumericVector& y, 
                          double x_width, double y_width,
                          double x_origin, double y_origin,

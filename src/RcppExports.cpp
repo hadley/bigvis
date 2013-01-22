@@ -38,6 +38,72 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// group_fixed
+IntegerVector group_fixed(const NumericVector& x, double width, double origin = 0);
+RcppExport SEXP bigvis_group_fixed(SEXP xSEXP, SEXP widthSEXP, SEXP originSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    double width = Rcpp::as<double >(widthSEXP);
+    double origin = Rcpp::as<double >(originSEXP);
+    IntegerVector __result = group_fixed(x, width, origin);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// group_breaks
+IntegerVector group_breaks(const NumericVector& x, const NumericVector& breaks);
+RcppExport SEXP bigvis_group_breaks(SEXP xSEXP, SEXP breaksSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
+    IntegerVector __result = group_breaks(x, breaks);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// group_integer
+IntegerVector group_integer(const IntegerVector& x, double origin = 0);
+RcppExport SEXP bigvis_group_integer(SEXP xSEXP, SEXP originSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    IntegerVector x = Rcpp::as<IntegerVector >(xSEXP);
+    double origin = Rcpp::as<double >(originSEXP);
+    IntegerVector __result = group_integer(x, origin);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// group_rect
+IntegerVector group_rect(const NumericVector& x, const NumericVector& y, double x_width, double y_width, double x_origin, double y_origin, double x_max);
+RcppExport SEXP bigvis_group_rect(SEXP xSEXP, SEXP ySEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP, SEXP x_maxSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    double x_width = Rcpp::as<double >(x_widthSEXP);
+    double y_width = Rcpp::as<double >(y_widthSEXP);
+    double x_origin = Rcpp::as<double >(x_originSEXP);
+    double y_origin = Rcpp::as<double >(y_originSEXP);
+    double x_max = Rcpp::as<double >(x_maxSEXP);
+    IntegerVector __result = group_rect(x, y, x_width, y_width, x_origin, y_origin, x_max);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// group_hex
+IntegerVector group_hex(const NumericVector& x, const NumericVector& y, double x_width, double y_width, double x_origin, double y_origin, double x_max);
+RcppExport SEXP bigvis_group_hex(SEXP xSEXP, SEXP ySEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP, SEXP x_maxSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    double x_width = Rcpp::as<double >(x_widthSEXP);
+    double y_width = Rcpp::as<double >(y_widthSEXP);
+    double x_origin = Rcpp::as<double >(x_originSEXP);
+    double y_origin = Rcpp::as<double >(y_originSEXP);
+    double x_max = Rcpp::as<double >(x_maxSEXP);
+    IntegerVector __result = group_hex(x, y, x_width, y_width, x_origin, y_origin, x_max);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // compute_count_breaks
 NumericVector compute_count_breaks(const NumericVector& x, const NumericVector& y, const NumericVector& weight, NumericVector& breaks);
 RcppExport SEXP bigvis_compute_count_breaks(SEXP xSEXP, SEXP ySEXP, SEXP weightSEXP, SEXP breaksSEXP) {
