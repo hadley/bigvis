@@ -1,4 +1,4 @@
-context("1d binning")
+# context("1d binning")
 
 # test_that("binning integers equivalent to table", {
 #   x <- c(0, 100, sample(100, 1000, rep = TRUE))
