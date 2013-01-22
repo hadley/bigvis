@@ -10,8 +10,9 @@ class GroupFixed {
        : x_(x), width_(width), origin_(origin) {
     }
 
-    int bin(int i) const {
+    unsigned int bin(unsigned int i) const {
       if (ISNAN(x_[i])) return 0;
+      if (x_[i] < origin_) return 0;
       
       return (x_[i] - origin_) / width_ + 1;
     }
@@ -29,8 +30,9 @@ class GroupInteger {
         x_(x), origin_(origin) {
     }
 
-    int bin(int i) const {
+    unsigned int bin(unsigned int i) const {
       if (IntegerVector::is_na(x_[i])) return 0;
+      if (x_[i] < origin_) return 0;
 
       return x_[i] - origin_ + 1;
     }
@@ -53,7 +55,7 @@ class GroupBreaks {
       breaks_end_ = breaks.end();
     }
 
-    int bin(int i) const {
+    unsigned int bin(unsigned int i) const {
       if (ISNAN(x_[i])) return 0;
 
       NumericVector::iterator

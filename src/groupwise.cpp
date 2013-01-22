@@ -11,7 +11,6 @@ NumericVector groupwise(const NumericVector& y, const NumericVector& weight,
   int n = grouper.size();
   for(int i = 0; i < n; ++i) {
     int bin = grouper.bin(i);
-    if (bin < 0) bin = 0;
 
     if (bin >= stat.size()) {
       stat.resize(bin + 1);
