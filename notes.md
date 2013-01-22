@@ -1,10 +1,10 @@
 # Summarise
 
 * bin 
-  * by numeric x: fixed width, arbitrary breaks
+  * by numeric x: fixed width, arbitrary breaks (done)
   * by numeric x & y: fixed width, hexes
     * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
-  * by integer group
+  * by integer group (done)
 
 * 1d summary functions: 
   * all need to support weights

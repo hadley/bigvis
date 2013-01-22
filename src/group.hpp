@@ -21,6 +21,24 @@ class GroupFixed {
     }
 };
 
+class GroupInteger {
+    const Fast<IntegerVector> x_;
+  public:
+    GroupInteger (const IntegerVector& x) : x_(x) {
+    }
+
+    int bin(int i) const {
+      if (ISNAN(x_[i])) return 0;
+      
+      return x_[i];
+    }
+
+    int size() const {
+      return x_.size();
+    }
+};
+
+
 class GroupBreaks {
     const Fast<NumericVector> x_;
     const NumericVector& breaks_;
