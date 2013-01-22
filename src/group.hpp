@@ -23,14 +23,16 @@ class GroupFixed {
 
 class GroupInteger {
     const Fast<IntegerVector> x_;
+    double origin_;
   public:
-    GroupInteger (const IntegerVector& x) : x_(x) {
+    GroupInteger (const IntegerVector& x, double origin = 0) : 
+        x_(x), origin_(origin) {
     }
 
     int bin(int i) const {
       if (ISNAN(x_[i])) return 0;
-      
-      return x_[i];
+
+      return x_[i] - origin_;
     }
 
     int size() const {
