@@ -2,7 +2,7 @@
 
 * bin 
   * by numeric x: fixed width, arbitrary breaks (done)
-  * by numeric x & y: fixed width, hexes
+  * by numeric x & y: fixed width (done), hexes
     * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
   * by integer group (done)
 
