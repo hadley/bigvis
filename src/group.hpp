@@ -61,6 +61,9 @@ class GroupBreaks {
       NumericVector::iterator
         bin_it = std::upper_bound(breaks_it_, breaks_end_, x_[i]);
 
+      // Value higher than all breaks
+      if (bin_it == breaks_end_) return 0;
+
       return std::distance(breaks_it_, bin_it);
     }
 
