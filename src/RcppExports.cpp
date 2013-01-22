@@ -73,8 +73,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // group_rect
-IntegerVector group_rect(const NumericVector& x, const NumericVector& y, double x_width, double y_width, double x_origin, double y_origin, double x_max);
-RcppExport SEXP bigvis_group_rect(SEXP xSEXP, SEXP ySEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP, SEXP x_maxSEXP) {
+IntegerVector group_rect(const NumericVector& x, const NumericVector& y, double x_width, double y_width, double x_origin, double y_origin, int x_bins);
+RcppExport SEXP bigvis_group_rect(SEXP xSEXP, SEXP ySEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP, SEXP x_binsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
@@ -83,8 +83,8 @@ BEGIN_RCPP
     double y_width = Rcpp::as<double >(y_widthSEXP);
     double x_origin = Rcpp::as<double >(x_originSEXP);
     double y_origin = Rcpp::as<double >(y_originSEXP);
-    double x_max = Rcpp::as<double >(x_maxSEXP);
-    IntegerVector __result = group_rect(x, y, x_width, y_width, x_origin, y_origin, x_max);
+    int x_bins = Rcpp::as<int >(x_binsSEXP);
+    IntegerVector __result = group_rect(x, y, x_width, y_width, x_origin, y_origin, x_bins);
     return Rcpp::wrap(__result);
 END_RCPP
 }

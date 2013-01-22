@@ -33,8 +33,10 @@ IntegerVector group_integer(const IntegerVector& x, double origin = 0) {
 IntegerVector group_rect(const NumericVector& x, const NumericVector& y, 
                          double x_width, double y_width,
                          double x_origin, double y_origin,
-                         double x_max) {
-  return group_out(GroupRect(x, y, x_width, y_width, x_origin, y_origin, x_max));
+                         int x_bins) {
+  return group_out(Group2d<GroupFixed>(
+    GroupFixed(x, x_width, x_origin), 
+    GroupFixed(y, y_width, y_origin), x_bins));
 }
 
 

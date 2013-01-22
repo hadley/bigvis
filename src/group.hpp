@@ -73,35 +73,27 @@ class GroupBreaks {
 };
 
 
-
-class GroupRect {
-    const Fast<NumericVector> x_;
-    const Fast<NumericVector> y_;
-    double x_width_;
-    double x_origin_;
-    double y_width_;
-    double y_origin_;
-    double x_bins;
+template<typename Group>
+class Group2d {
+    const Group& x_;
+    const Group& y_;
+    int x_bins_;
 
   public:
-    GroupRect (const NumericVector& x, const NumericVector& y, 
-                double x_width, double y_width, 
-                double x_origin, double y_origin, 
-                double x_max)
-       : x_(x), y_(y), x_width_(x_width), y_width_(y_width), 
-          x_origin_(x_origin), y_origin_(y_origin) {
-      if (x.size() != y.size()) stop("x & y are not the same size");
-      x_bins = x_max / x_width_ + 1;
+    Group2d (const Group& x, const Group& y, int x_bins) 
+      : x_(x), y_(y), x_bins_(x_bins) {
+      if (x.size() != y.size()) {
+        stop("x and y are not equal sizes");
+      }
     }
 
-    int bin(int i) const {
-      int x_bin = ISNAN(x_[i]) ? 0 : (x_[i] - x_origin_) / x_width_ + 1;
-      int y_bin = ISNAN(y_[i]) ? 0 : (y_[i] - y_origin_) / y_width_ + 1;
-
-      return y_bin * x_bins + x_bin;
+    unsigned int bin(unsigned int i) const {
+      int x_bin = x_.bin(i), y_bin = y_.bin(i);
+      return y_bin * x_bins_ + x_bin;
     }
 
     int size() const {
       return x_.size();
     }
 };
+
