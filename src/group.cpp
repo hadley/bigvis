@@ -25,7 +25,7 @@ IntegerVector group_breaks(const NumericVector& x, const NumericVector& breaks) 
 }
 
 // [[Rcpp::export]]
-IntegerVector group_integer(const IntegerVector& x, double origin = 0) {
+IntegerVector group_integer(const NumericVector& x, double origin = 0) {
   return group_out(GroupInteger(x, origin));
 }
 

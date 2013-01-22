@@ -47,3 +47,4 @@ test_that("GroupFixed: values outside of breaks belong to group 0", {
   expect_equal(group_breaks(left, breaks), rep(0, 4))
   expect_equal(group_breaks(right, breaks), rep(0, 4))
 })
+

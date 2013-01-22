@@ -62,11 +62,11 @@ BEGIN_RCPP
 END_RCPP
 }
 // group_integer
-IntegerVector group_integer(const IntegerVector& x, double origin = 0);
+IntegerVector group_integer(const NumericVector& x, double origin = 0);
 RcppExport SEXP bigvis_group_integer(SEXP xSEXP, SEXP originSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    IntegerVector x = Rcpp::as<IntegerVector >(xSEXP);
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
     double origin = Rcpp::as<double >(originSEXP);
     IntegerVector __result = group_integer(x, origin);
     return Rcpp::wrap(__result);

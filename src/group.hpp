@@ -1,12 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-template<typename Vector>
-inline double cached_max(const Vector& x) {
-  RObject cache = x.attr("range");
-  return (cache.sexp_type() == REALSXP) ? as<NumericVector>(cache)(0) : max(x);
-}
-
+NumericVector frange(const NumericVector& x, const bool na_rm = true);
 class GroupFixed {
     const NumericVector x_;
     double width_;
@@ -28,21 +23,21 @@ class GroupFixed {
     }
 
     int nbins() const {
-      return (cached_max(x_) - origin_) / width_ + 1;
+      return (frange(x_)(1) - origin_) / width_ + 1;
     }
 
 };
 
 class GroupInteger {
-    const IntegerVector x_;
+    const NumericVector x_;
     double origin_;
   public:
-    GroupInteger (const IntegerVector& x, double origin = 0) : 
+    GroupInteger (const NumericVector& x, double origin = 0) : 
         x_(x), origin_(origin) {
     }
 
     unsigned int bin(unsigned int i) const {
-      if (IntegerVector::is_na(x_[i])) return 0;
+      if (NumericVector::is_na(x_[i])) return 0;
       if (x_[i] < origin_) return 0;
 
       return x_[i] - origin_ + 1;
@@ -53,7 +48,7 @@ class GroupInteger {
     }
 
     int nbins() const {
-      return (cached_max(x_) - origin_) + 1;
+      return (frange(x_)(1) - origin_) + 1;
     }
 
 };
