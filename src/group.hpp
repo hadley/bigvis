@@ -30,9 +30,9 @@ class GroupInteger {
     }
 
     int bin(int i) const {
-      if (ISNAN(x_[i])) return 0;
+      if (IntegerVector::is_na(x_[i])) return 0;
 
-      return x_[i] - origin_;
+      return x_[i] - origin_ + 1;
     }
 
     int size() const {
