@@ -105,7 +105,7 @@ class Group2d {
 
     unsigned int bin(unsigned int i) const {
       int x_bin = x_.bin(i), y_bin = y_.bin(i);
-      return y_bin * x_bins_ + x_bin;
+      return y_bin * (x_bins_ + 1) + x_bin;
     }
 
     int size() const {
