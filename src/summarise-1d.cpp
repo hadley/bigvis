@@ -18,7 +18,7 @@ NumericVector summarise1d(const NumericVector& y, const NumericVector& weight,
     int bin = group.bin(i);
 
     if (bin >= stats.size()) {
-      stats.insert(stats.end(), bin - stats.size(), stat);
+      stats.insert(stats.end(), bin - stats.size() + 1, stat);
     }
 
     stats[bin].push(y_[i], weight_[i]);
