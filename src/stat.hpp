@@ -59,6 +59,8 @@ class StatSum {
     }
 
     void push(double y, double w) {
+      if (NumericVector::is_na(y)) return;
+
       weight += w;
       if (i_ < 1) return;
 
@@ -85,6 +87,8 @@ class StatMedian {
 
   public:
     void push(double y, double w) {
+      if (NumericVector::is_na(y)) return;
+
       ys.push_back(y);
     }
 
