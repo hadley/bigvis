@@ -114,3 +114,33 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// compute_moments
+NumericVector compute_moments(const NumericVector& x);
+RcppExport SEXP bigvis_compute_moments(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector __result = compute_moments(x);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// compute_sum
+NumericVector compute_sum(const NumericVector& x);
+RcppExport SEXP bigvis_compute_sum(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector __result = compute_sum(x);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// compute_median
+NumericVector compute_median(const NumericVector& x);
+RcppExport SEXP bigvis_compute_median(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector __result = compute_median(x);
+    return Rcpp::wrap(__result);
+END_RCPP
+}

@@ -61,3 +61,15 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
     .Call('bigvis_group_hex', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin, x_max)
 }
 
+compute_moments <- function(x) {
+    .Call('bigvis_compute_moments', PACKAGE = 'bigvis', x)
+}
+
+compute_sum <- function(x) {
+    .Call('bigvis_compute_sum', PACKAGE = 'bigvis', x)
+}
+
+compute_median <- function(x) {
+    .Call('bigvis_compute_median', PACKAGE = 'bigvis', x)
+}
+
