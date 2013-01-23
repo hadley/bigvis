@@ -9,12 +9,14 @@
 * summarise (1d)
   * all need to support weights
 
-  * count, sum (unweighted)
-  * weights, mean, var, skew?, kurt?
+  * count, sum (done)
+  * count, mean, sd, (done)
+  * skew?, kurt?
 
-  * median 
+  * median (done)
 
   * quantiles
+    * different to others because it takes a parameter, so will need extension to generator
     * default to R's interpolation method O(nm)
   
   * weighted quantiles
@@ -46,18 +48,13 @@ Kernel smoothing plus binned summary leads to many common statistics: density = 
 
 * smooth would expect constant bins
 * single sided smoother for time data
-* should probably force kernel to be odd to simplify code
+* should probably force kernel to be even to simplify code
 * option to reflect & sum kernel values at bounds.  If TRUE length of output = length of input, otherwise = input + kernel
 
 # Syntax
 
     summarise1d(x, binwidth = 1 / 100)
-    summarise1d(x, "count", binwidth = 1 / 100)
-    summarise1d(x, y, "mean", binwidth = 1 / 100)
-    summarise1d(x, y, "median", binwidth = 1 / 100)
-    summarise1d(x, weight = w, "mean", binwidth = 1 / 100)
-
-Should return a data frame with columns left, right and count, mean, etc.
-
-    summary1d(x, y, binwidth = 1 / 100)
-    summary1d(x, "count", binwidth = 1 / 100)
+    summarise1d(x, ,  "count", binwidth = 1 / 100)
+    summarise1d(x, z, "mean", binwidth = 1 / 100)
+    summarise1d(x, z, "median", binwidth = 1 / 100)
+    summarise1d(x, z, weight = w, "mean", binwidth = 1 / 100)
