@@ -18,26 +18,6 @@ convolve_2d <- function(sample, kernel) {
     .Call('bigvis_convolve_2d', PACKAGE = 'bigvis', sample, kernel)
 }
 
-group_fixed <- function(x, width, origin = 0) {
-    .Call('bigvis_group_fixed', PACKAGE = 'bigvis', x, width, origin)
-}
-
-group_breaks <- function(x, breaks) {
-    .Call('bigvis_group_breaks', PACKAGE = 'bigvis', x, breaks)
-}
-
-group_integer <- function(x, origin = 0) {
-    .Call('bigvis_group_integer', PACKAGE = 'bigvis', x, origin)
-}
-
-group_rect <- function(x, y, x_width, y_width, x_origin, y_origin) {
-    .Call('bigvis_group_rect', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin)
-}
-
-group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
-    .Call('bigvis_group_hex', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin, x_max)
-}
-
 #' Efficient implementation of range.
 #'
 #' This is an efficient C++ implementation of range for numeric vectors:
@@ -59,5 +39,25 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
 #' system.time(frange(rx))
 frange <- function(x, na_rm = TRUE) {
     .Call('bigvis_frange', PACKAGE = 'bigvis', x, na_rm)
+}
+
+group_fixed <- function(x, width, origin = 0) {
+    .Call('bigvis_group_fixed', PACKAGE = 'bigvis', x, width, origin)
+}
+
+group_breaks <- function(x, breaks) {
+    .Call('bigvis_group_breaks', PACKAGE = 'bigvis', x, breaks)
+}
+
+group_integer <- function(x, origin = 0) {
+    .Call('bigvis_group_integer', PACKAGE = 'bigvis', x, origin)
+}
+
+group_rect <- function(x, y, x_width, y_width, x_origin, y_origin) {
+    .Call('bigvis_group_rect', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin)
+}
+
+group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
+    .Call('bigvis_group_hex', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin, x_max)
 }
 

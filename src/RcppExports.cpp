@@ -38,6 +38,17 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// frange
+NumericVector frange(const NumericVector& x, const bool na_rm = true);
+RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP na_rmSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    bool na_rm = Rcpp::as<bool >(na_rmSEXP);
+    NumericVector __result = frange(x, na_rm);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // group_fixed
 IntegerVector group_fixed(const NumericVector& x, double width, double origin = 0);
 RcppExport SEXP bigvis_group_fixed(SEXP xSEXP, SEXP widthSEXP, SEXP originSEXP) {
@@ -100,17 +111,6 @@ BEGIN_RCPP
     double y_origin = Rcpp::as<double >(y_originSEXP);
     double x_max = Rcpp::as<double >(x_maxSEXP);
     IntegerVector __result = group_hex(x, y, x_width, y_width, x_origin, y_origin, x_max);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// frange
-NumericVector frange(const NumericVector& x, const bool na_rm = true);
-RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP na_rmSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    bool na_rm = Rcpp::as<bool >(na_rmSEXP);
-    NumericVector __result = frange(x, na_rm);
     return Rcpp::wrap(__result);
 END_RCPP
 }
