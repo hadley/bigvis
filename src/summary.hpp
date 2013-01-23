@@ -39,8 +39,8 @@ class SummaryMoments {
     double compute(int i) const {
       switch (i) {
         case 0: return weight;
-        case 1: return mean;
-        case 2: return pow(m2 / (weight - 1), 0.5);
+        case 1: return (weight == 0) ? NAN : mean;
+        case 2: return (weight == 0) ? NAN : pow(m2 / (weight - 1), 0.5);
         default: 
           stop("Invalid output requested");
           return NAN;

@@ -29,3 +29,7 @@ test_that("standard deviation agrees with sd", {
   x <- runif(1e6)
   expect_equal(sd2(x), sd(x))
 })
+
+test_that("summary statistics of zero length input are NaN", {
+  expect_equal(compute_moments(numeric()), c(0, NaN, NaN))
+})
