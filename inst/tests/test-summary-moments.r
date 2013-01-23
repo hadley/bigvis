@@ -1,8 +1,8 @@
-context("Stat: moments")
+context("Summary: moments")
 
 count2 <- function(x) compute_moments(x)[1]
 mean2 <- function(x) compute_moments(x)[2]
-var2 <- function(x) compute_moments(x)[3]
+sd2 <- function(x) compute_moments(x)[3]
 
 test_that("count agrees with length", {
   expect_equal(count2(1:10), 10)
@@ -23,9 +23,9 @@ test_that("missing values are ignored", {
   expect_equal(mean2(x), 5)
 })
 
-test_that("variance agrees with var", {
-  expect_equal(var2(1:10), var(1:10))
+test_that("standard deviation agrees with sd", {
+  expect_equal(sd2(1:10), sd(1:10))
 
   x <- runif(1e6)
-  expect_equal(var2(x), var(x))
+  expect_equal(sd2(x), sd(x))
 })
