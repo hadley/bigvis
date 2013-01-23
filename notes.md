@@ -51,11 +51,11 @@ Kernel smoothing plus binned summary leads to many common statistics: density = 
 
 # Syntax
 
-    summary1d(x, binwidth = 1 / 100)
-    summary1d(x, "count", binwidth = 1 / 100)
-    summary1d(x, y, "mean", binwidth = 1 / 100)
-    summary1d(x, y, "median", binwidth = 1 / 100)
-    summary1d(x, weight = w, "mean", binwidth = 1 / 100)
+    summarise1d(x, binwidth = 1 / 100)
+    summarise1d(x, "count", binwidth = 1 / 100)
+    summarise1d(x, y, "mean", binwidth = 1 / 100)
+    summarise1d(x, y, "median", binwidth = 1 / 100)
+    summarise1d(x, weight = w, "mean", binwidth = 1 / 100)
 
 Should return a data frame with columns left, right and count, mean, etc.
 
