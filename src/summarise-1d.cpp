@@ -6,9 +6,14 @@ using namespace Rcpp;
 template<typename Group, typename Stat>
 NumericVector summarise1d(const NumericVector& y, const NumericVector& weight, 
                         const Group& group, const Stat& stat) {
-  std::vector<Stat> stats;
-
   int n_groups = group.size();
+
+  const NumericVector& weight_ = (weight.size() > 0) ? weight : 
+    rep(NumericVector::create(1), n_groups);
+  const NumericVector& y_ = (y.size() > 0) ? y : 
+    rep(NumericVector::create(1), n_groups);
+
+  std::vector<Stat> stats;
   for(int i = 0; i < n_groups; ++i) {
     int bin = group.bin(i);
 
@@ -16,7 +21,7 @@ NumericVector summarise1d(const NumericVector& y, const NumericVector& weight,
       stats.insert(stats.end(), bin - stats.size(), stat);
     }
 
-    stats[bin].push(y[i], weight[i]);
+    stats[bin].push(y_[i], weight_[i]);
   }
 
   int n = stats.size();

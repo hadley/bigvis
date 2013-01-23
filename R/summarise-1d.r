@@ -29,17 +29,17 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
   if (!is.null(z)) {
     stopifnot(length(z) == length(x))
   } else {
-    y <- 1
+    z <- numeric()
   }
   if (!is.null(weights)) {
     stopifnot(length(weights) == length(x))
   } else {
-    weights <- 1
+    weights <- numeric()
   }
 
   if (!is.null(breaks)) {
     f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
-    out <- f(x, y, weights, breaks = breaks)
+    out <- f(x, z, weights, breaks = breaks)
   } else {
     if (is.null(origin)) {
       rng <- frange(x, na_rm = TRUE)
