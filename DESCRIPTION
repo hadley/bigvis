@@ -26,3 +26,4 @@ Collate:
     'ranged.r'
     'bigvis.r'
     'summarise-1d.r'
+    'smooth-1d.r'

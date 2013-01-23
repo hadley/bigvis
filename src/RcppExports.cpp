@@ -5,28 +5,6 @@
 
 using namespace Rcpp;
 
-// convolve_1d
-NumericVector convolve_1d(NumericVector x, NumericVector kernel);
-RcppExport SEXP bigvis_convolve_1d(SEXP xSEXP, SEXP kernelSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector kernel = Rcpp::as<NumericVector >(kernelSEXP);
-    NumericVector __result = convolve_1d(x, kernel);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// convolver_1d
-NumericVector convolver_1d(NumericVector x, NumericVector kernel);
-RcppExport SEXP bigvis_convolver_1d(SEXP xSEXP, SEXP kernelSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector kernel = Rcpp::as<NumericVector >(kernelSEXP);
-    NumericVector __result = convolver_1d(x, kernel);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // convolve_2d
 NumericMatrix convolve_2d(NumericMatrix sample, NumericMatrix kernel);
 RcppExport SEXP bigvis_convolve_2d(SEXP sampleSEXP, SEXP kernelSEXP) {
@@ -111,6 +89,20 @@ BEGIN_RCPP
     double y_origin = Rcpp::as<double >(y_originSEXP);
     double x_max = Rcpp::as<double >(x_maxSEXP);
     IntegerVector __result = group_hex(x, y, x_width, y_width, x_origin, y_origin, x_max);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// smooth_1d_
+NumericVector smooth_1d_(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const Function& kernel, bool reflect = true);
+RcppExport SEXP bigvis_smooth_1d_(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP kernelSEXP, SEXP reflectSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector x_out = Rcpp::as<NumericVector >(x_outSEXP);
+    Function kernel = Rcpp::as<Function >(kernelSEXP);
+    bool reflect = Rcpp::as<bool >(reflectSEXP);
+    NumericVector __result = smooth_1d_(x, z, x_out, kernel, reflect);
     return Rcpp::wrap(__result);
 END_RCPP
 }
