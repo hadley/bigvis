@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 class StatMoments {
-    const int i_;
+    int i_;
     double weight;
     double mean;
     double m2;
@@ -49,7 +49,7 @@ class StatMoments {
 };
 
 class StatSum {
-    const int i_;
+    int i_;
     int weight;
     double sum;
 
