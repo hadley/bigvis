@@ -40,7 +40,7 @@ class SummaryMoments {
       switch (i) {
         case 0: return weight;
         case 1: return mean;
-        case 2: return m2 / (weight - 1);
+        case 2: return pow(m2 / (weight - 1), 0.5);
         default: 
           stop("Invalid output requested");
           return NAN;
@@ -51,7 +51,7 @@ class SummaryMoments {
       switch (i) {
         case 0: return "count";
         case 1: return "mean";
-        case 2: return "var";
+        case 2: return "sd";
         default: 
           stop("Invalid output requested");
           return "";
