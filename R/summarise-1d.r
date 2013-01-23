@@ -46,7 +46,7 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
       origin <- rng[1]
       if (abs(origin) / abs(rng[2] - rng[1]) < 1e-3) origin <- 0
     }
-    f <- match.fun(paste("compute", summary, "fixed", sep = "_"))
+    f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
     out <- f(x, z, weights, width = binwidth, origin = origin)
     breaks <- origin + binwidth * seq_len(nrow(out) - 1)
   }

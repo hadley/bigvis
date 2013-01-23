@@ -1,14 +1,14 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-class StatMoments {
+class SummaryMoments {
     int i_;
     double weight;
     double mean;
     double m2;
 
   public:
-    StatMoments (int i) : i_(i), weight(0), mean(0), m2(0) {
+    SummaryMoments (int i) : i_(i), weight(0), mean(0), m2(0) {
       if (i > 2) stop("Invalid moment");
     }
 
@@ -48,13 +48,13 @@ class StatMoments {
     }
 };
 
-class StatSum {
+class SummarySum {
     int i_;
     int weight;
     double sum;
 
   public:
-    StatSum (int i) : i_(i), weight(0), sum(0) {
+    SummarySum (int i) : i_(i), weight(0), sum(0) {
       if (i > 1 || i < 0) stop("Invalid moment");
     }
 
@@ -82,7 +82,7 @@ class StatSum {
     }
 };
 
-class StatMedian {
+class SummaryMedian {
     std::vector<double> ys;
 
   public:

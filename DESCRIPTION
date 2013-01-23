@@ -23,6 +23,6 @@ Collate:
     'movies.r'
     'RcppExports.R'
     'adjust.r'
-    'summary.r'
     'ranged.r'
     'bigvis.r'
+    'summarise-1d.r'

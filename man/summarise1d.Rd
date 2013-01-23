@@ -1,8 +1,8 @@
-\name{summary1d}
-\alias{summary1d}
+\name{summarise1d}
+\alias{summarise1d}
 \title{Efficient binned 1d summaries.}
 \usage{
-  summary1d(x, y = NULL, summary = NULL, weights = NULL,
+  summarise1d(x, z = NULL, summary = NULL, weights = NULL,
     binwidth = NULL, origin = NULL, breaks = NULL)
 }
 \arguments{
@@ -25,5 +25,9 @@
 }
 \description{
   Efficient binned 1d summaries.
+}
+\examples{
+x <- runif(1e5)
+summarise1d(x, binwidth = 0.1)
 }
 
