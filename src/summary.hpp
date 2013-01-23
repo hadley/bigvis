@@ -46,6 +46,17 @@ class SummaryMoments {
           return NAN;
       }
     }
+
+    std::string name(int i) const {
+      switch (i) {
+        case 0: return "count";
+        case 1: return "mean";
+        case 2: return "var";
+        default: 
+          stop("Invalid output requested");
+          return "";
+      }
+    }
 };
 
 class SummarySum {
@@ -80,6 +91,17 @@ class SummarySum {
           return NAN;
       }
     }
+
+    std::string name(int i) const {
+      switch (i) {
+        case 0: return "count";
+        case 1: return "sum";
+        default: 
+          stop("Invalid output requested");
+          return "";
+      }
+    }
+
 };
 
 class SummaryMedian {
@@ -111,5 +133,9 @@ class SummaryMedian {
         std::nth_element(ys.begin(), lower, upper);
         return (*upper + *lower) / 2.0;
       }
+    }
+
+    std::string name(int i) const {
+      return "median";
     }
 };

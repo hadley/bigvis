@@ -27,6 +27,13 @@ NumericVector summarise1d(const NumericVector& y, const NumericVector& weight,
       res(i, j) = stats[i].compute(j);
     }
   }
+
+  CharacterVector colnames(m);
+  for (int j = 0; j < m; ++j) {
+    colnames[j] = stats[0].name(j);
+  }
+  res.attr("dimnames") = List::create(CharacterVector::create(), colnames);
+
   return res;
 }
 

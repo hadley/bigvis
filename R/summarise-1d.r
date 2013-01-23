@@ -51,7 +51,7 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     breaks <- origin + binwidth * seq_len(nrow(out) - 1)
   }
 
-  data.frame(x = c(NA, breaks), z = out)
+  data.frame(x = c(NA, breaks), out)
 }
 
 groups <- list(
