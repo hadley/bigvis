@@ -1,29 +1,36 @@
 # Summarise
 
-* bin 
+* group 
   * by numeric x: fixed width, arbitrary breaks (done)
   * by numeric x & y: fixed width (done), hexes
     * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
   * by integer group (done)
 
-* 1d summary functions: 
+* summarise (1d)
   * all need to support weights
 
-  * count, sum (= weighted count), mean, sd
-    * Should these be separate summaries, or just one?
-    * If separate, should (e.g.) sd also return count, sum, and mean?
-    * How to avoid duplication across classes?
+  * count, sum (unweighted)
+  * weights, mean, var, skew?, kurt?
 
-  * median, quantiles (need to be weighted)
+  * median 
+
+  * quantiles
     * default to R's interpolation method O(nm)
-    * weighted might need different algorithm O(n log n): 
-      * sort whole vector
-      * find upper and lower bounds (assuming ordered, can do incrementally)
-      * interpolate between them
+  
+  * weighted quantiles
+    * sort whole vector
+    * find upper and lower bounds (assuming ordered, can do incrementally)
+    * interpolate between them
 
-* 2d summary functions:
+  * histogram
+
+* summarise (2d)
   * cor
   * lm?
+
+* smooth
+
+* visualise
 
 # Robustness
 
