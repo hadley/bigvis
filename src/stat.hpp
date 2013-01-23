@@ -40,7 +40,9 @@ class StatMoments {
         case 0: return weight;
         case 1: return mean;
         case 2: return m2 / weight;
-        default: stop("Invalid output requested");
+        default: 
+          stop("Invalid output requested");
+          return NAN;
       }
     }
 };
@@ -70,7 +72,9 @@ class StatSum {
       switch (i) {
         case 0: return weight;
         case 1: return sum;
-        default: stop("Invalid output requested");
+        default: 
+          stop("Invalid output requested");
+          return NAN;
       }
     }
 };
