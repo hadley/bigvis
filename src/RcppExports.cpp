@@ -92,17 +92,16 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// smooth_1d_
-NumericVector smooth_1d_(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const Function& kernel, bool reflect = true);
-RcppExport SEXP bigvis_smooth_1d_(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP kernelSEXP, SEXP reflectSEXP) {
+// smooth_1d_normal
+NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const double sd);
+RcppExport SEXP bigvis_smooth_1d_normal(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP sdSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector x_out = Rcpp::as<NumericVector >(x_outSEXP);
-    Function kernel = Rcpp::as<Function >(kernelSEXP);
-    bool reflect = Rcpp::as<bool >(reflectSEXP);
-    NumericVector __result = smooth_1d_(x, z, x_out, kernel, reflect);
+    double sd = Rcpp::as<double >(sdSEXP);
+    NumericVector __result = smooth_1d_normal(x, z, x_out, sd);
     return Rcpp::wrap(__result);
 END_RCPP
 }

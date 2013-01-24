@@ -53,11 +53,10 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
 #' @param x ordered vector of x positions
 #' @param z vector of values
 #' @param x_out vector of x positions to smooth for
-#' @param kernel function that when given distance between two locations 
-#'   returns the weight that should be used.
+#' @param sd standard deviation of normal kernel
 #' @keywords internal
-smooth_1d_ <- function(x, z, x_out, kernel, reflect = TRUE) {
-    .Call('bigvis_smooth_1d_', PACKAGE = 'bigvis', x, z, x_out, kernel, reflect)
+smooth_1d_normal <- function(x, z, x_out, sd) {
+    .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd)
 }
 
 summarise_count_breaks <- function(x, y, weight, breaks) {

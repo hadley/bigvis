@@ -12,13 +12,11 @@ using namespace Rcpp;
 //' @param x ordered vector of x positions
 //' @param z vector of values
 //' @param x_out vector of x positions to smooth for
-//' @param kernel function that when given distance between two locations 
-//'   returns the weight that should be used.
+//' @param sd standard deviation of normal kernel
 //' @keywords internal
 // [[Rcpp::export]]
-NumericVector smooth_1d_(const NumericVector& x, const NumericVector& z, 
-                        const NumericVector& x_out, const Function& kernel, 
-                        bool reflect = true) {
+NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, 
+                        const NumericVector& x_out, const double sd) {
 
   int n_in = x.size(), n_out = x_out.size();
   NumericVector z_out(n_out);
@@ -26,25 +24,17 @@ NumericVector smooth_1d_(const NumericVector& x, const NumericVector& z,
   for (int i = 0; i < n_out; i++) {
     for (int j = 0; j < n_in; j++) {
       double dist = x[j] - x_out[i];
-      double k = as<NumericVector>(kernel(dist))[0];
+      // Only use middle 99% of normal kernel
+      if (fabs(dist) > (4 * sd)) continue; 
+
+      double k = R::dnorm(dist, 0.0, sd, 0);
       z_out[i] += z[j] * k;
-
-      // Rcout << "dist: " << dist << "\n";
-      // Rcout << "k: " << k << "\n";
-      // Rcout << "z_out[" << i << "]: " << z_out[i] << "\n";        
-
-      // // Reflections matter if the corresponding value on the other side would
-      // // be outside the grid (either to the right or the left)
-      // if (reflect) {
-      //   // This skips, but it needs to get added somewhere else
-      //   if (x_out[i] < x[0] || x_out[i] > x[n_in]) continue;
-      // }
-
     }
   }
 
   return z_out;
 }
+
 
 /*** R
 
@@ -53,8 +43,12 @@ NumericVector smooth_1d_(const NumericVector& x, const NumericVector& z,
   k <- kernel("norm", sd = 0.1)
   grid <- seq(0, 11, length = 1000)
 
-  s <- smooth_1d_(x, z, grid, k)
+  s <- smooth_1d_normal(x, z, grid, 0.1)
   plot(grid, s, type = "l", ylim = range(s, z))
-  points(x, z)
+  text(grid, min(s), seq_along(grid) - 1, cex = 0.5)
+  text(x, z, seq_along(x) - 1)
+
+  xs <- rep(x, z)
+  plot(density(x, 0.1, weights = z))
 
 */

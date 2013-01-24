@@ -44,11 +44,11 @@ smooth_1d <- function(summary, var = names(summary)[2], kernel = kernel("norm", 
 kernel <- function(dist, ..., range = c(0.005, 0.995)) {
   stopifnot(is.character(dist), length(dist) == 1)
   qdist <- match.fun(paste("q", dist, sep = ""))
-  pdist <- match.fun(paste("p", dist, sep = ""))
+  ddist <- match.fun(paste("d", dist, sep = ""))
 
   krange <- qdist(range, ...)
 
-  structure(function(x) pdist(x, ...), class = "kernel")
+  structure(function(x) ddist(x, ...), class = "kernel")
 }
 
 is.kernel <- function(x) inherits(x, "kernel")

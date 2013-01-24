@@ -158,7 +158,7 @@ NumericVector smooth_1d_memo_range_kcpp(const NumericVector& x, const NumericVec
       std::unordered_map<double, double>::const_iterator it = k_memo.find(dist);
       double k;
       if (it == k_memo.end()) {
-        k = Rf_pnorm5(dist, 0.0, 0.1, 1, 0);
+        k = R::dnorm(dist, 0.0, 0.1, 0);
         k_memo[dist] = k;
       } else {
         k = it->second; 
@@ -184,7 +184,7 @@ NumericVector smooth_1d_range_kcpp(const NumericVector& x, const NumericVector& 
       double dist = x[j] - x_out[i];
       if (dist < kmin || dist > kmax) continue;
 
-      double k = Rf_pnorm5(dist, 0.0, 0.1, 1, 0);
+      double k = R::dnorm(dist, 0.0, 0.1, 0);
       z_out[i] += z[j] * k;
     }
   }
