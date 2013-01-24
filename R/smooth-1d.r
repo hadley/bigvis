@@ -37,16 +37,18 @@ smooth_1d <- function(summary, var = names(summary)[2], kernel = kernel("norm", 
   counts
 }
 
-kernel <- function(dist, ..., range = c(0.01, 0.99)) {
+#' A trimmed kernel function.
+#'
+#' The resulting kernel will not integrate to 1: the assumption is that the
+#' mass outside the range is negligible. This is done for efficiency reasons.
+kernel <- function(dist, ..., range = c(0.005, 0.995)) {
   stopifnot(is.character(dist), length(dist) == 1)
   qdist <- match.fun(paste("q", dist, sep = ""))
-  pdist <- match.fun(paste("d", dist, sep = ""))
+  pdist <- match.fun(paste("p", dist, sep = ""))
 
   krange <- qdist(range, ...)
 
-  structure(function(x) {
-   pdist(x, ...) / diff(range)
-  }, class = "kernel")
+  structure(function(x) pdist(x, ...), class = "kernel")
 }
 
 is.kernel <- function(x) inherits(x, "kernel")
