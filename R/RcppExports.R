@@ -48,12 +48,16 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
     .Call('bigvis_group_hex', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin, x_max)
 }
 
-#' 1d kernel smoothing
+#' 1d normal kernel smoothing.
+#'
+#' This is a variant of \code{\link{density}} for smoothing with normal 
+#' kernels, where both the input and the output can be irregular locations.
 #'
 #' @param x ordered vector of x positions
 #' @param z vector of values
-#' @param x_out vector of x positions to smooth for
-#' @param sd standard deviation of normal kernel
+#' @param x_out vector of x positions to produce smoothed values
+#' @param sd standard deviation of normal kernel (the bandwidth of the 
+#'   smoother)
 #' @keywords internal
 smooth_1d_normal <- function(x, z, x_out, sd) {
     .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd)

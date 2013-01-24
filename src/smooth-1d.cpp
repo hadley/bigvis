@@ -1,18 +1,16 @@
-// Convolution options:
-//   zero pad
-//   truncuate
-//   reflect
-//   wrap
-
 #include <Rcpp.h>
 using namespace Rcpp;
 
-//' 1d kernel smoothing
+//' 1d normal kernel smoothing.
+//'
+//' This is a variant of \code{\link{density}} for smoothing with normal 
+//' kernels, where both the input and the output can be irregular locations.
 //'
 //' @param x ordered vector of x positions
 //' @param z vector of values
-//' @param x_out vector of x positions to smooth for
-//' @param sd standard deviation of normal kernel
+//' @param x_out vector of x positions to produce smoothed values
+//' @param sd standard deviation of normal kernel (the bandwidth of the 
+//'   smoother)
 //' @keywords internal
 // [[Rcpp::export]]
 NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, 
@@ -24,7 +22,7 @@ NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z,
   for (int i = 0; i < n_out; i++) {
     for (int j = 0; j < n_in; j++) {
       double dist = x[j] - x_out[i];
-      // Only use middle 99% of normal kernel
+      // Only use middle four sd of normal kernel
       if (fabs(dist) > (4 * sd)) continue; 
 
       double k = R::dnorm(dist, 0.0, sd, 0);
