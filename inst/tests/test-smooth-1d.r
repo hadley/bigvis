@@ -7,7 +7,7 @@ density_d <- function(x, z, bw, from = min(x) - 3 * bw, to = max(x) + 3 * bw, n 
 
 density_s <- function(x, z, bw, from = min(x) - 3 * bw, to = max(x) + 3 * bw, n = 512) {
   grid <- seq(from, to, length = n)
-  smooth_1d_normal(x, z, grid, bw)
+  smooth_1d_normal(x, z, grid, bw, standardise = FALSE)
 }
 
 test_that("for single point, agrees with dnorm", {
@@ -35,6 +35,6 @@ test_that("when standardised, small binwidth keeps values equal", {
   x <- seq(0, 1, length = 100)
   z <- runif(length(x))
 
-  s <- smooth_1d_normal(x, z, x, 1/1000, standard = TRUE)
+  s <- smooth_1d_normal(x, z, x, 1/1000)
   expect_equal(s, z)
 })

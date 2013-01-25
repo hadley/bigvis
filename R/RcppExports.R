@@ -59,8 +59,13 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
 #' @param x_out vector of x positions to produce smoothed values
 #' @param sd standard deviation of normal kernel (the bandwidth of the 
 #'   smoother)
+#' @param standardise if \code{TRUE}, divides the weighted sum at each location
+#'   by the sum of the weights. This is usually what you want for pre-binned
+#'   data, as it interpolates between the points, rather than redistributing 
+#'   the density.  Any locations in \code{x_out} that are more than 4 standard
+#'   deviations away from \code{x_in} will be \code{NaN}.
 #' @keywords internal
-smooth_1d_normal <- function(x, z, x_out, sd, standardise = FALSE) {
+smooth_1d_normal <- function(x, z, x_out, sd, standardise = TRUE) {
     .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd, standardise)
 }
 

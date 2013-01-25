@@ -12,11 +12,16 @@ using namespace Rcpp;
 //' @param x_out vector of x positions to produce smoothed values
 //' @param sd standard deviation of normal kernel (the bandwidth of the 
 //'   smoother)
+//' @param standardise if \code{TRUE}, divides the weighted sum at each location
+//'   by the sum of the weights. This is usually what you want for pre-binned
+//'   data, as it interpolates between the points, rather than redistributing 
+//'   the density.  Any locations in \code{x_out} that are more than 4 standard
+//'   deviations away from \code{x_in} will be \code{NaN}.
 //' @keywords internal
 // [[Rcpp::export]]
 NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, 
                         const NumericVector& x_out, const double sd, 
-                        bool standardise = false) {
+                        bool standardise = true) {
 
   int n_in = x.size(), n_out = x_out.size();
   NumericVector z_out(n_out), w_out(n_out);
