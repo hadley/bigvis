@@ -1,13 +1,15 @@
+# Group
+
+* by numeric x: fixed width, arbitrary breaks (done)
+* by numeric x & y: fixed width (done), hexes
+  * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
+* by integer group (done)
+
 # Summarise
 
-* group 
-  * by numeric x: fixed width, arbitrary breaks (done)
-  * by numeric x & y: fixed width (done), hexes
-    * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
-  * by integer group (done)
+* all need to support weights
 
-* summarise (1d)
-  * all need to support weights
+* 1d
 
   * count, sum (done)
   * count, mean, sd, (done)
@@ -26,23 +28,13 @@
 
   * histogram
 
-* summarise (2d)
+* 2d
   * cor
   * lm?
 
-* smooth
-
-* visualise
-
-# Robustness
-
-Median: http://people.cs.umass.edu/~mcgregor/papers/09-streamorderstatistics.pdf
-Counting: count-min sketch, https://sites.google.com/site/countminsketch/
-http://link.springer.com.ezproxy.rice.edu/content/pdf/10.1023%2FA%3A1023296123228
-http://www.cs.virginia.edu/~son/cs851/papers/ucsb.sensys04.pdf
-http://www2.research.att.com/~marioh/sketches/index.html
-
 # Smooth
+
+Smoothing needs to be weighted so that values don't get inflated when sd is small - we're not producing densities
 
 Kernel smoothing plus binned summary leads to many common statistics: density = bin + smooth, loess =~ mean + smooth, rqss =~ quantile + smooth
 
@@ -50,6 +42,9 @@ Kernel smoothing plus binned summary leads to many common statistics: density = 
 * single sided smoother for time data
 * should probably force kernel to be even to simplify code
 * option to reflect & sum kernel values at bounds.  If TRUE length of output = length of input, otherwise = input + kernel
+
+# Visualise
+
 
 # Syntax
 

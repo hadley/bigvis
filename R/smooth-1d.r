@@ -1,5 +1,15 @@
 #' Smooth 1d summary statistics
 #'
+#' Currently only provides the normal kernel, but extension to other kernels
+#' is straightforward (but ignored because they don't make that much
+#' difference to the final result).
+#'
+#' The methods used in this function are adapted from the ideas of binned
+#' kernel density in MP Wand's "KernSmooth" package, but rather than using
+#' the discrete discrete fast fourier algorithm, they do convolution using
+#' C-level loops. This is more efficient when the matrices to be convolved
+#' are rather different sizes.
+#'
 #' @param summary summary statistics produced by \code{\link{summary1d}}
 #' @param bw smoothing bandwidth/standard deviation
 #' @param var variable to smooth
