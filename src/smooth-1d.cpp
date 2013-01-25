@@ -38,7 +38,6 @@ NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z,
 
   if (standardise) {
     for (int i = 0; i < n_out; ++i) {
-      if (w_out[i] == 0) continue;
       z_out[i] /= w_out[i];
     }    
   }
