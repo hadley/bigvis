@@ -1,3 +1,8 @@
+# TODO
+
+* two summary and smoothing functions
+* s3 class for summaries, and update binned-summary.r & standardise.r
+
 # Group
 
 * by numeric x: fixed width, arbitrary breaks (done)
@@ -34,14 +39,12 @@
 
 # Smooth
 
-Kernel smoothing plus binned summary leads to many common statistics: density = bin + smooth, loess =~ mean + smooth, rqss =~ quantile + smooth
+Kernel smoothing plus binned summary leads to many common statistics: density =~ bin + smooth, loess =~ mean + smooth, rqss =~ quantile + smooth
 
-* smooth would expect constant bins
-* single sided smoother for time data
-* should probably force kernel to be even to simplify code
-* option to reflect & sum kernel values at bounds.  If TRUE length of output = length of input, otherwise = input + kernel
+* would be nice to have single sided smoother for time data
 
 # Visualise
+
 
 
 # Syntax
