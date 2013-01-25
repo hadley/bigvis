@@ -1,6 +1,6 @@
 # bigvis
 
-The bigvis package provides tools for interactively (<1 s for most operations)visualising large (10-100 million obs) datasets.  
+The bigvis package provides tools for exploratory data analysis of __large datasets__ (10-100 million obs). The aim is to have most operations take less than 1 second on commodity hardware, even for 100,000,000 data points.
 
 ## Workflow
 
