@@ -93,15 +93,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // smooth_1d_normal
-NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const double sd);
-RcppExport SEXP bigvis_smooth_1d_normal(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP sdSEXP) {
+NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const double sd, bool standardise = false);
+RcppExport SEXP bigvis_smooth_1d_normal(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP sdSEXP, SEXP standardiseSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector x_out = Rcpp::as<NumericVector >(x_outSEXP);
     double sd = Rcpp::as<double >(sdSEXP);
-    NumericVector __result = smooth_1d_normal(x, z, x_out, sd);
+    bool standardise = Rcpp::as<bool >(standardiseSEXP);
+    NumericVector __result = smooth_1d_normal(x, z, x_out, sd, standardise);
     return Rcpp::wrap(__result);
 END_RCPP
 }

@@ -3,8 +3,9 @@ using namespace Rcpp;
 
 //' 1d normal kernel smoothing.
 //'
-//' This is a variant of \code{\link{density}} for smoothing with normal 
-//' kernels, where both the input and the output can be irregular locations.
+//' This is a variant of \code{\link{density}} for calculating weighted 
+//' means or weighted sums, with weights determined by a normal kernel. 
+//' Both the input and the output can have irregular locations.
 //'
 //' @param x ordered vector of x positions
 //' @param z vector of values
@@ -14,20 +15,32 @@ using namespace Rcpp;
 //' @keywords internal
 // [[Rcpp::export]]
 NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, 
-                        const NumericVector& x_out, const double sd) {
+                        const NumericVector& x_out, const double sd, 
+                        bool standardise = false) {
 
   int n_in = x.size(), n_out = x_out.size();
-  NumericVector z_out(n_out);
+  NumericVector z_out(n_out), w_out(n_out);
 
-  for (int i = 0; i < n_out; i++) {
-    for (int j = 0; j < n_in; j++) {
+  for (int i = 0; i < n_out; ++i) {
+    for (int j = 0; j < n_in; ++j) {
       double dist = x[j] - x_out[i];
-      // Only use middle four sd of normal kernel
+      // Only use middle four sd of normal kernel: If we assume that x_out is 
+      // sorted, we might be able to do this more efficiently using
+      // std::lower_bound and std::upper_bound to find the begin and end 
+      // iterators
       if (fabs(dist) > (4 * sd)) continue; 
 
       double k = R::dnorm(dist, 0.0, sd, 0);
       z_out[i] += z[j] * k;
+      if (standardise) w_out[i] += k;
     }
+  }
+
+  if (standardise) {
+    for (int i = 0; i < n_out; ++i) {
+      if (w_out[i] == 0) continue;
+      z_out[i] /= w_out[i];
+    }    
   }
 
   return z_out;

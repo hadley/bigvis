@@ -21,7 +21,6 @@ test_that("for single point, agrees with dnorm", {
   # expect_equal(d, dnorm(grid, sd = 0.25))
 })
 
-
 test_that("more multiple points, agrees with density", {
   x <- 1:10
   z <- rep(c(1, 2), length = length(x))
@@ -30,4 +29,12 @@ test_that("more multiple points, agrees with density", {
   s <- density_s(x, z, 0.1)
 
   expect_equal(s, d, tol = 0.01)
+})
+
+test_that("when standardised, small binwidth keeps values equal", {
+  x <- seq(0, 1, length = 100)
+  z <- runif(length(x))
+
+  s <- smooth_1d_normal(x, z, x, 1/1000, standard = TRUE)
+  expect_equal(s, z)
 })

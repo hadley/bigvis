@@ -50,8 +50,9 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
 
 #' 1d normal kernel smoothing.
 #'
-#' This is a variant of \code{\link{density}} for smoothing with normal 
-#' kernels, where both the input and the output can be irregular locations.
+#' This is a variant of \code{\link{density}} for calculating weighted 
+#' means or weighted sums, with weights determined by a normal kernel. 
+#' Both the input and the output can have irregular locations.
 #'
 #' @param x ordered vector of x positions
 #' @param z vector of values
@@ -59,8 +60,8 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
 #' @param sd standard deviation of normal kernel (the bandwidth of the 
 #'   smoother)
 #' @keywords internal
-smooth_1d_normal <- function(x, z, x_out, sd) {
-    .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd)
+smooth_1d_normal <- function(x, z, x_out, sd, standardise = FALSE) {
+    .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd, standardise)
 }
 
 summarise_count_breaks <- function(x, y, weight, breaks) {

@@ -34,8 +34,6 @@
 
 # Smooth
 
-Smoothing needs to be weighted so that values don't get inflated when sd is small - we're not producing densities
-
 Kernel smoothing plus binned summary leads to many common statistics: density = bin + smooth, loess =~ mean + smooth, rqss =~ quantile + smooth
 
 * smooth would expect constant bins

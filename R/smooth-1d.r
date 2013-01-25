@@ -23,7 +23,13 @@
 #'
 #' plot(xsum)
 #' lines(xsmu)
-smooth1d <- function(summary, bw, var = names(summary)[2], grid = NULL, n = nrow(summary), reflect = TRUE) {
+#'
+#' # If you just want to smooth to
+#' xsmu2 <- smooth1d(xsum, 1/100, standardise = TRUE)
+#' plot(xsum)
+#' lines(xsmu2)
+smooth1d <- function(summary, bw, var = names(summary)[2], grid = NULL,
+                     n = nrow(summary) - 1, reflect = TRUE, standardise = NULL) {
   x_rng <- frange(summary$x)
 
   if (is.null(grid)) {
@@ -38,7 +44,12 @@ smooth1d <- function(summary, bw, var = names(summary)[2], grid = NULL, n = nrow
     grid <- seq(g_rng[1], g_rng[2], length = n)
   }
 
+  if (is.null(standardise)) {
+    standardise <- !(var %in% c("count", "sum"))
+  }
+
   no_na <- summary[-1, ]
-  s <- smooth_1d_normal(x = no_na$x[-1], z = no_na[[var]], x_out = grid, sd = bw)
+  s <- smooth_1d_normal(x = no_na$x, z = no_na[[var]], x_out = grid, sd = bw,
+    standardise = standardise)
   data.frame(x = c(NA, grid), s = c(summary[[var]][1], s))
 }
