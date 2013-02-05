@@ -26,3 +26,4 @@ Collate:
     'smooth-1d.r'
     'rebin.r'
     'binsum.r'
+    'autoplot.r'
