@@ -14,7 +14,12 @@
 binsum <- function(df, type) {
   stopifnot(is.data.frame(df), ncol(df) >= 2)
 
-  structure(df, class = c("binsum", class(df)), type = type)
+  structure(df, class = c("binsum", paste0("binsum_", type), class(df)))
+}
+
+type <- function(x) {
+  stopifnot(is.binsum(x))
+  strsplit(class(x)[2], "_")[[1]][2]
 }
 
 #' @rdname binsum

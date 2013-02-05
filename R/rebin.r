@@ -8,18 +8,11 @@
 #' @param a binned summary object
 #' @keywords internal
 rebin <- function(x) {
-  stopifnot(is.binsum(x))
-
-  # Doesn't actually need to be rebinned
-  if (!anyDuplicated(x)) return(x)
-
-  type <- attr(x, "type")
-  f <- match.fun(paste0("rebin_", type))
-
-  binsum(f(x), attr(x, "type"))
+  UseMethod("rebin")
 }
 
-rebin_median <- function(df) {
+rebin.binsum_median <- function(x) {
+  if (!anyDuplicated(x)) return(x)
   message("Warning: can not rebin medians. Approximating using mean.")
 
   x <- unique(df$x)
@@ -28,10 +21,12 @@ rebin_median <- function(df) {
 
   out <- data.frame(x = unique(df$x))
   out$median <- grp_apply(xs, function(i) mean(df$median[i], na.rm = TRUE))
-  out
+  binsum(out, type = type(x))
 }
 
-rebin_sum <- function(df) {
+rebin.binsum_sum <- function(x) {
+  if (!anyDuplicated(x)) return(x)
+
   x <- unique(df$x)
   x_id <- match(df$x, x)
   xs <- split(seq_len(nrow(df)), x_id)
@@ -42,10 +37,12 @@ rebin_sum <- function(df) {
     out$sum <- grp_apply(xs, function(i) sum(df$sum[i]))
   }
 
-  out
+  binsum(out, type = type(x))
 }
 
-rebin_moments <- function(df) {
+rebin.binsum_moments <- function(x) {
+  if (!anyDuplicated(x)) return(x)
+
   x <- unique(df$x)
   x_id <- match(df$x, x)
   xs <- split(seq_len(nrow(df)), x_id)
@@ -57,7 +54,7 @@ rebin_moments <- function(df) {
     out$mean <- grp_apply(xs, function(i) weighted.mean(df$mean[i], df$count[i]))
   }
 
-  out
+  binsum(out, type = type(x))
 }
 
 grp_apply <- function(x, f) vapply(x, f, numeric(1), USE.NAMES = FALSE)

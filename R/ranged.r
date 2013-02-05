@@ -38,3 +38,4 @@ range.ranged <- function(x, ...) attr(x, "range")
   attr(x, "class") <- NULL
   NextMethod(x, ...)
 }
+
