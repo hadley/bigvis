@@ -55,7 +55,7 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     breaks <- origin + binwidth * seq_len(nrow(out) - 1)
   }
 
-  binsum(data.frame(x = c(NA, breaks), out))
+  binsum(data.frame(x = c(NA, breaks), out), summary_class[[summary]])
 }
 
 groups <- list(
@@ -69,5 +69,10 @@ summaries <- c(
   sd = "Moments(2)",
   median = "Median()"
 )
-
-
+summary_class <- c(
+  count = "sum",
+  sum = "sum",
+  mean = "moments",
+  sd = "moments",
+  median = "median"
+)

@@ -1,10 +1,10 @@
 #' Create a new binned summary object.
 #'
 #' @keywords inherit.
-binsum <- function(df) {
+binsum <- function(df, type) {
   stopifnot(is.data.frame(df), ncol(df) >= 2)
 
-  structure(df, class = c("binsum", class(df)))
+  structure(df, class = c("binsum", class(df)), type = type)
 }
 
 #' @rdname binsum
@@ -17,7 +17,7 @@ is.binsum <- function(x) {
 Math.binsum <- function(x, ...) {
   generic <- match.fun(.Generic)
   x[[1]] <- generic(x[[1]], ...)
-  x
+  rebin(x)
 }
 
 logical_ops <- c("==", "!=", "<", "<=", ">=", ">")
@@ -30,7 +30,7 @@ Ops.binsum <- function(e1, e2) {
     generic(e1[[1]], e2)
   } else if (.Generic %in% math_ops) {
     e1[[1]] <- generic(e1[[1]], e2)
-    e1
+    rebin(e1)
   } else {
     stop(.Generic, " not supported for binsum objects", call. = FALSE)
   }

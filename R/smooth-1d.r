@@ -69,5 +69,5 @@ smooth1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
     c(summary[[var]][1], s)
   }
   smooths <- vapply(vars, smooth_var, numeric(nrow(summary)))
-  binsum(data.frame(x = c(NA, grid), smooths))
+  binsum(data.frame(x = c(NA, grid), smooths), attr(summary, "type"))
 }
