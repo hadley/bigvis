@@ -34,6 +34,8 @@
 #' plot(xsmu2, type = "l")
 smooth1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
                      n = nrow(summary) - 1, reflect = TRUE, standardise = TRUE) {
+  stopifnot(is.binsum(summary))
+
   x_rng <- frange(summary$x)
   no_na <- summary[-1, ]
 
@@ -67,5 +69,5 @@ smooth1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
     c(summary[[var]][1], s)
   }
   smooths <- vapply(vars, smooth_var, numeric(nrow(summary)))
-  data.frame(x = c(NA, grid), smooths)
+  binsum(data.frame(x = c(NA, grid), smooths))
 }
