@@ -13,7 +13,6 @@ Suggests:
 LinkingTo: Rcpp
 License: GPL (>= 2)
 Collate:
-    'bin-nd.r'
     'density-2d.r'
     'factor.r'
     'binned-summary.r'
