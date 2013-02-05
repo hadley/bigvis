@@ -2,7 +2,7 @@
 \alias{smooth1d}
 \title{Smooth 1d summary statistics}
 \usage{
-  smooth1d(summary, var = NULL, bw = NULL, grid = NULL,
+  smooth1d(summary, vars = NULL, bw = NULL, grid = NULL,
     n = nrow(summary) - 1, reflect = TRUE,
     standardise = TRUE)
 }
@@ -10,8 +10,8 @@
   \item{summary}{summary statistics produced by
   \code{\link{summary1d}}}
 
-  \item{var}{variable to smooth.  Defaults (with a message)
-  to the second column in \code{summary}.}
+  \item{vars}{variables to smooth.  Defaults (with a
+  message) to all variables in the original summary.}
 
   \item{bw}{smoothing bandwidth/standard deviation.
   Defaults (with a message) to the minimum difference

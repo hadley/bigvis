@@ -42,10 +42,10 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     out <- f(x, z, weights, breaks = breaks)
   } else {
     if (is.null(origin)) {
+      rng <- frange(x, na_rm = TRUE)
       if (is.integer(x)) {
-        origin <- -0.5
+        origin <- rng[1] - 0.5
       } else {
-        rng <- frange(x, na_rm = TRUE)
         origin <- rng[1]
         if (abs(origin) / abs(rng[2] - rng[1]) < 1e-3) origin <- 0
       }
@@ -55,7 +55,7 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     breaks <- origin + binwidth * seq_len(nrow(out) - 1)
   }
 
-  data.frame(x = c(NA, breaks), out)
+  binsum(data.frame(x = c(NA, breaks), out))
 }
 
 groups <- list(

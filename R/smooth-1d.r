@@ -11,8 +11,8 @@
 #' are rather different sizes.
 #'
 #' @param summary summary statistics produced by \code{\link{summary1d}}
-#' @param var variable to smooth.  Defaults (with a message) to the second
-#'   column in \code{summary}.
+#' @param vars variables to smooth.  Defaults (with a message) to all variables
+#'   in the original summary.
 #' @param bw smoothing bandwidth/standard deviation. Defaults (with a message)
 #'   to the minimum difference between bins. Since most of the normal density
 #'   is located within 3 sd, this will smooth over the nearest two bins, with
@@ -32,14 +32,14 @@
 #' xsmu2 <- smooth1d(xsum, bw = 1/100, standardise = FALSE)
 #' # notice the y-axis
 #' plot(xsmu2, type = "l")
-smooth1d <- function(summary, var = NULL, bw = NULL, grid = NULL,
+smooth1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
                      n = nrow(summary) - 1, reflect = TRUE, standardise = TRUE) {
   x_rng <- frange(summary$x)
   no_na <- summary[-1, ]
 
-  if (is.null(var)) {
-    var <- names(summary)[2]
-    message("Smoothing ", var)
+  if (is.null(vars)) {
+    vars <- names(summary)[-1]
+    message("Smoothing ", paste(vars, collapse = ", "))
   }
 
   if (is.null(bw)) {
@@ -61,7 +61,11 @@ smooth1d <- function(summary, var = NULL, bw = NULL, grid = NULL,
     }
   }
 
-  s <- smooth_1d_normal(x = no_na$x, z = no_na[[var]], x_out = grid, sd = bw,
-    standardise = standardise)
-  data.frame(x = c(NA, grid), s = c(summary[[var]][1], s))
+  smooth_var <- function(var) {
+    s <- smooth_1d_normal(x = no_na$x, z = no_na[[var]], x_out = grid, sd = bw,
+      standardise = standardise)
+    c(summary[[var]][1], s)
+  }
+  smooths <- vapply(vars, smooth_var, numeric(nrow(summary)))
+  data.frame(x = c(NA, grid), smooths)
 }
