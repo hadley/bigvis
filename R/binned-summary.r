@@ -1,6 +1,16 @@
-#' Create a new binned summary object.
+#' Create/test for binned summary objects.
 #'
-#' @keywords inherit.
+#' @section Methods:
+#'
+#' Mathematical functions with methods for \code{binsum} object will modify
+#' the x column of the data frame and \code{\link{rebin}} the data, calculating
+#' updated summary statistics.
+#'
+#' Currently methods are provided for the \code{Math} group generic,
+#' logical comparison and arithmetic operators, and
+#' \code{\link[plyr]{round_any}}.
+#'
+#' @keywords internal
 binsum <- function(df, type) {
   stopifnot(is.data.frame(df), ncol(df) >= 2)
 
@@ -34,4 +44,10 @@ Ops.binsum <- function(e1, e2) {
   } else {
     stop(.Generic, " not supported for binsum objects", call. = FALSE)
   }
+}
+
+#' @S3method round_any binsum
+round_any.binsum <- function(x, accuracy, f = round) {
+  x[[1]] <- round_any(x[[1]], accuracy, f = f)
+  rebin(x)
 }
