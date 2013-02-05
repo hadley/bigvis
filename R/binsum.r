@@ -46,7 +46,7 @@ Ops.binsum <- function(e1, e2) {
   }
 }
 
-#' @S3method round_any binsum
+#' @export
 round_any.binsum <- function(x, accuracy, f = round) {
   x[[1]] <- round_any(x[[1]], accuracy, f = f)
   rebin(x)
