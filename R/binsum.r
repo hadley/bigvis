@@ -42,7 +42,9 @@ math_ops <- c("+", "-", "*", "/", "^", "%%", "%/%")
 Ops.binsum <- function(e1, e2) {
   generic <- match.fun(.Generic)
   if (.Generic %in% logical_ops)  {
-    generic(e1[[1]], e2)
+    l <- generic(e1[[1]], e2)
+    l[1] <- TRUE # always preserve missings
+    l & !is.na(l)
   } else if (.Generic %in% math_ops) {
     e1[[1]] <- generic(e1[[1]], e2)
     rebin(e1)
