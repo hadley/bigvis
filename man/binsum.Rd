@@ -3,7 +3,7 @@
 \alias{is.binsum}
 \title{Create a new binned summary object.}
 \usage{
-  binsum(df)
+  binsum(df, type)
 
   is.binsum(x)
 }

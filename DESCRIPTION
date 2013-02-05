@@ -25,3 +25,4 @@ Collate:
     'bigvis.r'
     'summarise-1d.r'
     'smooth-1d.r'
+    'rebin.r'
