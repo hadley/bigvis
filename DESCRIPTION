@@ -15,7 +15,6 @@ License: GPL (>= 2)
 Collate:
     'density-2d.r'
     'factor.r'
-    'binned-summary.r'
     'standardise.r'
     'glyph.r'
     'movies.r'
@@ -26,3 +25,4 @@ Collate:
     'summarise-1d.r'
     'smooth-1d.r'
     'rebin.r'
+    'binsum.r'
