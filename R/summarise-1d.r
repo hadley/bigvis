@@ -41,15 +41,8 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
     out <- f(x, z, weights, breaks = breaks)
   } else {
-    if (is.null(origin)) {
-      rng <- frange(x, na_rm = TRUE)
-      if (is.integer(x)) {
-        origin <- rng[1] - 0.5
-      } else {
-        origin <- rng[1]
-        if (abs(origin) / abs(rng[2] - rng[1]) < 1e-3) origin <- 0
-      }
-    }
+    origin <- origin %||% find_origin(x, binwidth)
+
     f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
     out <- f(x, z, weights, width = binwidth, origin = origin)
     breaks <- origin + binwidth * seq_len(nrow(out) - 1)

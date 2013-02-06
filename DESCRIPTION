@@ -24,3 +24,5 @@ Collate:
     'rebin.r'
     'binsum.r'
     'autoplot.r'
+    'origin.r'
+    'utils.r'
