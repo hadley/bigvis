@@ -69,44 +69,44 @@ smooth_1d_normal <- function(x, z, x_out, sd, standardise = TRUE) {
     .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd, standardise)
 }
 
-summarise_count_breaks <- function(x, y, weight, breaks) {
-    .Call('bigvis_summarise_count_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+summarise_count_breaks <- function(x, z, weight, breaks) {
+    .Call('bigvis_summarise_count_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
-summarise_count_fixed <- function(x, y, weight, width, origin) {
-    .Call('bigvis_summarise_count_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+summarise_count_fixed <- function(x, z, weight, width, origin) {
+    .Call('bigvis_summarise_count_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
-summarise_sum_breaks <- function(x, y, weight, breaks) {
-    .Call('bigvis_summarise_sum_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+summarise_sum_breaks <- function(x, z, weight, breaks) {
+    .Call('bigvis_summarise_sum_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
-summarise_sum_fixed <- function(x, y, weight, width, origin) {
-    .Call('bigvis_summarise_sum_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+summarise_sum_fixed <- function(x, z, weight, width, origin) {
+    .Call('bigvis_summarise_sum_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
-summarise_mean_breaks <- function(x, y, weight, breaks) {
-    .Call('bigvis_summarise_mean_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+summarise_mean_breaks <- function(x, z, weight, breaks) {
+    .Call('bigvis_summarise_mean_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
-summarise_mean_fixed <- function(x, y, weight, width, origin) {
-    .Call('bigvis_summarise_mean_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+summarise_mean_fixed <- function(x, z, weight, width, origin) {
+    .Call('bigvis_summarise_mean_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
-summarise_sd_breaks <- function(x, y, weight, breaks) {
-    .Call('bigvis_summarise_sd_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+summarise_sd_breaks <- function(x, z, weight, breaks) {
+    .Call('bigvis_summarise_sd_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
-summarise_sd_fixed <- function(x, y, weight, width, origin) {
-    .Call('bigvis_summarise_sd_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+summarise_sd_fixed <- function(x, z, weight, width, origin) {
+    .Call('bigvis_summarise_sd_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
-summarise_median_breaks <- function(x, y, weight, breaks) {
-    .Call('bigvis_summarise_median_breaks', PACKAGE = 'bigvis', x, y, weight, breaks)
+summarise_median_breaks <- function(x, z, weight, breaks) {
+    .Call('bigvis_summarise_median_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
-summarise_median_fixed <- function(x, y, weight, width, origin) {
-    .Call('bigvis_summarise_median_fixed', PACKAGE = 'bigvis', x, y, weight, width, origin)
+summarise_median_fixed <- function(x, z, weight, width, origin) {
+    .Call('bigvis_summarise_median_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
 compute_moments <- function(x) {
