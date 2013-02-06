@@ -47,23 +47,3 @@ summarise1d <- function(x, z = NULL, summary = NULL, w = NULL,
 
   binsum(data.frame(x = c(NA, breaks), out), summary_class[[summary]])
 }
-
-groups <- list(
-  Breaks = c(breaks = "NumericVector&"),
-  Fixed = c(width = "double", origin = "double")
-)
-
-summaries <- c(
-  count = "Sum(0)",
-  sum = "Sum(1)",
-  mean = "Moments(1)",
-  sd = "Moments(2)",
-  median = "Median()"
-)
-summary_class <- c(
-  count = "sum",
-  sum = "sum",
-  mean = "moments",
-  sd = "moments",
-  median = "median"
-)

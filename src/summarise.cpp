@@ -55,6 +55,11 @@ NumericVector summarise_count_fixed(const NumericVector& x, const NumericVector&
 }
 
 // [[Rcpp::export]]
+NumericVector summarise_count_2dfixed(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
+  return summarise(z, weight, Group2dFixed(x, y, x_width, y_width, x_origin, y_origin), SummarySum(0));
+}
+
+// [[Rcpp::export]]
 NumericVector summarise_sum_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks) {
   return summarise(z, weight, GroupBreaks(x, breaks), SummarySum(1));
 }
@@ -62,6 +67,11 @@ NumericVector summarise_sum_breaks(const NumericVector& x, const NumericVector& 
 // [[Rcpp::export]]
 NumericVector summarise_sum_fixed(const NumericVector& x, const NumericVector& z, const NumericVector& weight, double width, double origin) {
   return summarise(z, weight, GroupFixed(x, width, origin), SummarySum(1));
+}
+
+// [[Rcpp::export]]
+NumericVector summarise_sum_2dfixed(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
+  return summarise(z, weight, Group2dFixed(x, y, x_width, y_width, x_origin, y_origin), SummarySum(1));
 }
 
 // [[Rcpp::export]]
@@ -75,6 +85,11 @@ NumericVector summarise_mean_fixed(const NumericVector& x, const NumericVector& 
 }
 
 // [[Rcpp::export]]
+NumericVector summarise_mean_2dfixed(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
+  return summarise(z, weight, Group2dFixed(x, y, x_width, y_width, x_origin, y_origin), SummaryMoments(1));
+}
+
+// [[Rcpp::export]]
 NumericVector summarise_sd_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks) {
   return summarise(z, weight, GroupBreaks(x, breaks), SummaryMoments(2));
 }
@@ -85,6 +100,11 @@ NumericVector summarise_sd_fixed(const NumericVector& x, const NumericVector& z,
 }
 
 // [[Rcpp::export]]
+NumericVector summarise_sd_2dfixed(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
+  return summarise(z, weight, Group2dFixed(x, y, x_width, y_width, x_origin, y_origin), SummaryMoments(2));
+}
+
+// [[Rcpp::export]]
 NumericVector summarise_median_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks) {
   return summarise(z, weight, GroupBreaks(x, breaks), SummaryMedian());
 }
@@ -92,5 +112,10 @@ NumericVector summarise_median_breaks(const NumericVector& x, const NumericVecto
 // [[Rcpp::export]]
 NumericVector summarise_median_fixed(const NumericVector& x, const NumericVector& z, const NumericVector& weight, double width, double origin) {
   return summarise(z, weight, GroupFixed(x, width, origin), SummaryMedian());
+}
+
+// [[Rcpp::export]]
+NumericVector summarise_median_2dfixed(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
+  return summarise(z, weight, Group2dFixed(x, y, x_width, y_width, x_origin, y_origin), SummaryMedian());
 }
 

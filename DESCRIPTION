@@ -26,3 +26,4 @@ Collate:
     'autoplot.r'
     'origin.r'
     'utils.r'
+    'summarise.r'

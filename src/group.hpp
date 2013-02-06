@@ -103,14 +103,6 @@ class Group2d {
       x_bins_ = x_.nbins();
     }
 
-    // Create fixed bins
-    Group2d(const NumericVector& x, const NumericVector& y,
-            double x_width, double y_width, 
-            double x_origin = 0, double y_origin = 0) {
-      x_ = GroupFixed(x, x_width, x_origin);
-      y_ = GroupFixed(y, y_width, y_origin);
-    }
-
     unsigned int bin(unsigned int i) const {
       int x_bin = x_.bin(i), y_bin = y_.bin(i);
       return y_bin * (x_bins_ + 1) + x_bin;
@@ -124,3 +116,12 @@ class Group2d {
       return x_bins_ * y_.nbins();
     }
 };
+
+inline Group2d<GroupFixed> Group2dFixed (const NumericVector& x, const NumericVector& y,
+            double x_width, double y_width, 
+            double x_origin = 0, double y_origin = 0) {
+  GroupFixed x_grp(x, x_width, x_origin),  
+             y_grp(y, y_width, y_origin);
+  return Group2d<GroupFixed>(x_grp, y_grp);
+}
+
