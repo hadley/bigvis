@@ -14,7 +14,7 @@
 #' @examples
 #' x <- runif(1e5)
 #' summarise1d(x, binwidth = 0.1)
-summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
+summarise1d <- function(x, z = NULL, summary = NULL, w = NULL,
                       binwidth = NULL, origin = NULL, breaks = NULL) {
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"
@@ -26,16 +26,13 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     stop("You must specify one of binwidth and breaks", call. = FALSE)
   }
 
-  if (!is.null(z)) {
-    stopifnot(length(z) == length(x))
-  } else {
-    z <- numeric()
-  }
-  if (!is.null(weights)) {
-    stopifnot(length(weights) == length(x))
-  } else {
-    weights <- numeric()
-  }
+  # C++ code can deal with NULL inputs more efficiently than R code
+  z <- z %||% numeric()
+  w <- w %||% numeric()
+
+  # Check lenghts consistent
+  stopifnot(length(z) == 0 || length(z) == length(x))
+  stopifnot(length(w) == 0 || length(w) == length(x))
 
   if (!is.null(breaks)) {
     f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
@@ -44,7 +41,7 @@ summarise1d <- function(x, z = NULL, summary = NULL, weights = NULL,
     origin <- origin %||% find_origin(x, binwidth)
 
     f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
-    out <- f(x, z, weights, width = binwidth, origin = origin)
+    out <- f(x, z, w, width = binwidth, origin = origin)
     breaks <- origin + binwidth * seq_len(nrow(out) - 1)
   }
 
@@ -55,6 +52,7 @@ groups <- list(
   Breaks = c(breaks = "NumericVector&"),
   Fixed = c(width = "double", origin = "double")
 )
+
 summaries <- c(
   count = "Sum(0)",
   sum = "Sum(1)",

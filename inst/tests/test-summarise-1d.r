@@ -11,7 +11,7 @@ test_that("summarise1d counts small vectors accurately", {
 test_that("weights modify counts", {
   x <- c(NA, 0:10)
   w <- rep(2, length(x))
-  s <- summarise1d(x, weights = w, summary = "count", binwidth = 1)
+  s <- summarise1d(x, w = w, summary = "count", binwidth = 1)
 
   expect_equal(s$x, c(NA, 0.5 + 0:10))
   expect_equal(s$count, rep(2, length(x)))
