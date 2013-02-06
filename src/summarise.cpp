@@ -37,13 +37,13 @@ NumericVector summarise(const NumericVector& z, const NumericVector& weight,
   return res;
 }
 
+Group2d<GroupFixed> Group2dFixed (const NumericVector& x, const NumericVector& y,
+            double x_width, double y_width, 
+            double x_origin = 0, double y_origin = 0) {
 
-// [[Rcpp::export]]
-NumericVector summarise_count_2dfixed2(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
-
-  return summarise(z, weight, Group2d<GroupFixed>(
-    GroupFixed(x, x_width, x_origin), 
-    GroupFixed(y, y_width, y_origin)), SummarySum(0));
+  return Group2d<GroupFixed>(
+    GroupFixed(x, 1, 0.5),
+    GroupFixed(y, 1, 0.5));
 }
 
 // -----------------------------------------------------------------------------
