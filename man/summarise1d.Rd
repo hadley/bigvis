@@ -2,7 +2,7 @@
 \alias{summarise1d}
 \title{Efficient binned 1d summaries.}
 \usage{
-  summarise1d(x, z = NULL, summary = NULL, weights = NULL,
+  summarise1d(x, z = NULL, summary = NULL, w = NULL,
     binwidth = NULL, origin = NULL, breaks = NULL)
 }
 \arguments{
