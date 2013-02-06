@@ -16,3 +16,10 @@ test_that("diagonal counted correctly", {
   expect_equal(s$x, s$y)
 })
 
+
+test_that("random data doesn't crash", {
+  x <- runif(1e3, 8, 4963)
+  y <- runif(1e3, 1e-2, 1e3)
+
+  summarise2d(x, y, x_binwidth = 10, y_binwidth = 10)
+})

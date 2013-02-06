@@ -14,7 +14,7 @@ NumericVector summarise(const NumericVector& z, const NumericVector& weight,
   const NumericVector& z_ = (z.size() > 0) ? z : 
     rep(NumericVector::create(1), n_obs);
 
-  std::vector<Stat> stats(n_bins, stat);
+  std::vector<Stat> stats(n_bins + 1, stat);
   for(int i = 0; i < n_obs; ++i) {
     int bin = group.bin(i);
     stats[bin].push(z_[i], weight_[i]);
@@ -42,8 +42,8 @@ Group2d<GroupFixed> Group2dFixed (const NumericVector& x, const NumericVector& y
             double x_origin = 0, double y_origin = 0) {
 
   return Group2d<GroupFixed>(
-    GroupFixed(x, 1, 0.5),
-    GroupFixed(y, 1, 0.5));
+    GroupFixed(x, x_width, x_origin),
+    GroupFixed(y, y_width, y_origin));
 }
 
 // -----------------------------------------------------------------------------
