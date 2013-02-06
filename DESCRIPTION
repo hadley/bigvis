@@ -7,9 +7,6 @@ Authors@R: c(person("Hadley", "Wickham", role = c("aut", "cre"),
     person("Yue", "Hue", role = "aut"))
 Depends:
     Rcpp
-Suggests:
-    RevoScaleR,
-    MASS
 LinkingTo: Rcpp
 License: GPL (>= 2)
 Collate:
