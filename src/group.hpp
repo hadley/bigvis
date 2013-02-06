@@ -2,6 +2,7 @@
 using namespace Rcpp;
 
 NumericVector frange(const NumericVector& x, const bool na_rm = true);
+
 class GroupFixed {
     const NumericVector x_;
     double width_;
@@ -23,7 +24,12 @@ class GroupFixed {
     }
 
     int nbins() const {
-      return (frange(x_)(1) - origin_) / width_ + 1;
+      double max = frange(x_)(1);
+      double dest = floor(max / width_) * width_;
+
+      // + 1 for missing values
+      // + 1 because bins are left-closed, right-open
+      return (dest - origin_) / width_ + 2;
     }
 
 };
@@ -94,6 +100,7 @@ class Group2d {
     const Group& x_;
     const Group& y_;
     int x_bins_;
+    int y_bins_;
 
   public:
     Group2d (const Group& x, const Group& y) : x_(x), y_(y) {
@@ -101,11 +108,16 @@ class Group2d {
         stop("x and y are not equal sizes");
       }
       x_bins_ = x_.nbins();
+      y_bins_ = y_.nbins();
+
+      Rcout << "x_bins: " << x_bins_ << " y_bins: " << y_bins_ << "\n";
     }
 
     unsigned int bin(unsigned int i) const {
       int x_bin = x_.bin(i), y_bin = y_.bin(i);
-      return y_bin * (x_bins_ + 1) + x_bin;
+      int bin = y_bin * x_bins_ + x_bin;
+      // Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
+      return bin;
     }
 
     int size() const {
@@ -113,15 +125,15 @@ class Group2d {
     }
 
     int nbins() const {
-      return x_bins_ * y_.nbins();
+      return x_bins_ * y_bins_;
     }
 };
 
 inline Group2d<GroupFixed> Group2dFixed (const NumericVector& x, const NumericVector& y,
             double x_width, double y_width, 
             double x_origin = 0, double y_origin = 0) {
-  GroupFixed x_grp(x, x_width, x_origin),  
-             y_grp(y, y_width, y_origin);
-  return Group2d<GroupFixed>(x_grp, y_grp);
-}
 
+  return Group2d<GroupFixed>(
+    GroupFixed(x, x_width, x_origin),
+    GroupFixed(y, y_width, y_origin));
+}

@@ -37,13 +37,15 @@ summarise1d <- function(x, z = NULL, summary = NULL, w = NULL,
   if (!is.null(breaks)) {
     f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
     out <- f(x, z, weights, breaks = breaks)
+
+    breaks <- c(NA, breaks)
   } else {
     origin <- origin %||% find_origin(x, binwidth)
 
     f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
     out <- f(x, z, w, width = binwidth, origin = origin)
-    breaks <- origin + binwidth * seq_len(nrow(out) - 1)
+    breaks <- breaks(x, origin, binwidth)
   }
 
-  binsum(data.frame(x = c(NA, breaks), out), summary_class[[summary]])
+  binsum(data.frame(x = breaks, out), summary_class[[summary]])
 }

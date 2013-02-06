@@ -27,3 +27,5 @@ Collate:
     'origin.r'
     'utils.r'
     'summarise.r'
+    'breaks.r'
+    'summarise-2d.r'

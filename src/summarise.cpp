@@ -7,27 +7,22 @@ template<typename Group, typename Stat>
 NumericVector summarise(const NumericVector& z, const NumericVector& weight, 
                         const Group& group, const Stat& stat) {
   int n_obs = group.size();
+  int n_bins = group.nbins();
 
   const NumericVector& weight_ = (weight.size() > 0) ? weight : 
     rep(NumericVector::create(1), n_obs);
   const NumericVector& z_ = (z.size() > 0) ? z : 
     rep(NumericVector::create(1), n_obs);
 
-  std::vector<Stat> stats;
+  std::vector<Stat> stats(n_bins, stat);
   for(int i = 0; i < n_obs; ++i) {
     int bin = group.bin(i);
-
-    if (bin >= stats.size()) {
-      stats.insert(stats.end(), bin - stats.size() + 1, stat);
-    }
-
     stats[bin].push(z_[i], weight_[i]);
   }
 
-  int n = stats.size();
   int m = stats[0].size();
-  NumericMatrix res(n, m);
-  for (int i = 0; i < n; ++i) {
+  NumericMatrix res(n_bins, m);
+  for (int i = 0; i < n_bins; ++i) {
     for (int j = 0; j < m; ++j) {
       res(i, j) = stats[i].compute(j);
     }
@@ -56,7 +51,10 @@ NumericVector summarise_count_fixed(const NumericVector& x, const NumericVector&
 
 // [[Rcpp::export]]
 NumericVector summarise_count_2dfixed(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin) {
-  return summarise(z, weight, Group2dFixed(x, y, x_width, y_width, x_origin, y_origin), SummarySum(0));
+
+  return summarise(z, weight, Group2d<GroupFixed>(
+    GroupFixed(x, x_width, x_origin), 
+    GroupFixed(y, y_width, y_origin)), SummarySum(0));
 }
 
 // [[Rcpp::export]]

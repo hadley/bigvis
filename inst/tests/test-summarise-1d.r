@@ -2,10 +2,16 @@ context("Summary: 1d")
 
 test_that("summarise1d counts small vectors accurately", {
   x <- c(NA, 0:10)
-  s <- summarise1d(x, summary = "count", binwidth = 1)
+  s1 <- summarise1d(x, summary = "count", binwidth = 1, origin = -0.5)
+  # Pathological origin: need to add extra bin on end, because they're
+  # right open, left closed
+  s2 <- summarise1d(x, summary = "count", binwidth = 1, origin = 0)
 
-  expect_equal(s$x, c(NA, 0.5 + 0:10))
-  expect_equal(s$count, rep(1, length(x)))
+  expect_equal(s1$x, c(NA, 0:10 - 0.5))
+  expect_equal(s2$x, c(NA, 0:10))
+
+  expect_equal(s1$count, rep(1, length(x)))
+  expect_equal(s2$count, rep(1, length(x)))
 })
 
 test_that("weights modify counts", {
@@ -13,7 +19,7 @@ test_that("weights modify counts", {
   w <- rep(2, length(x))
   s <- summarise1d(x, w = w, summary = "count", binwidth = 1)
 
-  expect_equal(s$x, c(NA, 0.5 + 0:10))
+  expect_equal(s$x, c(NA, -0.5 + 0:10))
   expect_equal(s$count, rep(2, length(x)))
 })
 
