@@ -11,6 +11,7 @@ rebin <- function(x) {
   UseMethod("rebin")
 }
 
+#' @S3method rebin binsum_median
 rebin.binsum_median <- function(x) {
   if (!anyDuplicated(x)) return(x)
   message("Warning: can not rebin medians. Approximating using mean.")
@@ -24,6 +25,7 @@ rebin.binsum_median <- function(x) {
   binsum(out, type = type(x))
 }
 
+#' @S3method rebin binsum_sum
 rebin.binsum_sum <- function(x) {
   if (!anyDuplicated(x)) return(x)
 
@@ -41,6 +43,7 @@ rebin.binsum_sum <- function(x) {
   binsum(out, type = type(x))
 }
 
+#' @S3method rebin binsum_moments
 rebin.binsum_moments <- function(x) {
   if (!anyDuplicated(x$x)) return(x)
 
@@ -59,9 +62,3 @@ rebin.binsum_moments <- function(x) {
 }
 
 grp_apply <- function(x, f) vapply(x, f, numeric(1), USE.NAMES = FALSE)
-
-weighted.var <- function(n_x, n_y, mu_x, mu_y, var_x, var_y) {
-  n <- n_x + n_y
-  1 / n * (n_x * var_x + n_y * var_y) +
-    (n_x * n_y) / n ^ 2 * (mu_x ^ 2 + mu_y ^ 2 - 2 * mu_x * mu_y)
-}

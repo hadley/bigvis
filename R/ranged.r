@@ -39,3 +39,12 @@ range.ranged <- function(x, ...) attr(x, "range")
   NextMethod(x, ...)
 }
 
+#' @S3method as.data.frame ranged
+as.data.frame.ranged <- function(x, ...) {
+  n <- length(x)
+  x <- list(x)
+  class(x) <- "data.frame"
+  attr(x, "row.names") <- c(NA_integer_, -n)
+
+  x
+}
