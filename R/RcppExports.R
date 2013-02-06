@@ -69,6 +69,10 @@ smooth_1d_normal <- function(x, z, x_out, sd, standardise = TRUE) {
     .Call('bigvis_smooth_1d_normal', PACKAGE = 'bigvis', x, z, x_out, sd, standardise)
 }
 
+summarise_count_2dfixed2 <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
+    .Call('bigvis_summarise_count_2dfixed2', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
+}
+
 summarise_count_breaks <- function(x, z, weight, breaks) {
     .Call('bigvis_summarise_count_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }

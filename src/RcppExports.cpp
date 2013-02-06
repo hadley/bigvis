@@ -106,6 +106,23 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// summarise_count_2dfixed2
+NumericVector summarise_count_2dfixed2(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& weight, double x_width, double y_width, double x_origin, double y_origin);
+RcppExport SEXP bigvis_summarise_count_2dfixed2(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP weightSEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    double x_width = Rcpp::as<double >(x_widthSEXP);
+    double y_width = Rcpp::as<double >(y_widthSEXP);
+    double x_origin = Rcpp::as<double >(x_originSEXP);
+    double y_origin = Rcpp::as<double >(y_originSEXP);
+    NumericVector __result = summarise_count_2dfixed2(x, y, z, weight, x_width, y_width, x_origin, y_origin);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // summarise_count_breaks
 NumericVector summarise_count_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
 RcppExport SEXP bigvis_summarise_count_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {

@@ -116,7 +116,7 @@ class Group2d {
     unsigned int bin(unsigned int i) const {
       int x_bin = x_.bin(i), y_bin = y_.bin(i);
       int bin = y_bin * x_bins_ + x_bin;
-      // Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
+      Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
       return bin;
     }
 
