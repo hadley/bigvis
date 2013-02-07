@@ -15,7 +15,10 @@ convolve_2d <- function(sample, kernel) {
 #' object), it will be used instead of computing the range from scratch.
 #' 
 #' @param x a numeric vector, or a \code{\link{ranged}} object
-#' @param na_rm should missing values be removed?
+#' @param finite If \code{TRUE} ignores missing values and infinities. Note
+#'   that if the vector is empty, or only contains missing values, 
+#'   \code{frange} will return \code{c(Inf, -Inf)} because those are the
+#'   identity values for \code{\link{min}} and \code{\link{max}} respectively.
 #' @export
 #' @examples
 #' x <- runif(1e6)
@@ -24,8 +27,8 @@ convolve_2d <- function(sample, kernel) {
 #'
 #' rx <- ranged(x)
 #' system.time(frange(rx))
-frange <- function(x, na_rm = TRUE) {
-    .Call('bigvis_frange', PACKAGE = 'bigvis', x, na_rm)
+frange <- function(x, finite = TRUE) {
+    .Call('bigvis_frange', PACKAGE = 'bigvis', x, finite)
 }
 
 group_fixed <- function(x, width, origin = 0) {

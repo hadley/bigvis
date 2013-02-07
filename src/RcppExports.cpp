@@ -17,13 +17,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // frange
-NumericVector frange(const NumericVector& x, const bool na_rm = true);
-RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP na_rmSEXP) {
+NumericVector frange(const NumericVector& x, const bool finite = true);
+RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP finiteSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    bool na_rm = Rcpp::as<bool >(na_rmSEXP);
-    NumericVector __result = frange(x, na_rm);
+    bool finite = Rcpp::as<bool >(finiteSEXP);
+    NumericVector __result = frange(x, finite);
     return Rcpp::wrap(__result);
 END_RCPP
 }

@@ -2,7 +2,7 @@
 \alias{ranged}
 \title{A S3 class for caching the range of a vector}
 \usage{
-  ranged(x, range = frange(x, na_rm = TRUE))
+  ranged(x, range = frange(x, finite = TRUE))
 }
 \arguments{
   \item{x}{a numeric vector}

@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-NumericVector frange(const NumericVector& x, const bool na_rm = true);
+NumericVector frange(const NumericVector& x, const bool finite = true);
 
 class GroupFixed {
     const NumericVector& x_;

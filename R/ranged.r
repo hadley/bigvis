@@ -30,7 +30,7 @@
 #' z <- y + 10
 #' max(z)
 #' class(z)
-ranged <- function(x, range = frange(x, na_rm = TRUE)) {
+ranged <- function(x, range = frange(x, finite = TRUE)) {
   stopifnot(is.numeric(x))
 
   # Reset range attribute so that lazy evaluation of range

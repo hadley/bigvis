@@ -2,13 +2,18 @@
 \alias{frange}
 \title{Efficient implementation of range.}
 \usage{
-  frange(x, na_rm = TRUE)
+  frange(x, finite = TRUE)
 }
 \arguments{
   \item{x}{a numeric vector, or a \code{\link{ranged}}
   object}
 
-  \item{na_rm}{should missing values be removed?}
+  \item{finite}{If \code{TRUE} ignores missing values and
+  infinities. Note that if the vector is empty, or only
+  contains missing values, \code{frange} will return
+  \code{c(Inf, -Inf)} because those are the identity values
+  for \code{\link{min}} and \code{\link{max}}
+  respectively.}
 }
 \description{
   This is an efficient C++ implementation of range for

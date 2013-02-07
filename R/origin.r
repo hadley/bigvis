@@ -18,7 +18,9 @@
 #' find_origin(1:10, 2)
 #' find_origin(c(1, 1e6), 1)
 find_origin <- function(x, binwidth) {
-  rng <- frange(x, na_rm = TRUE)
+  rng <- frange(x, finite = TRUE)
+  if (!all(is.finite(rng))) stop("No valid values in x", call. = FALSE)
+
   offset <- is.integer(x) * 0.5
 
   if (close_to_zero(rng[1], rng)) {
