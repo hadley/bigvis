@@ -17,7 +17,7 @@ NumericVector summarise(const NumericVector& z, const NumericVector& weight,
   std::vector<Stat> stats(n_bins + 1, stat);
   for(int i = 0; i < n_obs; ++i) {
     int bin = group.bin(i);
-    stats[bin].push(z_[i], weight_[i]);
+    stats.at(bin).push(z_[i], weight_[i]);      
   }
 
   int m = stats[0].size();
