@@ -13,7 +13,7 @@ class GroupFixed {
     }
 
     unsigned int bin(unsigned int i) const {
-      if (ISNAN(x_[i])) return 0;
+      if (ISNAN(x_[i]) || x_[i] == INFINITY || x_[i] == -INFINITY) return 0;
       if (x_[i] < origin_) return 0;
       
       return (x_[i] - origin_) / width_ + 1;

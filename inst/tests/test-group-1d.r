@@ -7,6 +7,11 @@ test_that("NAs belong to group 0", {
   expect_equal(group_breaks(x, c(0, 1, 2)), 0)
 })
 
+test_that("Inf and -Inf belong to group 0", {
+  x <- c(-Inf, Inf)
+  expect_equal(group_fixed(x, 1), c(0, 0))
+})
+
 test_that("Out of range values belong to group 0", {
   expect_equal(group_fixed(-10, 1), 0)
   expect_equal(group_integer(-10, 0), 0)
