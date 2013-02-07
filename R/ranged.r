@@ -20,6 +20,10 @@
 ranged <- function(x, range = frange(x, na_rm = TRUE)) {
   stopifnot(is.numeric(x))
 
+  # Reset range attribute so that lazy evaluation of range
+  # always recomputes from scratch
+  attr(x, "range") <- NULL
+
   attr(x, "range") <- range
   class(x) <- "ranged"
   x
