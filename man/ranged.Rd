@@ -13,18 +13,32 @@
   \code{\link{range}}.}
 }
 \description{
+  This class is designed for dealing with large vectors,
+  where the cost of recomputing the range multiple times is
+  prohibitive. It provides methods for \code{\link{print}}
+  and \code{\link{str}} that display only the range, not
+  the contents.
+}
+\section{Performance}{
   For best performance, you may want to run copy and paste
   the contents of this function into your function, to
-  avoid making any copies of \code{x}.
+  avoid making any copies of \code{x}. This is probably
+  only necessary if you're dealing with extremely large
+  vectors, > 100 million obs.
 }
 \examples{
 x <- runif(1e6)
 y <- ranged(x)
 range(y)
+y
+str(y)
 
 # Modifications to the class currently destroy the cache
 y[1] <- 10
 max(y)
 class(y)
+z <- y + 10
+max(z)
+class(z)
 }
 
