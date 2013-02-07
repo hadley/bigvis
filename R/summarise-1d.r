@@ -26,6 +26,9 @@ summarise1d <- function(x, z = NULL, summary = NULL, w = NULL,
     stop("You must specify one of binwidth and breaks", call. = FALSE)
   }
 
+  # Compute ranges only once
+  if (!is.ranged(x)) x <- ranged(x)
+
   # C++ code can deal with NULL inputs more efficiently than R code
   z <- z %||% numeric()
   w <- w %||% numeric()

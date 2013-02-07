@@ -7,6 +7,10 @@ summarise2d <- function(x, y, z = NULL, summary = NULL, w = NULL,
   }
   stopifnot(summary %in% names(summaries))
 
+  # Compute ranges only once
+  if (!is.ranged(x)) x <- ranged(x)
+  if (!is.ranged(y)) y <- ranged(y)
+
   # C++ code can deal with NULL inputs more efficiently than R code
   z <- z %||% numeric()
   w <- w %||% numeric()

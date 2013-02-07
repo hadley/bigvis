@@ -42,6 +42,9 @@ ranged <- function(x, range = frange(x, na_rm = TRUE)) {
   x
 }
 
+#' @export
+is.ranged <- function(x) inherits(x, "ranged")
+
 #' @S3method min ranged
 min.ranged <- function(x, ...) attr(x, "range")[1]
 #' @S3method max ranged
