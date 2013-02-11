@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericMatrix smooth_2d(const NumericVector& x, const NumericVector& y, 
+NumericMatrix smooth2d(const NumericVector& x, const NumericVector& y, 
                         const NumericVector& z, 
                         const NumericVector& x_out, const NumericVector& y_out, 
                         const double x_sd, const double y_sd, 
@@ -51,7 +51,7 @@ NumericMatrix smooth_2d(const NumericVector& x, const NumericVector& y,
 
   grid <- seq(0, 4, by = 0.05)
 
-  sm <- smooth_2d(df$x, df$y, df$z, grid, grid, 0.2, 0.2, FALSE)
+  sm <- smooth2d(df$x, df$y, df$z, grid, grid, 0.2, 0.2, FALSE)
   
   image(1:3, 1:3, m, xlim = range(grid), ylim = range(grid))
   image(grid, grid, sm)

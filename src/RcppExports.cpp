@@ -81,23 +81,6 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// smooth2d
-NumericMatrix smooth2d(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& x_out, const NumericVector& y_out, const double x_sd, const double y_sd, bool standardise = true);
-RcppExport SEXP bigvis_smooth2d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP y_outSEXP, SEXP x_sdSEXP, SEXP y_sdSEXP, SEXP standardiseSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector x_out = Rcpp::as<NumericVector >(x_outSEXP);
-    NumericVector y_out = Rcpp::as<NumericVector >(y_outSEXP);
-    double x_sd = Rcpp::as<double >(x_sdSEXP);
-    double y_sd = Rcpp::as<double >(y_sdSEXP);
-    bool standardise = Rcpp::as<bool >(standardiseSEXP);
-    NumericMatrix __result = smooth2d(x, y, z, x_out, y_out, x_sd, y_sd, standardise);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // smooth1d
 NumericVector smooth1d(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const double sd, bool standardise = true);
 RcppExport SEXP bigvis_smooth1d(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP sdSEXP, SEXP standardiseSEXP) {
@@ -112,9 +95,9 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// smooth_2d
-NumericMatrix smooth_2d(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& x_out, const NumericVector& y_out, const double x_sd, const double y_sd, bool standardise = true);
-RcppExport SEXP bigvis_smooth_2d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP y_outSEXP, SEXP x_sdSEXP, SEXP y_sdSEXP, SEXP standardiseSEXP) {
+// smooth2d
+NumericMatrix smooth2d(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& x_out, const NumericVector& y_out, const double x_sd, const double y_sd, bool standardise = true);
+RcppExport SEXP bigvis_smooth2d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP y_outSEXP, SEXP x_sdSEXP, SEXP y_sdSEXP, SEXP standardiseSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
@@ -125,7 +108,7 @@ BEGIN_RCPP
     double x_sd = Rcpp::as<double >(x_sdSEXP);
     double y_sd = Rcpp::as<double >(y_sdSEXP);
     bool standardise = Rcpp::as<bool >(standardiseSEXP);
-    NumericMatrix __result = smooth_2d(x, y, z, x_out, y_out, x_sd, y_sd, standardise);
+    NumericMatrix __result = smooth2d(x, y, z, x_out, y_out, x_sd, y_sd, standardise);
     return Rcpp::wrap(__result);
 END_RCPP
 }
