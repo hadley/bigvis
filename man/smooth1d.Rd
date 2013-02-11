@@ -1,8 +1,8 @@
-\name{smooth1d}
-\alias{smooth1d}
+\name{smooth_1d}
+\alias{smooth_1d}
 \title{Smooth 1d summary statistics}
 \usage{
-  smooth1d(summary, vars = NULL, bw = NULL, grid = NULL,
+  smooth_1d(summary, vars = NULL, bw = NULL, grid = NULL,
     n = nrow(summary) - 1, reflect = TRUE,
     standardise = TRUE)
 }
@@ -41,13 +41,13 @@
 \examples{
 x <- runif(1e5)
 xsum <- summarise1d(x, binwidth = 1/100)
-xsmu <- smooth1d(xsum, bw = 1/100, n = 1000)
+xsmu <- smooth_1d(xsum, bw = 1/100, n = 1000)
 
 plot(xsum)
 lines(xsmu)
 
 # If you just want to distribute density, use standardise = FALSE
-xsmu2 <- smooth1d(xsum, bw = 1/100, standardise = FALSE)
+xsmu2 <- smooth_1d(xsum, bw = 1/100, standardise = FALSE)
 # notice the y-axis
 plot(xsmu2, type = "l")
 }

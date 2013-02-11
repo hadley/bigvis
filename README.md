@@ -7,7 +7,7 @@ The bigvis package provides tools for exploratory data analysis of __large datas
 The bigvis package is structured around the following workflow:
 
 * summarise data with `summary1d()`
-* optionally smooth or standardise with `smooth1d()` and `standardise()`
+* optionally smooth or standardise with `smooth_1d()` and `standardise()`
 * visualising the results
 
 ## Acknowledgements

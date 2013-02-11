@@ -1,8 +1,8 @@
-\name{smooth_1d_normal}
-\alias{smooth_1d_normal}
+\name{smooth1d}
+\alias{smooth1d}
 \title{1d normal kernel smoothing.}
 \usage{
-  smooth_1d_normal(x, z, x_out, sd, standardise = TRUE)
+  smooth1d(x, z, x_out, sd, standardise = TRUE)
 }
 \arguments{
   \item{x}{ordered vector of x positions}

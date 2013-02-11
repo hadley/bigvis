@@ -19,7 +19,7 @@ using namespace Rcpp;
 //'   deviations away from \code{x_in} will be \code{NaN}.
 //' @keywords internal
 // [[Rcpp::export]]
-NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z, 
+NumericVector smooth1d(const NumericVector& x, const NumericVector& z, 
                         const NumericVector& x_out, const double sd, 
                         bool standardise = true) {
 
@@ -58,7 +58,7 @@ NumericVector smooth_1d_normal(const NumericVector& x, const NumericVector& z,
   k <- kernel("norm", sd = 0.1)
   grid <- seq(0, 11, length = 1000)
 
-  s <- smooth_1d_normal(x, z, grid, 0.1)
+  s <- smooth1d(x, z, grid, 0.1)
   plot(grid, s, type = "l", ylim = range(s, z))
   text(grid, min(s), seq_along(grid) - 1, cex = 0.5)
   text(x, z, seq_along(x) - 1)
