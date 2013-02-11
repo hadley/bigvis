@@ -5,17 +5,6 @@
 
 using namespace Rcpp;
 
-// convolve_2d
-NumericMatrix convolve_2d(NumericMatrix sample, NumericMatrix kernel);
-RcppExport SEXP bigvis_convolve_2d(SEXP sampleSEXP, SEXP kernelSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericMatrix sample = Rcpp::as<NumericMatrix >(sampleSEXP);
-    NumericMatrix kernel = Rcpp::as<NumericMatrix >(kernelSEXP);
-    NumericMatrix __result = convolve_2d(sample, kernel);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // frange
 NumericVector frange(const NumericVector& x, const bool finite = true);
 RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP finiteSEXP) {
@@ -103,6 +92,23 @@ BEGIN_RCPP
     double sd = Rcpp::as<double >(sdSEXP);
     bool standardise = Rcpp::as<bool >(standardiseSEXP);
     NumericVector __result = smooth_1d_normal(x, z, x_out, sd, standardise);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// smooth_2d
+NumericMatrix smooth_2d(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& x_out, const NumericVector& y_out, const double x_sd, const double y_sd, bool standardise = true);
+RcppExport SEXP bigvis_smooth_2d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP y_outSEXP, SEXP x_sdSEXP, SEXP y_sdSEXP, SEXP standardiseSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector x_out = Rcpp::as<NumericVector >(x_outSEXP);
+    NumericVector y_out = Rcpp::as<NumericVector >(y_outSEXP);
+    double x_sd = Rcpp::as<double >(x_sdSEXP);
+    double y_sd = Rcpp::as<double >(y_sdSEXP);
+    bool standardise = Rcpp::as<bool >(standardiseSEXP);
+    NumericMatrix __result = smooth_2d(x, y, z, x_out, y_out, x_sd, y_sd, standardise);
     return Rcpp::wrap(__result);
 END_RCPP
 }
