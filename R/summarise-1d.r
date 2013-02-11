@@ -13,8 +13,8 @@
 #' @export
 #' @examples
 #' x <- runif(1e5)
-#' summarise1d(x, binwidth = 0.1)
-summarise1d <- function(x, z = NULL, summary = NULL, w = NULL,
+#' summarise_1d(x, binwidth = 0.1)
+summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL,
                       binwidth = NULL, origin = NULL, breaks = NULL) {
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"

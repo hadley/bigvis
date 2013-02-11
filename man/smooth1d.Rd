@@ -1,54 +1,33 @@
-\name{smooth_1d}
-\alias{smooth_1d}
-\title{Smooth 1d summary statistics}
+\name{smooth1d}
+\alias{smooth1d}
+\title{1d normal kernel smoothing.}
 \usage{
-  smooth_1d(summary, vars = NULL, bw = NULL, grid = NULL,
-    n = nrow(summary) - 1, reflect = TRUE,
-    standardise = TRUE)
+  smooth1d(x, z, x_out, sd, standardise = TRUE)
 }
 \arguments{
-  \item{summary}{summary statistics produced by
-  \code{\link{summary1d}}}
+  \item{x}{ordered vector of x positions}
 
-  \item{vars}{variables to smooth.  Defaults (with a
-  message) to all variables in the original summary.}
+  \item{z}{vector of values}
 
-  \item{bw}{smoothing bandwidth/standard deviation.
-  Defaults (with a message) to the minimum difference
-  between bins. Since most of the normal density is located
-  within 3 sd, this will smooth over the nearest two bins,
-  with a small contribution from the nearest 3rd and 4th.}
+  \item{x_out}{vector of x positions to produce smoothed
+  values}
 
-  \item{grid,n}{A grid of locations to produced smoothed
-  values. If \code{NULL}, the default, will be an evenly
-  spaced grid of \code{n} points across the the range of
-  \code{x}.}
+  \item{sd}{standard deviation of normal kernel (the
+  bandwidth of the smoother)}
+
+  \item{standardise}{if \code{TRUE}, divides the weighted
+  sum at each location by the sum of the weights. This is
+  usually what you want for pre-binned data, as it
+  interpolates between the points, rather than
+  redistributing the density.  Any locations in
+  \code{x_out} that are more than 4 standard deviations
+  away from \code{x_in} will be \code{NaN}.}
 }
 \description{
-  Currently only provides the normal kernel, but extension
-  to other kernels is straightforward (but ignored because
-  they don't make that much difference to the final
-  result).
+  This is a variant of \code{\link{density}} for
+  calculating weighted means or weighted sums, with weights
+  determined by a normal kernel. Both the input and the
+  output can have irregular locations.
 }
-\details{
-  The methods used in this function are adapted from the
-  ideas of binned kernel density in MP Wand's "KernSmooth"
-  package, but rather than using the discrete discrete fast
-  fourier algorithm, they do convolution using C-level
-  loops. This is more efficient when the matrices to be
-  convolved are rather different sizes.
-}
-\examples{
-x <- runif(1e5)
-xsum <- summarise1d(x, binwidth = 1/100)
-xsmu <- smooth_1d(xsum, bw = 1/100, n = 1000)
-
-plot(xsum)
-lines(xsmu)
-
-# If you just want to distribute density, use standardise = FALSE
-xsmu2 <- smooth_1d(xsum, bw = 1/100, standardise = FALSE)
-# notice the y-axis
-plot(xsmu2, type = "l")
-}
+\keyword{internal}
 

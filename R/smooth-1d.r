@@ -22,7 +22,7 @@
 #'   the range of \code{x}.
 #' @examples
 #' x <- runif(1e5)
-#' xsum <- summarise1d(x, binwidth = 1/100)
+#' xsum <- summarise_1d(x, binwidth = 1/100)
 #' xsmu <- smooth_1d(xsum, bw = 1/100, n = 1000)
 #'
 #' plot(xsum)

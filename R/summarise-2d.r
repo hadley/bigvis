@@ -1,4 +1,4 @@
-summarise2d <- function(x, y, z = NULL, summary = NULL, w = NULL,
+summarise_2d <- function(x, y, z = NULL, summary = NULL, w = NULL,
                         x_binwidth, x_origin = NULL,
                         y_binwidth, y_origin = NULL) {
   if (is.null(summary)) {

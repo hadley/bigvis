@@ -49,8 +49,8 @@ Kernel smoothing plus binned summary leads to many common statistics: density =~
 
 # Syntax
 
-    summarise1d(x, binwidth = 1 / 100)
-    summarise1d(x, ,  "count", binwidth = 1 / 100)
-    summarise1d(x, z, "mean", binwidth = 1 / 100)
-    summarise1d(x, z, "median", binwidth = 1 / 100)
-    summarise1d(x, z, weight = w, "mean", binwidth = 1 / 100)
+    summarise_1d(x, binwidth = 1 / 100)
+    summarise_1d(x, ,  "count", binwidth = 1 / 100)
+    summarise_1d(x, z, "mean", binwidth = 1 / 100)
+    summarise_1d(x, z, "median", binwidth = 1 / 100)
+    summarise_1d(x, z, weight = w, "mean", binwidth = 1 / 100)
