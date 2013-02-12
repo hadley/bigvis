@@ -103,15 +103,18 @@ NumericMatrix smooth2d2(const NumericVector& x, const NumericVector& y,
   df <- data.frame(x = c(row(m)), y = c(col(m)), z = c(m))
   df <- df[order(df$x, df$y), ]
 
-  grid <- seq(0, 4, by = 0.01)
+  grid <- seq(0, 4, length = 1000)
 
   system.time(sm <- smooth2d(df$x, df$y, df$z, grid, grid, 0.2, 0.2, FALSE))
   system.time(sm2 <- smooth2d2(df$x, df$y, df$z, grid, grid, 0.2, 0.2, FALSE))
 
   all.equal(sm, sm2)
+  sum((sm - sm2) ^ 2)
+  image(grid, grid, sm - sm2, useRaster = T)
   
-  image(1:3, 1:3, m, xlim = range(grid), ylim = range(grid))
   image(grid, grid, sm, useRaster = T)
+  points(df$x[df$z > 0], df$y[df$z > 0], pch = 20)
   image(grid, grid, sm2, useRaster = T)
+  points(df$x[df$z > 0], df$y[df$z > 0], pch = 20)
 
 */
