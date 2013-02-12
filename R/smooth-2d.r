@@ -4,7 +4,7 @@
 #' @examples
 #' x <- runif(1e3)
 #' y <- runif(1e3)
-#' z <- summarise_2d(x, y, x_binwidth = 1/50, y_binwidth = 1/50)
+#' z <- summarise_2d(x, y, x_binwidth = 1/1000, y_binwidth = 1/1000)
 #' qplot(x, y, fill = count, data = z, geom = "raster")
 #' zs <- smooth_2d(z, x_n = 100, y_n = 100)
 #' qplot(x, y, fill = count, data = zs, geom = "raster")

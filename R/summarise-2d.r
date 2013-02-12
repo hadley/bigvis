@@ -31,6 +31,6 @@ summarise_2d <- function(x, y, z = NULL, summary = NULL, w = NULL,
   y_breaks <- breaks(y, y_origin, y_binwidth)
   breaks <- expand.grid(x = x_breaks, y = y_breaks, KEEP.OUT.ATTRS = FALSE)
 
-  binsum(cbind(breaks, out), summary_class[[summary]])
+  binsum(cbind(breaks, out), paste0("2d_", summary_class[[summary]]))
 }
 

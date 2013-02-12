@@ -50,5 +50,5 @@ summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL,
     breaks <- breaks(x, origin, binwidth)
   }
 
-  binsum(data.frame(x = breaks, out), summary_class[[summary]])
+  binsum(data.frame(x = breaks, out), paste0("1d_", summary_class[[summary]]))
 }
