@@ -112,6 +112,23 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// smooth2d2
+NumericMatrix smooth2d2(const NumericVector& x, const NumericVector& y, const NumericVector& z, const NumericVector& x_out, const NumericVector& y_out, const double x_sd, const double y_sd, bool standardise = true);
+RcppExport SEXP bigvis_smooth2d2(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP y_outSEXP, SEXP x_sdSEXP, SEXP y_sdSEXP, SEXP standardiseSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector x_out = Rcpp::as<NumericVector >(x_outSEXP);
+    NumericVector y_out = Rcpp::as<NumericVector >(y_outSEXP);
+    double x_sd = Rcpp::as<double >(x_sdSEXP);
+    double y_sd = Rcpp::as<double >(y_sdSEXP);
+    bool standardise = Rcpp::as<bool >(standardiseSEXP);
+    NumericMatrix __result = smooth2d2(x, y, z, x_out, y_out, x_sd, y_sd, standardise);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // summarise_count_breaks
 NumericVector summarise_count_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
 RcppExport SEXP bigvis_summarise_count_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {
