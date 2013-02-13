@@ -129,6 +129,25 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// smooth2d3
+NumericMatrix smooth2d3(const NumericVector& x, const NumericVector& y, const NumericVector& z, const double x_width, const double x_origin, const double y_width, const double y_origin, const double x_sd, const double y_sd, bool standardise = true);
+RcppExport SEXP bigvis_smooth2d3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP x_widthSEXP, SEXP x_originSEXP, SEXP y_widthSEXP, SEXP y_originSEXP, SEXP x_sdSEXP, SEXP y_sdSEXP, SEXP standardiseSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    double x_width = Rcpp::as<double >(x_widthSEXP);
+    double x_origin = Rcpp::as<double >(x_originSEXP);
+    double y_width = Rcpp::as<double >(y_widthSEXP);
+    double y_origin = Rcpp::as<double >(y_originSEXP);
+    double x_sd = Rcpp::as<double >(x_sdSEXP);
+    double y_sd = Rcpp::as<double >(y_sdSEXP);
+    bool standardise = Rcpp::as<bool >(standardiseSEXP);
+    NumericMatrix __result = smooth2d3(x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // summarise_count_breaks
 NumericVector summarise_count_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
 RcppExport SEXP bigvis_summarise_count_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {

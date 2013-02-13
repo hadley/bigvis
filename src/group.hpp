@@ -12,12 +12,22 @@ class GroupFixed {
        : x_(x), width_(width), origin_(origin) {
     }
 
-    unsigned int bin(unsigned int i) const {
+    int bin(int i) const {
       if (ISNAN(x_[i]) || x_[i] == INFINITY || x_[i] == -INFINITY) return 0;
       if (x_[i] < origin_) return 0;
       
-      return (x_[i] - origin_) / width_ + 1;
+      return bin(x_[i]);
     }
+
+    int bin(double x) const {
+      return (x - origin_) / width_ + 1;
+    }
+
+    double unbin(int bin) const {
+      if (bin == 0) return(NAN);
+      return (bin - 1) * width_ + origin_;
+    }
+
 
     int size() const {
       return x_.size();
@@ -42,7 +52,7 @@ class GroupInteger {
         x_(x), origin_(origin) {
     }
 
-    unsigned int bin(unsigned int i) const {
+    int bin(int i) const {
       if (NumericVector::is_na(x_[i])) return 0;
       if (x_[i] < origin_) return 0;
 
@@ -72,7 +82,7 @@ class GroupBreaks {
       breaks_end_ = breaks.end();
     }
 
-    unsigned int bin(unsigned int i) const {
+    int bin(int i) const {
       if (ISNAN(x_[i])) return 0;
 
       NumericVector::iterator
@@ -82,6 +92,11 @@ class GroupBreaks {
       if (bin_it == breaks_end_) return 0;
 
       return std::distance(breaks_it_, bin_it);
+    }
+
+    double unbin(int bin) const {
+      if (bin == 0) return(NAN);
+      return breaks_[bin - 1];
     }
 
     int size() const {
@@ -94,6 +109,68 @@ class GroupBreaks {
 
 };
 
+
+template<typename Group>
+class GroupNd {
+    const std::vector<Group> groups_;
+    const int ngroups_;
+
+    int size_;
+    std::vector<int> bins_;
+
+  public:
+    GroupNd (const std::vector<Group> groups) 
+        : groups_(groups), ngroups_(groups.size()) {
+      if (groups.size() == 0) {
+        stop("Empty groups vector passed to GroupCompound");
+      }
+
+      size_ = groups[0].size();
+
+      bins_[0] = 1;
+      for (int i = 0; i < ngroups_ - 1; ++i) {
+        if (groups_[i].size() != size_) stop("Groups not equal sizes");
+
+        bins_[i + 1] = bins_[i] * groups_[i].nbins(); 
+      }
+    }
+
+    int bin(int i) const {
+      int bin = 0;
+
+      for (int j = 0; j < ngroups_; ++j) {
+        bin += groups_[j].bin(i) * bins_[j];
+      }
+
+      return bin;
+    }
+
+    // int nbins() const {
+    //   return bins_[ngroups_ - 1];
+    // }
+
+    int ngroups() const {
+      return groups_.size();
+    }
+
+    int size() const {
+      return size_;
+    }
+
+    std::vector<double> unbin(int bin) const {
+      std::vector<double> bins(ngroups_);
+
+      for (int j = 0; j < ngroups_; ++j) {
+        int bin_j = bin % bins_[j];
+        bins[j] = groups_[j].unbin(bin_j);
+
+        bin = bin - bin * bins_[j];
+      }
+
+      return bins;
+    }
+
+};
 
 template<typename Group>
 class Group2d {
@@ -113,7 +190,7 @@ class Group2d {
       // Rcout << "x_bins: " << x_bins_ << " y_bins: " << y_bins_ << "\n";
     }
 
-    unsigned int bin(unsigned int i) const {
+    int bin(int i) const {
       int x_bin = x_.bin(i), y_bin = y_.bin(i);
       int bin = y_bin * x_bins_ + x_bin;
       // Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
