@@ -29,7 +29,7 @@ test_that("Positive integers unchanged if origin is 1", {
 
 })
 
-test_that("GroupFixed: values inside breaks same as findInterval", {
+test_that("GroupBreaks: values inside breaks same as findInterval", {
   x <- runif(1e2)
   breaks <- seq(0, 1, length = 20)
 
@@ -44,7 +44,7 @@ test_that("GroupFixed: values inside breaks same as findInterval", {
     c(1:19, 0))
 })
 
-test_that("GroupFixed: values outside of breaks belong to group 0", {
+test_that("GroupBreaks: values outside of breaks belong to group 0", {
   left <- c(NA, -1, -1e-3, -1e-6)
   right <- c(1, 10, 100, 1000)
   breaks <- seq(0, 1, length = 20)
@@ -52,4 +52,3 @@ test_that("GroupFixed: values outside of breaks belong to group 0", {
   expect_equal(group_breaks(left, breaks), rep(0, 4))
   expect_equal(group_breaks(right, breaks), rep(0, 4))
 })
-
