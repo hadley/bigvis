@@ -32,3 +32,4 @@ Collate:
     'smooth-2d.r'
     'norm-deriv.r'
     'weighted-stats.r'
+    'bandwidth.r'

@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// double_diff_sum
+std::vector<int> double_diff_sum(IntegerVector bin, IntegerVector count);
+RcppExport SEXP bigvis_double_diff_sum(SEXP binSEXP, SEXP countSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    IntegerVector bin = Rcpp::as<IntegerVector >(binSEXP);
+    IntegerVector count = Rcpp::as<IntegerVector >(countSEXP);
+    std::vector<int> __result = double_diff_sum(bin, count);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // frange
 NumericVector frange(const NumericVector& x, const bool finite = true);
 RcppExport SEXP bigvis_frange(SEXP xSEXP, SEXP finiteSEXP) {
