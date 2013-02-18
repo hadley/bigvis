@@ -35,14 +35,15 @@ class GroupFixed {
 
     int nbins() const {
       double max = frange(x_)(1);
-      double dest = floor(max / width_) * width_;
+      double dest = floor((max - origin_) / width_) * width_ + origin_;
 
       // + 1 for missing values
-      // + 1 because bins are left-closed, right-open
-      return (dest - origin_) / width_ + 2;
+      // + 1 if highest value is on right-open boundary
+      return (dest - origin_) / width_ + 1 + ((max >= dest) ? 1 : 0);
     }
 
 };
+
 
 class GroupInteger {
     const NumericVector x_;

@@ -31,3 +31,7 @@ test_that("z affects sums, but not counts", {
   expect_equal(s$count, rep(1, length(x)))
   expect_equal(s$sum, z)
 })
+
+test_that("summarise1d computes breaks correctly", {
+
+})

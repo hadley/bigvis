@@ -16,7 +16,10 @@
 #' breaks(9.9, origin = 0, binwidth = 1)
 #'
 #' breaks(1:10, origin = 0, binwidth = 2)
-breaks <- function(x, origin, binwidth) {
-  dest <- floor_any(max(x, na.rm = TRUE), binwidth)
+breaks <- function(x, binwidth, origin = min(x)) {
+  max_x <- max(x, na.rm = TRUE)
+  dest <- floor((max_x - origin) / binwidth) * binwidth + origin
+  if (dest + binwidth <= max_x) dest <- dest + binwidth
+
   c(NA, seq(origin, dest, by = binwidth))
 }

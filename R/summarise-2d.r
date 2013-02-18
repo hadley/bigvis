@@ -27,8 +27,8 @@ summarise_2d <- function(x, y, z = NULL, summary = NULL, w = NULL,
   out <- f(x, y, z, w, x_width = x_binwidth, y_width = y_binwidth,
     x_origin = x_origin, y_origin = y_origin)
 
-  x_breaks <- breaks(x, x_origin, x_binwidth)
-  y_breaks <- breaks(y, y_origin, y_binwidth)
+  x_breaks <- breaks(x, x_binwidth, x_origin)
+  y_breaks <- breaks(y, y_binwidth, y_origin)
   breaks <- expand.grid(x = x_breaks, y = y_breaks, KEEP.OUT.ATTRS = FALSE)
 
   binsum(cbind(breaks, out), paste0("2d_", summary_class[[summary]]))
