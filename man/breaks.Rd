@@ -2,7 +2,7 @@
 \alias{breaks}
 \title{Compute breaks given origin and width.}
 \usage{
-  breaks(x, origin, binwidth)
+  breaks(x, binwidth, origin = min(x))
 }
 \arguments{
   \item{x}{numeric vector}
