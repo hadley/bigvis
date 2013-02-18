@@ -30,3 +30,4 @@ Collate:
     'breaks.r'
     'summarise-2d.r'
     'smooth-2d.r'
+    'norm-deriv.r'
