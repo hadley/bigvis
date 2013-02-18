@@ -1,0 +1,40 @@
+\name{weighted.ecdf}
+\alias{weighted.ecdf}
+\title{A weighted ecdf function.}
+\usage{
+  weighted.ecdf(x, w)
+}
+\arguments{
+  \item{x}{numeric vector of observations}
+
+  \item{w}{integer vector of weights, representing the
+  number of time each \code{x} was observed}
+}
+\description{
+  An extension of the base \code{\link[stats]{ecdf}}
+  function which works with weighted data.
+}
+\section{S3 methods}{
+  The \code{ecdf} class has methods for \code{\link{plot}},
+  \code{\link{lines}}, \code{\link{summary}} and
+  \code{\link{quantile}}. \code{\link{quantile}} does not
+  currently correctly compute values for weighted ecdfs.
+}
+\examples{
+x <- runif(200)
+w <- rpois(200, 5) + 1
+
+e <- weighted.ecdf(x, w)
+plot(e)
+summary(e)
+
+y <- x[rep(seq_along(x), w)]
+plot(ecdf(y))
+}
+\seealso{
+  \code{\link[stats]{weighted.mean}}
+
+  Other weighted.statistics: \code{\link{weighted.sd}},
+  \code{\link{weighted.var}}
+}
+

@@ -31,3 +31,4 @@ Collate:
     'summarise-2d.r'
     'smooth-2d.r'
     'norm-deriv.r'
+    'weighted-stats.r'
