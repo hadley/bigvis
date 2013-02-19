@@ -1,14 +1,10 @@
-# TODO
-
-* two summary and smoothing functions
-* s3 class for summaries, and update binned-summary.r & standardise.r
-
 # Group
 
-* by numeric x: fixed width, arbitrary breaks (done)
-* by numeric x & y: fixed width (done), hexes
-  * https://github.com/d3/d3-plugins/blob/master/hexbin/hexbin.js
-* by integer group (done)
+* 1d (done), 2d (done), nd (stuck)
+
+One day:
+
+* 2d hex bins
 
 # Summarise
 
@@ -37,23 +33,23 @@
   * cor
   * lm?
 
+* need to compute standard errors
+
 # Smooth
 
 Kernel smoothing plus binned summary leads to many common statistics: density =~ bin + smooth, loess =~ mean + smooth, rqss =~ quantile + smooth
 
-* would be nice to have single sided smoother for time data
+Need to complete code for `guess_bandwidth`. Implement varying density smoother.
+
+Read literature on bandwidth selection for kernel smoothers. Read literature on variable bandwidth kernel smoothers.
+
+Explore implementiong of linear kernel smooth.
+
+`guess_bandwidth` and `smooth` should automatically pick the correct method (density estimation or smoother) based on variable name.
 
 # Visualise
 
-
-
-# Syntax
-
-    summarise_1d(x, binwidth = 1 / 100)
-    summarise_1d(x, ,  "count", binwidth = 1 / 100)
-    summarise_1d(x, z, "mean", binwidth = 1 / 100)
-    summarise_1d(x, z, "median", binwidth = 1 / 100)
-    summarise_1d(x, z, weight = w, "mean", binwidth = 1 / 100)
+Need to automatically compute standard errors, and provide cut off.
 
 # Data structures
 
