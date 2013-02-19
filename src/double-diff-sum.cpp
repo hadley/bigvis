@@ -5,6 +5,11 @@ using namespace Rcpp;
 
 // Efficiently compute \sum \sum abs(x_i - x_j) for binned data
 // 
+// It's effectively equivalent to this R code on the ungrouped observations
+// bin <- trunc(x / bw)
+// diffs <- abs(outer(bin, bin, "-"))
+// tabulate(diffs + 1)
+// 
 // [[Rcpp::export]]
 std::vector<int> double_diff_sum(IntegerVector bin, IntegerVector count) {
   int n = bin.size();

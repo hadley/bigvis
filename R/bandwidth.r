@@ -69,9 +69,12 @@ guess_bandwidth <- function(binsum) {
   upper <- 1.144 * scale * n ^ (-1 / 5)
   lower <- upper * 0.1
   limits <- expand_limits(fSD, lower, upper)
-  tol <- lower / 10
+  tol <- limits[1] / 10
 
-  uniroot(fSD, limits, tol = tol)$root
+  res <- uniroot(fSD, limits, tol = tol)$root
+
+  list(scale = scale, a = a, b = b, alpha2 = alpha2, limits = limits,
+    res = res, SDh = SDh, TDh = TDh)
 }
 
 
@@ -93,3 +96,5 @@ expand_limits <- function(f, lower, upper, tries = 100) {
   }
   c(lower, upper)
 }
+
+
