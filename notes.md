@@ -54,3 +54,11 @@ Kernel smoothing plus binned summary leads to many common statistics: density =~
     summarise_1d(x, z, "mean", binwidth = 1 / 100)
     summarise_1d(x, z, "median", binwidth = 1 / 100)
     summarise_1d(x, z, weight = w, "mean", binwidth = 1 / 100)
+
+# Data structures
+
+Grouping classes need to be able to unbin data and generate bin positions for input data.
+
+Summarise should be able to be sparse (e.g. use hashmap) and should generate complete output included labels (generated from group methods).
+
+Should be able to create group objects at R level, and eliminate width & origin arguments from r functions. 

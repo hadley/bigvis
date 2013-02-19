@@ -35,14 +35,6 @@ group_fixed <- function(x, width, origin = 0) {
     .Call('bigvis_group_fixed', PACKAGE = 'bigvis', x, width, origin)
 }
 
-group_breaks <- function(x, breaks) {
-    .Call('bigvis_group_breaks', PACKAGE = 'bigvis', x, breaks)
-}
-
-group_integer <- function(x, origin = 0) {
-    .Call('bigvis_group_integer', PACKAGE = 'bigvis', x, origin)
-}
-
 group_rect <- function(x, y, x_width, y_width, x_origin, y_origin) {
     .Call('bigvis_group_rect', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin)
 }
@@ -84,20 +76,12 @@ smooth2d3 <- function(x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd,
     .Call('bigvis_smooth2d3', PACKAGE = 'bigvis', x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise)
 }
 
-summarise_count_breaks <- function(x, z, weight, breaks) {
-    .Call('bigvis_summarise_count_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
-}
-
 summarise_count_fixed <- function(x, z, weight, width, origin) {
     .Call('bigvis_summarise_count_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
 summarise_count_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
     .Call('bigvis_summarise_count_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
-}
-
-summarise_sum_breaks <- function(x, z, weight, breaks) {
-    .Call('bigvis_summarise_sum_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
 summarise_sum_fixed <- function(x, z, weight, width, origin) {
@@ -108,10 +92,6 @@ summarise_sum_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y
     .Call('bigvis_summarise_sum_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
 }
 
-summarise_mean_breaks <- function(x, z, weight, breaks) {
-    .Call('bigvis_summarise_mean_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
-}
-
 summarise_mean_fixed <- function(x, z, weight, width, origin) {
     .Call('bigvis_summarise_mean_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
@@ -120,20 +100,12 @@ summarise_mean_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, 
     .Call('bigvis_summarise_mean_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
 }
 
-summarise_sd_breaks <- function(x, z, weight, breaks) {
-    .Call('bigvis_summarise_sd_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
-}
-
 summarise_sd_fixed <- function(x, z, weight, width, origin) {
     .Call('bigvis_summarise_sd_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
 }
 
 summarise_sd_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
     .Call('bigvis_summarise_sd_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
-}
-
-summarise_median_breaks <- function(x, z, weight, breaks) {
-    .Call('bigvis_summarise_median_breaks', PACKAGE = 'bigvis', x, z, weight, breaks)
 }
 
 summarise_median_fixed <- function(x, z, weight, width, origin) {

@@ -15,16 +15,12 @@
 #' x <- runif(1e5)
 #' summarise_1d(x, binwidth = 0.1)
 summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL,
-                      binwidth = NULL, origin = NULL, breaks = NULL) {
+                      binwidth = NULL, origin = NULL) {
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"
     message("Summarising with ", summary)
   }
   stopifnot(summary %in% names(summaries))
-
-  if (is.null(binwidth) + is.null(breaks) != 1L) {
-    stop("You must specify one of binwidth and breaks", call. = FALSE)
-  }
 
   # Compute ranges only once
   if (!is.ranged(x)) x <- ranged(x)
@@ -33,22 +29,15 @@ summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL,
   z <- z %||% numeric()
   w <- w %||% numeric()
 
-  # Check lenghts consistent
+  # Check lengths consistent
   stopifnot(length(z) == 0 || length(z) == length(x))
   stopifnot(length(w) == 0 || length(w) == length(x))
 
-  if (!is.null(breaks)) {
-    f <- match.fun(paste("compute", summary, "breaks", sep = "_"))
-    out <- f(x, z, weights, breaks = breaks)
+  origin <- origin %||% find_origin(x, binwidth)
 
-    breaks <- c(NA, breaks)
-  } else {
-    origin <- origin %||% find_origin(x, binwidth)
-
-    f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
-    out <- f(x, z, w, width = binwidth, origin = origin)
-    breaks <- breaks(x, binwidth, origin)
-  }
+  f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
+  out <- f(x, z, w, width = binwidth, origin = origin)
+  breaks <- breaks(x, binwidth, origin)
 
   binsum(data.frame(x = breaks, out), paste0("1d_", summary_class[[summary]]))
 }

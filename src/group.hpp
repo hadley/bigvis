@@ -44,20 +44,29 @@ class GroupFixed {
 
 };
 
+template<typename Group>
+class Group2d {
+    const Group& x_;
+    const Group& y_;
+    int x_bins_;
+    int y_bins_;
 
-class GroupInteger {
-    const NumericVector x_;
-    double origin_;
   public:
-    GroupInteger (const NumericVector& x, double origin = 0) : 
-        x_(x), origin_(origin) {
+    Group2d (const Group& x, const Group& y) : x_(x), y_(y) {
+      if (x_.size() != y_.size()) {
+        stop("x and y are not equal sizes");
+      }
+      x_bins_ = x_.nbins();
+      y_bins_ = y_.nbins();
+
+      // Rcout << "x_bins: " << x_bins_ << " y_bins: " << y_bins_ << "\n";
     }
 
     int bin(int i) const {
-      if (NumericVector::is_na(x_[i])) return 0;
-      if (x_[i] < origin_) return 0;
-
-      return x_[i] - origin_ + 1;
+      int x_bin = x_.bin(i), y_bin = y_.bin(i);
+      int bin = y_bin * x_bins_ + x_bin;
+      // Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
+      return bin;
     }
 
     int size() const {
@@ -65,49 +74,8 @@ class GroupInteger {
     }
 
     int nbins() const {
-      return (frange(x_)(1) - origin_) + 1;
+      return x_bins_ * y_bins_;
     }
-
-};
-
-
-class GroupBreaks {
-    const NumericVector x_;
-    const NumericVector& breaks_;
-    NumericVector::const_iterator breaks_it_, breaks_end_;
-
-  public:
-    GroupBreaks (const NumericVector& x, const NumericVector& breaks)
-        : x_(x), breaks_(breaks) {
-      breaks_it_ = breaks.begin();
-      breaks_end_ = breaks.end();
-    }
-
-    int bin(int i) const {
-      if (ISNAN(x_[i])) return 0;
-
-      NumericVector::iterator
-        bin_it = std::upper_bound(breaks_it_, breaks_end_, x_[i]);
-
-      // Value higher than all breaks
-      if (bin_it == breaks_end_) return 0;
-
-      return std::distance(breaks_it_, bin_it);
-    }
-
-    double unbin(int bin) const {
-      if (bin == 0) return(NAN);
-      return breaks_[bin - 1];
-    }
-
-    int size() const {
-      return x_.size();
-    }
-
-    int nbins() const {
-      return breaks_.size();
-    }
-
 };
 
 
@@ -171,38 +139,4 @@ class GroupNd {
       return bins;
     }
 
-};
-
-template<typename Group>
-class Group2d {
-    const Group& x_;
-    const Group& y_;
-    int x_bins_;
-    int y_bins_;
-
-  public:
-    Group2d (const Group& x, const Group& y) : x_(x), y_(y) {
-      if (x_.size() != y_.size()) {
-        stop("x and y are not equal sizes");
-      }
-      x_bins_ = x_.nbins();
-      y_bins_ = y_.nbins();
-
-      // Rcout << "x_bins: " << x_bins_ << " y_bins: " << y_bins_ << "\n";
-    }
-
-    int bin(int i) const {
-      int x_bin = x_.bin(i), y_bin = y_.bin(i);
-      int bin = y_bin * x_bins_ + x_bin;
-      // Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
-      return bin;
-    }
-
-    int size() const {
-      return x_.size();
-    }
-
-    int nbins() const {
-      return x_bins_ * y_bins_;
-    }
 };

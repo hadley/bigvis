@@ -1,6 +1,5 @@
 
 groups <- list(
-  Breaks = c(breaks = "NumericVector&"),
   Fixed = c(width = "double", origin = "double"),
   "2dFixed" = c(x_width = "double", y_width = "double",
               x_origin = "double", y_origin = "double")

@@ -39,28 +39,6 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// group_breaks
-IntegerVector group_breaks(const NumericVector& x, const NumericVector& breaks);
-RcppExport SEXP bigvis_group_breaks(SEXP xSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    IntegerVector __result = group_breaks(x, breaks);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// group_integer
-IntegerVector group_integer(const NumericVector& x, double origin = 0);
-RcppExport SEXP bigvis_group_integer(SEXP xSEXP, SEXP originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    IntegerVector __result = group_integer(x, origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // group_rect
 IntegerVector group_rect(const NumericVector& x, const NumericVector& y, double x_width, double y_width, double x_origin, double y_origin);
 RcppExport SEXP bigvis_group_rect(SEXP xSEXP, SEXP ySEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
@@ -159,19 +137,6 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_count_breaks
-NumericVector summarise_count_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
-RcppExport SEXP bigvis_summarise_count_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    NumericVector __result = summarise_count_breaks(x, z, weight, breaks);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // summarise_count_fixed
 NumericVector summarise_count_fixed(const NumericVector& x, const NumericVector& z, const NumericVector& weight, double width, double origin);
 RcppExport SEXP bigvis_summarise_count_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
@@ -200,19 +165,6 @@ BEGIN_RCPP
     double x_origin = Rcpp::as<double >(x_originSEXP);
     double y_origin = Rcpp::as<double >(y_originSEXP);
     NumericVector __result = summarise_count_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_sum_breaks
-NumericVector summarise_sum_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
-RcppExport SEXP bigvis_summarise_sum_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    NumericVector __result = summarise_sum_breaks(x, z, weight, breaks);
     return Rcpp::wrap(__result);
 END_RCPP
 }
@@ -247,19 +199,6 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_mean_breaks
-NumericVector summarise_mean_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
-RcppExport SEXP bigvis_summarise_mean_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    NumericVector __result = summarise_mean_breaks(x, z, weight, breaks);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // summarise_mean_fixed
 NumericVector summarise_mean_fixed(const NumericVector& x, const NumericVector& z, const NumericVector& weight, double width, double origin);
 RcppExport SEXP bigvis_summarise_mean_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
@@ -291,19 +230,6 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_sd_breaks
-NumericVector summarise_sd_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
-RcppExport SEXP bigvis_summarise_sd_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    NumericVector __result = summarise_sd_breaks(x, z, weight, breaks);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
 // summarise_sd_fixed
 NumericVector summarise_sd_fixed(const NumericVector& x, const NumericVector& z, const NumericVector& weight, double width, double origin);
 RcppExport SEXP bigvis_summarise_sd_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
@@ -332,19 +258,6 @@ BEGIN_RCPP
     double x_origin = Rcpp::as<double >(x_originSEXP);
     double y_origin = Rcpp::as<double >(y_originSEXP);
     NumericVector __result = summarise_sd_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_median_breaks
-NumericVector summarise_median_breaks(const NumericVector& x, const NumericVector& z, const NumericVector& weight, NumericVector& breaks);
-RcppExport SEXP bigvis_summarise_median_breaks(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP breaksSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
-    NumericVector __result = summarise_median_breaks(x, z, weight, breaks);
     return Rcpp::wrap(__result);
 END_RCPP
 }
