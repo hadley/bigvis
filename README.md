@@ -10,6 +10,10 @@ The bigvis package is structured around the following workflow:
 * optionally smooth or standardise with `smooth_1d()` and `standardise()`
 * visualising the results
 
+## Weighted statistics
+
+Bigvis also provides a number of standard statistics efficiently implemented on weighted/binned data: `weighted.var`, `weighted.sd`, `weighted.ecdf` and `weighted.quantile`. 
+
 ## Acknowledgements
 
 This package wouldn't be possible without:
