@@ -12,7 +12,7 @@ class GroupFixed {
        : x_(x), width_(width), origin_(origin) {
     }
 
-    int bin(int i) const {
+    int bin_i(int i) const {
       if (ISNAN(x_[i]) || x_[i] == INFINITY || x_[i] == -INFINITY) return 0;
       if (x_[i] < origin_) return 0;
       
@@ -62,8 +62,8 @@ class Group2d {
       // Rcout << "x_bins: " << x_bins_ << " y_bins: " << y_bins_ << "\n";
     }
 
-    int bin(int i) const {
-      int x_bin = x_.bin(i), y_bin = y_.bin(i);
+    int bin_i(int i) const {
+      int x_bin = x_.bin_i(i), y_bin = y_.bin_i(i);
       int bin = y_bin * x_bins_ + x_bin;
       // Rcout << i << ": (" << x_bin << "," << y_bin << ") -> " << bin << "\n";
       return bin;
@@ -104,7 +104,7 @@ class GroupNd {
       }
     }
 
-    int bin(int i) const {
+    int bin_i(int i) const {
       int bin = 0;
 
       for (int j = 0; j < ngroups_; ++j) {

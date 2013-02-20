@@ -25,7 +25,7 @@ class GroupHex {
       x_bins = x_max / x_width_ + 1;
     }
 
-    int bin(int i) const {
+    int bin_i(int i) const {
       double py = ISNAN(y_[i]) ? 0 : (y_[i] - y_origin_) / y_width_ + 1;
       int pj = py;
       double py1 = py - pj;

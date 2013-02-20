@@ -8,7 +8,7 @@ IntegerVector group_out(const Group& group) {
   int n = group.size();
   IntegerVector out(n);
   for(int i = 0; i < n; ++i) {
-    out[i] = group.bin(i);
+    out[i] = group.bin_i(i);
   }
 
   return out;
