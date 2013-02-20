@@ -128,3 +128,18 @@ weighted.quantile <- function (x, w, probs = seq(0, 1, 0.25), na.rm = FALSE) {
 #   m = 1 - p =>
 #   j = floor(1 + (n - 1) * p)
 #   g = (np + 1 - p) - floor(1 + (n - 1) * p)
+
+#' Compute the median of weighted data.
+#'
+#' @details This is a simple wrapper around \code{\link{weighted.quantile}}
+#' @inheritParams weighted.quantile
+#' @export
+#' @examples
+#' x <- runif(200)
+#' w <- rpois(200, 5) + 1
+#'
+#' median(x)
+#' weighted.median(x, w)
+weighted.median <- function(x, w, na.rm = FALSE) {
+  weighted.quantile(x, w, probs = 0.5, na.rm = na.rm)
+}

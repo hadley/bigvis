@@ -12,7 +12,7 @@ The bigvis package is structured around the following workflow:
 
 ## Weighted statistics
 
-Bigvis also provides a number of standard statistics efficiently implemented on weighted/binned data: `weighted.var`, `weighted.sd`, `weighted.ecdf` and `weighted.quantile`. 
+Bigvis also provides a number of standard statistics efficiently implemented on weighted/binned data: `weighted.median`, `weighted.var`, `weighted.sd`, `weighted.ecdf` and `weighted.quantile`. 
 
 ## Acknowledgements
 
