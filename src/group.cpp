@@ -14,6 +14,24 @@ IntegerVector group_out(const Group& group) {
   return out;
 }
 
+RCPP_MODULE(Group) {
+  class_<GroupFixed>("GroupFixed")
+  .constructor<const NumericVector&, double, double>()
+  .const_method("bin_i", &GroupFixed::bin_i)
+  .const_method("bin", &GroupFixed::bin)
+  .const_method("unbin", &GroupFixed::unbin)
+
+  .const_method("size", &GroupFixed::size)
+  .const_method("nbins", &GroupFixed::nbins)
+
+  .const_method("origin", &GroupFixed::origin)
+  .const_method("width", &GroupFixed::width)
+  ;
+}
+RCPP_EXPOSED_AS(GroupFixed);
+RCPP_EXPOSED_WRAP(GroupFixed);
+
+
 // [[Rcpp::export]]
 IntegerVector group_fixed(const NumericVector& x, double width, double origin = 0) {
   return group_out(GroupFixed(x, width, origin));

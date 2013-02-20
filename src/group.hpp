@@ -28,6 +28,13 @@ class GroupFixed {
       return (bin - 1) * width_ + origin_;
     }
 
+    double origin() const {
+      return origin_;
+    }
+    double width() const {
+      return width_;
+    }
+
 
     int size() const {
       return x_.size();
