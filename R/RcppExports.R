@@ -43,6 +43,10 @@ group_hex <- function(x, y, x_width, y_width, x_origin, y_origin, x_max) {
     .Call('bigvis_group_hex', PACKAGE = 'bigvis', x, y, x_width, y_width, x_origin, y_origin, x_max)
 }
 
+lowerBound <- function(x, breaks) {
+    .Call('bigvis_lowerBound', PACKAGE = 'bigvis', x, breaks)
+}
+
 #' 1d normal kernel smoothing.
 #'
 #' This is a variant of \code{\link{density}} for calculating weighted 

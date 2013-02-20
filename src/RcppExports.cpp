@@ -70,6 +70,17 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// lowerBound
+IntegerVector lowerBound(const NumericVector& x, const NumericVector& breaks);
+RcppExport SEXP bigvis_lowerBound(SEXP xSEXP, SEXP breaksSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector breaks = Rcpp::as<NumericVector >(breaksSEXP);
+    IntegerVector __result = lowerBound(x, breaks);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // smooth1d
 NumericVector smooth1d(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const double sd, bool standardise = true);
 RcppExport SEXP bigvis_smooth1d(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP sdSEXP, SEXP standardiseSEXP) {

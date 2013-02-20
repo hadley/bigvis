@@ -4,10 +4,10 @@ Title: Tools for visualisation of big data sets
 Description: Tools for visualising large datasets.
 Authors@R: c(
     person("Hadley", "Wickham", role = c("aut", "cre"),
-        email = "hadley@rice.edu"),
+    email = "hadley@rice.edu"),
     person("Yue", "Hue", role = "aut"),
     person("R Core team", role = "ctb",
-        comment = "guess_bandwidth adapted from stats::bw.SJ")
+    comment = "guess_bandwidth adapted from stats::bw.SJ")
     )
 Depends:
     Rcpp

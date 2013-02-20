@@ -3,7 +3,7 @@
 \title{Efficient binned 1d summaries.}
 \usage{
   summarise_1d(x, z = NULL, summary = NULL, w = NULL,
-    binwidth = NULL, origin = NULL, breaks = NULL)
+    binwidth = NULL, origin = NULL)
 }
 \arguments{
   \item{x}{a numeric vector to group by}

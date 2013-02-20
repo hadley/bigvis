@@ -34,6 +34,7 @@ stopifnot(all.equal(weighted.var(x, w), var(y)))
 \seealso{
   \code{\link[stats]{weighted.mean}}
 
-  Other weighted.statistics: \code{\link{weighted.ecdf}}
+  Other weighted.statistics: \code{\link{weighted.ecdf}},
+  \code{\link{weighted.quantile}}
 }
 
