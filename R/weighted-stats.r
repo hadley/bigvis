@@ -81,11 +81,12 @@ weighted.ecdf <- function(x, w) {
 #' Currently only implements the type 7 algorithm, as described in
 #' \code{\link{quantile}}. Based on \code{\link{quantile}} written by R-core.
 #'
-#' @inheritParams weighed.var
+#' @inheritParams weighted.var
 #' @param probs numeric vector of probabilities between 0 and 1
 #' @param na.rm If \code{TRUE} will automatically remove missing values
 #'   in \code{x} or \code{w}.
 #' @family weighted statistics
+#' @export
 #' @examples
 #' x <- runif(200)
 #' w <- rpois(200, 5) + 1

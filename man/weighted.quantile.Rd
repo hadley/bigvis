@@ -11,6 +11,11 @@
 
   \item{na.rm}{If \code{TRUE} will automatically remove
   missing values in \code{x} or \code{w}.}
+
+  \item{x}{numeric vector of observations}
+
+  \item{w}{integer vector of weights, representing the
+  number of time each \code{x} was observed}
 }
 \description{
   Compute quantiles of weighted data.
