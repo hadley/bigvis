@@ -1,0 +1,30 @@
+\name{weighted.IQR}
+\alias{weighted.IQR}
+\title{Compute the interquartile range of weighted data.}
+\usage{
+  weighted.IQR(x, w, na.rm = FALSE)
+}
+\arguments{
+  \item{x}{numeric vector of observations}
+
+  \item{w}{integer vector of weights, representing the
+  number of time each \code{x} was observed}
+
+  \item{na.rm}{If \code{TRUE} will automatically remove
+  missing values in \code{x} or \code{w}.}
+}
+\description{
+  Compute the interquartile range of weighted data.
+}
+\details{
+  This is a simple wrapper around
+  \code{\link{weighted.quantile}}
+}
+\examples{
+x <- sort(runif(200))
+w <- rpois(200, seq(1, 10, length = 200)) + 1
+
+IQR(x)
+weighted.IQR(x, w)
+}
+

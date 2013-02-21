@@ -143,3 +143,18 @@ weighted.quantile <- function (x, w, probs = seq(0, 1, 0.25), na.rm = FALSE) {
 weighted.median <- function(x, w, na.rm = FALSE) {
   weighted.quantile(x, w, probs = 0.5, na.rm = na.rm)
 }
+
+#' Compute the interquartile range of weighted data.
+#'
+#' @details This is a simple wrapper around \code{\link{weighted.quantile}}
+#' @inheritParams weighted.quantile
+#' @export
+#' @examples
+#' x <- sort(runif(200))
+#' w <- rpois(200, seq(1, 10, length = 200)) + 1
+#'
+#' IQR(x)
+#' weighted.IQR(x, w)
+weighted.IQR <- function(x, w, na.rm = FALSE) {
+  diff(weighted.quantile(x, w, probs = c(0.25, 0.75), na.rm = na.rm))
+}
