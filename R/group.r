@@ -22,7 +22,6 @@ grouped <- function(x, width, origin = NULL) {
   module$GroupFixed$new(x, width, origin)
 }
 
-
 setMethod("show", "Rcpp_GroupFixed", function(object) {
   cat("Grouped [", object$size(), "]. ",
     "Width: ", object$width(), " Origin: ", object$origin(), "\n", sep = "")
