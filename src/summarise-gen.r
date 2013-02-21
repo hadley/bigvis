@@ -13,7 +13,7 @@ cpp_fun <- function(summary, group) {
 
   g_vars <- groups[[group]]
   g_args <- paste(g_vars, names(g_vars), collapse = ", ")
-  s_args <- paste("const NumericVector&", c(vars, "z", "weight"), collapse = ", ")
+  s_args <- paste("NumericVector", c(vars, "z", "weight"), collapse = ", ")
   args <- paste(s_args, ", ", g_args, sep = "")
 
   body <- paste("return summarise(z, weight, ",

@@ -16,7 +16,7 @@ IntegerVector group_out(const Group& group) {
 
 RCPP_MODULE(Group) {
   class_<GroupFixed>("GroupFixed")
-  .constructor<const NumericVector&, double, double>()
+  .constructor<NumericVector, double, double>()
   .const_method("bin_i", &GroupFixed::bin_i)
   .const_method("bin", &GroupFixed::bin)
   .const_method("unbin", &GroupFixed::unbin)

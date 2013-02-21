@@ -4,11 +4,11 @@ using namespace Rcpp;
 NumericVector frange(const NumericVector& x, const bool finite = true);
 
 class GroupFixed {
-    const NumericVector& x_;
+    const NumericVector x_;
     double width_;
     double origin_;
   public:
-    GroupFixed (const NumericVector& x, double width, double origin = 0)
+    GroupFixed (NumericVector x, double width, double origin = 0)
        : x_(x), width_(width), origin_(origin) {
     }
 
