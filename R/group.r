@@ -10,7 +10,7 @@ module <- Module("Group")
 #'
 #' @param x numeric or integer vector
 #' @param width bin width
-#' @parma origin if not specified, guessed by \code{\link{find_origin}}
+#' @param origin if not specified, guessed by \code{\link{find_origin}}
 #' @export
 #' @examples
 #' x <- runif(1e6)
