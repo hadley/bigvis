@@ -21,7 +21,6 @@ class BinnedVector {
     }
 
     int bin(double x) const {
-      Rcout << "Binning " << x << "\n"; 
       if (ISNAN(x) || x == INFINITY || x == -INFINITY) return 0;
       if (x < origin_) return 0;
 
