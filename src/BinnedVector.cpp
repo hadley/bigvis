@@ -37,6 +37,18 @@ class BinnedVector {
       return bin(max(x_));
     }
 
+    int size() const {
+      return x_.size();
+    }
+
+    double origin() const {
+      return origin_;
+    } 
+
+    double width() const {
+      return width_;
+    }
+
 };
 
 // This class is just boilerplate. There might be rcpp magic that does the right thing here
@@ -71,6 +83,9 @@ public:
     int bin(double x) const { return get()->bin(x); }
     double unbin(int bin) const { return get()->unbin(bin); }
     int nbins() const { return get()->nbins(); }
+    int size() const { return get()->size();}
+    double origin() const { return get()->origin();}
+    double width() const { return get()->width();}
 };
 
 // A data structure to store multiple binned vectors
@@ -138,15 +153,18 @@ class BinnedVectors {
 };
 
 RCPP_MODULE(Binned) {
-  class_<BinnedVectorReference>("Vector")
+  class_<BinnedVectorReference>("BinnedVector")
     .constructor<NumericVector, double, double>()
     .const_method("bin_i", &BinnedVectorReference::bin_i)
     .const_method("bin", &BinnedVectorReference::bin)
     .const_method("unbin", &BinnedVectorReference::unbin)
     .const_method("nbins", &BinnedVectorReference::nbins)
+    .const_method("size", &BinnedVectorReference::size)
+    .const_method("origin", &BinnedVectorReference::origin)
+    .const_method("width", &BinnedVectorReference::width)
   ;
 
-  class_<BinnedVectors>("Vectors")
+  class_<BinnedVectors>("BinnedVectors")
     .constructor()
     .method("add_vector", &BinnedVectors::add_vector)
     .field("bins", &BinnedVectors::bins_)

@@ -1,4 +1,4 @@
-module <- Module("Group")
+module <- Module("Binned")
 
 #' Create a grouped variable.
 #'
@@ -19,10 +19,10 @@ grouped <- function(x, width, origin = NULL) {
   if (!is.ranged(x)) x <- ranged(x)
   origin <- origin %||% find_origin(x, width)
 
-  module$GroupFixed$new(x, width, origin)
+  module$BinnedVector$new(x, width, origin)
 }
 
-setMethod("show", "Rcpp_GroupFixed", function(object) {
+setMethod("show", "Rcpp_BinnedVector", function(object) {
   cat("Grouped [", object$size(), "]. ",
     "Width: ", object$width(), " Origin: ", object$origin(), "\n", sep = "")
 })
