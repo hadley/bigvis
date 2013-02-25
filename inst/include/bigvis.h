@@ -28,8 +28,8 @@ class BinnedVector {
     }
 
     double unbin(int bin) const {
-      if (bin == 0) return(NAN);
-      return (bin - 1) * width_ + origin_;
+      if (bin == 0) return(NA_REAL);
+      return (bin - 1) * width_ + origin_ + width_ / 2;
     }
 
     int nbins() const {
