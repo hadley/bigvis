@@ -1,6 +1,6 @@
 # Group
 
-* 1d (done), 2d (done), nd (stuck)
+* 1d (done), 2d (done), nd (done)
 
 One day:
 
@@ -53,10 +53,3 @@ Explore implementation of linear kernel smooth.
 
 Need to automatically compute standard errors, and provide cut off.
 
-# Data structures
-
-Grouping classes need to be able to unbin data and generate bin positions for input data.  Add breaks method to BinnedVector, and also save origin, width as attributes on summary output.
-
-Summarise should be able to be sparse (e.g. use hashmap) and should generate complete output included labels (generated from group methods).
-
-Should be able to create group objects at R level, and eliminate width & origin arguments from r functions. 
