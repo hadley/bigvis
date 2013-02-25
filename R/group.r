@@ -26,3 +26,7 @@ setMethod("show", "Rcpp_BinnedVector", function(object) {
   cat("Grouped [", object$size(), "]. ",
     "Width: ", object$width(), " Origin: ", object$origin(), "\n", sep = "")
 })
+
+is.grouped <- function(x) {
+  is(x, "Rcpp_BinnedVector")
+}

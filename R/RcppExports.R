@@ -80,44 +80,24 @@ smooth2d3 <- function(x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd,
     .Call('bigvis_smooth2d3', PACKAGE = 'bigvis', x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise)
 }
 
-summarise_count_fixed <- function(x, z, weight, width, origin) {
-    .Call('bigvis_summarise_count_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
+summarise_count <- function(x, z, weight) {
+    .Call('bigvis_summarise_count', PACKAGE = 'bigvis', x, z, weight)
 }
 
-summarise_count_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
-    .Call('bigvis_summarise_count_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
+summarise_sum <- function(x, z, weight) {
+    .Call('bigvis_summarise_sum', PACKAGE = 'bigvis', x, z, weight)
 }
 
-summarise_sum_fixed <- function(x, z, weight, width, origin) {
-    .Call('bigvis_summarise_sum_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
+summarise_mean <- function(x, z, weight) {
+    .Call('bigvis_summarise_mean', PACKAGE = 'bigvis', x, z, weight)
 }
 
-summarise_sum_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
-    .Call('bigvis_summarise_sum_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
+summarise_sd <- function(x, z, weight) {
+    .Call('bigvis_summarise_sd', PACKAGE = 'bigvis', x, z, weight)
 }
 
-summarise_mean_fixed <- function(x, z, weight, width, origin) {
-    .Call('bigvis_summarise_mean_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
-}
-
-summarise_mean_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
-    .Call('bigvis_summarise_mean_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
-}
-
-summarise_sd_fixed <- function(x, z, weight, width, origin) {
-    .Call('bigvis_summarise_sd_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
-}
-
-summarise_sd_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
-    .Call('bigvis_summarise_sd_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
-}
-
-summarise_median_fixed <- function(x, z, weight, width, origin) {
-    .Call('bigvis_summarise_median_fixed', PACKAGE = 'bigvis', x, z, weight, width, origin)
-}
-
-summarise_median_2dfixed <- function(x, y, z, weight, x_width, y_width, x_origin, y_origin) {
-    .Call('bigvis_summarise_median_2dfixed', PACKAGE = 'bigvis', x, y, z, weight, x_width, y_width, x_origin, y_origin)
+summarise_median <- function(x, z, weight) {
+    .Call('bigvis_summarise_median', PACKAGE = 'bigvis', x, z, weight)
 }
 
 compute_moments <- function(x) {

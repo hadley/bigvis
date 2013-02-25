@@ -1,10 +1,3 @@
-
-groups <- list(
-  Fixed = c(width = "double", origin = "double"),
-  "2dFixed" = c(x_width = "double", y_width = "double",
-              x_origin = "double", y_origin = "double")
-)
-
 summaries <- c(
   count = "Sum(0)",
   sum = "Sum(1)",

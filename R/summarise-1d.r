@@ -13,30 +13,28 @@
 #' @export
 #' @examples
 #' x <- runif(1e5)
-#' summarise_1d(x, binwidth = 0.1)
-summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL,
-                      binwidth = NULL, origin = NULL) {
+#' gx <- grouped(x, 0.1)
+#' summarise_1d(gx)
+summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL) {
+  stopifnot(is.grouped(x))
+
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"
     message("Summarising with ", summary)
   }
   stopifnot(summary %in% names(summaries))
 
-  # Compute ranges only once
-  if (!is.ranged(x)) x <- ranged(x)
-
   # C++ code can deal with NULL inputs more efficiently than R code
   z <- z %||% numeric()
   w <- w %||% numeric()
 
   # Check lengths consistent
-  stopifnot(length(z) == 0 || length(z) == length(x))
-  stopifnot(length(w) == 0 || length(w) == length(x))
+  n <- x$size()
+  stopifnot(length(z) == 0 || length(z) == n)
+  stopifnot(length(w) == 0 || length(w) == n)
 
-  origin <- origin %||% find_origin(x, binwidth)
-
-  f <- match.fun(paste("summarise", summary, "fixed", sep = "_"))
-  out <- f(x, z, w, width = binwidth, origin = origin)
+  f <- match.fun(paste("summarise", summary, sep = "_"))
+  out <- f(x, z, w)
   breaks <- breaks(x, binwidth, origin)
 
   binsum(data.frame(x = breaks, out), paste0("1d_", summary_class[[summary]]))

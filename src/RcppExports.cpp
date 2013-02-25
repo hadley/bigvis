@@ -2,6 +2,7 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <Rcpp.h>
+#include "../inst/include/bigvis.h"
 
 using namespace Rcpp;
 
@@ -148,158 +149,63 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_count_fixed
-NumericVector summarise_count_fixed(NumericVector x, NumericVector z, NumericVector weight, double width, double origin);
-RcppExport SEXP bigvis_summarise_count_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
+// summarise_count
+NumericVector summarise_count(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_summarise_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double width = Rcpp::as<double >(widthSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    NumericVector __result = summarise_count_fixed(x, z, weight, width, origin);
+    NumericVector __result = summarise_count(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_count_2dfixed
-NumericVector summarise_count_2dfixed(NumericVector x, NumericVector y, NumericVector z, NumericVector weight, double x_width, double y_width, double x_origin, double y_origin);
-RcppExport SEXP bigvis_summarise_count_2dfixed(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP weightSEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
+// summarise_sum
+NumericVector summarise_sum(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_summarise_sum(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double x_width = Rcpp::as<double >(x_widthSEXP);
-    double y_width = Rcpp::as<double >(y_widthSEXP);
-    double x_origin = Rcpp::as<double >(x_originSEXP);
-    double y_origin = Rcpp::as<double >(y_originSEXP);
-    NumericVector __result = summarise_count_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
+    NumericVector __result = summarise_sum(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_sum_fixed
-NumericVector summarise_sum_fixed(NumericVector x, NumericVector z, NumericVector weight, double width, double origin);
-RcppExport SEXP bigvis_summarise_sum_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
+// summarise_mean
+NumericVector summarise_mean(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_summarise_mean(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double width = Rcpp::as<double >(widthSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    NumericVector __result = summarise_sum_fixed(x, z, weight, width, origin);
+    NumericVector __result = summarise_mean(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_sum_2dfixed
-NumericVector summarise_sum_2dfixed(NumericVector x, NumericVector y, NumericVector z, NumericVector weight, double x_width, double y_width, double x_origin, double y_origin);
-RcppExport SEXP bigvis_summarise_sum_2dfixed(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP weightSEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
+// summarise_sd
+NumericVector summarise_sd(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_summarise_sd(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
+    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double x_width = Rcpp::as<double >(x_widthSEXP);
-    double y_width = Rcpp::as<double >(y_widthSEXP);
-    double x_origin = Rcpp::as<double >(x_originSEXP);
-    double y_origin = Rcpp::as<double >(y_originSEXP);
-    NumericVector __result = summarise_sum_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
+    NumericVector __result = summarise_sd(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// summarise_mean_fixed
-NumericVector summarise_mean_fixed(NumericVector x, NumericVector z, NumericVector weight, double width, double origin);
-RcppExport SEXP bigvis_summarise_mean_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
+// summarise_median
+NumericVector summarise_median(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_summarise_median(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double width = Rcpp::as<double >(widthSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    NumericVector __result = summarise_mean_fixed(x, z, weight, width, origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_mean_2dfixed
-NumericVector summarise_mean_2dfixed(NumericVector x, NumericVector y, NumericVector z, NumericVector weight, double x_width, double y_width, double x_origin, double y_origin);
-RcppExport SEXP bigvis_summarise_mean_2dfixed(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP weightSEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double x_width = Rcpp::as<double >(x_widthSEXP);
-    double y_width = Rcpp::as<double >(y_widthSEXP);
-    double x_origin = Rcpp::as<double >(x_originSEXP);
-    double y_origin = Rcpp::as<double >(y_originSEXP);
-    NumericVector __result = summarise_mean_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_sd_fixed
-NumericVector summarise_sd_fixed(NumericVector x, NumericVector z, NumericVector weight, double width, double origin);
-RcppExport SEXP bigvis_summarise_sd_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double width = Rcpp::as<double >(widthSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    NumericVector __result = summarise_sd_fixed(x, z, weight, width, origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_sd_2dfixed
-NumericVector summarise_sd_2dfixed(NumericVector x, NumericVector y, NumericVector z, NumericVector weight, double x_width, double y_width, double x_origin, double y_origin);
-RcppExport SEXP bigvis_summarise_sd_2dfixed(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP weightSEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double x_width = Rcpp::as<double >(x_widthSEXP);
-    double y_width = Rcpp::as<double >(y_widthSEXP);
-    double x_origin = Rcpp::as<double >(x_originSEXP);
-    double y_origin = Rcpp::as<double >(y_originSEXP);
-    NumericVector __result = summarise_sd_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_median_fixed
-NumericVector summarise_median_fixed(NumericVector x, NumericVector z, NumericVector weight, double width, double origin);
-RcppExport SEXP bigvis_summarise_median_fixed(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP widthSEXP, SEXP originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double width = Rcpp::as<double >(widthSEXP);
-    double origin = Rcpp::as<double >(originSEXP);
-    NumericVector __result = summarise_median_fixed(x, z, weight, width, origin);
-    return Rcpp::wrap(__result);
-END_RCPP
-}
-// summarise_median_2dfixed
-NumericVector summarise_median_2dfixed(NumericVector x, NumericVector y, NumericVector z, NumericVector weight, double x_width, double y_width, double x_origin, double y_origin);
-RcppExport SEXP bigvis_summarise_median_2dfixed(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP weightSEXP, SEXP x_widthSEXP, SEXP y_widthSEXP, SEXP x_originSEXP, SEXP y_originSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
-    NumericVector y = Rcpp::as<NumericVector >(ySEXP);
-    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
-    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    double x_width = Rcpp::as<double >(x_widthSEXP);
-    double y_width = Rcpp::as<double >(y_widthSEXP);
-    double x_origin = Rcpp::as<double >(x_originSEXP);
-    double y_origin = Rcpp::as<double >(y_originSEXP);
-    NumericVector __result = summarise_median_2dfixed(x, y, z, weight, x_width, y_width, x_origin, y_origin);
+    NumericVector __result = summarise_median(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }

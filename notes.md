@@ -6,6 +6,8 @@ One day:
 
 * 2d hex bins
 
+Look into linear binning.
+
 # Summarise
 
 * all need to support weights
@@ -43,7 +45,7 @@ Need to complete code for `guess_bandwidth`. Implement varying density smoother.
 
 Read literature on bandwidth selection for kernel smoothers. Read literature on variable bandwidth kernel smoothers.
 
-Explore implementiong of linear kernel smooth.
+Explore implementation of linear kernel smooth.
 
 `guess_bandwidth` and `smooth` should automatically pick the correct method (density estimation or smoother) based on variable name.
 
@@ -53,7 +55,7 @@ Need to automatically compute standard errors, and provide cut off.
 
 # Data structures
 
-Grouping classes need to be able to unbin data and generate bin positions for input data.
+Grouping classes need to be able to unbin data and generate bin positions for input data.  Add breaks method to BinnedVector, and also save origin, width as attributes on summary output.
 
 Summarise should be able to be sparse (e.g. use hashmap) and should generate complete output included labels (generated from group methods).
 
