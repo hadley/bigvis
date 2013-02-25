@@ -100,26 +100,6 @@ smooth2d3 <- function(x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd,
     .Call('bigvis_smooth2d3', PACKAGE = 'bigvis', x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise)
 }
 
-summarise_count <- function(x, z, weight) {
-    .Call('bigvis_summarise_count', PACKAGE = 'bigvis', x, z, weight)
-}
-
-summarise_sum <- function(x, z, weight) {
-    .Call('bigvis_summarise_sum', PACKAGE = 'bigvis', x, z, weight)
-}
-
-summarise_mean <- function(x, z, weight) {
-    .Call('bigvis_summarise_mean', PACKAGE = 'bigvis', x, z, weight)
-}
-
-summarise_sd <- function(x, z, weight) {
-    .Call('bigvis_summarise_sd', PACKAGE = 'bigvis', x, z, weight)
-}
-
-summarise_median <- function(x, z, weight) {
-    .Call('bigvis_summarise_median', PACKAGE = 'bigvis', x, z, weight)
-}
-
 compute_moments <- function(x) {
     .Call('bigvis_compute_moments', PACKAGE = 'bigvis', x)
 }

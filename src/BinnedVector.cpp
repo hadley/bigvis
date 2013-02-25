@@ -1,6 +1,16 @@
 #include <bigvis.h>
 using namespace Rcpp;
 
+
+NumericVector frange(const NumericVector& x, const bool finite = true);
+
+int BinnedVector::nbins() const {
+  double max = frange(x_)[1];
+  return bin(max) + 1; 
+  // +1 bin for missing values
+}
+
+
 RCPP_MODULE(Binned) {
   class_<BinnedVectorReference>("BinnedVector")
     .constructor<NumericVector, String, double, double>()
@@ -15,7 +25,7 @@ RCPP_MODULE(Binned) {
   ;
 
   class_<BinnedVectors>("BinnedVectors")
-    .constructor()
+    .constructor<List>()
     .method("add_vector", &BinnedVectors::add_vector)
     .field("bins", &BinnedVectors::bins_)
     .const_method("bin_i", &BinnedVectors::bin_i)

@@ -17,7 +17,7 @@ class BinnedVector {
        : x_(x), name_(name), width_(width), origin_(origin) {
     }
 
-    int bin_i(int i) const {      
+    int bin_i(int i) const {
       return bin(x_[i]);
     }
 
@@ -33,9 +33,7 @@ class BinnedVector {
       return (bin - 1) * width_ + origin_ + width_ / 2;
     }
 
-    int nbins() const {
-      return bin(max(x_));
-    }
+    int nbins() const;
 
     int size() const {
       return x_.size();

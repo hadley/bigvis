@@ -15,9 +15,10 @@ List condense(const BinnedVectors& group, const NumericVector& z,
     rep(NumericVector::create(1), n_obs);
 
   // Push values into summaries
-  std::vector<Stat> stats(n_bins + 1, stat);
+  std::vector<Stat> stats(n_bins, stat);
   for(int i = 0; i < n_obs; ++i) {
     int bin = group.bin_i(i);
+    // Rcout << "i: " << i << " bin: " << bin << "\n"; 
     stats.at(bin).push(z_[i], weight_[i]);      
   }
 
