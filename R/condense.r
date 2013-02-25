@@ -1,4 +1,4 @@
-#' Efficient binned 1d summaries.
+#' Efficient binned summaries.
 #'
 #' @param x a group object created by \code{\link{grouped}}
 #' @param y a numeric vector to summary for each group. Optional for some
@@ -12,9 +12,15 @@
 #' @examples
 #' x <- runif(1e5)
 #' gx <- grouped(x, 0.1)
-#' summarise_1d(gx)
-summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL) {
-  stopifnot(is.grouped(x))
+#' condense(gx)
+condense <- function(x, z = NULL, summary = NULL, w = NULL) {
+  if (is.grouped(x)) {
+    x <- list(x)
+  } else if (is.list(x)) {
+
+  } else {
+    stop("x must be a list or a single grouped object", call. = FALSE)
+  }
 
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"
@@ -27,12 +33,12 @@ summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL) {
   w <- w %||% numeric()
 
   # Check lengths consistent
-  n <- x$size()
+  n <- x[[1]]$size()
   stopifnot(length(z) == 0 || length(z) == n)
   stopifnot(length(w) == 0 || length(w) == n)
 
-  f <- match.fun(paste("summarise", summary, sep = "_"))
+  f <- match.fun(paste("condense", summary, sep = "_"))
   out <- f(x, z, w)
 
-  data.frame(x = out[[2]], out[[1]])
+  data.frame(out[[2]], out[[1]])
 }

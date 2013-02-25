@@ -1,8 +1,8 @@
-\name{summarise_1d}
-\alias{summarise_1d}
-\title{Efficient binned 1d summaries.}
+\name{condense}
+\alias{condense}
+\title{Efficient binned summaries.}
 \usage{
-  summarise_1d(x, z = NULL, summary = NULL, w = NULL)
+  condense(x, z = NULL, summary = NULL, w = NULL)
 }
 \arguments{
   \item{x}{a group object created by \code{\link{grouped}}}
@@ -19,11 +19,11 @@
   supported by all summary functions.}
 }
 \description{
-  Efficient binned 1d summaries.
+  Efficient binned summaries.
 }
 \examples{
 x <- runif(1e5)
 gx <- grouped(x, 0.1)
-summarise_1d(gx)
+condense(gx)
 }
 

@@ -6,6 +6,66 @@
 
 using namespace Rcpp;
 
+// condense_count
+List condense_count(const List& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_condense_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    List x = Rcpp::as<List >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    List __result = condense_count(x, z, weight);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// condense_sum
+List condense_sum(const List& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_condense_sum(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    List x = Rcpp::as<List >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    List __result = condense_sum(x, z, weight);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// condense_mean
+List condense_mean(const List& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_condense_mean(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    List x = Rcpp::as<List >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    List __result = condense_mean(x, z, weight);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// condense_sd
+List condense_sd(const List& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_condense_sd(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    List x = Rcpp::as<List >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    List __result = condense_sd(x, z, weight);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// condense_median
+List condense_median(const List& x, const NumericVector& z, const NumericVector& weight);
+RcppExport SEXP bigvis_condense_median(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    List x = Rcpp::as<List >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
+    List __result = condense_median(x, z, weight);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // double_diff_sum
 std::vector<int> double_diff_sum(IntegerVector bin, IntegerVector count);
 RcppExport SEXP bigvis_double_diff_sum(SEXP binSEXP, SEXP countSEXP) {
@@ -150,11 +210,11 @@ BEGIN_RCPP
 END_RCPP
 }
 // summarise_count
-List summarise_count(const List& x, const NumericVector& z, const NumericVector& weight);
+List summarise_count(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    List x = Rcpp::as<List >(xSEXP);
+    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
     List __result = summarise_count(x, z, weight);
