@@ -39,6 +39,8 @@ test_that("grid counted accurately", {
   s <- condense(list(grouped(grid$x, 1), grouped(grid$y, 1)))
 
   expect_equal(s$count, rep(1, nrow(grid)))
+  expect_equal(s$grid.x, grid$x)
+  expect_equal(s$grid.y, grid$y)
 })
 
 test_that("diagonal counted correctly", {
@@ -52,10 +54,8 @@ test_that("diagonal counted correctly", {
 
 
 test_that("random data doesn't crash", {
-  replicate(20, {
-    x <- runif(1e3, 8, 4963)
-    y <- runif(1e3, 1e-2, 1e3)
+  x <- runif(1e3, 8, 4963)
+  y <- runif(1e3, 1e-2, 1e3)
 
-    condense(list(grouped(x, 10), grouped(y, 10)))
-  })
+  condense(list(grouped(x, 10), grouped(y, 10)))
 })
