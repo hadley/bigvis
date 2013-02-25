@@ -97,8 +97,21 @@ class BinnedVectors {
     BinnedVectors () : groups_(0), bins_(0) {
     }
 
+    BinnedVectors (List gs) : groups_(0), bins_(0) {
+      int n = gs.size();
+      for (int i = 0; i < n; ++i) {
+        add_vector(as<BinnedVectorReference>(gs[i]));
+      }
+    }
+
     void add_vector(BinnedVectorReference g) {
-      int nbins = groups_.empty() ? 1 : bins_.back();
+      int nbins;
+      if (groups_.empty()) {
+        nbins = 1;
+        size_ = g.size();
+      } else {
+        nbins = bins_.back();
+      }
 
       groups_.push_back(g);
       bins_.push_back(nbins * g.nbins());
@@ -117,7 +130,7 @@ class BinnedVectors {
     }
 
     int bin(std::vector<double> x) const {
-      if (x.size() != groups_.size()) stop("x must be same length as groups");
+      if (x.size() != size_) stop("x must be same length as groups");
       int bin = 0;
 
       for (int j = 0; j < x.size(); ++j) {
@@ -131,6 +144,10 @@ class BinnedVectors {
       return bins_.back();
     }
 
+    int ngroups() const {
+      return bins_.size();
+    }
+
     int size() const {
       return size_;
     }
@@ -139,12 +156,13 @@ class BinnedVectors {
       int ngroups = groups_.size();
       std::vector<double> bins(ngroups);
 
-      for (int j = 0; j < ngroups; ++j) {
+      for (int j = 1; j < ngroups; ++j) {
         int bin_j = bin % bins_[j];
         bins[j] = groups_[j].unbin(bin_j);
 
         bin = bin - bin * bins_[j];
       }
+      bins[0] = groups_[0].unbin(bin);
 
       return bins;
     }

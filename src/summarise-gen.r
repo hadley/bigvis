@@ -14,7 +14,7 @@ cpp_fun <- function(summary) {
     "Summary", summaries[[summary]], ");", sep = "")
 
   paste("// [[Rcpp::export]]\n",
-    "NumericVector ", name, "(", args, ") {\n",
+    "List ", name, "(", args, ") {\n",
     "  ", body, "\n}\n\n", sep = "")
 }
 

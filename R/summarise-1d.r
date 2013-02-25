@@ -35,7 +35,6 @@ summarise_1d <- function(x, z = NULL, summary = NULL, w = NULL) {
 
   f <- match.fun(paste("summarise", summary, sep = "_"))
   out <- f(x, z, w)
-  breaks <- breaks(x, binwidth, origin)
 
-  binsum(data.frame(x = breaks, out), paste0("1d_", summary_class[[summary]]))
+  data.frame(x = out[[2]], out[[1]])
 }

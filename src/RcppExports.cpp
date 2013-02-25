@@ -150,62 +150,62 @@ BEGIN_RCPP
 END_RCPP
 }
 // summarise_count
-NumericVector summarise_count(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+List summarise_count(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector __result = summarise_count(x, z, weight);
+    List __result = summarise_count(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // summarise_sum
-NumericVector summarise_sum(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+List summarise_sum(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_sum(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector __result = summarise_sum(x, z, weight);
+    List __result = summarise_sum(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // summarise_mean
-NumericVector summarise_mean(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+List summarise_mean(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_mean(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector __result = summarise_mean(x, z, weight);
+    List __result = summarise_mean(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // summarise_sd
-NumericVector summarise_sd(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+List summarise_sd(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_sd(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector __result = summarise_sd(x, z, weight);
+    List __result = summarise_sd(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // summarise_median
-NumericVector summarise_median(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+List summarise_median(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_median(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    NumericVector __result = summarise_median(x, z, weight);
+    List __result = summarise_median(x, z, weight);
     return Rcpp::wrap(__result);
 END_RCPP
 }

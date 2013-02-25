@@ -18,7 +18,7 @@
 #' breaks(1:10, origin = 0, binwidth = 2)
 breaks <- function(x, binwidth, origin = min(x)) {
   if (is.grouped(x)) {
-    return(c(NA, x$origin() + seq.int(1, x$nbins()) * x$width()))
+    return(c(NA, x$origin() + seq.int(1, x$nbins() - 1) * x$width()))
   }
 
   max_x <- max(x, na.rm = TRUE)
