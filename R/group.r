@@ -1,7 +1,3 @@
-if (!exists("module")) {
-  module <- Module("Binned")
-}
-
 #' Create a grouped variable.
 #'
 #' @details
@@ -31,7 +27,7 @@ grouped <- function(x, width, origin = NULL, name = NULL) {
   }
   origin <- origin %||% find_origin(x, width)
 
-  module$BinnedVector$new(x, name, width, origin)
+  BigVis$BinnedVector$new(x, name, width, origin)
 }
 
 setMethod("show", "Rcpp_BinnedVector", function(object) {

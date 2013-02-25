@@ -11,7 +11,7 @@ int BinnedVector::nbins() const {
 }
 
 
-RCPP_MODULE(Binned) {
+RCPP_MODULE(BigVis) {
   class_<BinnedVectorReference>("BinnedVector")
     .constructor<NumericVector, String, double, double>()
     .const_method("bin_i", &BinnedVectorReference::bin_i)

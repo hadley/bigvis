@@ -1,0 +1,2 @@
+context("Binned vectors")
+

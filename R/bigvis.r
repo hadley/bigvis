@@ -4,3 +4,7 @@
 #' @docType package
 #' @name bigvis
 NULL
+
+if (!exists("BigVis")) {
+  BigVis <- Module("BigVis")
+}
