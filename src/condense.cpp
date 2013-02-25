@@ -14,7 +14,7 @@ List condense(const BinnedVectors& group, const NumericVector& z,
   const NumericVector& z_ = (z.size() > 0) ? z : 
     rep(NumericVector::create(1), n_obs);
 
-  // Push values into summaries
+  // Push values into stats
   std::vector<Stat> stats(n_bins, stat);
   for(int i = 0; i < n_obs; ++i) {
     int bin = group.bin_i(i);
@@ -22,8 +22,8 @@ List condense(const BinnedVectors& group, const NumericVector& z,
     stats.at(bin).push(z_[i], weight_[i]);      
   }
 
-  // Compute values from summaries and determine bins
-  int n_stats = stats[0].size();
+  // Compute values from stats and determine bins
+  int n_stats = stat.size();
   int n_groups = group.ngroups();
   NumericMatrix out(n_bins, n_stats), bin(n_bins, n_groups);
 
@@ -41,7 +41,67 @@ List condense(const BinnedVectors& group, const NumericVector& z,
   // Name 
   CharacterVector out_cols(n_stats), bin_cols(n_groups);
   for (int j = 0; j < n_stats; ++j) {
-    out_cols[j] = stats[0].name(j);
+    out_cols[j] = stat.name(j);
+  }
+  for (int j = 0; j < n_groups; ++j) {
+    bin_cols[j] = group.name(j);
+  }
+  out.attr("dimnames") = List::create(CharacterVector::create(), out_cols);
+  bin.attr("dimnames") = List::create(CharacterVector::create(), bin_cols);
+
+  return List::create(out, bin);
+}
+
+template<typename Stat>
+List sparse_condense(const BinnedVectors& group, const NumericVector& z, 
+                        const NumericVector& weight, const Stat& stat) {
+  int n_obs = group.size();
+
+  const NumericVector& weight_ = (weight.size() > 0) ? weight : 
+    rep(NumericVector::create(1), n_obs);
+  const NumericVector& z_ = (z.size() > 0) ? z : 
+    rep(NumericVector::create(1), n_obs);
+
+  // Push values into stats
+  typename std::map<int, Stat> stats;
+  for(int i = 0; i < n_obs; ++i) {
+    int bin = group.bin_i(i);
+    
+    typename std::map<int, Stat>::iterator loc = stats.find(bin);
+    if (loc == stats.end()) {
+      Stat new_stat(stat);
+      new_stat.push(z_[i], weight_[i]);
+      stats.insert(std::pair<int, Stat>(bin, new_stat));
+    } else {
+      (loc->second).push(z_[i], weight_[i]);
+    }
+  }
+
+  // Compute values from stats and determine bins
+  int n_bins = stats.size();
+  int n_stats = stat.size();
+  int n_groups = group.ngroups();
+  NumericMatrix out(n_bins, n_stats), bin(n_bins, n_groups);
+
+  typename std::map<int, Stat>::iterator stats_it = stats.begin(),
+    stats_end = stats.end();
+
+
+  for (int i = 0; stats_it != stats_end; ++stats_it, ++i) {
+    for (int j = 0; j < n_stats; ++j) {
+      out(i, j) = (stats_it->second).compute(j);
+    }
+
+    std::vector<double> bins = group.unbin(stats_it->first);
+    for (int j = 0; j < n_groups; ++j) {
+      bin(i, j) = bins[j];
+    }
+  }
+
+  // Name 
+  CharacterVector out_cols(n_stats), bin_cols(n_groups);
+  for (int j = 0; j < n_stats; ++j) {
+    out_cols[j] = stat.name(j);
   }
   for (int j = 0; j < n_groups; ++j) {
     bin_cols[j] = group.name(j);

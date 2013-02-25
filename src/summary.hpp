@@ -114,7 +114,7 @@ class SummaryMedian {
       ys.push_back(y);
     }
 
-    int size() {
+    int size() const {
       return 1;
     }
 
