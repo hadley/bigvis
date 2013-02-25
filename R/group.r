@@ -1,4 +1,6 @@
-module <- Module("Binned")
+if (!exists("module")) {
+  module <- Module("Binned")
+}
 
 #' Create a grouped variable.
 #'
