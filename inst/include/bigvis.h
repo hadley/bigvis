@@ -145,7 +145,7 @@ class BinnedVectors {
     }
 
     int nbins() const {
-      return bins_.back() * groups_.back().nbins();
+      return bins_.back() * groups_.front().nbins();
     }
 
     int ngroups() const {

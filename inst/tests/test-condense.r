@@ -57,5 +57,8 @@ test_that("random data doesn't crash", {
   x <- runif(1e3, 8, 4963)
   y <- runif(1e3, 1e-2, 1e3)
 
-  condense(list(grouped(x, 10), grouped(y, 10)))
+  gx <- grouped(x, 10)
+  gy <- grouped(y, 10)
+
+  condense(list(gx, gy))
 })
