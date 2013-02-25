@@ -16,7 +16,10 @@ module <- Module("Binned")
 #' x <- runif(1e6)
 #' g <- grouped(x, 0.01)
 grouped <- function(x, width, origin = NULL) {
-  if (!is.ranged(x)) x <- ranged(x)
+  if (!is.ranged(x)) {
+    attr(x, "range") <- frange(x)
+    class(x) <- "ranged"
+  }
   origin <- origin %||% find_origin(x, width)
 
   module$BinnedVector$new(x, width, origin)
