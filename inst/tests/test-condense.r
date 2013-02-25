@@ -1,6 +1,6 @@
-context("Summary: 1d")
+context("Condense")
 
-test_that("summarise_1d counts small vectors accurately", {
+test_that("condense counts small vectors accurately", {
   x <- c(NA, 0:10)
   s1 <- condense(grouped(x, 1, -0.5), summary = "count")
   # Pathological origin: need to add extra bin on end, because they're
@@ -51,7 +51,6 @@ test_that("diagonal counted correctly", {
   expect_equal(nrow(s), nrow(df))
   expect_equal(s$df.x, s$df.y)
 })
-
 
 test_that("random data doesn't crash", {
   x <- runif(1e3, 8, 4963)
