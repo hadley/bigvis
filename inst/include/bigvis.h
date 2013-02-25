@@ -111,16 +111,15 @@ class BinnedVectors {
     }
 
     void add_vector(BinnedVectorReference g) {
-      int nbins;
       if (groups_.empty()) {
-        nbins = 1;
+        bins_.push_back(1);
         size_ = g.size();
       } else {
-        nbins = bins_.back();
+        if (g.size() != size_) stop("Inconsistent sizes");
+        bins_.push_back(bins_.back() * g.nbins());
       }
-
       groups_.push_back(g);
-      bins_.push_back(nbins * g.nbins());
+
     }
 
     int bin_i(int i) const {
@@ -147,7 +146,7 @@ class BinnedVectors {
     }
 
     int nbins() const {
-      return bins_.back();
+      return bins_.back() * groups_.back().nbins();
     }
 
     int ngroups() const {
@@ -156,6 +155,10 @@ class BinnedVectors {
 
     int size() const {
       return size_;
+    }
+
+    String name(int j) const {
+      return groups_[j].name();
     }
 
     std::vector<double> unbin(int bin) const {

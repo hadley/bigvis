@@ -150,11 +150,11 @@ BEGIN_RCPP
 END_RCPP
 }
 // summarise_count
-List summarise_count(const BinnedVectorReference& x, const NumericVector& z, const NumericVector& weight);
+List summarise_count(const List& x, const NumericVector& z, const NumericVector& weight);
 RcppExport SEXP bigvis_summarise_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    BinnedVectorReference x = Rcpp::as<BinnedVectorReference >(xSEXP);
+    List x = Rcpp::as<List >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
     List __result = summarise_count(x, z, weight);
