@@ -1,6 +1,6 @@
 #' Efficient binned 1d summaries.
 #'
-#' @param x a numeric vector to group by
+#' @param x a group object created by \code{\link{grouped}}
 #' @param y a numeric vector to summary for each group. Optional for some
 #'   summary statistics.
 #' @param summary the summary statistic to use. Currently must be one of
@@ -8,8 +8,6 @@
 #'   y is present, count if not.
 #' @param weight a vector of weights.  Not currently supported by all summary
 #'   functions.
-#' @param binwidth,origin,breaks Binning specification. Either supply binwidth
-#'  and optionally origin (defaults to \code{min(x)}), or a vector of breaks.
 #' @export
 #' @examples
 #' x <- runif(1e5)
