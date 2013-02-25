@@ -31,7 +31,6 @@ RCPP_MODULE(BigVis) {
     .const_method("bin_i", &BinnedVectors::bin_i)
     .const_method("bin", &BinnedVectors::bin)
     .const_method("unbin", &BinnedVectors::unbin)
-
     .const_method("nbins", &BinnedVectors::nbins)
   ;
 }

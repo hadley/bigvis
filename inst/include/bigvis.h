@@ -133,10 +133,11 @@ class BinnedVectors {
     }
 
     int bin(std::vector<double> x) const {
-      if (x.size() != size_) stop("x must be same length as groups");
+      int ngroups = groups_.size();
+      if (x.size() != ngroups) stop("x must be same length as groups");
       int bin = 0;
 
-      for (int j = 0; j < x.size(); ++j) {
+      for (int j = 0; j < ngroups; ++j) {
         bin += groups_[j].bin(x[j]) * bins_[j];
       }
 
@@ -161,15 +162,16 @@ class BinnedVectors {
 
     std::vector<double> unbin(int bin) const {
       int ngroups = groups_.size();
-      std::vector<double> bins(ngroups);
+      std::vector<double> bins(0);
 
-      for (int j = 1; j < ngroups; ++j) {
+      for (int j = ngroups - 1; j > 0; --j) {
         int bin_j = bin % bins_[j];
-        bins[j] = groups_[j].unbin(bin_j);
+        bins.push_back(groups_[j].unbin(bin_j));
 
-        bin = bin - bin * bins_[j];
+        bin = (bin - bin_j) / bins_[j];
       }
-      bins[0] = groups_[0].unbin(bin);
+      // Special case for last group because x %% 1 = 0
+      bins.push_back(groups_[0].unbin(bin));
 
       return bins;
     }
