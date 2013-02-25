@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 RCPP_MODULE(Binned) {
   class_<BinnedVectorReference>("BinnedVector")
-    .constructor<NumericVector, double, double>()
+    .constructor<NumericVector, String, double, double>()
     .const_method("bin_i", &BinnedVectorReference::bin_i)
     .const_method("bin", &BinnedVectorReference::bin)
     .const_method("unbin", &BinnedVectorReference::unbin)
@@ -11,6 +11,7 @@ RCPP_MODULE(Binned) {
     .const_method("size", &BinnedVectorReference::size)
     .const_method("origin", &BinnedVectorReference::origin)
     .const_method("width", &BinnedVectorReference::width)
+    .const_method("name", &BinnedVectorReference::name)
   ;
 
   class_<BinnedVectors>("BinnedVectors")

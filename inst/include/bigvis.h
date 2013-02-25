@@ -9,11 +9,12 @@ class BinnedVector {
     // This should probably be a const NumericVector&, but that doesn't work
     // with modules currently
     NumericVector x_;
+    String name_;
     double width_;
     double origin_;
   public:
-    BinnedVector(NumericVector x, double width, double origin = 0)
-       : x_(x), width_(width), origin_(origin) {
+    BinnedVector(NumericVector x, String name, double width, double origin = 0)
+       : x_(x), name_(name), width_(width), origin_(origin) {
     }
 
     int bin_i(int i) const {      
@@ -48,6 +49,10 @@ class BinnedVector {
       return width_;
     }
 
+    String name() const {
+      return name_;
+    }
+
 };
 
 // This class is just boilerplate. There might be rcpp magic that does the right thing here
@@ -73,8 +78,8 @@ public:
         ref = boost::shared_ptr<BinnedVector>(ptr);
     }
 
-    BinnedVectorReference(NumericVector x, double width, double origin = 0) {
-        BinnedVector *vec = new BinnedVector(x, width, origin);
+    BinnedVectorReference(NumericVector x, String name, double width, double origin = 0) {
+        BinnedVector *vec = new BinnedVector(x, name, width, origin);
         ref = boost::shared_ptr<BinnedVector>(vec);
     }
 
@@ -85,6 +90,7 @@ public:
     int size() const { return get()->size();}
     double origin() const { return get()->origin();}
     double width() const { return get()->width();}
+    String name() const { return get()->name();}
 };
 
 // A data structure to store multiple binned vectors
