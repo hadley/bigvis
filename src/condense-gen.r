@@ -1,21 +1,28 @@
+library(whisker)
+
 # Generate template specialisations for groupwise - these are the functions
 # that are called from R.
 
 # groups and summaries are defined in summarise.r
 source("../R/summarise.r")
 
+template <- "
+// [[Rcpp::export]]
+List condense_{{name}}(const List& x, const NumericVector& z,
+                       const NumericVector& weight, bool drop = false) {
+  if (drop) {
+    return sparse_condense(BinnedVectors(x), z, weight, Summary{{summary}});
+  } else {
+    return condense(BinnedVectors(x), z, weight, Summary{{summary}});
+  }
+}
+"
+
 cpp_fun <- function(summary) {
-  name <- paste("condense", tolower(summary), sep = "_")
-
-  args <- paste("const List& x",
-    "const NumericVector& z", "const NumericVector& weight",  sep = ", ")
-
-  body <- paste("return condense(BinnedVectors(x), z, weight, ",
-    "Summary", summaries[[summary]], ");", sep = "")
-
-  paste("// [[Rcpp::export]]\n",
-    "List ", name, "(", args, ") {\n",
-    "  ", body, "\n}\n\n", sep = "")
+  whisker.render(template, list(
+    name = tolower(summary),
+    summary = summaries[[summary]]
+  ))
 }
 
 

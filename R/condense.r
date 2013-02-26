@@ -8,12 +8,16 @@
 #'   y is present, count if not.
 #' @param weight a vector of weights.  Not currently supported by all summary
 #'   functions.
+#' @param drop if \code{TRUE} only locations with data will be returned.  This
+#'   is more efficient if the data is very sparse (<1\% of cells filled), and
+#'   is slightly less efficient. Defaults to \code{TRUE} if you are condensing
+#'   over two or more dimensions, \code{FALSE} for 1d.
 #' @export
 #' @examples
 #' x <- runif(1e5)
 #' gx <- grouped(x, 0.1)
 #' condense(gx)
-condense <- function(x, z = NULL, summary = NULL, w = NULL) {
+condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
   if (is.grouped(x)) {
     x <- list(x)
   } else if (is.list(x)) {
@@ -21,6 +25,8 @@ condense <- function(x, z = NULL, summary = NULL, w = NULL) {
   } else {
     stop("x must be a list or a single grouped object", call. = FALSE)
   }
+
+  drop <- drop %||% length(x) > 1
 
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"
@@ -38,7 +44,7 @@ condense <- function(x, z = NULL, summary = NULL, w = NULL) {
   stopifnot(length(w) == 0 || length(w) == n)
 
   f <- match.fun(paste("condense", summary, sep = "_"))
-  out <- f(x, z, w)
+  out <- f(x, z, w, drop = drop)
 
   data.frame(out[[2]], out[[1]])
 }

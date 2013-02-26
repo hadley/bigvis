@@ -7,62 +7,67 @@
 using namespace Rcpp;
 
 // condense_count
-List condense_count(const List& x, const NumericVector& z, const NumericVector& weight);
-RcppExport SEXP bigvis_condense_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+List condense_count(const List& x, const NumericVector& z, const NumericVector& weight, bool drop = false);
+RcppExport SEXP bigvis_condense_count(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP dropSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     List x = Rcpp::as<List >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    List __result = condense_count(x, z, weight);
+    bool drop = Rcpp::as<bool >(dropSEXP);
+    List __result = condense_count(x, z, weight, drop);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // condense_sum
-List condense_sum(const List& x, const NumericVector& z, const NumericVector& weight);
-RcppExport SEXP bigvis_condense_sum(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+List condense_sum(const List& x, const NumericVector& z, const NumericVector& weight, bool drop = false);
+RcppExport SEXP bigvis_condense_sum(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP dropSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     List x = Rcpp::as<List >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    List __result = condense_sum(x, z, weight);
+    bool drop = Rcpp::as<bool >(dropSEXP);
+    List __result = condense_sum(x, z, weight, drop);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // condense_mean
-List condense_mean(const List& x, const NumericVector& z, const NumericVector& weight);
-RcppExport SEXP bigvis_condense_mean(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+List condense_mean(const List& x, const NumericVector& z, const NumericVector& weight, bool drop = false);
+RcppExport SEXP bigvis_condense_mean(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP dropSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     List x = Rcpp::as<List >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    List __result = condense_mean(x, z, weight);
+    bool drop = Rcpp::as<bool >(dropSEXP);
+    List __result = condense_mean(x, z, weight, drop);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // condense_sd
-List condense_sd(const List& x, const NumericVector& z, const NumericVector& weight);
-RcppExport SEXP bigvis_condense_sd(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+List condense_sd(const List& x, const NumericVector& z, const NumericVector& weight, bool drop = false);
+RcppExport SEXP bigvis_condense_sd(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP dropSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     List x = Rcpp::as<List >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    List __result = condense_sd(x, z, weight);
+    bool drop = Rcpp::as<bool >(dropSEXP);
+    List __result = condense_sd(x, z, weight, drop);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // condense_median
-List condense_median(const List& x, const NumericVector& z, const NumericVector& weight);
-RcppExport SEXP bigvis_condense_median(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP) {
+List condense_median(const List& x, const NumericVector& z, const NumericVector& weight, bool drop = false);
+RcppExport SEXP bigvis_condense_median(SEXP xSEXP, SEXP zSEXP, SEXP weightSEXP, SEXP dropSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     List x = Rcpp::as<List >(xSEXP);
     NumericVector z = Rcpp::as<NumericVector >(zSEXP);
     NumericVector weight = Rcpp::as<NumericVector >(weightSEXP);
-    List __result = condense_median(x, z, weight);
+    bool drop = Rcpp::as<bool >(dropSEXP);
+    List __result = condense_median(x, z, weight, drop);
     return Rcpp::wrap(__result);
 END_RCPP
 }
