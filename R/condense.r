@@ -26,7 +26,7 @@ condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
     stop("x must be a list or a single grouped object", call. = FALSE)
   }
 
-  drop <- drop %||% length(x) > 1
+  drop <- drop %||% (length(x) > 1)
 
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"

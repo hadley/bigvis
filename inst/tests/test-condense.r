@@ -41,8 +41,10 @@ test_that("drop = FALSE and drop = TRUE results agree", {
   gy <- grouped(y, 0.1)
 
   count1 <- condense(list(gx, gy), summary = "count", drop = TRUE)
-  count2 <- condense(list(gx, gy), summary = "count", drop = FALSE)
+  expect_equal(sum(count1$count == 0), 0)
 
+  count2 <- condense(list(gx, gy), summary = "count", drop = FALSE)
+  expect_equivalent(count1, count2[count2$count != 0, ])
 })
 
 # 2d tests ---------------------------------------------------------------------

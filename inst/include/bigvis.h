@@ -126,7 +126,7 @@ class BinnedVectors {
 
       for (int j = 0; j < ngroups; ++j) {
         double bin_j = groups_[j].bin_i(i);
-        bin += bin_j * bins_[j];
+        bin += bin_j * bins_[(ngroups - 1) - j];
       }
 
       return bin;
@@ -138,7 +138,7 @@ class BinnedVectors {
       int bin = 0;
 
       for (int j = 0; j < ngroups; ++j) {
-        bin += groups_[j].bin(x[j]) * bins_[j];
+        bin += groups_[j].bin(x[j]) * bins_[(ngroups - 1) - j];
       }
 
       return bin;

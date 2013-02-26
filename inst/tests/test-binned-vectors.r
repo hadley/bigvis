@@ -4,6 +4,26 @@ bv <- function(...) {
   BigVis$BinnedVectors$new(list(...))
 }
 
+if (require("plyr")) {
+  test_that("bins agree with plyr::id", {
+    grid <- expand.grid(x = c(NA, seq(0, 0.5, by = 0.1)), y = c(NA, seq(0, 0.7, by = 0.1)))
+    x <- grid$x
+    y <- grid$y
+
+    gx <- grouped(x, 0.1)
+    gy <- grouped(y, 0.1)
+
+    bin_x <- sapply(seq_along(x) - 1, gx$bin_i)
+    bin_y <- sapply(seq_along(x) - 1, gy$bin_i)
+
+    bv <- BigVis$BinnedVectors$new(list(gx, gy))
+    bigvis <- sapply(seq_along(x) - 1, bv$bin_i)
+    plyr <- as.vector(id(list(bin_x, bin_y)))
+
+    expect_equal(bigvis + 1, plyr)
+  })
+}
+
 test_that("square nbins correct", {
   g <- grouped(1:10, 1)
   expect_equal(bv(g)$nbins(), 11)
@@ -41,10 +61,10 @@ test_that("bin and unbin are symmetric", {
   g <- grouped(1:10, 1)
   bvs <- bv(g, g)
 
-  for(x in 1:10) {
-    for(y in 1:10) {
-      bin <- bvs$bin(c(x, y))
-      expect_equal(bvs$unbin(bin), c(x, y), expected.label = c(x, y))
-    }
-  }
+  grid <- expand.grid(x = 1:10, y = 1:10)
+  bins <- unlist(Map(function(x, y) bvs$bin(c(x, y)), grid$x, grid$y))
+  unbin <- t(vapply(bins, bvs$unbin, numeric(2)))
+  colnames(unbin) <- c("x", "y")
+
+  expect_equal(unbin, as.matrix(grid))
 })
