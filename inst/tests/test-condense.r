@@ -50,7 +50,8 @@ test_that("drop = FALSE and drop = TRUE results agree", {
 # 2d tests ---------------------------------------------------------------------
 
 test_that("grid counted accurately", {
-  grid <- expand.grid(x = c(NA, 1:2), y = c(NA, 1:2))
+  # expand.grid orders in opposite way to bigvis
+  grid <- expand.grid(y = c(NA, 1:2), x = c(NA, 1:2))
   s <- condense(list(grouped(grid$x, 1), grouped(grid$y, 1)))
 
   expect_equal(s$count, rep(1, nrow(grid)))
