@@ -10,8 +10,8 @@ if (require("plyr")) {
     x <- grid$x
     y <- grid$y
 
-    gx <- grouped(x, 0.1)
-    gy <- grouped(y, 0.1)
+    gx <- bin(x, 0.1)
+    gy <- bin(y, 0.1)
 
     bin_x <- sapply(seq_along(x) - 1, gx$bin_i)
     bin_y <- sapply(seq_along(x) - 1, gy$bin_i)
@@ -25,15 +25,15 @@ if (require("plyr")) {
 }
 
 test_that("square nbins correct", {
-  g <- grouped(1:10, 1)
+  g <- bin(1:10, 1)
   expect_equal(bv(g)$nbins(), 11)
   expect_equal(bv(g, g)$nbins(), 11 ^ 2)
   expect_equal(bv(g, g, g)$nbins(), 11 ^ 3)
 })
 
 test_that("rectangular nbins correct", {
-  g11 <- grouped(1:10, 1)
-  g2 <- grouped(rep(1, 10), 1)
+  g11 <- bin(1:10, 1)
+  g2 <- bin(rep(1, 10), 1)
 
   expect_equal(bv(g2, g11)$nbins(), 22)
   expect_equal(bv(g11, g2)$nbins(), 22)
@@ -44,8 +44,8 @@ test_that("diagonal nbins correct", {
   y <- x + runif(1e3, -0.2, 0.2)
   z <- rnorm(1e3, x)
 
-  gx <- grouped(x, 0.1)
-  gy <- grouped(y, 0.1)
+  gx <- bin(x, 0.1)
+  gy <- bin(y, 0.1)
 
   expect_equal(gx$nbins(), 11)
   expect_equal(gy$nbins(), 15)
@@ -58,7 +58,7 @@ test_that("diagonal nbins correct", {
 })
 
 test_that("bin and unbin are symmetric", {
-  g <- grouped(1:10, 1)
+  g <- bin(1:10, 1)
   bvs <- bv(g, g)
 
   grid <- expand.grid(x = 1:10, y = 1:10)

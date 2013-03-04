@@ -15,15 +15,15 @@
 #' @export
 #' @examples
 #' x <- runif(1e5)
-#' gx <- grouped(x, 0.1)
+#' gx <- bin(x, 0.1)
 #' condense(gx)
 condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
-  if (is.grouped(x)) {
+  if (is.binned(x)) {
     g <- list(x)
   } else if (!is.list(x)) {
     g <- x
   } else {
-    stop("x must be a list or a single grouped object", call. = FALSE)
+    stop("x must be a list or a single binned object", call. = FALSE)
   }
 
   drop <- drop %||% (length(x) > 1)

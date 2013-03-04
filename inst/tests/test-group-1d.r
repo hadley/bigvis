@@ -1,7 +1,7 @@
 context("Grouping: 1d")
 
 group <- function(x, width, origin = NULL) {
-  g <- grouped(x, width, origin)
+  g <- bin(x, width, origin)
   vapply(seq_along(x) - 1, g$bin_i, integer(1))
 }
 

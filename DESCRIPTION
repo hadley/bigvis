@@ -35,6 +35,6 @@ Collate:
     'norm-deriv.r'
     'weighted-stats.r'
     'bandwidth.r'
-    'group.r'
     'condense.r'
     'condensed.r'
+    'bin.r'

@@ -40,7 +40,7 @@
 }
 \examples{
 x <- runif(1e5)
-xsum <- condense(grouped(x, 1/100))
+xsum <- condense(bin(x, 1/100))
 xsmu <- smooth_1d(xsum, bw = 1/100, n = 1000)
 
 plot(xsum)

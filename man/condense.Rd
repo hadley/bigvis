@@ -30,7 +30,7 @@
 }
 \examples{
 x <- runif(1e5)
-gx <- grouped(x, 0.1)
+gx <- bin(x, 0.1)
 condense(gx)
 }
 
