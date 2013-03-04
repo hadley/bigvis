@@ -19,9 +19,9 @@
 #' condense(gx)
 condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
   if (is.grouped(x)) {
-    x <- list(x)
-  } else if (is.list(x)) {
-
+    g <- list(x)
+  } else if (!is.list(x)) {
+    g <- x
   } else {
     stop("x must be a list or a single grouped object", call. = FALSE)
   }
@@ -39,12 +39,12 @@ condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
   w <- w %||% numeric()
 
   # Check lengths consistent
-  n <- x[[1]]$size()
+  n <- g[[1]]$size()
   stopifnot(length(z) == 0 || length(z) == n)
   stopifnot(length(w) == 0 || length(w) == n)
 
   f <- match.fun(paste("condense", summary, sep = "_"))
-  out <- f(x, z, w, drop = drop)
+  out <- f(g, z, w, drop = drop)
 
-  data.frame(out[[2]], out[[1]])
+  condensed(g, out[[1]], out[[2]])
 }

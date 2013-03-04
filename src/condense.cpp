@@ -49,7 +49,7 @@ List condense(const BinnedVectors& group, const NumericVector& z,
   out.attr("dimnames") = List::create(CharacterVector::create(), out_cols);
   bin.attr("dimnames") = List::create(CharacterVector::create(), bin_cols);
 
-  return List::create(out, bin);
+  return List::create(bin, out);
 }
 
 template<typename Stat>
@@ -109,7 +109,7 @@ List sparse_condense(const BinnedVectors& group, const NumericVector& z,
   out.attr("dimnames") = List::create(CharacterVector::create(), out_cols);
   bin.attr("dimnames") = List::create(CharacterVector::create(), bin_cols);
 
-  return List::create(out, bin);
+  return List::create(bin, out);
 }
 
 // -----------------------------------------------------------------------------
