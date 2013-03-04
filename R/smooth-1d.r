@@ -22,7 +22,7 @@
 #'   the range of \code{x}.
 #' @examples
 #' x <- runif(1e5)
-#' xsum <- summarise_1d(x, binwidth = 1/100)
+#' xsum <- condense(grouped(x, 1/100))
 #' xsmu <- smooth_1d(xsum, bw = 1/100, n = 1000)
 #'
 #' plot(xsum)
@@ -34,7 +34,7 @@
 #' plot(xsmu2, type = "l")
 smooth_1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
                      n = nrow(summary) - 1, reflect = TRUE, standardise = TRUE) {
-  stopifnot(is.binsum(summary))
+  # stopifnot(is.binsum(summary))
 
   x_rng <- frange(summary$x)
   no_na <- summary[-1, ]
@@ -68,6 +68,7 @@ smooth_1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
       standardise = standardise)
     c(summary[[var]][1], s)
   }
-  smooths <- vapply(vars, smooth_var, numeric(nrow(summary)))
-  binsum(data.frame(x = c(NA, grid), smooths), type(summary))
+  smooths <- vapply(vars, smooth_var, numeric(length(grid) + 1))
+  # binsum(data.frame(x = c(NA, grid), smooths), type(summary))
+  data.frame(x = c(NA, grid), smooths)
 }
