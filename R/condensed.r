@@ -21,4 +21,14 @@ condensed <- function(groups, grouped, summary) {
   df
 }
 
+is.condensed <- function(x) inherits(x, "condensed")
 
+summary_vars <- function(x) {
+  stopifnot(is.condensed(x))
+  nm <- names(x)
+  names(x)[grepl("^\\.", names(x))]
+}
+
+group_vars <- function(x) {
+  setdiff(names(x), summary_vars(x))
+}
