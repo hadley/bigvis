@@ -41,13 +41,16 @@ Look into linear binning.
 
 Kernel smoothing plus binned summary leads to many common statistics: density =~ bin + smooth, loess =~ mean + smooth, rqss =~ quantile + smooth
 
-Need to complete code for `guess_bandwidth`. Implement varying density smoother.
+* weights
+* smoothing type
+  * constant
+  * linear
+  * robust linear (lowess)
+  * (linear poisson?)
+* leave-one-out cross-validation
+* pre-computed grid of kernel values
 
-Read literature on bandwidth selection for kernel smoothers. Read literature on variable bandwidth kernel smoothers.
-
-Explore implementation of linear kernel smooth.
-
-`guess_bandwidth` and `smooth` should automatically pick the correct method (density estimation or smoother) based on variable name.
+Think about input data structure: sparse grid, represented as a coordinate list. Possible that more performance is available by switching to a sparse tensor library. 
 
 # Visualise
 
