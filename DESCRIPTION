@@ -38,3 +38,4 @@ Collate:
     'condense.r'
     'condensed.r'
     'bin.r'
+    'smooth-nd.r'
