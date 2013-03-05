@@ -44,23 +44,28 @@ NumericVector regress(const std::vector<double>& x,
   return NumericVector::create(regression.alpha, regression.beta);
 }
 
-// [[Rcpp::export("medianC")]]
-double median(const std::vector<double>& x_) {
-  if (x_.empty()) return NAN;
+double median(std::vector<double>* x) {
+  if (x->empty()) return NAN;
 
-  std::vector<double> x(x_);
-  int size = x.size();
-  std::vector<double>::iterator upper = x.begin() + (int) (size / 2);
-  std::nth_element(x.begin(), upper, x.end());
+  int size = x->size();
+  std::vector<double>::iterator upper = x->begin() + (int) (size / 2);
+  std::nth_element(x->begin(), upper, x->end());
 
   if (size % 2 == 1) {
     return *upper;
   } else {
     std::vector<double>::iterator lower = upper - 1;
-    std::nth_element(x.begin(), lower, upper);
+    std::nth_element(x->begin(), lower, upper);
     return (*upper + *lower) / 2.0;
   }  
 }
+
+// [[Rcpp::export("medianC")]]
+double median(const std::vector<double>& x) {
+  std::vector<double> x_(x);
+  return median(&x_);
+}
+
 
 Regression simpleRobustRegression(const std::vector<double>& x, 
                        const std::vector<double>& y,

@@ -67,7 +67,9 @@ lowerBound <- function(x, breaks) {
     .Call('bigvis_lowerBound', PACKAGE = 'bigvis', x, breaks)
 }
 
-#' Smooth an n-dimensional condensed dataset with 
+#' Smooth an n-dimensional condensed dataset with normal kernel of 
+#' binwidth \code{h} in one direction.
+#'
 smooth_nd_1 <- function(grid_in, z_in, grid_out, var, h) {
     .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, grid_out, var, h)
 }
@@ -113,8 +115,8 @@ regress <- function(x, y, w) {
     .Call('bigvis_regress', PACKAGE = 'bigvis', x, y, w)
 }
 
-medianC <- function(x_) {
-    .Call('bigvis_median', PACKAGE = 'bigvis', x_)
+medianC <- function(x) {
+    .Call('bigvis_median', PACKAGE = 'bigvis', x)
 }
 
 regress_robust <- function(x, y, w, iterations = 3L) {

@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include "stats.hpp"
 using namespace Rcpp;
 
 class SummaryMoments {
@@ -120,19 +121,7 @@ class SummaryMedian {
 
     // Adapted from http://stackoverflow.com/questions/1719070/
     double compute(int i) {
-      if (ys.empty()) return NAN;
-
-      int size = ys.size();
-      std::vector<double>::iterator upper = ys.begin() + (int) (size / 2);
-      std::nth_element(ys.begin(), upper, ys.end());
-
-      if (size % 2 == 1) {
-        return *upper;
-      } else {
-        std::vector<double>::iterator lower = upper - 1;
-        std::nth_element(ys.begin(), lower, upper);
-        return (*upper + *lower) / 2.0;
-      }
+      return median(&ys);
     }
 
     std::string name(int i) const {

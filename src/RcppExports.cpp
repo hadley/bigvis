@@ -252,12 +252,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // median
-double median(const std::vector<double>& x_);
-RcppExport SEXP bigvis_median(SEXP x_SEXP) {
+double median(const std::vector<double>& x);
+RcppExport SEXP bigvis_median(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
-    std::vector<double> x_ = Rcpp::as<std::vector<double> >(x_SEXP);
-    double __result = median(x_);
+    std::vector<double> x = Rcpp::as<std::vector<double> >(xSEXP);
+    double __result = median(x);
     return Rcpp::wrap(__result);
 END_RCPP
 }
