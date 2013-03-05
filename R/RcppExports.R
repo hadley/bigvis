@@ -74,6 +74,10 @@ smooth_nd_1 <- function(grid_in, z_in, grid_out, var, h) {
     .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, grid_out, var, h)
 }
 
+smooth_nd <- function(grid_in, z_in, grid_out, h) {
+    .Call('bigvis_smooth_nd', PACKAGE = 'bigvis', grid_in, z_in, grid_out, h)
+}
+
 #' 1d normal kernel smoothing.
 #'
 #' This is a variant of \code{\link{density}} for calculating weighted 

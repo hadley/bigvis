@@ -56,6 +56,40 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
   return z_out;
 }
 
+// [[Rcpp::export]]
+NumericVector smooth_nd(const NumericMatrix& grid_in, 
+                        const NumericVector& z_in, 
+                        const NumericMatrix& grid_out, 
+                        const NumericVector h) {
+
+  if (grid_in.nrow() != z_in.size()) stop("Incompatible input lengths");
+  if (grid_in.ncol() != grid_out.ncol()) stop("Incompatible grid sizes");
+  if (h.size() != grid_in.ncol()) stop("Incorrect h length");
+
+  int n_in = grid_in.nrow(), n_out = grid_out.nrow(), d = grid_in.ncol();
+  NumericVector z_out(n_out), w_out(n_out);
+
+  for (int i = 0; i < n_in; ++i) {
+    for(int j = 0; j < n_out; ++j) {
+      double w = 1;
+      for (int k = 0; k < d; ++k) {
+        double dist = (grid_in(i, k) - grid_out(j, k)) / h[k];
+        w *= R::dnorm(dist, 0, 1, 0);
+      }
+
+      w_out[j] += w;
+      z_out[j] += z_in[i] * w;
+    }
+  }
+
+  for(int j = 0; j < n_out; ++j) {
+    z_out[j] /= w_out[j];
+  }
+
+  return z_out;
+}
+
+
 /*** R
 library(ggplot2)
 
@@ -78,13 +112,7 @@ z_yx <- smooth_nd_1(grid, z_y, grid, 0, 1)
 qplot(grid[, 1], grid[, 2], fill = z_xy, geom = "raster")
 qplot(grid[, 1], grid[, 2], fill = z_yx, geom = "raster")
 
-z2 <- smooth2d_full(grid[, 1], grid[, 2], z, unique(grid[, 1]), unique(grid[, 2]), 1, 1)
-image(z2, useRaster = T)
-
-x <- runif(1e5)
-xsum <- condense(bin(x, 1/100))[-1, ]
-
-gridx <- matrix(xsum$x, ncol = 1)
-smooth_nd_1(gridx, xsum$.count, gridx, 0, 0.1)
+z2 <- smooth_nd(grid, z, grid, c(1, 1))
+qplot(grid[, 1], grid[, 2], fill = z2, geom = "raster")
 
 */

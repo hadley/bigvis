@@ -161,6 +161,19 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// smooth_nd
+NumericVector smooth_nd(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericMatrix& grid_out, const NumericVector h);
+RcppExport SEXP bigvis_smooth_nd(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP grid_outSEXP, SEXP hSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericMatrix grid_in = Rcpp::as<NumericMatrix >(grid_inSEXP);
+    NumericVector z_in = Rcpp::as<NumericVector >(z_inSEXP);
+    NumericMatrix grid_out = Rcpp::as<NumericMatrix >(grid_outSEXP);
+    NumericVector h = Rcpp::as<NumericVector >(hSEXP);
+    NumericVector __result = smooth_nd(grid_in, z_in, grid_out, h);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // smooth1d
 NumericVector smooth1d(const NumericVector& x, const NumericVector& z, const NumericVector& x_out, const double sd, bool standardise = true);
 RcppExport SEXP bigvis_smooth1d(SEXP xSEXP, SEXP zSEXP, SEXP x_outSEXP, SEXP sdSEXP, SEXP standardiseSEXP) {
