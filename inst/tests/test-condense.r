@@ -7,11 +7,11 @@ test_that("condense counts small vectors accurately", {
   # right open, left closed
   s2 <- condense(bin(x, 1, 0), summary = "count")
 
-  expect_equal(s1$x, c(NA, 0:10))
-  expect_equal(s2$x, c(NA, 0:10 + 0.5))
+  expect_equivalent(s1$x, c(NA, 0:10))
+  expect_equivalent(s2$x, c(NA, 0:10 + 0.5))
 
-  expect_equal(s1$count, rep(1, length(x)))
-  expect_equal(s2$count, rep(1, length(x)))
+  expect_equal(s1$.count, rep(1, length(x)))
+  expect_equal(s2$.count, rep(1, length(x)))
 })
 
 test_that("weights modify counts", {
@@ -19,8 +19,8 @@ test_that("weights modify counts", {
   w <- rep(2, length(x))
   s <- condense(bin(x, 1), w = w, summary = "count")
 
-  expect_equal(s$x, c(NA, 0:10))
-  expect_equal(s$count, rep(2, length(x)))
+  expect_equivalent(s$x, c(NA, 0:10))
+  expect_equal(s$.count, rep(2, length(x)))
 })
 
 test_that("z affects sums, but not counts", {
@@ -28,8 +28,8 @@ test_that("z affects sums, but not counts", {
   z <- 0:11
   s <- condense(bin(x, 1), z, summary = "sum")
 
-  expect_equal(s$count, rep(1, length(x)))
-  expect_equal(s$sum, z)
+  expect_equal(s$.count, rep(1, length(x)))
+  expect_equal(s$.sum, z)
 })
 
 test_that("drop = FALSE and drop = TRUE results agree", {
@@ -41,10 +41,10 @@ test_that("drop = FALSE and drop = TRUE results agree", {
   gy <- bin(y, 0.1)
 
   count1 <- condense(list(gx, gy), summary = "count", drop = TRUE)
-  expect_equal(sum(count1$count == 0), 0)
+  expect_equal(sum(count1$.count == 0), 0)
 
   count2 <- condense(list(gx, gy), summary = "count", drop = FALSE)
-  expect_equivalent(count1, count2[count2$count != 0, ])
+  expect_equivalent(count1, count2[count2$.count != 0, ])
 })
 
 # 2d tests ---------------------------------------------------------------------
@@ -54,9 +54,9 @@ test_that("grid counted accurately", {
   grid <- expand.grid(y = c(NA, 1:2), x = c(NA, 1:2))
   s <- condense(list(bin(grid$x, 1), bin(grid$y, 1)))
 
-  expect_equal(s$count, rep(1, nrow(grid)))
-  expect_equal(s$grid.x, grid$x)
-  expect_equal(s$grid.y, grid$y)
+  expect_equal(s$.count, rep(1, nrow(grid)))
+  expect_equivalent(s$grid.x, grid$x)
+  expect_equivalent(s$grid.y, grid$y)
 })
 
 test_that("diagonal counted correctly", {

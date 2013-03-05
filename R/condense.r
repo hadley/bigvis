@@ -20,7 +20,7 @@
 condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
   if (is.binned(x)) {
     g <- list(x)
-  } else if (!is.list(x)) {
+  } else if (is.list(x)) {
     g <- x
   } else {
     stop("x must be a list or a single binned object", call. = FALSE)

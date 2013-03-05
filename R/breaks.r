@@ -17,7 +17,7 @@
 #'
 #' breaks(1:10, origin = 0, binwidth = 2)
 breaks <- function(x, binwidth, origin = min(x)) {
-  if (is.bin(x)) {
+  if (is.binned(x)) {
     return(c(NA, x$origin() + seq.int(1, x$nbins() - 1) * x$width()))
   }
 
