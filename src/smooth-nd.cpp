@@ -3,7 +3,9 @@
 #include "group.hpp"
 using namespace Rcpp;
 
-//' Smooth an n-dimensional condensed dataset with 
+//' Smooth an n-dimensional condensed dataset with normal kernel of 
+//' binwidth \code{h} in one direction.
+//'
 // [[Rcpp::export]]
 NumericVector smooth_nd_1(const NumericMatrix& grid_in, 
                           const NumericVector& z_in, 
@@ -22,6 +24,10 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
   // Will be much more efficient to slice up by input dimension:
   // and most efficient way of doing that will be to bin with / bw
   // My data structure: sparse grids
+  // 
+  // And once we're smoothing in one direction, with guaranteed evenly spaced
+  // grid can avoid many kernel evaluations and can also compute more
+  // efficient running sum
 
   for (int i = 0; i < n_in; ++i) {
     for(int j = 0; j < n_out; ++j) {
