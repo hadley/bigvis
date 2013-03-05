@@ -4,7 +4,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericMatrix smooth2d(const NumericVector& x, const NumericVector& y, 
+NumericMatrix smooth2d_full(const NumericVector& x, const NumericVector& y, 
                         const NumericVector& z, 
                         const NumericVector& x_out, const NumericVector& y_out, 
                         const double x_sd, const double y_sd, 
@@ -22,7 +22,6 @@ NumericMatrix smooth2d(const NumericVector& x, const NumericVector& y,
         double x_dist = (x[i] - x_out[jx]) / x_sd;
         double y_dist = (y[i] - y_out[jy]) / y_sd;
 
-        if (fabs(x_dist) > 3 || fabs(y_dist) > 3) continue; 
         double k = R::dnorm(x_dist, 0, 1, 0) * R::dnorm(y_dist, 0, 1, 0);
         z_out(jx, jy) += z[i] * k;
         if (standardise) w_out(jx, jy) += k;
@@ -127,6 +126,7 @@ NumericMatrix smooth2d3(const NumericVector& x, const NumericVector& y,
         // Rcout << "  " << jy * x_bins + jx << " [" << jx << "," << jy << "]\n";
         double x_dist = (x[i] - gx.unbin(jx)) / x_sd;
         double y_dist = (y[i] - gy.unbin(jy)) / y_sd;
+        // Rcout << "  dist: [" << x_dist << ", " << y_dist << "]\n";
 
         // Computing k takes >80% of the time. Can we cache when input
         // and output grids are aligned? - Yes, by supplying a pre-computed 
@@ -155,6 +155,7 @@ NumericMatrix smooth2d3(const NumericVector& x, const NumericVector& y,
 
   system.time(sm <- smooth2d(df$x, df$y, df$z, grid, grid, 0.2, 0.2, FALSE))
   system.time(sm2 <- smooth2d2(df$x, df$y, df$z, grid, grid, 0.2, 0.2, FALSE))
+  system.time(sm3 <- smooth2d3(df$x, df$y, df$z, 4 / 1000, 0, 4 / 1000, 0, 0.2, 0.2, FALSE))
 
   grid2 <- seq(0, 4, length = 10001)
   system.time(sm2 <- smooth2d2(df$x, df$y, df$z, grid2, grid2, 0.2, 0.2, FALSE))
