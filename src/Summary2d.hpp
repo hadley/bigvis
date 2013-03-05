@@ -51,24 +51,6 @@ class Summary2dLoess {
     }
 
     double compute() {
-      int n = x_.size();
-      Regression prev = simpleLinearRegression(x_, z_, w_);
-
-      for (int k = 0; k < iterations_; ++k) {
-        std::vector<double> resid(n);
-        for (int i = 0; i < n; ++i) {
-          resid[i] = abs(z_[i] - (prev.alpha + prev.beta * x_[i]));
-        }
-
-        std::vector<double> w(w_);
-        double b = 6 * median(resid);
-        for (int i = 0; i < n; ++i) {
-          w_[i] *= bisquare(resid[i], b);
-        }
-
-        prev = simpleLinearRegression(x_, z_, w);
-      }
-
-      return prev.alpha;
+      return simpleLoess(x_, z_, w_, iterations_).alpha;
     }
 };

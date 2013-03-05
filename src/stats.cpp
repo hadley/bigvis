@@ -61,3 +61,37 @@ double median(const std::vector<double>& x_) {
     return (*upper + *lower) / 2.0;
   }  
 }
+
+Regression simpleLoess(const std::vector<double>& x, 
+                       const std::vector<double>& y,
+                       const std::vector<double>& w,
+                       int iterations = 3) {
+  int n = x.size();
+  Regression prev = simpleLinearRegression(x, y, w);
+
+  for (int k = 0; k < iterations; ++k) {
+    std::vector<double> resid(n);
+    for (int i = 0; i < n; ++i) {
+      resid[i] = abs(y[i] - (prev.alpha + prev.beta * x[i]));
+    }
+
+    std::vector<double> w_(w);
+    double b = 6 * median(resid);
+    for (int i = 0; i < n; ++i) {
+      w_[i] *= bisquare(resid[i], b);
+    }
+
+    prev = simpleLinearRegression(x, y, w_);
+  }
+
+  return prev;
+}
+
+// [[Rcpp::export]]
+NumericVector simple_loess(const std::vector<double>& x, 
+                           const std::vector<double>& y,
+                           const std::vector<double>& w,
+                           int iterations = 3) {
+  Regression regression = simpleLoess(x, y, w, iterations);
+  return NumericVector::create(regression.alpha, regression.beta);
+}

@@ -117,6 +117,10 @@ medianC <- function(x_) {
     .Call('bigvis_median', PACKAGE = 'bigvis', x_)
 }
 
+simple_loess <- function(x, y, w, iterations = 3L) {
+    .Call('bigvis_simple_loess', PACKAGE = 'bigvis', x, y, w, iterations)
+}
+
 compute_moments <- function(x) {
     .Call('bigvis_compute_moments', PACKAGE = 'bigvis', x)
 }
@@ -127,17 +131,5 @@ compute_sum <- function(x) {
 
 compute_median <- function(x) {
     .Call('bigvis_compute_median', PACKAGE = 'bigvis', x)
-}
-
-s2d_kernel_mean <- function(x, z, w) {
-    .Call('bigvis_s2d_kernel_mean', PACKAGE = 'bigvis', x, z, w)
-}
-
-s2d_kernel_regression <- function(x, z, w) {
-    .Call('bigvis_s2d_kernel_regression', PACKAGE = 'bigvis', x, z, w)
-}
-
-s2d_loess <- function(x, z, w) {
-    .Call('bigvis_s2d_loess', PACKAGE = 'bigvis', x, z, w)
 }
 
