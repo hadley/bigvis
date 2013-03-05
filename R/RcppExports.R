@@ -78,39 +78,6 @@ smooth_nd <- function(grid_in, z_in, grid_out, h) {
     .Call('bigvis_smooth_nd', PACKAGE = 'bigvis', grid_in, z_in, grid_out, h)
 }
 
-#' 1d normal kernel smoothing.
-#'
-#' This is a variant of \code{\link{density}} for calculating weighted 
-#' means or weighted sums, with weights determined by a normal kernel. 
-#' Both the input and the output can have irregular locations.
-#'
-#' @param x ordered vector of x positions
-#' @param z vector of values
-#' @param x_out vector of x positions to produce smoothed values
-#' @param sd standard deviation of normal kernel (the bandwidth of the 
-#'   smoother)
-#' @param standardise if \code{TRUE}, divides the weighted sum at each location
-#'   by the sum of the weights. This is usually what you want for pre-binned
-#'   data, as it interpolates between the points, rather than redistributing 
-#'   the density.  Any locations in \code{x_out} that are more than 4 standard
-#'   deviations away from \code{x_in} will be \code{NaN}.
-#' @keywords internal
-smooth1d <- function(x, z, x_out, sd, standardise = TRUE) {
-    .Call('bigvis_smooth1d', PACKAGE = 'bigvis', x, z, x_out, sd, standardise)
-}
-
-smooth2d_full <- function(x, y, z, x_out, y_out, x_sd, y_sd, standardise = TRUE) {
-    .Call('bigvis_smooth2d_full', PACKAGE = 'bigvis', x, y, z, x_out, y_out, x_sd, y_sd, standardise)
-}
-
-smooth2d2 <- function(x, y, z, x_out, y_out, x_sd, y_sd, standardise = TRUE) {
-    .Call('bigvis_smooth2d2', PACKAGE = 'bigvis', x, y, z, x_out, y_out, x_sd, y_sd, standardise)
-}
-
-smooth2d3 <- function(x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise = TRUE) {
-    .Call('bigvis_smooth2d3', PACKAGE = 'bigvis', x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise)
-}
-
 bisquare <- function(u, b) {
     .Call('bigvis_bisquare', PACKAGE = 'bigvis', u, b)
 }

@@ -49,6 +49,7 @@ Kernel smoothing plus binned summary leads to many common statistics: density =~
   * (linear poisson?)
 * leave-one-out cross-validation
 * pre-computed grid of kernel values
+* deal with missing values
 
 Think about input data structure: sparse grid, represented as a coordinate list. Possible that more performance is available by switching to a sparse tensor library. 
 
