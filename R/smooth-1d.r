@@ -40,8 +40,12 @@ smooth_1d <- function(summary, vars = NULL, bw = NULL, grid = NULL,
   no_na <- summary[-1, ]
 
   if (is.null(vars)) {
-    vars <- names(summary)[-1]
+    vars <- summary_vars(summary)
     message("Smoothing ", paste(vars, collapse = ", "))
+  }
+  if (!all(vars %in% names(summary))) {
+    stop("Unknown variables: ",
+      paste0(setdiff(vars, names(summary), collapse = ", ")), call. = FALSE)
   }
 
   if (is.null(bw)) {
