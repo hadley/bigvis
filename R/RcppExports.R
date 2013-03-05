@@ -67,9 +67,6 @@ lowerBound <- function(x, breaks) {
     .Call('bigvis_lowerBound', PACKAGE = 'bigvis', x, breaks)
 }
 
-#' Smooth an n-dimensional condensed dataset with normal kernel of 
-#' binwidth \code{h} in one direction.
-#'
 smooth_nd_1 <- function(grid_in, z_in, grid_out, var, h) {
     .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, grid_out, var, h)
 }

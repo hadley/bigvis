@@ -3,9 +3,6 @@
 #include "group.hpp"
 using namespace Rcpp;
 
-//' Smooth an n-dimensional condensed dataset with normal kernel of 
-//' binwidth \code{h} in one direction.
-//'
 // [[Rcpp::export]]
 NumericVector smooth_nd_1(const NumericMatrix& grid_in, 
                           const NumericVector& z_in, 
