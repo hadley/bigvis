@@ -51,6 +51,6 @@ class Summary2dLoess {
     }
 
     double compute() {
-      return simpleLoess(x_, z_, w_, iterations_).alpha;
+      return simpleRobustRegression(x_, z_, w_, iterations_).alpha;
     }
 };

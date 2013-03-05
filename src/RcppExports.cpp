@@ -261,16 +261,16 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
-// simple_loess
-NumericVector simple_loess(const std::vector<double>& x, const std::vector<double>& y, const std::vector<double>& w, int iterations = 3);
-RcppExport SEXP bigvis_simple_loess(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP iterationsSEXP) {
+// regress_robust
+NumericVector regress_robust(const std::vector<double>& x, const std::vector<double>& y, const std::vector<double>& w, int iterations = 3);
+RcppExport SEXP bigvis_regress_robust(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP iterationsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     std::vector<double> x = Rcpp::as<std::vector<double> >(xSEXP);
     std::vector<double> y = Rcpp::as<std::vector<double> >(ySEXP);
     std::vector<double> w = Rcpp::as<std::vector<double> >(wSEXP);
     int iterations = Rcpp::as<int >(iterationsSEXP);
-    NumericVector __result = simple_loess(x, y, w, iterations);
+    NumericVector __result = regress_robust(x, y, w, iterations);
     return Rcpp::wrap(__result);
 END_RCPP
 }

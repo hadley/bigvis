@@ -62,7 +62,7 @@ double median(const std::vector<double>& x_) {
   }  
 }
 
-Regression simpleLoess(const std::vector<double>& x, 
+Regression simpleRobustRegression(const std::vector<double>& x, 
                        const std::vector<double>& y,
                        const std::vector<double>& w,
                        int iterations = 3) {
@@ -72,11 +72,12 @@ Regression simpleLoess(const std::vector<double>& x,
   for (int k = 0; k < iterations; ++k) {
     std::vector<double> resid(n);
     for (int i = 0; i < n; ++i) {
-      resid[i] = abs(y[i] - (prev.alpha + prev.beta * x[i]));
+      resid[i] = fabs(y[i] - (prev.alpha + prev.beta * x[i]));
     }
 
     std::vector<double> w_(w);
     double b = 6 * median(resid);
+    if (b < 1e-20) break;
     for (int i = 0; i < n; ++i) {
       w_[i] *= bisquare(resid[i], b);
     }
@@ -88,10 +89,10 @@ Regression simpleLoess(const std::vector<double>& x,
 }
 
 // [[Rcpp::export]]
-NumericVector simple_loess(const std::vector<double>& x, 
-                           const std::vector<double>& y,
-                           const std::vector<double>& w,
-                           int iterations = 3) {
-  Regression regression = simpleLoess(x, y, w, iterations);
+NumericVector regress_robust(const std::vector<double>& x, 
+                             const std::vector<double>& y,
+                             const std::vector<double>& w,
+                             int iterations = 3) {
+  Regression regression = simpleRobustRegression(x, y, w, iterations);
   return NumericVector::create(regression.alpha, regression.beta);
 }

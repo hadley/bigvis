@@ -117,8 +117,8 @@ medianC <- function(x_) {
     .Call('bigvis_median', PACKAGE = 'bigvis', x_)
 }
 
-simple_loess <- function(x, y, w, iterations = 3L) {
-    .Call('bigvis_simple_loess', PACKAGE = 'bigvis', x, y, w, iterations)
+regress_robust <- function(x, y, w, iterations = 3L) {
+    .Call('bigvis_regress_robust', PACKAGE = 'bigvis', x, y, w, iterations)
 }
 
 compute_moments <- function(x) {
