@@ -3,63 +3,18 @@
 #include "group.hpp"
 using namespace Rcpp;
 
-NumericVector smooth_nd(const NumericMatrix& grid_in, 
-                          const NumericVector& z_in, 
-                          const NumericVector& w_in, 
-                          const NumericMatrix& grid_out, 
-                          const std::vector<double> h) {
-
-  if (var < 0) stop("var < 0");
-  if (var >= grid.ncol()) stop("var too large");
-  if (h <= 0) stop("h <= 0");
-  if (grid_in.nrow() != z_in.size()) stop("Incompatible input lengths");
-  if (grid_in.ncol() != grid_out.ncol()) stop("Incompatible grid sizes");
-
-  const NumericVector& w_in_ = (w_in.size() > 0) ? weight : 
-    rep(NumericVector::create(1), n_obs);
-
-  int n_in = grid_in.nrow(), n_out = grid_out.nrow(), d = grid_in.ncol();
-  NumericVector z_out(n_out), w_out(n_out);
-
-  for (int i = 0; i < n_in; ++i) {
-    for(int j = 0; j < n_out; ++j) {
-      // Compute weights, summing over each dimension
-      double k = 0;
-      for (int k = 0; k < d; ++k) {
-        double dist = (grid_in(i, k) - grid_out(j, k)) / h[k];
-        k *= R::dnorm(dist, 0, 1, 0);      
-      }
-      k *= w_in_[i];
-
-      w_out[j] += k;
-      z_out[j] += z_in[i] * k;
-    }
-  }
-
-  for(int j = 0; j < n_out; ++j) {
-    z_out[j] /= w_out[j];
-  }
-
-  return z_out;
-}
-
-
 //' Smooth an n-dimensional condensed dataset with 
 // [[Rcpp::export]]
 NumericVector smooth_nd_1(const NumericMatrix& grid_in, 
                           const NumericVector& z_in, 
-                          const NumericVector& w_in, 
                           const NumericMatrix& grid_out, 
                           const int var, const double h) {
 
   if (var < 0) stop("var < 0");
-  if (var >= grid.ncol()) stop("var too large");
+  if (var >= grid_in.ncol()) stop("var too large");
   if (h <= 0) stop("h <= 0");
   if (grid_in.nrow() != z_in.size()) stop("Incompatible input lengths");
   if (grid_in.ncol() != grid_out.ncol()) stop("Incompatible grid sizes");
-
-  const NumericVector& w_in_ = (w_in.size() > 0) ? weight : 
-    rep(NumericVector::create(1), n_obs);
 
   int n_in = grid_in.nrow(), n_out = grid_out.nrow(), d = grid_in.ncol();
   NumericVector z_out(n_out), w_out(n_out);
@@ -82,7 +37,7 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
       if (!equiv) continue;
 
       double dist = (grid_in(i, var) - grid_out(j, var)) / h;
-      double k = R::dnorm(dist, 0, 1, 0) * w_in_[i];
+      double k = R::dnorm(dist, 0, 1, 0);
       w_out[j] += k;
       z_out[j] += z_in[i] * k;
     }
@@ -94,10 +49,6 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
 
   return z_out;
 }
-
-Summary2dMean().push(x, z, w).compute()
-SmootherLinear()
-SmootherLowess(iterations)
 
 /*** R
 library(ggplot2)

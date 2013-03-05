@@ -228,6 +228,39 @@ BEGIN_RCPP
     return Rcpp::wrap(__result);
 END_RCPP
 }
+// bisquare
+double bisquare(double u, double b);
+RcppExport SEXP bigvis_bisquare(SEXP uSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    double u = Rcpp::as<double >(uSEXP);
+    double b = Rcpp::as<double >(bSEXP);
+    double __result = bisquare(u, b);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// regress
+NumericVector regress(const std::vector<double>& x, const std::vector<double>& y, const std::vector<double>& w);
+RcppExport SEXP bigvis_regress(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    std::vector<double> x = Rcpp::as<std::vector<double> >(xSEXP);
+    std::vector<double> y = Rcpp::as<std::vector<double> >(ySEXP);
+    std::vector<double> w = Rcpp::as<std::vector<double> >(wSEXP);
+    NumericVector __result = regress(x, y, w);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// median
+double median(const std::vector<double>& x_);
+RcppExport SEXP bigvis_median(SEXP x_SEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    std::vector<double> x_ = Rcpp::as<std::vector<double> >(x_SEXP);
+    double __result = median(x_);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
 // compute_moments
 NumericVector compute_moments(const NumericVector& x);
 RcppExport SEXP bigvis_compute_moments(SEXP xSEXP) {
@@ -255,6 +288,42 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericVector x = Rcpp::as<NumericVector >(xSEXP);
     NumericVector __result = compute_median(x);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// s2d_kernel_mean
+double s2d_kernel_mean(const NumericVector& x, const NumericVector& z, const NumericVector& w);
+RcppExport SEXP bigvis_s2d_kernel_mean(SEXP xSEXP, SEXP zSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector w = Rcpp::as<NumericVector >(wSEXP);
+    double __result = s2d_kernel_mean(x, z, w);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// s2d_kernel_regression
+double s2d_kernel_regression(const NumericVector& x, const NumericVector& z, const NumericVector& w);
+RcppExport SEXP bigvis_s2d_kernel_regression(SEXP xSEXP, SEXP zSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector w = Rcpp::as<NumericVector >(wSEXP);
+    double __result = s2d_kernel_regression(x, z, w);
+    return Rcpp::wrap(__result);
+END_RCPP
+}
+// s2d_loess
+double s2d_loess(const NumericVector& x, const NumericVector& z, const NumericVector& w);
+RcppExport SEXP bigvis_s2d_loess(SEXP xSEXP, SEXP zSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope __rngScope;
+    NumericVector x = Rcpp::as<NumericVector >(xSEXP);
+    NumericVector z = Rcpp::as<NumericVector >(zSEXP);
+    NumericVector w = Rcpp::as<NumericVector >(wSEXP);
+    double __result = s2d_loess(x, z, w);
     return Rcpp::wrap(__result);
 END_RCPP
 }

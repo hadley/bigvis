@@ -67,6 +67,7 @@ lowerBound <- function(x, breaks) {
     .Call('bigvis_lowerBound', PACKAGE = 'bigvis', x, breaks)
 }
 
+#' Smooth an n-dimensional condensed dataset with 
 smooth_nd_1 <- function(grid_in, z_in, grid_out, var, h) {
     .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, grid_out, var, h)
 }
@@ -104,6 +105,18 @@ smooth2d3 <- function(x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd,
     .Call('bigvis_smooth2d3', PACKAGE = 'bigvis', x, y, z, x_width, x_origin, y_width, y_origin, x_sd, y_sd, standardise)
 }
 
+bisquare <- function(u, b) {
+    .Call('bigvis_bisquare', PACKAGE = 'bigvis', u, b)
+}
+
+regress <- function(x, y, w) {
+    .Call('bigvis_regress', PACKAGE = 'bigvis', x, y, w)
+}
+
+medianC <- function(x_) {
+    .Call('bigvis_median', PACKAGE = 'bigvis', x_)
+}
+
 compute_moments <- function(x) {
     .Call('bigvis_compute_moments', PACKAGE = 'bigvis', x)
 }
@@ -114,5 +127,17 @@ compute_sum <- function(x) {
 
 compute_median <- function(x) {
     .Call('bigvis_compute_median', PACKAGE = 'bigvis', x)
+}
+
+s2d_kernel_mean <- function(x, z, w) {
+    .Call('bigvis_s2d_kernel_mean', PACKAGE = 'bigvis', x, z, w)
+}
+
+s2d_kernel_regression <- function(x, z, w) {
+    .Call('bigvis_s2d_kernel_regression', PACKAGE = 'bigvis', x, z, w)
+}
+
+s2d_loess <- function(x, z, w) {
+    .Call('bigvis_s2d_loess', PACKAGE = 'bigvis', x, z, w)
 }
 
