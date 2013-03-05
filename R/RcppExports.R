@@ -67,6 +67,10 @@ lowerBound <- function(x, breaks) {
     .Call('bigvis_lowerBound', PACKAGE = 'bigvis', x, breaks)
 }
 
+smooth_nd_1 <- function(grid_in, z_in, grid_out, var, h) {
+    .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, grid_out, var, h)
+}
+
 #' 1d normal kernel smoothing.
 #'
 #' This is a variant of \code{\link{density}} for calculating weighted 
@@ -88,8 +92,8 @@ smooth1d <- function(x, z, x_out, sd, standardise = TRUE) {
     .Call('bigvis_smooth1d', PACKAGE = 'bigvis', x, z, x_out, sd, standardise)
 }
 
-smooth2d <- function(x, y, z, x_out, y_out, x_sd, y_sd, standardise = TRUE) {
-    .Call('bigvis_smooth2d', PACKAGE = 'bigvis', x, y, z, x_out, y_out, x_sd, y_sd, standardise)
+smooth2d_full <- function(x, y, z, x_out, y_out, x_sd, y_sd, standardise = TRUE) {
+    .Call('bigvis_smooth2d_full', PACKAGE = 'bigvis', x, y, z, x_out, y_out, x_sd, y_sd, standardise)
 }
 
 smooth2d2 <- function(x, y, z, x_out, y_out, x_sd, y_sd, standardise = TRUE) {
