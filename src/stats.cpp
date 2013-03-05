@@ -5,10 +5,9 @@ struct Regression {
   double alpha, beta;
 };
 
-
 // [[Rcpp::export]]
 double bisquare(double u, double b) {
-  u = abs(u);
+  u = fabs(u);
   return (u < b) ? pow(1 - pow(u / b, 2), 2) : 0;
 }
 
