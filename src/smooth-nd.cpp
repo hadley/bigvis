@@ -3,6 +3,14 @@
 #include "group.hpp"
 using namespace Rcpp;
 
+double tricube(double x) {
+  x = fabs(x);
+  if (x > 1) return 0;
+
+  double y = 1 - x * x * x;
+  return y * y * y;
+}
+
 // [[Rcpp::export]]
 NumericVector smooth_nd_1(const NumericMatrix& grid_in, 
                           const NumericVector& z_in, 
@@ -40,7 +48,7 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
       if (!equiv) continue;
 
       double dist = (grid_in(i, var) - grid_out(j, var)) / h;
-      double k = R::dnorm(dist, 0, 1, 0);
+      double k = tricube(dist);
       w_out[j] += k;
       z_out[j] += z_in[i] * k;
     }
@@ -71,7 +79,7 @@ NumericVector smooth_nd(const NumericMatrix& grid_in,
       double w = 1;
       for (int k = 0; k < d; ++k) {
         double dist = (grid_in(i, k) - grid_out(j, k)) / h[k];
-        w *= R::dnorm(dist, 0, 1, 0);
+        w *= tricube(dist);
       }
 
       w_out[j] += w;
@@ -97,19 +105,19 @@ z[c(5, 23, 84)] <- 1
 
 qplot(grid[, 1], grid[, 2], fill = z, geom = "raster")
 
-z_x <- smooth_nd_1(grid, z, grid, 0, 1)
-z_y <- smooth_nd_1(grid, z, grid, 1, 1)
+z_x <- smooth_nd_1(grid, z, grid, 0, 3)
+z_y <- smooth_nd_1(grid, z, grid, 1, 3)
 
 qplot(grid[, 1], grid[, 2], fill = z_x, geom = "raster")
 qplot(grid[, 1], grid[, 2], fill = z_y, geom = "raster")
 
-z_xy <- smooth_nd_1(grid, z_x, grid, 1, 1)
-z_yx <- smooth_nd_1(grid, z_y, grid, 0, 1)
+z_xy <- smooth_nd_1(grid, z_x, grid, 1, 3)
+z_yx <- smooth_nd_1(grid, z_y, grid, 0, 3)
 
 qplot(grid[, 1], grid[, 2], fill = z_xy, geom = "raster")
 qplot(grid[, 1], grid[, 2], fill = z_yx, geom = "raster")
 
-z2 <- smooth_nd(grid, z, grid, c(1, 1))
+z2 <- smooth_nd(grid, z, grid, c(3, 3))
 qplot(grid[, 1], grid[, 2], fill = z2, geom = "raster")
 
 */
