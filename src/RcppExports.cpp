@@ -148,29 +148,31 @@ BEGIN_RCPP
 END_RCPP
 }
 // smooth_nd_1
-NumericVector smooth_nd_1(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericMatrix& grid_out, const int var, const double h);
-RcppExport SEXP bigvis_smooth_nd_1(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP grid_outSEXP, SEXP varSEXP, SEXP hSEXP) {
+NumericVector smooth_nd_1(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericVector& w_in_, const NumericMatrix& grid_out, const int var, const double h);
+RcppExport SEXP bigvis_smooth_nd_1(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP w_in_SEXP, SEXP grid_outSEXP, SEXP varSEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericMatrix grid_in = Rcpp::as<NumericMatrix >(grid_inSEXP);
     NumericVector z_in = Rcpp::as<NumericVector >(z_inSEXP);
+    NumericVector w_in_ = Rcpp::as<NumericVector >(w_in_SEXP);
     NumericMatrix grid_out = Rcpp::as<NumericMatrix >(grid_outSEXP);
     int var = Rcpp::as<int >(varSEXP);
     double h = Rcpp::as<double >(hSEXP);
-    NumericVector __result = smooth_nd_1(grid_in, z_in, grid_out, var, h);
+    NumericVector __result = smooth_nd_1(grid_in, z_in, w_in_, grid_out, var, h);
     return Rcpp::wrap(__result);
 END_RCPP
 }
 // smooth_nd
-NumericVector smooth_nd(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericMatrix& grid_out, const NumericVector h);
-RcppExport SEXP bigvis_smooth_nd(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP grid_outSEXP, SEXP hSEXP) {
+NumericVector smooth_nd(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericVector& w_in_, const NumericMatrix& grid_out, const NumericVector h);
+RcppExport SEXP bigvis_smooth_nd(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP w_in_SEXP, SEXP grid_outSEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericMatrix grid_in = Rcpp::as<NumericMatrix >(grid_inSEXP);
     NumericVector z_in = Rcpp::as<NumericVector >(z_inSEXP);
+    NumericVector w_in_ = Rcpp::as<NumericVector >(w_in_SEXP);
     NumericMatrix grid_out = Rcpp::as<NumericMatrix >(grid_outSEXP);
     NumericVector h = Rcpp::as<NumericVector >(hSEXP);
-    NumericVector __result = smooth_nd(grid_in, z_in, grid_out, h);
+    NumericVector __result = smooth_nd(grid_in, z_in, w_in_, grid_out, h);
     return Rcpp::wrap(__result);
 END_RCPP
 }

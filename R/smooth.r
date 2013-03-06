@@ -17,14 +17,15 @@ smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, factor = TRUE) {
   grid_out <- grid %||% grid_in
 
   z <- x[[var]]
+  w <- if (var != ".count" && !is.null(var$.count)) var$.count else numeric()
 
   if (factor) {
     for(i in 1:ncol(grid_in)) {
       # smooth_nd_1 is a C++ function, so var is 0 indexed
-      z <- smooth_nd_1(grid_in, z, grid_out, var = i - 1, h = h[i])
+      z <- smooth_nd_1(grid_in, z, w, grid_out, var = i - 1, h = h[i])
     }
   } else {
-    z <- smooth_nd(grid_in, z, grid_out, h)
+    z <- smooth_nd(grid_in, z, w, grid_out, h)
   }
 
   out <- data.frame(grid_out)

@@ -14,6 +14,7 @@ double tricube(double x) {
 // [[Rcpp::export]]
 NumericVector smooth_nd_1(const NumericMatrix& grid_in, 
                           const NumericVector& z_in, 
+                          const NumericVector& w_in_,
                           const NumericMatrix& grid_out, 
                           const int var, const double h) {
 
@@ -24,6 +25,8 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
   if (grid_in.ncol() != grid_out.ncol()) stop("Incompatible grid sizes");
 
   int n_in = grid_in.nrow(), n_out = grid_out.nrow(), d = grid_in.ncol();
+  NumericVector w_in = (w_in_.size() > 0) ? w_in_ : 
+    rep(NumericVector::create(1), n_in);
   NumericVector z_out(n_out), w_out(n_out);
 
   // Will be much more efficient to slice up by input dimension:
@@ -48,7 +51,8 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
       if (!equiv) continue;
 
       double dist = (grid_in(i, var) - grid_out(j, var)) / h;
-      double k = tricube(dist);
+      double k = tricube(dist) * w_in[i];
+
       w_out[j] += k;
       z_out[j] += z_in[i] * k;
     }
@@ -64,6 +68,7 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
 // [[Rcpp::export]]
 NumericVector smooth_nd(const NumericMatrix& grid_in, 
                         const NumericVector& z_in, 
+                        const NumericVector& w_in_,
                         const NumericMatrix& grid_out, 
                         const NumericVector h) {
 
@@ -72,6 +77,8 @@ NumericVector smooth_nd(const NumericMatrix& grid_in,
   if (h.size() != grid_in.ncol()) stop("Incorrect h length");
 
   int n_in = grid_in.nrow(), n_out = grid_out.nrow(), d = grid_in.ncol();
+  NumericVector w_in = (w_in_.size() > 0) ? w_in_ : 
+    rep(NumericVector::create(1), n_in);
   NumericVector z_out(n_out), w_out(n_out);
 
   for (int i = 0; i < n_in; ++i) {
@@ -81,6 +88,7 @@ NumericVector smooth_nd(const NumericMatrix& grid_in,
         double dist = (grid_in(i, k) - grid_out(j, k)) / h[k];
         w *= tricube(dist);
       }
+      w *= w_in[i];
 
       w_out[j] += w;
       z_out[j] += z_in[i] * w;
