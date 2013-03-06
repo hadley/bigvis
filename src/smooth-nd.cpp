@@ -93,31 +93,3 @@ NumericVector smooth_nd(const NumericMatrix& grid_in,
 
   return z_out;
 }
-
-
-/*** R
-library(ggplot2)
-
-grid <- as.matrix(expand.grid(x = 1:10, y = 1:10, KEEP.OUT.ATTRS = FALSE))
-
-z <- rep(0, nrow(grid))
-z[c(5, 23, 84)] <- 1
-
-qplot(grid[, 1], grid[, 2], fill = z, geom = "raster")
-
-z_x <- smooth_nd_1(grid, z, grid, 0, 3)
-z_y <- smooth_nd_1(grid, z, grid, 1, 3)
-
-qplot(grid[, 1], grid[, 2], fill = z_x, geom = "raster")
-qplot(grid[, 1], grid[, 2], fill = z_y, geom = "raster")
-
-z_xy <- smooth_nd_1(grid, z_x, grid, 1, 3)
-z_yx <- smooth_nd_1(grid, z_y, grid, 0, 3)
-
-qplot(grid[, 1], grid[, 2], fill = z_xy, geom = "raster")
-qplot(grid[, 1], grid[, 2], fill = z_yx, geom = "raster")
-
-z2 <- smooth_nd(grid, z, grid, c(3, 3))
-qplot(grid[, 1], grid[, 2], fill = z2, geom = "raster")
-
-*/

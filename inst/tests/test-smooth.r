@@ -21,3 +21,9 @@ test_that("factorised smooth equal to manual smooth", {
   expect_equal(z_xy, z2)
   expect_equal(z_yx, z2)
 })
+
+# library(ggplot2)
+# qplot(grid[, 1], grid[, 2], fill = z, geom = "raster")
+# qplot(grid[, 1], grid[, 2], fill = z_xy, geom = "raster")
+# qplot(grid[, 1], grid[, 2], fill = z_yx, geom = "raster")
+# qplot(grid[, 1], grid[, 2], fill = z2, geom = "raster")
