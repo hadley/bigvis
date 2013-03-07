@@ -56,4 +56,4 @@ Think about input data structure: sparse grid, represented as a coordinate list.
 * Product plots
 * Standard errors + cut offs
 
-* Peel: implement more efficient version using depth
+* Peel: implement more efficient version using depth, and make central = TRUE the default
