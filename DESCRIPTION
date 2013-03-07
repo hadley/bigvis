@@ -28,7 +28,6 @@ Collate:
     'autoplot.r'
     'origin.r'
     'utils.r'
-    'summarise.r'
     'breaks.r'
     'weighted-stats.r'
     'condense.r'
