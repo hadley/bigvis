@@ -10,7 +10,7 @@
 #' xsmu1 <- smooth(xsum, 5 / 100)
 #' xsmu2 <- smooth(xsum, 5 / 100, factor = FALSE)
 smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, type = "mean",
-                   factor = (type == "smooth")) {
+                   factor = TRUE) {
   stopifnot(is.condensed(x))
   stopifnot(is.numeric(h), all(h > 0))
   type <- match.arg(type, c("mean", "regression", "robust_regression"))
