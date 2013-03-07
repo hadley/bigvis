@@ -7,7 +7,7 @@
 #' has negligible effect.) This distribution is challenging because it
 #' mixes heavy tailed and asymmetric distributions.
 #'
-#' @param x values to evaluate density at
+#' @param x values to evaluate pdf at
 #' @param n number of random samples to generate
 #' @export
 #' @examples
@@ -30,6 +30,33 @@ dchallenge <- function(x) {
 
   (spike + 2 * slope) / 3
 }
+
+#' plot(pchallenge, xlim = c(-5, 60), n = 500)
+pchallenge <- function(x) {
+  #  H(y) =
+  #  = int_0^y h(x) dx
+  #  = int_0^y 1/3 f(x) + 2/3 g(x) dx
+  #  = 1/3 int_0^y f(x) dx + 2/3 int_0^y g(x) dx =
+  #  = 1/3 F(y) + 2/3 G(y)
+
+  # h(x) = g((x - 30) / 2)
+  # H(y) = int_0^y g((x - 30) / 2) dx
+  # complete transformation
+
+  scale <- function(x) (x - 30) / 2
+  spike <- ifelse(x < 0, 0, pt(scale(x), df = 2))
+
+  slope <- pgamma(x, 2, 1/3)
+
+  (spike + 2 * slope) / 3
+}
+
+qchallenge <- function(x) {
+  # approximate pchallenge with 1000 points, and linearise
+  # use to implement fast option to rchallenge that does inverse pdf
+  # transformation + runif()
+}
+
 
 #' @rdname dchallenge
 #' @export

@@ -9,7 +9,7 @@ distribution.}
   rchallenge(n)
 }
 \arguments{
-  \item{x}{values to evaluate density at}
+  \item{x}{values to evaluate pdf at}
 
   \item{n}{number of random samples to generate}
 }
