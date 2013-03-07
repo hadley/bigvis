@@ -4,7 +4,7 @@
 #' This is a 1/3-2/3 mixture of a t-distribution with 2 degrees of freedom
 #' centered at 15 and scaled by 2, and a gamma distribution with shape 2
 #' and rate 1/3. (The t-distribution is windsorised at 0, but this
-#' has negligible effect.)  This distribution is challenging because it
+#' has negligible effect.) This distribution is challenging because it
 #' mixes heavy tailed and asymmetric distributions.
 #'
 #' @param x values to evaluate density at
@@ -34,7 +34,7 @@ dchallenge <- function(x) {
 #' @rdname dchallenge
 #' @export
 rchallenge <- function(n) {
-  nt <- floor(n / 3)
+  nt <- rbinom(1, n, 1 / 3)
   ngamma <- n - nt
 
   spike <- 2 * rt(nt, df = 2) + 15

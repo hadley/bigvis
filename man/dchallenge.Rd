@@ -18,7 +18,7 @@ distribution.}
   degrees of freedom centered at 15 and scaled by 2, and a
   gamma distribution with shape 2 and rate 1/3. (The
   t-distribution is windsorised at 0, but this has
-  negligible effect.)  This distribution is challenging
+  negligible effect.) This distribution is challenging
   because it mixes heavy tailed and asymmetric
   distributions.
 }
