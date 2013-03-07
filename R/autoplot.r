@@ -82,7 +82,7 @@ plot_total_2 <- function(x, var = ".count", show_na = TRUE, log = "") {
   plot <- ggplot(x[miss == 0, ], aes_string(x = xvar, y = yvar)) +
     geom_raster(aes_string(fill = var)) +
     scale_fill_gradient(low = "grey90", high = "black", trans = fill_trans) +
-    ggplot2::expand_limits(fill = 0)
+    expand_limits(fill = 0)
 
   if (show_na) {
   }
