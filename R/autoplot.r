@@ -75,7 +75,7 @@ plot_total_2 <- function(x, var = ".count", show_na = TRUE, log = "") {
   x <- peel(x, keep = 1)
   xvar <- names(x)[[1]]
   yvar <- names(x)[[2]]
-  miss <- is.na(x$x) + 2 * is.na(x$y)
+  miss <- is.na(x[[1]]) + 2 * is.na(x[[2]])
 
   fill_trans <- if (logv(log, "z")) "log1p" else "identity"
 
