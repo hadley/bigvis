@@ -15,7 +15,7 @@ if (require("ggplot2")) {
 x <- rchallenge(1e4)
 z <- x + rt(length(x), df = 2)
 xsum <- condense(bin(x, 0.1))
-zsum <- condense(bin(x, 0.1), z)
+zsum <- condense(bin(x, 0.1), z = z)
 
 autoplot(xsum)
 autoplot(peel(xsum))
@@ -26,8 +26,8 @@ autoplot(peel(zsum))
 
 # 2d summaries -----------------------------
 y <- runif(length(x))
-xysum <- condense(list(bin(x, 0.1), bin(y, 0.1)))
-xyzsum <- condense(list(bin(x, 0.1), bin(y, 0.1)), z = z)
+xysum <- condense(bin(x, 0.1), bin(y, 0.1))
+xyzsum <- condense(bin(x, 0.1), bin(y, 0.1), z = z)
 
 autoplot(xysum)
 autoplot(peel(xysum))

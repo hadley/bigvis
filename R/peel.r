@@ -18,7 +18,7 @@
 #' @examples
 #' x <- rt(1e5, df = 2)
 #' y <- rt(1e5, df = 2)
-#' xysum <- condense(list(bin(x, 1 / 10), bin(y, 1 / 10)))
+#' xysum <- condense(bin(x, 1 / 10), bin(y, 1 / 10))
 #' plot(xysum$x, xysum$y)
 #'
 #' plot(peel(xysum, 0.95, central = TRUE)[1:2])

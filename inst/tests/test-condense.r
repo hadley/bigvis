@@ -40,10 +40,10 @@ test_that("drop = FALSE and drop = TRUE results agree", {
   gx <- bin(x, 0.1)
   gy <- bin(y, 0.1)
 
-  count1 <- condense(list(gx, gy), summary = "count", drop = TRUE)
+  count1 <- condense(gx, gy, summary = "count", drop = TRUE)
   expect_equal(sum(count1$.count == 0), 0)
 
-  count2 <- condense(list(gx, gy), summary = "count", drop = FALSE)
+  count2 <- condense(gx, gy, summary = "count", drop = FALSE)
   expect_equivalent(count1, count2[count2$.count != 0, ])
 })
 
@@ -52,7 +52,7 @@ test_that("drop = FALSE and drop = TRUE results agree", {
 test_that("grid counted accurately", {
   # expand.grid orders in opposite way to bigvis
   grid <- expand.grid(y = c(NA, 1:2), x = c(NA, 1:2))
-  s <- condense(list(bin(grid$x, 1), bin(grid$y, 1)))
+  s <- condense(bin(grid$x, 1), bin(grid$y, 1))
 
   expect_equal(s$.count, rep(1, nrow(grid)))
   expect_equivalent(s$grid.x, grid$x)
@@ -61,7 +61,7 @@ test_that("grid counted accurately", {
 
 test_that("diagonal counted correctly", {
   df <- data.frame(x = c(NA, 1:2), y = c(NA, 1:2))
-  s <- condense(list(bin(df$x, 1), bin(df$y, 1)))
+  s <- condense(bin(df$x, 1), bin(df$y, 1))
 
   expect_equal(nrow(s), nrow(df))
   expect_equal(s$df.x, s$df.y)
@@ -74,5 +74,5 @@ test_that("random data doesn't crash", {
   gx <- bin(x, 10)
   gy <- bin(y, 10)
 
-  condense(list(gx, gy))
+  condense(gx, gy)
 })

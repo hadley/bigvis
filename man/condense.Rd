@@ -2,11 +2,12 @@
 \alias{condense}
 \title{Efficient binned summaries.}
 \usage{
-  condense(x, z = NULL, summary = NULL, w = NULL,
+  condense(..., z = NULL, summary = NULL, w = NULL,
     drop = NULL)
 }
 \arguments{
-  \item{x}{a group object created by \code{\link{grouped}}}
+  \item{...}{group objects created by
+  \code{\link{grouped}}}
 
   \item{y}{a numeric vector to summary for each group.
   Optional for some summary statistics.}
