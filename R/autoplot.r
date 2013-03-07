@@ -1,7 +1,7 @@
 #' Autoplot method for condensed.
 #'
 #' @method autoplot condensed
-#' @export
+#' @export autoplot.condensed
 #' @examples
 #' if (require("ggplot2")) {
 #'

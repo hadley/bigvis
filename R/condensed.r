@@ -99,7 +99,7 @@ Ops.condensed <- function(e1, e2) {
   }
 }
 
-#' @S3method round_any condensed
+#' @export
 round_any.condensed <- function(x, accuracy, f = round) {
   gvars <- group_vars(x)
   x[gvars] <- lapply(x[gvars], round_any, accuracy = accuracy, f = f)
