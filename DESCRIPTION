@@ -19,9 +19,7 @@ Suggests:
 LinkingTo: Rcpp
 License: GPL (>= 2)
 Collate:
-    'factor.r'
     'standardise.r'
-    'glyph.r'
     'movies.r'
     'RcppExports.R'
     'adjust.r'
