@@ -6,7 +6,7 @@
 #' if (require("ggplot2")) {
 #'
 #' # 1d summaries -----------------------------
-#' x <- rchallenge(1e3)
+#' x <- rchallenge(1e4)
 #' z <- x + rt(length(x), df = 2)
 #' xsum <- condense(bin(x, 0.1))
 #' zsum <- condense(bin(x, 0.1), z)
@@ -18,6 +18,15 @@
 #' autoplot(peel(zsum, keep = 1))
 #' autoplot(peel(zsum))
 #'
+#' # 2d summaries -----------------------------
+#' y <- runif(length(x))
+#' xysum <- condense(list(bin(x, 0.1), bin(y, 0.1)))
+#' xyzsum <- condense(list(bin(x, 0.1), bin(y, 0.1)), z = z)
+#'
+#' autoplot(xysum)
+#' autoplot(peel(xysum))
+#' autoplot(xyzsum)
+#' autoplot(peel(xyzsum))
 #' }
 autoplot.condensed <- function(x, var = last(summary_vars(x)), ...) {
   stopifnot(is.condensed(x))
@@ -62,16 +71,18 @@ plot_total_1 <- function(x, var = ".count", show_na = TRUE, log = "") {
   plot
 }
 
-autoplot.binsum_2d_sum <- function(x, var = "count", show_na = TRUE, log = "") {
-  x <- x[x$count > 0, ]
+plot_total_2 <- function(x, var = ".count", show_na = TRUE, log = "") {
+  x <- peel(x, keep = 1)
+  xvar <- names(x)[[1]]
+  yvar <- names(x)[[2]]
   miss <- is.na(x$x) + 2 * is.na(x$y)
 
   fill_trans <- if (logv(log, "z")) "log1p" else "identity"
 
-  plot <- ggplot(x[miss == 0, ], aes_string(x = "x", y = "y")) +
+  plot <- ggplot(x[miss == 0, ], aes_string(x = xvar, y = yvar)) +
     geom_raster(aes_string(fill = var)) +
     scale_fill_gradient(low = "grey90", high = "black", trans = fill_trans) +
-    expand_limits(fill = 0)
+    ggplot2::expand_limits(fill = 0)
 
   if (show_na) {
   }
@@ -103,11 +114,14 @@ plot_summary_1 <- function(x, var = "mean", show_na = TRUE,
   plot
 }
 
-autoplot.binsum_2d_moments <- function(x, var = "mean", show_na = TRUE, log = "") {
-  x <- x[x$count > 0, ]
+plot_summary_2 <- function(x, var = "mean", show_na = TRUE, log = "") {
+  x <- peel(x, keep = 1)
+  xvar <- names(x)[[1]]
+  yvar <- names(x)[[2]]
+
   miss <- is.na(x$x) + 2 * is.na(x$y)
 
-  plot <- ggplot(x[miss == 0, ], aes_string(x = "x", y = "y")) +
+  plot <- ggplot(x[miss == 0, ], aes_string(x = xvar, y = yvar)) +
     geom_tile(aes_string(fill = var)) +
     scale_fill_gradient2()
 
