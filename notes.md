@@ -12,17 +12,26 @@ Future work: linear binning
   * count, mean, sd
   * median
 
+* 2d
+  * mean
+  * regression
+  * robust regression
+
+* nd 
+  * mean
+  * regression (with eigen or armadillo)
+  * robust regression (with eigen or armadillo)
+
 Future work:
 
 * skew?, kurt?
-* weighted quantiles
-  * sort whole vector
-  * find upper and lower bounds (assuming ordered, can do incrementally)
-  * interpolate between them
+* boxplot
+* weighted quantiles (C++ version of R code)
+* compute standard errors / bootstrap standard errors?
 
-* 2d: cor, lm
-
-* need to compute standard errors
+* infrastructure for passing multiple z
+  * 2d: cor, lm
+  
 
 # Smooth
 
@@ -46,3 +55,5 @@ Think about input data structure: sparse grid, represented as a coordinate list.
 
 * Product plots
 * Standard errors + cut offs
+
+* Peel: implement more efficient version using depth
