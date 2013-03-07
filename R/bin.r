@@ -39,3 +39,8 @@ setMethod("show", "Rcpp_BinnedVector", function(object) {
 is.binned <- function(x) {
   is(x, "Rcpp_BinnedVector")
 }
+
+bins <- function(...) {
+  BigVis$BinnedVectors$new(list(...))
+}
+
