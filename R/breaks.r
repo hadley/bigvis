@@ -17,13 +17,11 @@
 #'
 #' breaks(1:10, origin = 0, binwidth = 2)
 breaks <- function(x, binwidth, origin = min(x)) {
-  if (is.binned(x)) {
-    return(c(NA, x$origin() + seq.int(1, x$nbins() - 1) * x$width()))
+  if (!is.binned(x)) {
+    x <- bin(x, binwidth, origin)
   }
 
-  max_x <- max(x, na.rm = TRUE)
-  dest <- floor((max_x - origin) / binwidth) * binwidth + origin
-  if (dest + binwidth <= max_x) dest <- dest + binwidth
-
-  c(NA, seq(origin, dest, by = binwidth))
+  # -1 for NA bin, -1 since R is 1 indexed
+  nbins <- x$nbins() - 2
+  c(NA, x$origin() + seq.int(1, nbins) * x$width())
 }
