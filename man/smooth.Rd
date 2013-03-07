@@ -3,7 +3,7 @@
 \title{Smooth a condensed data frame.}
 \usage{
   smooth(x, h, var = summary_vars(x)[1], grid = NULL,
-    factor = TRUE)
+    type = "mean", factor = TRUE)
 }
 \arguments{
   \item{grid}{a data frame with the grouping colums as x.
