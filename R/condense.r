@@ -32,7 +32,6 @@ condense <- function(..., z = NULL, summary = NULL, w = NULL, drop = NULL) {
     summary <- if (is.null(z)) "count" else "mean"
     message("Summarising with ", summary)
   }
-  stopifnot(summary %in% names(summaries))
 
   # C++ code can deal with NULL inputs more efficiently than R code
   z <- z %||% numeric()
