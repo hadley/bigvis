@@ -14,7 +14,6 @@ Depends:
 LinkingTo: Rcpp
 License: GPL (>= 2)
 Collate:
-    'density-2d.r'
     'factor.r'
     'standardise.r'
     'glyph.r'
