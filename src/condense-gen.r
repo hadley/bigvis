@@ -3,8 +3,13 @@ library(whisker)
 # Generate template specialisations for groupwise - these are the functions
 # that are called from R.
 
-# groups and summaries are defined in summarise.r
-source("../R/summarise.r")
+summaries <- c(
+  count = "Sum(0)",
+  sum = "Sum(1)",
+  mean = "Moments(1)",
+  sd = "Moments(2)",
+  median = "Median()"
+)
 
 template <- "
 // [[Rcpp::export]]
