@@ -64,3 +64,18 @@ test_that("bin and unbin are symmetric", {
 
   expect_equal(unbin, as.matrix(grid))
 })
+
+test_that("bin and unbin are symmetric with diff binning", {
+  x <- c(-1, 5)
+  y <- c(0.1, 1)
+  bvs <- bins(bin(x, 1), bin(y, 0.1))
+
+  grid <- expand.grid(
+    x = seq(x[1], x[2], length = 10),
+    y = seq(y[1], y[2], length = 10))
+  bins <- unlist(Map(function(x, y) bvs$bin(c(x, y)), grid$x, grid$y))
+  unbin <- t(vapply(bins, bvs$unbin, numeric(2)))
+  colnames(unbin) <- c("x", "y")
+
+  expect_equal(unbin, as.matrix(grid))
+})
