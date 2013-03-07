@@ -49,7 +49,7 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
   // and most efficient way of doing that will be to bin with / bw
   // My data structure: sparse grids
   // 
-  // And once we're smoothing in one direction, with guaranteed evenly spaced
+  // And once we're smoothing in one direction, with guaranteed e2venly spaced
   // grid can avoid many kernel evaluations and can also compute more
   // efficient running sum
 
@@ -69,6 +69,7 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
 
       double dist = (grid_in(i, var) - grid_out(j, var));
       double w = tricube(dist / h) * w_in[i];
+      if (w == 0) continue;
 
       summary->push(dist, z_in[i], w);
     }

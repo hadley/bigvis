@@ -16,11 +16,13 @@ class Summary2dMean: public Summary2d {
     Summary2dMean() : w_(0), z_(0) {}
 
     void push(double x, double z, double w) {
+      // Rcout << "  x: " << x << " z: " << z << " w: " << w << "\n";
       w_ += w;
-      z_ += z;
+      z_ += z * w;
     }
 
     double compute() {
+      // Rcout << "Result: " << z_ / w_ << "\n";
       return z_ / w_;
     }
 };
