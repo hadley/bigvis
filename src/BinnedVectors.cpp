@@ -18,7 +18,9 @@ int BinnedVectors::bin(std::vector<double> x) const {
   int bin = 0;
 
   for (int j = 0; j < ngroups; ++j) {
-    bin += groups_[j].bin(x[j]) * bins_[(ngroups - 1) - j];
+    int bin_j = groups_[j].bin(x[j]);
+    bin += bin_j * bins_[(ngroups - 1) - j];
+    // Rcout << "group: " << j << " bin: " << bin << " bin_j: " << bin_j << "\n";
   }
 
   return bin;
@@ -39,12 +41,14 @@ std::vector<double> BinnedVectors::unbin(int bin) const {
 
   for (int i = 0, j = ngroups - 1; i < ngroups - 1; ++i, --j) {
     int bin_j = bin % bins_[j];
-    bins[j] = groups_[i].unbin(bin_j);
+    // Rcout << "group: " << j << " bin: " << bin << " bin_j: " << bin_j << "\n";
+    bins[j] = groups_[j].unbin(bin_j);
 
     bin = (bin - bin_j) / bins_[j];
   }
+  // Rcout << "group: " << 0 << " bin: " << bin << " bin_j: " << bin << "\n";
   // Special case for last group because x %% 1 = 0
-  bins[0] = groups_[ngroups - 1].unbin(bin);
+  bins[0] = groups_[0].unbin(bin);
 
   return bins;
 }

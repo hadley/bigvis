@@ -18,8 +18,7 @@
 #' }
 #'
 #' # Can also standardise a dimension at a time
-#' b2 <- with(movies, condense(bin(year, 1), bin(length, 20), drop = FALSE))
-#' b2 <- subset(b2, length <= 2010)
+#' b2 <- with(movies, condense(bin(year, 1), bin(length, 20)))
 #'
 #' if (require("ggplot2")) {
 #'
