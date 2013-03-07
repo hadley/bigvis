@@ -2,9 +2,35 @@
 #'
 #' This object managed the properties of condensed (summarised) data frames.
 #'
+#' @section S3 methods:
+#'
+#' Mathematical functions with methods for \code{binsum} object will modify
+#' the x column of the data frame and \code{\link{rebin}} the data, calculating
+#' updated summary statistics.
+#'
+#' Currently methods are provided for the \code{Math} group generic,
+#' logical comparison and arithmetic operators, and
+#' \code{\link[plyr]{round_any}}.
+#'
+#'
 #' @param groups list of \code{\link{grouped}} objects
 #' @param grouped,summary output from C++ condense function
 #' @keywords internal
+#' @examples
+#' if (require("ggplot2")) {
+#'
+#' x <- rchallenge(1e4)
+#' xsum <- condense(bin(x, 1 / 10))
+#'
+#' # Basic math operations just modify the first column
+#' autoplot(xsum)
+#' autoplot(xsum * 10)
+#' autoplot(xsum - 30)
+#' autoplot(abs(xsum - 30))
+#'
+#' # Similarly, logical operations work on the first col
+#' autoplot(xsum[xsum > 10, ])
+#'}
 condensed <- function(groups, grouped, summary) {
   grouped <- as.data.frame(grouped)
   summary <- as.data.frame(summary)
@@ -47,3 +73,35 @@ group_vars <- function(x) {
 
 gcol <- function(x) length(group_vars(x))
 
+
+#' @S3method Math condensed
+Math.condensed <- function(x, ...) {
+  generic <- match.fun(.Generic)
+  x[[1]] <- generic(x[[1]], ...)
+  rebin(x)
+}
+
+#' @S3method Ops condensed
+Ops.condensed <- function(e1, e2) {
+  logical_ops <- c("==", "!=", "<", "<=", ">=", ">")
+  math_ops <- c("+", "-", "*", "/", "^", "%%", "%/%")
+
+  generic <- match.fun(.Generic)
+  if (.Generic %in% logical_ops)  {
+    l <- generic(e1[[1]], e2)
+    l[1] <- TRUE # always preserve missings
+    l & !is.na(l)
+  } else if (.Generic %in% math_ops) {
+    e1[[1]] <- generic(e1[[1]], e2)
+    rebin(e1)
+  } else {
+    stop(.Generic, " not supported for condensed objects", call. = FALSE)
+  }
+}
+
+#' @S3method round_any condensed
+round_any.condensed <- function(x, accuracy, f = round) {
+  gvars <- group_vars(x)
+  x[gvars] <- lapply(x[gvars], round_any, accuracy = accuracy, f = f)
+  rebin(x)
+}

@@ -24,7 +24,6 @@ Collate:
     'ranged.r'
     'bigvis.r'
     'rebin.r'
-    'binsum.r'
     'autoplot.r'
     'origin.r'
     'utils.r'
