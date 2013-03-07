@@ -1,6 +1,6 @@
 #' Efficient binned summaries.
 #'
-#' @param x a group object created by \code{\link{grouped}}
+#' @param ... group objects created by \code{\link{grouped}}
 #' @param y a numeric vector to summary for each group. Optional for some
 #'   summary statistics.
 #' @param summary the summary statistic to use. Currently must be one of
@@ -17,16 +17,16 @@
 #' x <- runif(1e5)
 #' gx <- bin(x, 0.1)
 #' condense(gx)
-condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
-  if (is.binned(x)) {
-    g <- list(x)
-  } else if (is.list(x)) {
-    g <- x
-  } else {
-    stop("x must be a list or a single binned object", call. = FALSE)
+condense <- function(..., z = NULL, summary = NULL, w = NULL, drop = NULL) {
+  gs <- list(...)
+  if (length(gs) == 1 && is.list(gs[[1]])) gs <- gs[[1]]
+
+  is_binned <- vapply(gs, is.binned, logical(1))
+  if (!all(is_binned)) {
+    stop("All objects passed to ... must be binned.", call. = FALSE)
   }
 
-  drop <- drop %||% (length(x) > 1)
+  drop <- drop %||% (length(gs) > 1)
 
   if (is.null(summary)) {
     summary <- if (is.null(z)) "count" else "mean"
@@ -39,12 +39,12 @@ condense <- function(x, z = NULL, summary = NULL, w = NULL, drop = NULL) {
   w <- w %||% numeric()
 
   # Check lengths consistent
-  n <- g[[1]]$size()
+  n <- gs[[1]]$size()
   stopifnot(length(z) == 0 || length(z) == n)
   stopifnot(length(w) == 0 || length(w) == n)
 
   f <- match.fun(paste("condense", summary, sep = "_"))
-  out <- f(g, z, w, drop = drop)
+  out <- f(gs, z, w, drop = drop)
 
-  condensed(g, out[[1]], out[[2]])
+  condensed(gs, out[[1]], out[[2]])
 }

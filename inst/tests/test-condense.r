@@ -26,7 +26,7 @@ test_that("weights modify counts", {
 test_that("z affects sums, but not counts", {
   x <- c(NA, 0:10)
   z <- 0:11
-  s <- condense(bin(x, 1), z, summary = "sum")
+  s <- condense(bin(x, 1), z = z, summary = "sum")
 
   expect_equal(s$.count, rep(1, length(x)))
   expect_equal(s$.sum, z)
