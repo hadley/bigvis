@@ -1,9 +1,52 @@
-autoplot.binsum_1d_sum <- function(x, var = "count", show_na = TRUE, log = "") {
-  name <- deparse(substitute(x))
+#' Autoplot method for condensed.
+#'
+#' @method autoplot condensed
+#' @export
+#' @examples
+#' if (require("ggplot2")) {
+#'
+#' # 1d summaries -----------------------------
+#' x <- rchallenge(1e3)
+#' z <- x + rt(length(x), df = 2)
+#' xsum <- condense(bin(x, 0.1))
+#' zsum <- condense(bin(x, 0.1), z)
+#'
+#' autoplot(xsum)
+#' autoplot(peel(xsum))
+#'
+#' autoplot(zsum)
+#' autoplot(peel(zsum, keep = 1))
+#' autoplot(peel(zsum))
+#'
+#' }
+autoplot.condensed <- function(x, var = last(summary_vars(x)), ...) {
+  stopifnot(is.condensed(x))
+  stopifnot(is.character(var), length(var) == 1)
+  summaries <- c(
+    .count = "total",
+    .sum = "total",
+    .mean = "summary",
+    .sd = "summary",
+    .median = "summary"
+  )
+  if (!(var %in% names(summaries))) {
+    stop("Unknown varible", call. = FALSE)
+  }
+  d <- gcol(x)
+  if (d > 2) {
+    stop("No autoplot methods available for more than two d")
+  }
 
-  plot <- ggplot(x[-1, ], aes_string(x = "x", y= var)) +
-    geom_line(na.rm = TRUE) +
-    xlab(name)
+  f <- paste0("plot_", summaries[var], "_", d)
+  match.fun(f)(x, var = var, ...)
+}
+
+
+plot_total_1 <- function(x, var = ".count", show_na = TRUE, log = "") {
+  xvar <- names(x)[[1]]
+
+  plot <- ggplot(x[-1, ], aes_string(x = xvar, y = var)) +
+    geom_line(na.rm = TRUE)
 
   if (show_na) {
     plot <- plot + na_layer(x, var)
@@ -39,18 +82,17 @@ autoplot.binsum_2d_sum <- function(x, var = "count", show_na = TRUE, log = "") {
   plot
 }
 
-autoplot.binsum_1d_moments <- function(x, var = "mean", show_na = TRUE,
+plot_summary_1 <- function(x, var = "mean", show_na = TRUE,
                                     show_n = TRUE, log = NULL) {
-  name <- deparse(substitute(x))
+  xvar <- names(x)[[1]]
 
-  plot <- ggplot(x[-1, ], aes_string(x = "x", y = var)) +
-    geom_line() +
-    scale_size_area() +
-    xlab(name)
+  plot <- ggplot(x[-1, ], aes_string(x = xvar, y = var)) +
+    geom_line(na.rm = TRUE) +
+    scale_size_area()
 
   if (show_n) {
     plot <- plot +
-      geom_point(aes(color = count)) +
+      geom_point(aes(color = .count), na.rm = TRUE) +
       scale_colour_gradient(trans = "log10")
   }
 
@@ -79,7 +121,8 @@ autoplot.binsum_2d_moments <- function(x, var = "mean", show_na = TRUE, log = ""
 }
 
 na_layer <- function(x, var) {
-  if (x[[var]][1] == 0) return()
+  val <- x[[var]][is.na(x[[1]])]
+  if (length(val) == 0 || is.na(val) || val == 0) return()
 
   xloc <- miss_poss(x$x)
   annotate("text", x = xloc, y = x[[var]][1], colour = "red", label = "NA",

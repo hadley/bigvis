@@ -34,6 +34,7 @@ peel <- function(x, keep = 0.99, central = FALSE) {
   }
 
   x <- x[x$.count > 0, , drop = FALSE]
+  if (keep == 1) return(x)
 
   if (central) {
     peel_outer(x, keep)
