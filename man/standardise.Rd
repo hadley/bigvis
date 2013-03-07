@@ -31,6 +31,7 @@ b2 <- with(movies, condense(bin(year, 1), bin(length, 20), drop = FALSE))
 b2 <- subset(b2, length <= 2010)
 
 if (require("ggplot2")) {
+
 base <- ggplot(b2, aes(length, .count)) +
   geom_line(aes(group = year))
 base
