@@ -1,4 +1,4 @@
-#' Condensed data structure.
+#' Condensed: an S3 class for condensed summaries.
 #'
 #' This object managed the properties of condensed (summarised) data frames.
 #'
@@ -21,7 +21,19 @@ condensed <- function(groups, grouped, summary) {
   df
 }
 
+#' @export
+#' @rdname condensed
+#' @param x object to test
 is.condensed <- function(x) inherits(x, "condensed")
+
+#' @export
+as.condensed <- function(x) UseMethod("as.condensed")
+#' @S3method as.condensed condensed
+as.condensed.condensed <- function(x) x
+#' @S3method as.condensed data.frame
+as.condensed.data.frame <- function(x) {
+  structure(x, class = c("condensed", class(x)))
+}
 
 summary_vars <- function(x) {
   stopifnot(is.condensed(x))
@@ -34,3 +46,4 @@ group_vars <- function(x) {
 }
 
 gcol <- function(x) length(group_vars(x))
+

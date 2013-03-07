@@ -1,64 +1,81 @@
-#' Given a binsum object, collapse identical bins.
+#' Transform condensed objects, collapsing unique bins.
 #'
-#' This will generally not be called by the user, but is automatically called
-#' when you modify the \code{x} variable in a binsum object, ensuring that there
-#' are no bins with duplicate x's, collapsing the summary statistics as
-#' accurately as possible.
+#' @details
+#' You don't need to use \code{rebin} if you use transform: it will
+#' automatically rebin for you.  You will need to use it if you manually
+#' transform any grouping variables.
 #'
-#' @param a binned summary object
+#' @param x a condensed summary
+#' '
 #' @keywords internal
-rebin <- function(x) {
-  UseMethod("rebin")
+#' @examples
+#' x <- runif(1e4, -1, 1)
+#' xsum <- condense(bin(x, 1 / 50))
+#'
+#' # Transforming by hand: must use rebin
+#' xsum$x <- abs(xsum$x)
+#' rebin(xsum)
+#' if (require("ggplot2")) {
+#'   autoplot(xsum) + geom_point()
+#'   autoplot(rebin(xsum)) + geom_point()
+#' }
+#'
+#' #' Transforming with transform
+#' y <- x ^ 2 + runif(length(x), -0.1, 0.1)
+#' xysum <- condense(bin(x, 1 / 50), z = y)
+#' xysum <- transform(xysum, x = abs(x))
+#' if (require("ggplot2")) {
+#'   autoplot(xysum)
+#' }
+#' @export
+#' @method transform condensed
+transform.condensed <- function(`_data`, ...) {
+  df <- transform.data.frame(`_data`, ...)
+  rebin(as.condensed(df))
 }
 
-#' @S3method rebin binsum_median
-rebin.binsum_median <- function(x) {
-  if (!anyDuplicated(x)) return(x)
-  message("Warning: can not rebin medians. Approximating using mean.")
+#' @export
+#' @rdname transform.condensed
+rebin <- function(`_data`) {
+  stopifnot(is.condensed(`_data`))
 
-  ux <- unique(x$x)
-  x_id <- match(x$x, ux)
-  xs <- split(seq_len(nrow(x)), x_id)
+  old_g <- `_data`[group_vars(`_data`)]
+  old_g[] <- lapply(old_g, zapsmall, digits = 3)
+  ids <- id(old_g, drop = TRUE)
+  if (!anyDuplicated(ids)) return(`_data`)
 
-  out <- data.frame(x = ux)
-  out$median <- grp_apply(xs, function(i) mean(x$median[i], na.rm = TRUE))
-  binsum(out, type = type(x))
+  old_s <- `_data`[summary_vars(`_data`)]
+  new_s <- lapply(names(old_s), function(var) rebin_var(old_s, ids, var))
+  names(new_s) <- names(old_s)
+
+  uids <- !duplicated(ids)
+  new_g <- old_g[uids, , drop = FALSE]
+  ord <- order(ids[uids], na.last = FALSE)
+
+  as.condensed(data.frame(new_g[ord, , drop = FALSE], new_s))
 }
 
-#' @S3method rebin binsum_sum
-rebin.binsum_sum <- function(x) {
-  if (!anyDuplicated(x)) return(x)
+rebin_var <- function(df, ids, var) {
+  stopifnot(is.data.frame(df))
+  stopifnot(is.integer(ids), length(ids) == nrow(df))
+  stopifnot(is.character(var), length(var) == 1, var %in% names(rebinners))
 
+  rows <- split(seq_len(nrow(df)), ids)
+  f <- rebinners[[var]]
 
-  ux <- unique(x$x)
-  x_id <- match(x$x, ux)
-  xs <- split(seq_len(nrow(x)), x_id)
+  vapply(rows, function(i) f(df[i, , drop = FALSE]), numeric(1),
+    USE.NAMES = FALSE)
+}
 
-  out <- data.frame(x = ux)
-  out$count <- grp_apply(xs, function(i) sum(x$count[i]))
-  if (!is.null(x$mean)) {
-    out$sum <- grp_apply(xs, function(i) sum(x$sum[i]))
+rebinners <- list(
+  .median = function(df) mean(df$.median, na.rm = TRUE),
+  .sum = function(df) sum(df$.sum, na.rm = TRUE),
+  .count = function(df) sum(df$.count, na.rm = TRUE),
+  .mean = function(df) {
+    if (is.null(df$.count)) {
+      mean(df$.mean, na.rm = TRUE)
+    } else {
+      weighted.mean(df$.mean, df$.count)
+    }
   }
-
-  binsum(out, type = type(x))
-}
-
-#' @S3method rebin binsum_moments
-rebin.binsum_moments <- function(x) {
-  if (!anyDuplicated(x$x)) return(x)
-
-  ux <- unique(x$x)
-  x_id <- match(x$x, ux)
-  xs <- split(seq_len(nrow(x)), x_id)
-
-  out <- data.frame(x = ux)
-
-  out$count <- grp_apply(xs, function(i) sum(x$count[i]))
-  if (!is.null(x$mean)) {
-    out$mean <- grp_apply(xs, function(i) weighted.mean(x$mean[i], x$count[i]))
-  }
-
-  binsum(out, type = type(x))
-}
-
-grp_apply <- function(x, f) vapply(x, f, numeric(1), USE.NAMES = FALSE)
+)
