@@ -38,7 +38,7 @@ test_that("factorised smooth equal to manual smooth", {
   class(grid) <- c("condensed", class(grid))
 
   z1 <- smooth(grid, c(3, 3), ".count", factor = FALSE)
-  z2 <- smooth(grid, c(3, 3), ".count", factor = FALSE)
+  z2 <- smooth(grid, c(3, 3), ".count", factor = TRUE)
 
   expect_equal(z1, z2)
 })

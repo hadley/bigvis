@@ -148,8 +148,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // smooth_nd_1
-NumericVector smooth_nd_1(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericVector& w_in_, const NumericMatrix& grid_out, const int var, const double h);
-RcppExport SEXP bigvis_smooth_nd_1(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP w_in_SEXP, SEXP grid_outSEXP, SEXP varSEXP, SEXP hSEXP) {
+NumericVector smooth_nd_1(const NumericMatrix& grid_in, const NumericVector& z_in, const NumericVector& w_in_, const NumericMatrix& grid_out, const int var, const double h, const std::string type = "mean");
+RcppExport SEXP bigvis_smooth_nd_1(SEXP grid_inSEXP, SEXP z_inSEXP, SEXP w_in_SEXP, SEXP grid_outSEXP, SEXP varSEXP, SEXP hSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     NumericMatrix grid_in = Rcpp::as<NumericMatrix >(grid_inSEXP);
@@ -158,7 +158,8 @@ BEGIN_RCPP
     NumericMatrix grid_out = Rcpp::as<NumericMatrix >(grid_outSEXP);
     int var = Rcpp::as<int >(varSEXP);
     double h = Rcpp::as<double >(hSEXP);
-    NumericVector __result = smooth_nd_1(grid_in, z_in, w_in_, grid_out, var, h);
+    std::string type = Rcpp::as<std::string >(typeSEXP);
+    NumericVector __result = smooth_nd_1(grid_in, z_in, w_in_, grid_out, var, h, type);
     return Rcpp::wrap(__result);
 END_RCPP
 }

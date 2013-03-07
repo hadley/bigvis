@@ -67,8 +67,8 @@ lowerBound <- function(x, breaks) {
     .Call('bigvis_lowerBound', PACKAGE = 'bigvis', x, breaks)
 }
 
-smooth_nd_1 <- function(grid_in, z_in, w_in_, grid_out, var, h) {
-    .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, w_in_, grid_out, var, h)
+smooth_nd_1 <- function(grid_in, z_in, w_in_, grid_out, var, h, type = "mean") {
+    .Call('bigvis_smooth_nd_1', PACKAGE = 'bigvis', grid_in, z_in, w_in_, grid_out, var, h, type)
 }
 
 smooth_nd <- function(grid_in, z_in, w_in_, grid_out, h) {

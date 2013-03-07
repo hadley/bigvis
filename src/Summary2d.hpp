@@ -2,15 +2,21 @@
 #include "stats.hpp"
 using namespace Rcpp;
 
-class Summary2dKernelMean {
+class Summary2d {
+  public:
+    virtual void push(double x, double z, double w) =0;
+    virtual double compute() =0;
+    // virtual ~Summary2d();
+};
+
+class Summary2dMean: public Summary2d {
     double w_, z_;
 
   public:
-    Summary2dKernelMean() : w_(0), z_(0) {}
+    Summary2dMean() : w_(0), z_(0) {}
 
     void push(double x, double z, double w) {
-      double k = R::dnorm(x, 0, 1, 0) * w;
-      w_ += k;
+      w_ += w;
       z_ += z;
     }
 
@@ -19,11 +25,11 @@ class Summary2dKernelMean {
     }
 };
 
-class Summary2dKernelRegression {
+class Summary2dRegression: public Summary2d {
     std::vector<double> x_, z_, w_;
 
   public:
-    Summary2dKernelRegression() {}
+    Summary2dRegression() {}
 
     void push(double x, double z, double w) {
       x_.push_back(x);
@@ -36,13 +42,13 @@ class Summary2dKernelRegression {
     }
 };
 
-class Summary2dLoess {
+class Summary2dRobustRegression: public Summary2d {
     int iterations_;
     std::vector<double> x_, z_, w_;
 
   public:
-    Summary2dLoess() : iterations_(3) {}
-    Summary2dLoess(int iterations) : iterations_(iterations) {}
+    Summary2dRobustRegression() : iterations_(3) {}
+    Summary2dRobustRegression(int iterations) : iterations_(iterations) {}
 
     void push(double x, double z, double w) {
       x_.push_back(x);

@@ -9,9 +9,16 @@
 #' xsum <- condense(bin(x, 1 / 100))[-1, ]
 #' xsmu1 <- smooth(xsum, 5 / 100)
 #' xsmu2 <- smooth(xsum, 5 / 100, factor = FALSE)
-smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, factor = TRUE) {
+smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, type = "mean",
+                   factor = (type == "smooth")) {
   stopifnot(is.condensed(x))
   stopifnot(is.numeric(h), all(h > 0))
+  type <- match.arg(type, c("mean", "regression", "robust_regression"))
+
+  if (type != "mean" && !factor) {
+    stop("Only factored approximations available for types other than mean",
+      call. = FALSE)
+  }
 
   grid_in <- as.matrix(x[group_vars(x)])
   grid_out <- grid %||% grid_in
@@ -22,7 +29,8 @@ smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, factor = TRUE) {
   if (factor) {
     for(i in 1:ncol(grid_in)) {
       # smooth_nd_1 is a C++ function, so var is 0 indexed
-      z <- smooth_nd_1(grid_in, z, w, grid_out, var = i - 1, h = h[i])
+      z <- smooth_nd_1(grid_in, z, w, grid_out, var = i - 1, h = h[i],
+        type = type)
     }
   } else {
     z <- smooth_nd(grid_in, z, w, grid_out, h)

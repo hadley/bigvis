@@ -1,7 +1,22 @@
 #include <algorithm>
 #include <Rcpp.h>
 #include "group.hpp"
+#include "Summary2d.hpp"
 using namespace Rcpp;
+
+std::auto_ptr<Summary2d> createSummary(std::string type) {
+  if (type == "mean") {
+    return std::auto_ptr<Summary2d>(new Summary2dMean());
+  } else if (type == "regression") {
+    return std::auto_ptr<Summary2d>(new Summary2dRegression());
+  } else if (type == "robust_regression") {
+    return std::auto_ptr<Summary2d>(new Summary2dRobustRegression());
+  } else {
+    stop("Unknown type");
+    // Quiet warning
+    return std::auto_ptr<Summary2d>(new Summary2dMean());
+  }
+}
 
 double tricube(double x) {
   x = fabs(x);
@@ -16,7 +31,8 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
                           const NumericVector& z_in, 
                           const NumericVector& w_in_,
                           const NumericMatrix& grid_out, 
-                          const int var, const double h) {
+                          const int var, const double h,
+                          const std::string type = "mean") {
 
   if (var < 0) stop("var < 0");
   if (var >= grid_in.ncol()) stop("var too large");
@@ -37,8 +53,9 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
   // grid can avoid many kernel evaluations and can also compute more
   // efficient running sum
 
-  for (int i = 0; i < n_in; ++i) {
-    for(int j = 0; j < n_out; ++j) {
+  for(int j = 0; j < n_out; ++j) {
+    std::auto_ptr<Summary2d> summary = createSummary(type);
+    for (int i = 0; i < n_in; ++i) {
       // Check that all variables (apart from var) are equal
       bool equiv = true;
       for (int k = 0; k < d; ++k) {
@@ -50,16 +67,12 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
       };
       if (!equiv) continue;
 
-      double dist = (grid_in(i, var) - grid_out(j, var)) / h;
-      double k = tricube(dist) * w_in[i];
+      double dist = (grid_in(i, var) - grid_out(j, var));
+      double w = tricube(dist / h) * w_in[i];
 
-      w_out[j] += k;
-      z_out[j] += z_in[i] * k;
+      summary->push(dist, z_in[i], w);
     }
-  }
-
-  for(int j = 0; j < n_out; ++j) {
-    z_out[j] /= w_out[j];
+    z_out[j] = summary->compute();
   }
 
   return z_out;
