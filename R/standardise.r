@@ -18,21 +18,23 @@
 #' }
 #'
 #' # Can also standardise a dimension at a time
-#' b2 <- with(movies, condense(bin(year, 1), bin(length, 20)))
+#' b2 <- with(movies, condense(bin(year, 2), bin(length, 10)))
+#' b2 <- peel(b2, central = TRUE)
 #'
 #' if (require("ggplot2")) {
 #'
-#' base <- ggplot(b2, aes(length, .count)) +
-#'   geom_line(aes(group = year))
-#' base
-#' base %+% standardise(b2)
-#' base %+% standardise(b2, "length")
-#' base %+% standardise(b2, "year")
-#'
 #' autoplot(b2)
 #' autoplot(standardise(b2))    # note legend
-#' autoplot(standardise(b2, "length")) # each row sums to 1
-#' autoplot(standardise(b2, "year")) # each col sums to 1
+#' autoplot(standardise(b2, "year"))   # each row sums to 1
+#' autoplot(standardise(b2, "length")) # each col sums to 1
+#'
+#' base <- ggplot(b2, aes(length, .count)) +
+#'   geom_line(aes(group = year, colour = year))
+#' base
+#' base %+% standardise(b2)  # Just affects y axis labels
+#' base %+% standardise(b2, "year") # Makes year comparable
+#' base %+% standardise(b2, "length") # Meaningless for this display
+#'
 #' }
 standardise <- function(x, margin = integer()) {
   stopifnot(is.condensed(x), !is.null(x$.count))
