@@ -1,27 +1,49 @@
 #' Standardise a summary to sum to one.
-#' 
+#'
 #' @param x
 #' @param margin margins to standardise along.  If \code{NULL}, the default,
 #'  standardises the whole array.
 #' @export
 #' @examples
-#' b1 <- bin_nd(mtcars, "mpg", 0.01)
-#' plot(b1)
-#' d1 <- density_1d(b1, 0.5)
-#' plot(d1)
+#' b1 <- condense(bin(movies$year, 1))[-1, ]
+#' d1 <- smooth(b1, 2, type = "reg")
+#'
+#' if (require("ggplot2")) {
+#'
+#' autoplot(b1)
+#' autoplot(d1)
+#'
 #' # Note change in x-axis limits
-#' plot(standardise(d1))
+#' autoplot(standardise(d1))
+#' }
 #'
 #' # Can also standardise a dimension at a time
-#' b2 <- bin_nd(mtcars, c("mpg", "wt"))
-#' plot(b2)
-#' plot(standardise(b2)) # doesn't look any different because no legend
-#' plot(standardise(b2, 1)) # each row sums to 1
-#' plot(standardise(b2, 2)) # each col sums to 1
-standardise <- function(x, margin = NULL) {
-  stopifnot(is.binned_summary(x))
-  
-  x$data <- prop.table(x$data, margin)
-  x$data[is.na(x$data)] <- 0
+#' b2 <- with(movies, condense(bin(year, 1), bin(length, 20), drop = FALSE))
+#' b2 <- subset(b2, length <= 2010)
+#'
+#' if (require("ggplot2")) {
+#'
+#' base <- ggplot(b2, aes(length, .count)) +
+#'   geom_line(aes(group = year))
+#' base
+#' base %+% standardise(b2)
+#' base %+% standardise(b2, "length")
+#' base %+% standardise(b2, "year")
+#'
+#' autoplot(b2)
+#' autoplot(standardise(b2))    # note legend
+#' autoplot(standardise(b2, "length")) # each row sums to 1
+#' autoplot(standardise(b2, "year")) # each col sums to 1
+#' }
+standardise <- function(x, margin = integer()) {
+  stopifnot(is.condensed(x), !is.null(x$.count))
+
+  if (length(margin) == 0) {
+    x$.count <- prop.table(x$.count)
+  } else {
+    x$.count <- ave(x$.count, id(x[margin]), FUN = prop.table)
+    x$.count[is.na(x$.count)] <- 0
+  }
+
   x
 }

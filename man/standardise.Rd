@@ -2,7 +2,7 @@
 \alias{standardise}
 \title{Standardise a summary to sum to one.}
 \usage{
-  standardise(x, margin = NULL)
+  standardise(x, margin = integer())
 }
 \arguments{
   \item{x}{}
@@ -14,18 +14,34 @@
   Standardise a summary to sum to one.
 }
 \examples{
-b1 <- bin_nd(mtcars, "mpg", 0.01)
-plot(b1)
-d1 <- density_1d(b1, 0.5)
-plot(d1)
+b1 <- condense(bin(movies$year, 1))[-1, ]
+d1 <- smooth(b1, 2, type = "reg")
+
+if (require("ggplot2")) {
+
+autoplot(b1)
+autoplot(d1)
+
 # Note change in x-axis limits
-plot(standardise(d1))
+autoplot(standardise(d1))
+}
 
 # Can also standardise a dimension at a time
-b2 <- bin_nd(mtcars, c("mpg", "wt"))
-plot(b2)
-plot(standardise(b2)) # doesn't look any different because no legend
-plot(standardise(b2, 1)) # each row sums to 1
-plot(standardise(b2, 2)) # each col sums to 1
+b2 <- with(movies, condense(bin(year, 1), bin(length, 20), drop = FALSE))
+b2 <- subset(b2, length <= 2010)
+
+if (require("ggplot2")) {
+base <- ggplot(b2, aes(length, .count)) +
+  geom_line(aes(group = year))
+base
+base \%+\% standardise(b2)
+base \%+\% standardise(b2, "length")
+base \%+\% standardise(b2, "year")
+
+autoplot(b2)
+autoplot(standardise(b2))    # note legend
+autoplot(standardise(b2, "length")) # each row sums to 1
+autoplot(standardise(b2, "year")) # each col sums to 1
+}
 }
 
