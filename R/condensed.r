@@ -32,3 +32,5 @@ summary_vars <- function(x) {
 group_vars <- function(x) {
   setdiff(names(x), summary_vars(x))
 }
+
+gcol <- function(x) length(group_vars(x))

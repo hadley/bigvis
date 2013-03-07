@@ -51,5 +51,5 @@ smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, type = "mean",
 
   out <- data.frame(grid_out)
   out[[var]] <- z
-  out
+  structure(out, class = c("condensed", class(out)))
 }
