@@ -14,6 +14,15 @@ The bigvis package is structured around the following workflow:
 
 Bigvis also provides a number of standard statistics efficiently implemented on weighted/binned data: `weighted.median`, `weighted.IQR`, `weighted.var`, `weighted.sd`, `weighted.ecdf` and `weighted.quantile`. 
 
+## Installation
+
+The package can be installed using the [`devtools`](https://github.com/hadley/devtools) package. Once `devtools` has been installed on your system, you can run the following commands in R:
+
+    library(devtools)
+    install_github("bigvis", "hadley")
+
+Note that you will also need the [`Boost C++`](http://www.boost.org/community/cpp.html) headers and libraries installed on your system in order to compile the package.
+
 ## Acknowledgements
 
 This package wouldn't be possible without:
