@@ -15,7 +15,7 @@
 #'
 #' x <- rchallenge(1e4)
 #' hist(x, breaks = 1000)
-#' xsum <- condense(bin(x, 0.1))[-1, ]
+#' xsum <- condense(bin(x, 0.1))
 #' plot(xsum$x, xsum$.count, type = "l")
 #' xsmu <- smooth(xsum, 0.3)
 #' plot(xsmu$x, xsmu$.count, type = "l")

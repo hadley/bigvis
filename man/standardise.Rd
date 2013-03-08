@@ -14,7 +14,7 @@
   Standardise a summary to sum to one.
 }
 \examples{
-b1 <- condense(bin(movies$year, 1))[-1, ]
+b1 <- condense(bin(movies$year, 1))
 d1 <- smooth(b1, 2, type = "reg")
 
 if (require("ggplot2")) {

@@ -15,13 +15,13 @@
 }
 \examples{
 x <- runif(1e5)
-xsum <- condense(bin(x, 1 / 100))[-1, ]
+xsum <- condense(bin(x, 1 / 100))
 xsmu1 <- smooth(xsum, 5 / 100)
 xsmu2 <- smooth(xsum, 5 / 100, factor = FALSE)
 
 # More challenging distribution
 x <- rchallenge(1e4)
-xsum <- condense(bin(x, 0.1))[-1, ]
+xsum <- condense(bin(x, 0.1))
 xsmu <- smooth(xsum, 1)
 
 plot(xsum$x, xsum$.count, type = "l")
