@@ -119,7 +119,7 @@ plot_summary_2 <- function(x, var = "mean", show_na = TRUE, log = "") {
   xvar <- names(x)[[1]]
   yvar <- names(x)[[2]]
 
-  miss <- is.na(x$x) + 2 * is.na(x$y)
+  miss <- is.na(x[[1]]) + 2 * is.na(x[[2]])
 
   plot <- ggplot(x[miss == 0, ], aes_string(x = xvar, y = yvar)) +
     geom_tile(aes_string(fill = var)) +
