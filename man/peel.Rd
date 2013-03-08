@@ -2,7 +2,7 @@
 \alias{peel}
 \title{Peel off low density regions of the data.}
 \usage{
-  peel(x, keep = 0.99, central = FALSE)
+  peel(x, keep = 0.99, central = NULL)
 }
 \arguments{
   \item{x}{condensed summary}
@@ -16,7 +16,8 @@
   data: the current algorithm is quite slow.  If
   \code{FALSE}, just removes the lowest density regions
   wherever they are found. Regions with 0 density are
-  removed regardless of location.}
+  removed regardless of location.  Defaults to TRUE if
+  there are two or fewer grouping variables is less.}
 }
 \description{
   Keeps specified proportion of data by removing the lowest

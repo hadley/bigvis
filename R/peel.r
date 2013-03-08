@@ -14,6 +14,7 @@
 #'   convex hull of the data: the current algorithm is quite slow.
 #'   If \code{FALSE}, just removes the lowest density regions wherever they are
 #'   found. Regions with 0 density are removed regardless of location.
+#'   Defaults to TRUE if there are two or fewer grouping variables is less.
 #' @export
 #' @examples
 #' x <- rt(1e5, df = 2)
@@ -24,9 +25,10 @@
 #' plot(peel(xysum, 0.95, central = TRUE)[1:2])
 #' plot(peel(xysum, 0.90, central = TRUE)[1:2])
 #' plot(peel(xysum, 0.50, central = TRUE)[1:2])
-peel <- function(x, keep = 0.99, central = FALSE) {
+peel <- function(x, keep = 0.99, central = NULL) {
   stopifnot(is.condensed(x))
   stopifnot(is.numeric(keep), length(keep) == 1, keep > 0, keep <= 1)
+  central <- central %||% (gcol(x) <= 2)
   stopifnot(is.logical(central), length(central) == 1)
 
   if (is.null(x$.count)) {
@@ -47,14 +49,14 @@ peel_anywhere <- function(x, keep) {
   ord <- order(x$.count, decreasing = TRUE)
   prop <- cumsum(x$.count[ord]) / sum(x$.count)
 
-  # browser()
   ind <- which(prop >= keep)[1]
-  x[ord < ind, , drop = FALSE]
+  x[ord[seq_len(ind)], , drop = FALSE]
 }
 
 peel_outer <- function(x, keep) {
-  if (gcol(x) != 2) {
-    stop("Outer peeling only works with 2d data", call. = FALSE)
+  d <- gcol(x)
+  if (d > 2) {
+    stop("Outer peeling only works with 1d or 2d data", call. = FALSE)
   }
 
   n <- sum(x$.count)
@@ -63,14 +65,14 @@ peel_outer <- function(x, keep) {
 
   # Peel off smallest values on chull
   candidate <- which(prop >= keep)
-  on_hull <- intersect(candidate, chull(x[1:2]))
+  on_hull <- intersect(candidate, chull(x[1:d]))
   left <- sum(x$.count[-on_hull]) / n
 
   while(left >= keep && length(on_hull) > 0) {
     x <- x[-on_hull, , drop = FALSE]
     prop <- prop[-on_hull]
     candidate <- which(prop >= keep)
-    on_hull <- intersect(candidate, chull(x[1:2]))
+    on_hull <- intersect(candidate, chull(x[1:d]))
     left <- sum(x$.count[-on_hull]) / n
   }
 

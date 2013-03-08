@@ -49,7 +49,7 @@ Kernel smoothing plus binned summary leads to many common statistics: density =~
   * hash in smooth_nd_1 and compute more efficiently along 1d
 * deal with missing values
 
-* smooth needs to create complete grid when factor = TRUE)
+* smooth needs to create complete grid when factor = TRUE
 
 Think about input data structure: sparse grid, represented as a coordinate list. Possible that more performance is available by switching to a sparse tensor library. 
 
@@ -58,4 +58,4 @@ Think about input data structure: sparse grid, represented as a coordinate list.
 * Product plots
 * Standard errors + cut offs
 
-* Peel: implement more efficient version using depth, and make central = TRUE the default
+* Peel: implement more efficient version using depth
