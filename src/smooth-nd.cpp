@@ -19,11 +19,16 @@ std::auto_ptr<Summary2d> createSummary(std::string type) {
 }
 
 double tricube(double x) {
+  if (NumericVector::is_na(x)) return 0;
   x = fabs(x);
   if (x > 1) return 0;
 
   double y = 1 - x * x * x;
   return y * y * y;
+}
+
+bool both_na(double x, double y) {
+  return (NumericVector::is_na(x) && NumericVector::is_na(y));
 }
 
 // [[Rcpp::export]]
@@ -60,14 +65,17 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
       bool equiv = true;
       for (int k = 0; k < d; ++k) {
         if (k == var) continue;
-        if (grid_in(i, k) != grid_out(j, k)) {
+
+        double in = grid_in(i, k), out = grid_out(j, k);
+        if (in != out && !both_na(in, out)) {
           equiv = false;
           break;
         }
       };
       if (!equiv) continue;
 
-      double dist = (grid_in(i, var) - grid_out(j, var));
+      double in = grid_in(i, var), out = grid_out(j, var);
+      double dist = both_na(in, out) ? 0 : in - out;
       double w = tricube(dist / h) * w_in[i];
       if (w == 0) continue;
 
