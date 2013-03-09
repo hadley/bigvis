@@ -35,6 +35,8 @@ smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, type = "mean",
 
   grid_in <- as.matrix(x[group_vars(x)])
   grid_out <- grid %||% grid_in
+  stopifnot(is.matrix(grid_out), is.numeric(grid_out),
+    ncol(grid_out) == ncol(grid_in), nrow(grid_out) > 0)
 
   z <- x[[var]]
   w <- if (var != ".count" && !is.null(var$.count)) var$.count else numeric()

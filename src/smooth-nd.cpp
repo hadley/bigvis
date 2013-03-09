@@ -42,7 +42,6 @@ NumericVector smooth_nd_1(const NumericMatrix& grid_in,
   if (var < 0) stop("var < 0");
   if (var >= grid_in.ncol()) stop("var too large");
   if (h <= 0) stop("h <= 0");
-  if (grid_in.nrow() != z_in.size()) stop("Incompatible input lengths");
   if (grid_in.ncol() != grid_out.ncol()) stop("Incompatible grid sizes");
 
   int n_in = grid_in.nrow(), n_out = grid_out.nrow(), d = grid_in.ncol();
