@@ -45,6 +45,70 @@ rmse_cv <- function(x, h, var = summary_vars(x)[1], ...) {
   sqrt(mean(err ^ 2, na.rm = TRUE))
 }
 
+#' Find "best" smoothing parameter using leave-one-out cross validation.
+#'
+#' Minimises the leave-one-out estimate of root mean-squared error to find
+#' find the "optimal" bandwidth for smoothing.
+#'
+#' L-BFGS-B optimisation is used to constrain the bandwidths to be greater
+#' than the binwidths: if the bandwidth is smaller than the binwidth it's
+#' impossible to compute the rmse because no smoothing occurs. The tolerance
+#' is set relatively high for numerical optimisation since the precise choice
+#' of bandwidth makes little difference visually, and we're unlikely to have
+#' sufficient data to make a statistically significant choice anyway.
+#'
+#' @param x condensed summary to smooth
+#' @param h initial values of bandwidths to start search out. If not specified
+#'  defaults to 5 times the binwidth of each variable.
+#' @param ... other arguments (like \code{var}) passed on to
+#'  \code{\link{rmse_cv}}
+#' @param tol numerical tolerance, defaults to 1\%.
+#' @param control additional control parameters passed on to \code{\link{optim}}
+#'   The most useful argument is probably trace, which makes it possible to
+#'   follow the progress of the optimisation.
+#' @export
+#' @examples
+#' x <- rchallenge(1e4)
+#' xsum <- condense(bin(x, 1 / 10))
+#' h <- best_h(xsum, control = list(trace = 1, REPORT = 1))
+#' h <- best_h(xsum)
+#'
+#' if (require("ggplot2")) {
+#' autoplot(xsum)
+#' autoplot(smooth(xsum, h))
+#' }
+best_h <- function(x, h_init = NULL, ..., tol = 1e-2, control = list()) {
+  stopifnot(is.condensed(x))
+
+  gvars <- group_vars(x)
+  widths <- vapply(x[gvars], attr, "width", FUN.VALUE = numeric(1))
+  h_init <- h_init %||% widths * 5
+  stopifnot(is.numeric(h_init), length(h_init) == length(gvars))
+
+  stopifnot(is.list(control))
+  control <- modifyList(list(factr = tol / .Machine$double.eps), control)
+
+  # Optimise
+  rmse <- function(h) {
+    rmse_cv(x, h, ...)
+  }
+  res <- optim(h_init, rmse, method = "L-BFGS-B", lower = widths,
+    control = control)
+  h <- unname(res$par)
+
+  # Feedback
+  if (res$convergence != 0) {
+    warning("Failed to converge: ", res$message, call. = FALSE)
+  } else if (rel_dist(h, widths) < 1e-3) {
+    warning("h close to lower bound: smoothing not needed", call. = FALSE)
+  }
+  structure(h, iterations = res$counts[1])
+}
+
+rel_dist <- function(x, y) {
+  mean(abs(x - y) / abs(x + y))
+}
+
 #' Generate grid of plausible bandwidths for condensed summary.
 #'
 #' @param x a condensed summary
