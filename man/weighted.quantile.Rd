@@ -31,7 +31,7 @@ w <- rpois(200, 5) + 1
 weighted.quantile(x, w)
 }
 \seealso{
-  Other weighted.statistics: \code{\link{weighted.ecdf}},
+  Other weighted statistics: \code{\link{weighted.ecdf}},
   \code{\link{weighted.sd}}, \code{\link{weighted.var}}
 }
 

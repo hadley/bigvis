@@ -20,8 +20,9 @@
   \code{\link{smooth}}}
 }
 \description{
-  Estimate smoothing RMSE using leave-one-out
-  cross-valdation.
+  \code{rmse_cv} computes the leave-one-out RMSE for a
+  single vector of bandwidths, \code{rmse_cvs} computes for
+  a multiple vectors of bandwidths, stored as a data frame.
 }
 \examples{
 set.seed(1014)
@@ -45,5 +46,9 @@ cvs <- rmse_cvs(xysum, h_grid(xysum, 10))
 if (require("ggplot2")) {
 qplot(x, y, data = cvs, size = err)
 }
+}
+\seealso{
+  Other bandwidth estimation functions:
+  \code{\link{best_h}}, \code{\link{h_grid}}
 }
 

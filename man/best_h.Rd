@@ -47,4 +47,9 @@ autoplot(xsum)
 autoplot(smooth(xsum, h))
 }
 }
+\seealso{
+  Other bandwidth estimation functions:
+  \code{\link{h_grid}}, \code{\link{rmse_cv}},
+  \code{\link{rmse_cvs}}
+}
 

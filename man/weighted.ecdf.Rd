@@ -34,7 +34,7 @@ plot(ecdf(y))
 \seealso{
   \code{\link[stats]{weighted.mean}}
 
-  Other weighted.statistics:
+  Other weighted statistics:
   \code{\link{weighted.quantile}},
   \code{\link{weighted.sd}}, \code{\link{weighted.var}}
 }
