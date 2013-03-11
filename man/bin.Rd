@@ -2,7 +2,8 @@
 \alias{bin}
 \title{Create a binned variable.}
 \usage{
-  bin(x, width, origin = NULL, name = NULL)
+  bin(x, width = find_width(x),
+    origin = find_origin(x, width), name = NULL)
 }
 \arguments{
   \item{x}{numeric or integer vector}
@@ -28,7 +29,7 @@
 }
 \examples{
 x <- runif(1e6)
-g <- bin(x, 0.01)
-g
+bin(x)
+bin(x, 0.01)
 }
 

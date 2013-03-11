@@ -15,9 +15,10 @@
 #' @export
 #' @examples
 #' x <- runif(1e6)
-#' g <- bin(x, 0.01)
-#' g
-bin <- function(x, width, origin = NULL, name = NULL) {
+#' bin(x)
+#' bin(x, 0.01)
+bin <- function(x, width = find_width(x), origin = find_origin(x, width),
+                name = NULL) {
   if (is.null(name)) {
     name <- deparse(substitute(x))
   }
@@ -26,7 +27,6 @@ bin <- function(x, width, origin = NULL, name = NULL) {
     attr(x, "range") <- frange(x)
     class(x) <- "ranged"
   }
-  origin <- origin %||% find_origin(x, width)
 
   BigVis$BinnedVector$new(x, name, width, origin)
 }

@@ -26,5 +26,8 @@ find_origin(1:10, 1)
 find_origin(1:10, 2)
 find_origin(c(1, 1e6), 1)
 }
+\seealso{
+  Other reasonable defaults: \code{\link{find_width}}
+}
 \keyword{internal}
 

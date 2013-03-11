@@ -13,6 +13,7 @@
 #' @param binwidth binwidth
 #' @export
 #' @keywords internal
+#' @family reasonable defaults
 #' @examples
 #' find_origin(1:10, 1)
 #' find_origin(1:10, 2)
