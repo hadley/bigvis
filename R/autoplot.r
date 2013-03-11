@@ -93,8 +93,8 @@ plot_total_2 <- function(x, var = ".count", show_na = TRUE, log = "") {
   plot
 }
 
-plot_summary_1 <- function(x, var = "mean", show_na = TRUE,
-                                    show_n = TRUE, log = NULL) {
+plot_summary_1 <- function(x, var = ".mean", show_na = TRUE,
+                                    show_n = x %contains% ".count", log = NULL) {
   xvar <- names(x)[[1]]
 
   plot <- ggplot(x[-1, ], aes_string(x = xvar, y = var)) +
@@ -114,7 +114,7 @@ plot_summary_1 <- function(x, var = "mean", show_na = TRUE,
   plot
 }
 
-plot_summary_2 <- function(x, var = "mean", show_na = TRUE, log = "") {
+plot_summary_2 <- function(x, var = ".mean", show_na = TRUE, log = "") {
   x <- peel(x, keep = 1)
   xvar <- names(x)[[1]]
   yvar <- names(x)[[2]]

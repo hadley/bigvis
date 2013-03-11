@@ -39,7 +39,7 @@ smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, type = "mean",
     ncol(grid_out) == ncol(grid_in), nrow(grid_out) > 0)
 
   z <- x[[var]]
-  w <- if (var != ".count" && !is.null(var$.count)) var$.count else numeric()
+  w <- if (var != ".count" && x %contains% ".count") x$.count else numeric()
 
   if (factor) {
     for(i in 1:ncol(grid_in)) {
