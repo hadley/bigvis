@@ -8,14 +8,16 @@
 \arguments{
   \item{x}{numeric or integer vector}
 
-  \item{width}{bin width}
+  \item{width}{bin width. If not specified, about 10,000
+  bins will be chosen using the algorithim in
+  \code{\link{find_width}}.}
 
-  \item{origin}{if not specified, guessed by
-  \code{\link{find_origin}}}
+  \item{origin}{origin. If not specified, guessed by
+  \code{\link{find_origin}}.}
 
-  \item{name}{name of original variable. This will be guess
-  from the input to \code{group} if not supplied. Used in
-  the output of \code{\link{condense}} etc.}
+  \item{name}{name of original variable. This will be
+  guessed from the input to \code{group} if not supplied.
+  Used in the output of \code{\link{condense}} etc.}
 }
 \description{
   Create a binned variable.
@@ -31,5 +33,6 @@
 x <- runif(1e6)
 bin(x)
 bin(x, 0.01)
+bin(x, 0.01, origin = 0.5)
 }
 
