@@ -8,7 +8,8 @@
   \item{x}{condensed summary}
 
   \item{keep}{(approximate) proportion of data to keep. If
-  \code{1}, will remove all cells with counts.}
+  \code{1}, will remove all cells with counts.  All missing
+  values will be preserved.}
 
   \item{central}{if \code{TRUE} peels off regions of lowest
   density only from the outside of the data. In 2d this

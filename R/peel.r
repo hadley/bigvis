@@ -8,7 +8,7 @@
 #'
 #' @param x condensed summary
 #' @param keep (approximate) proportion of data to keep. If \code{1}, will
-#'   remove all cells with counts.
+#'   remove all cells with counts.  All missing values will be preserved.
 #' @param central if \code{TRUE} peels off regions of lowest density only from
 #'   the outside of the data. In 2d this works by progressively peeling off
 #'   convex hull of the data: the current algorithm is quite slow.
@@ -38,11 +38,16 @@ peel <- function(x, keep = 0.99, central = NULL) {
   x <- x[x$.count > 0, , drop = FALSE]
   if (keep == 1) return(x)
 
+  complete <- complete.cases(x[group_vars(x)])
+  x_complete <- x[complete, , drop = FALSE]
+
   if (central) {
-    peel_outer(x, keep)
+    peeled <- peel_outer(x_complete, keep)
   } else {
-    peel_anywhere(x, keep)
+    peeled <- peel_anywhere(x_complete, keep)
   }
+
+  rbind(peeled, x[!complete, , drop = FALSE])
 }
 
 peel_anywhere <- function(x, keep) {

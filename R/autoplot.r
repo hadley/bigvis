@@ -139,7 +139,7 @@ na_layer <- function(x, var) {
   if (length(val) == 0 || is.na(val) || val == 0) return()
 
   xloc <- miss_poss(x[[1]])
-  annotate("text", x = xloc, y = x[[var]][1], colour = "red", label = "NA",
+  annotate("text", x = xloc, y = val, colour = "red", label = "NA",
     size = 3)
 }
 
