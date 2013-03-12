@@ -1,4 +1,4 @@
-#' Estimate smoothing RMSE using leave-one-out cross-valdation.
+#' Estimate smoothing RMSE using leave-one-out cross-validation.
 #'
 #' \code{rmse_cv} computes the leave-one-out RMSE for a single vector of
 #' bandwidths, \code{rmse_cvs} computes for a multiple vectors of bandwidths,
@@ -79,6 +79,11 @@ rmse_cv <- function(x, h, var = summary_vars(x)[1], ...) {
 #'   The most useful argument is probably trace, which makes it possible to
 #'   follow the progress of the optimisation.
 #' @family bandwidth estimation functions
+#' @return a single numeric value representing the bandwidth that minimises
+#'   the leave-one-out estimate of rmse. Vector has attributes
+#'   \code{evaluations} giving the number of times the objective function
+#'   was evaluated. If the optimisation does not converge, or smoothing is not
+#'   needed (i.e. the estimate is on the lower bounds), a warning is thrown.
 #' @export
 #' @examples
 #' x <- rchallenge(1e4)
@@ -115,7 +120,7 @@ best_h <- function(x, h_init = NULL, ..., tol = 1e-2, control = list()) {
   } else if (rel_dist(h, widths) < 1e-3) {
     warning("h close to lower bound: smoothing not needed", call. = FALSE)
   }
-  structure(h, iterations = res$counts[1])
+  structure(h, evaluations = res$counts[1])
 }
 
 rel_dist <- function(x, y) {

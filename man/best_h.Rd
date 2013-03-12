@@ -22,6 +22,14 @@
   trace, which makes it possible to follow the progress of
   the optimisation.}
 }
+\value{
+  a single numeric value representing the bandwidth that
+  minimises the leave-one-out estimate of rmse. Vector has
+  attributes \code{evaluations} giving the number of times
+  the objective function was evaluated. If the optimisation
+  does not converge, or smoothing is not needed (i.e. the
+  estimate is on the lower bounds), a warning is thrown.
+}
 \description{
   Minimises the leave-one-out estimate of root mean-squared
   error to find find the "optimal" bandwidth for smoothing.

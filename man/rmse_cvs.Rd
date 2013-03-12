@@ -1,7 +1,7 @@
 \name{rmse_cvs}
 \alias{rmse_cv}
 \alias{rmse_cvs}
-\title{Estimate smoothing RMSE using leave-one-out cross-valdation.}
+\title{Estimate smoothing RMSE using leave-one-out cross-validation.}
 \usage{
   rmse_cvs(x, hs = h_grid(x), ...)
 
