@@ -2,13 +2,24 @@
 
 The bigvis package provides tools for exploratory data analysis of __large datasets__ (10-100 million obs). The aim is to have most operations take less than 1 second on commodity hardware, even for 100,000,000 data points.
 
+Since bigvis is not currently available on CRAN, the easiest way to try it out is to:
+
+```R
+# install.packages("devtools")
+devtools::install_github("bigvis")
+```
+
 ## Workflow
 
 The bigvis package is structured around the following workflow:
 
-* summarise data with `summary1d()`
-* optionally smooth or standardise with `smooth_1d()` and `standardise()`
-* visualising the results
+* `bin()` and `condense()` to get a compact summary of the data
+
+* if the estimates are rough, you might want to `smooth()`. See `best_h()` and `rmse_cvs()` to figure out a good starting bandwidth
+
+* if you're working with counts, you might want to `standardise()`
+
+* visualise the results with `autoplot()`
 
 ## Weighted statistics
 
