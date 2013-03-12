@@ -39,7 +39,7 @@ Collate:
     'challenge.r'
     'peel.r'
     'id.r'
-    'jd.r'
     'rmse.r'
     'width.r'
     'h.r'
+    'mt.r'

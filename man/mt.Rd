@@ -1,0 +1,36 @@
+\name{mt}
+\alias{mt}
+\title{Modulus transformation.}
+\usage{
+  mt(x, lambda)
+}
+\arguments{
+  \item{x}{values to transform}
+
+  \item{lambda}{degree of transformation:}
+}
+\description{
+  A generalisation of the box-cox transformation that works
+  for values with both positive and negative values.
+}
+\details{
+  This is useful for compressing the tails of long-tailed
+  distributions, often encountered with very large
+  datasets.
+}
+\examples{
+x <- seq(-10, 10, length = 100)
+plot(x, jd(x, 0), type = "l")
+plot(x, jd(x, 0.25), type = "l")
+plot(x, jd(x, 0.5), type = "l")
+plot(x, jd(x, 1), type = "l")
+plot(x, jd(x, 2), type = "l")
+plot(x, jd(x, -1), type = "l")
+plot(x, jd(x, -2), type = "l")
+}
+\references{
+  J. John and N. Draper. "An alternative family of
+  transformations."  Applied Statistics, pages 190–197,
+  1980.  \url{http://www.jstor.org/stable/2986305}
+}
+
