@@ -48,10 +48,11 @@ condensed <- function(groups, grouped, summary) {
 
 #' @export
 #' @rdname condensed
-#' @param x object to test
+#' @param x object to test or coerce
 is.condensed <- function(x) inherits(x, "condensed")
 
 #' @export
+#' @rdname condensed
 as.condensed <- function(x) UseMethod("as.condensed")
 #' @S3method as.condensed condensed
 as.condensed.condensed <- function(x) x
@@ -98,7 +99,11 @@ Ops.condensed <- function(e1, e2) {
   }
 }
 
+#' Round any method for condensed objects
+#'
+#' @inheritParams plyr::round_any
 #' @export
+#' @keywords internal
 round_any.condensed <- function(x, accuracy, f = round) {
   gvars <- group_vars(x)
   x[gvars] <- lapply(x[gvars], round_any, accuracy = accuracy, f = f)

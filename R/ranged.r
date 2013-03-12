@@ -42,7 +42,11 @@ ranged <- function(x, range = frange(x, finite = TRUE)) {
   x
 }
 
+#' Test if an object is of class ranged.
+#'
 #' @export
+#' @param x object to test
+#' @keywords internal
 is.ranged <- function(x) inherits(x, "ranged")
 
 #' @S3method min ranged

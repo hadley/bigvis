@@ -1,4 +1,5 @@
 \name{condensed}
+\alias{as.condensed}
 \alias{condensed}
 \alias{is.condensed}
 \title{Condensed: an S3 class for condensed summaries.}
@@ -6,13 +7,15 @@
   condensed(groups, grouped, summary)
 
   is.condensed(x)
+
+  as.condensed(x)
 }
 \arguments{
   \item{groups}{list of \code{\link{bin}}ed objects}
 
   \item{grouped,summary}{output from C++ condense function}
 
-  \item{x}{object to test}
+  \item{x}{object to test or coerce}
 }
 \description{
   This object managed the properties of condensed
