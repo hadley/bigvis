@@ -16,7 +16,7 @@ Imports:
 Suggests:
     plyr,
     ggplot2
-LinkingTo: Rcpp
+LinkingTo: Rcpp, BH
 License: GPL (>= 2)
 Collate:
     'standardise.r'
