@@ -106,7 +106,7 @@ plot_summary_1 <- function(x, var = ".mean", show_na = TRUE,
 
   if (show_n) {
     plot <- plot +
-      geom_point(aes(color = .count), na.rm = TRUE) +
+      geom_point(aes_string(color = ".count"), na.rm = TRUE) +
       scale_colour_gradient(trans = "log10")
   }
 
