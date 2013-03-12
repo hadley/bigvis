@@ -5,7 +5,7 @@
 \usage{
   \\method{transform}{condensed}(`_data`, ...)
 
-  rebin(`_data`)
+  rebin(data)
 }
 \arguments{
   \item{data,`_data`}{a condensed summary}

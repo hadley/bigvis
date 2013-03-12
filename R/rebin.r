@@ -37,7 +37,6 @@ transform.condensed <- function(`_data`, ...) {
 
 #' @export
 #' @rdname transform.condensed
-#' @usage rebin(`_data`)
 rebin <- function(data) {
   stopifnot(is.condensed(data))
 
