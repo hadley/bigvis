@@ -37,6 +37,7 @@ condensed <- function(groups, grouped, summary) {
   for (i in seq_along(groups)) {
     attr(grouped[[i]], "width") <- groups[[i]]$width()
     attr(grouped[[i]], "origin") <- groups[[i]]$origin()
+    attr(grouped[[i]], "nbins") <- groups[[i]]$nbins()
   }
 
   names(summary) <- paste0(".", names(summary))

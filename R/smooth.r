@@ -69,3 +69,14 @@ smooth <- function(x, h, var = summary_vars(x)[1], grid = NULL, type = "mean",
   out[[var]] <- z
   structure(out, class = c("condensed", class(out)))
 }
+
+complete_grid <- function(df) {
+  stopifnot(is.data.frame(df))
+
+  breaks <- function(width, origin, nbins) {
+    origin + width * seq.int(nbins)
+  }
+
+  cols <- lapply(df, function(x) do.call(breaks, attributes(x)))
+  expand.grid(cols, KEEP.OUT.ATTRS = FALSE)
+}
