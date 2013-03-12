@@ -16,6 +16,7 @@ Imports:
 Suggests:
     plyr,
     ggplot2
+LazyData: true
 LinkingTo: Rcpp, BH
 License: GPL (>= 2)
 Collate:
