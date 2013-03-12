@@ -50,7 +50,7 @@ autoplot.condensed <- function(x, var = last(summary_vars(x)), ...) {
   }
 
   f <- paste0("plot_", summaries[var], "_", d)
-  match.fun(f)(x, var = var, ...)
+  find_fun(f)(x, var = var, ...)
 }
 
 

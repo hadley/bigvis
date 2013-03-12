@@ -42,7 +42,7 @@ condense <- function(..., z = NULL, summary = NULL, w = NULL, drop = NULL) {
   stopifnot(length(z) == 0 || length(z) == n)
   stopifnot(length(w) == 0 || length(w) == n)
 
-  f <- match.fun(paste("condense", summary, sep = "_"))
+  f <- find_fun(paste("condense", summary, sep = "_"))
   out <- f(gs, z, w, drop = drop)
 
   condensed(gs, out[[1]], out[[2]])
