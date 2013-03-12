@@ -11,8 +11,8 @@
 #' sufficient data to make a statistically significant choice anyway.
 #'
 #' @param x condensed summary to smooth
-#' @param h initial values of bandwidths to start search out. If not specified
-#'  defaults to 5 times the binwidth of each variable.
+#' @param h_init initial values of bandwidths to start search out. If not
+#'  specified defaults to 5 times the binwidth of each variable.
 #' @param ... other arguments (like \code{var}) passed on to
 #'  \code{\link{rmse_cv}}
 #' @param tol numerical tolerance, defaults to 1\%.

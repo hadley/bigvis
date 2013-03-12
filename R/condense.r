@@ -1,12 +1,12 @@
 #' Efficient binned summaries.
 #'
-#' @param ... group objects created by \code{\link{grouped}}
-#' @param y a numeric vector to summary for each group. Optional for some
+#' @param ... group objects created by \code{\link{bin}}
+#' @param z a numeric vector to summary for each group. Optional for some
 #'   summary statistics.
 #' @param summary the summary statistic to use. Currently must be one of
 #'   count, sum, mean, median or sd. If \code{NULL}, defaults to mean if
 #'   y is present, count if not.
-#' @param weight a vector of weights.  Not currently supported by all summary
+#' @param w a vector of weights. Not currently supported by all summary
 #'   functions.
 #' @param drop if \code{TRUE} only locations with data will be returned.  This
 #'   is more efficient if the data is very sparse (<1\% of cells filled), and

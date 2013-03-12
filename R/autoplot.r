@@ -1,5 +1,8 @@
-#' Autoplot method for condensed.
+#' Autoplot condensed summaries.
 #'
+#' @param x a condensed summary
+#' @param var which summary variable to display
+#' @param ... other arguments passed on to individual methods
 #' @method autoplot condensed
 #' @export autoplot.condensed
 #' @examples

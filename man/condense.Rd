@@ -6,10 +6,9 @@
     drop = NULL)
 }
 \arguments{
-  \item{...}{group objects created by
-  \code{\link{grouped}}}
+  \item{...}{group objects created by \code{\link{bin}}}
 
-  \item{y}{a numeric vector to summary for each group.
+  \item{z}{a numeric vector to summary for each group.
   Optional for some summary statistics.}
 
   \item{summary}{the summary statistic to use. Currently
@@ -17,8 +16,8 @@
   \code{NULL}, defaults to mean if y is present, count if
   not.}
 
-  \item{weight}{a vector of weights.  Not currently
-  supported by all summary functions.}
+  \item{w}{a vector of weights. Not currently supported by
+  all summary functions.}
 
   \item{drop}{if \code{TRUE} only locations with data will
   be returned.  This is more efficient if the data is very

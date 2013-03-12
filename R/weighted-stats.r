@@ -9,6 +9,9 @@
 #' @param x numeric vector of observations
 #' @param w integer vector of weights, representing the number of
 #'  time each \code{x} was observed
+#' @param na.rm if \code{TRUE}, missing values in both \code{w} and \code{x}
+#'   will be removed prior computation. Otherwise if there are missing values
+#'   the result will always be missing.
 #' @export
 #' @examples
 #' x <- c(1:5)

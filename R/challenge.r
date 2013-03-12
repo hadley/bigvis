@@ -31,7 +31,7 @@ dchallenge <- function(x) {
   (spike + 2 * slope) / 3
 }
 
-#' plot(pchallenge, xlim = c(-5, 60), n = 500)
+# plot(pchallenge, xlim = c(-5, 60), n = 500)
 pchallenge <- function(x) {
   #  H(y) =
   #  = int_0^y h(x) dx

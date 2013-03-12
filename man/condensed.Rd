@@ -8,7 +8,7 @@
   is.condensed(x)
 }
 \arguments{
-  \item{groups}{list of \code{\link{grouped}} objects}
+  \item{groups}{list of \code{\link{bin}}ed objects}
 
   \item{grouped,summary}{output from C++ condense function}
 

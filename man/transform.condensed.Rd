@@ -3,12 +3,15 @@
 \alias{transform.condensed}
 \title{Transform condensed objects, collapsing unique bins.}
 \usage{
-  \method{transform}{condensed} (_data, ...)
+  \\method{transform}{condensed}(`_data`, ...)
 
-  rebin(_data)
+  rebin(`_data`)
 }
 \arguments{
-  \item{x}{a condensed summary '}
+  \item{data,`_data`}{a condensed summary}
+
+  \item{...}{named arguments evaluated in the context of
+  the data}
 }
 \description{
   Transform condensed objects, collapsing unique bins.

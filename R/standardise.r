@@ -1,6 +1,6 @@
 #' Standardise a summary to sum to one.
 #'
-#' @param x
+#' @param x a condensed summary. Must have \code{.count} variable.
 #' @param margin margins to standardise along.  If \code{NULL}, the default,
 #'  standardises the whole array.
 #' @export

@@ -12,8 +12,7 @@
 #' logical comparison and arithmetic operators, and
 #' \code{\link[plyr]{round_any}}.
 #'
-#'
-#' @param groups list of \code{\link{grouped}} objects
+#' @param groups list of \code{\link{bin}}ed objects
 #' @param grouped,summary output from C++ condense function
 #' @keywords internal
 #' @examples

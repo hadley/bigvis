@@ -12,6 +12,11 @@
 
   \item{w}{integer vector of weights, representing the
   number of time each \code{x} was observed}
+
+  \item{na.rm}{if \code{TRUE}, missing values in both
+  \code{w} and \code{x} will be removed prior computation.
+  Otherwise if there are missing values the result will
+  always be missing.}
 }
 \description{
   Compute a weighted variance or standard deviation of a

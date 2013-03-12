@@ -1,8 +1,22 @@
 #' Smooth a condensed data frame.
 #'
+#' @param x a condensed summary
+#' @param h numeric vector of bandwidths, one for each grouping variable in
+#'   \code{x}
+#' @param var variable to smooth
 #' @param grid a data frame with the grouping colums as x.  In order for the
 #'   factored version of \code{smooth_nd} to work, this grid must be a superset
 #'   of \code{x}.
+#' @param type type of smoothing to use.  Current options are \code{"mean"},
+#'   a kernel weighted mean; \code{"regression"}, a kernel weighted local
+#'   regression; and \code{"robust_regression"}, robust kernel weighted local
+#'   regression in the style of \code{\link{loess}}.  Unique prefixes are also
+#'   acceptable.
+#' @param factor if \code{TRUE} compute the n-dimensional smooth by a sequence
+#'   of 1d smoothes. For \code{type = "mean"} the results are always the same
+#    as \code{FALSE}; for \code{type = "regress"} they will be equal if the
+#'   grid values are uncorrelated (e.g. the grid is complete at every location);
+#'   and is very approximate for \code{type = "robust"}.
 #' @export
 #' @examples
 #' x <- runif(1e5)

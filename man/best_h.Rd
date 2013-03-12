@@ -8,9 +8,9 @@
 \arguments{
   \item{x}{condensed summary to smooth}
 
-  \item{h}{initial values of bandwidths to start search
-  out. If not specified defaults to 5 times the binwidth of
-  each variable.}
+  \item{h_init}{initial values of bandwidths to start
+  search out. If not specified defaults to 5 times the
+  binwidth of each variable.}
 
   \item{...}{other arguments (like \code{var}) passed on to
   \code{\link{rmse_cv}}}

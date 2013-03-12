@@ -5,7 +5,8 @@
   standardise(x, margin = integer())
 }
 \arguments{
-  \item{x}{}
+  \item{x}{a condensed summary. Must have \code{.count}
+  variable.}
 
   \item{margin}{margins to standardise along.  If
   \code{NULL}, the default, standardises the whole array.}

@@ -5,8 +5,9 @@
 #' automatically rebin for you.  You will need to use it if you manually
 #' transform any grouping variables.
 #'
-#' @param x a condensed summary
-#' '
+#' @param data,`_data` a condensed summary
+#' @param ... named arguments evaluated in the context of the data
+#' @usage \\method{transform}{condensed}(`_data`, ...)
 #' @keywords internal
 #' @examples
 #' x <- runif(1e4, -1, 1)
@@ -36,15 +37,16 @@ transform.condensed <- function(`_data`, ...) {
 
 #' @export
 #' @rdname transform.condensed
-rebin <- function(`_data`) {
-  stopifnot(is.condensed(`_data`))
+#' @usage rebin(`_data`)
+rebin <- function(data) {
+  stopifnot(is.condensed(data))
 
-  old_g <- `_data`[group_vars(`_data`)]
+  old_g <- data[group_vars(data)]
   old_g[] <- lapply(old_g, zapsmall, digits = 3)
   ids <- id(old_g, drop = TRUE)
-  if (!anyDuplicated(ids)) return(`_data`)
+  if (!anyDuplicated(ids)) return(data)
 
-  old_s <- `_data`[summary_vars(`_data`)]
+  old_s <- data[summary_vars(data)]
   new_s <- lapply(names(old_s), function(var) rebin_var(old_s, ids, var))
   names(new_s) <- names(old_s)
 

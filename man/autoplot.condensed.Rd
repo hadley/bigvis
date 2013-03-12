@@ -1,12 +1,20 @@
 \name{autoplot.condensed}
 \alias{autoplot.condensed}
-\title{Autoplot method for condensed.}
+\title{Autoplot condensed summaries.}
 \usage{
   \method{autoplot}{condensed} (x,
     var = last(summary_vars(x)), ...)
 }
+\arguments{
+  \item{x}{a condensed summary}
+
+  \item{var}{which summary variable to display}
+
+  \item{...}{other arguments passed on to individual
+  methods}
+}
 \description{
-  Autoplot method for condensed.
+  Autoplot condensed summaries.
 }
 \examples{
 if (require("ggplot2")) {
