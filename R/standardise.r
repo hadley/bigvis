@@ -40,11 +40,13 @@ standardise <- function(x, margin = integer()) {
   stopifnot(is.condensed(x), !is.null(x$.count))
 
   if (length(margin) == 0) {
-    x$.count <- prop.table(x$.count)
+    x$.count <- prop(x$.count)
   } else {
-    x$.count <- ave(x$.count, id(x[margin]), FUN = prop.table)
+    x$.count <- ave(x$.count, id(x[margin]), FUN = prop)
     x$.count[is.na(x$.count)] <- 0
   }
 
   x
 }
+
+prop <- function(x) x / sum(x, na.rm = TRUE)
