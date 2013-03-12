@@ -78,10 +78,10 @@ Ops.ranged <- function(e1, e2) {
 }
 
 #' @S3method [<- ranged
-"[<-.ranged" <- function(x, ...) {
+"[<-.ranged" <- function(x, ..., value) {
   attr(x, "range") <- NULL
   attr(x, "class") <- NULL
-  NextMethod(x, ...)
+  NextMethod(x, ..., value = value)
 }
 
 #' @S3method as.data.frame ranged
