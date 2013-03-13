@@ -6,7 +6,7 @@ class Summary2d {
   public:
     virtual void push(double x, double z, double w) =0;
     virtual double compute() =0;
-    // virtual ~Summary2d();
+    virtual ~Summary2d() {}
 };
 
 class Summary2dMean: public Summary2d {
