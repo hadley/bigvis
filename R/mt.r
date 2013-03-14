@@ -9,8 +9,8 @@
 #' @param x values to transform
 #' @param lambda degree of transformation:
 #' @export
-#' @references J. John and N. Draper. "An alternative family of transformations."
-#'  Applied Statistics, pages 190–197, 1980.
+#' @references J. John and N. Draper. "An alternative family of
+#'  transformations." Applied Statistics, pages 190-197, 1980.
 #'  \url{http://www.jstor.org/stable/2986305}
 #' @examples
 #' x <- seq(-10, 10, length = 100)

@@ -30,7 +30,7 @@ plot(x, jd(x, -2), type = "l")
 }
 \references{
   J. John and N. Draper. "An alternative family of
-  transformations."  Applied Statistics, pages 190–197,
+  transformations." Applied Statistics, pages 190-197,
   1980.  \url{http://www.jstor.org/stable/2986305}
 }
 
