@@ -47,6 +47,11 @@ setMethod("show", "Rcpp_BinnedVector", function(object) {
     "Width: ", object$width(), " Origin: ", object$origin(), "\n", sep = "")
 })
 
+setMethod("as.integer", "Rcpp_BinnedVector", function(x, ...) {
+  vapply(seq_len(x$size()), x$bin_i, integer(1))
+})
+
+
 is.binned <- function(x) {
   is(x, "Rcpp_BinnedVector")
 }
