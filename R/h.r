@@ -51,7 +51,7 @@ best_h <- function(x, h_init = NULL, ..., tol = 1e-2, control = list()) {
   rmse <- function(h) {
     rmse_cv(x, h, ...)
   }
-  res <- optim(h_init, rmse, method = "L-BFGS-B", lower = widths,
+  res <- optim(h_init, rmse, method = "L-BFGS-B", lower = widths * 1.01,
     control = control)
   h <- unname(res$par)
 

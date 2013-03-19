@@ -53,7 +53,7 @@ rmse_cv <- function(x, h, var = summary_vars(x)[1], ...) {
     smu <- smooth(x[-i, , drop = FALSE], grid = out, h = h, var = var, ...)
     smu[[var]] - x[[var]][i]
   }
-  err <- vapply(seq_along(nrow(x)), pred_error, numeric(1))
+  err <- vapply(seq_len(nrow(x)), pred_error, numeric(1))
   sqrt(mean(err ^ 2, na.rm = TRUE))
 }
 
