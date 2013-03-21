@@ -45,3 +45,12 @@ range.dgrid <- function(x, ...) c(min(x), max(x))
 as.integer.dgrid <- function(x, ...) {
   as.integer((unclass(x) - attr(x, "origin")) / attr(x, "width") + 1L)
 }
+
+#' @S3method as.data.frame dgrid
+as.data.frame.dgrid <- function(x, ...) {
+  n <- length(x)
+  list <- list(x)
+  class(list) <- "data.frame"
+  attr(list, "row.names") <- c(NA_integer_, -n)
+  list
+}
