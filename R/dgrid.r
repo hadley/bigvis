@@ -18,7 +18,7 @@ dgrid <- function(x, width, origin = 0, nbins = NULL) {
     nbins <- floor((max(x) - origin) / width)
   }
 
-  structure(x, class = "dgrid",
+  structure(x, class = c("dgrid", "numeric"),
     width = width, origin = origin, nbins = nbins)
 }
 
