@@ -1,4 +1,4 @@
-#' Modulus transformation.
+#' Modulus transformation (and its inverse).
 #'
 #' A generalisation of the box-cox transformation that works for
 #' values with both positive and negative values.
@@ -29,5 +29,18 @@ mt <- function(x, lambda) {
     sign(x) * log(abs(x) + 1)
   } else {
     sign(x) * ((abs(x) + 1) ^ lambda - 1) / lambda
+   }
+}
+
+#' @rdname mt
+#' @export
+inv_mt <- function(x, lambda) {
+  stopifnot(is.numeric(x))
+  stopifnot(is.numeric(lambda), length(lambda) == 1)
+
+  if (lambda == 0) {
+    sign(x) * (exp(abs(x)) - 1)
+  } else {
+    sign(x) * ((abs(x) * lambda + 1) ^ (1 / lambda) - 1)
    }
 }
