@@ -7,20 +7,20 @@
 #' often encountered with very large datasets.
 #'
 #' @param x values to transform
-#' @param lambda degree of transformation:
+#' @param lambda degree of transformation
 #' @export
 #' @references J. John and N. Draper. "An alternative family of
 #'  transformations." Applied Statistics, pages 190-197, 1980.
 #'  \url{http://www.jstor.org/stable/2986305}
 #' @examples
 #' x <- seq(-10, 10, length = 100)
-#' plot(x, jd(x, 0), type = "l")
-#' plot(x, jd(x, 0.25), type = "l")
-#' plot(x, jd(x, 0.5), type = "l")
-#' plot(x, jd(x, 1), type = "l")
-#' plot(x, jd(x, 2), type = "l")
-#' plot(x, jd(x, -1), type = "l")
-#' plot(x, jd(x, -2), type = "l")
+#' plot(x, mt(x, 0), type = "l")
+#' plot(x, mt(x, 0.25), type = "l")
+#' plot(x, mt(x, 0.5), type = "l")
+#' plot(x, mt(x, 1), type = "l")
+#' plot(x, mt(x, 2), type = "l")
+#' plot(x, mt(x, -1), type = "l")
+#' plot(x, mt(x, -2), type = "l")
 mt <- function(x, lambda) {
   stopifnot(is.numeric(x))
   stopifnot(is.numeric(lambda), length(lambda) == 1)

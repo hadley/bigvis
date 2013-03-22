@@ -10,7 +10,7 @@
 \arguments{
   \item{x}{values to transform}
 
-  \item{lambda}{degree of transformation:}
+  \item{lambda}{degree of transformation}
 }
 \description{
   A generalisation of the box-cox transformation that works
@@ -23,13 +23,13 @@
 }
 \examples{
 x <- seq(-10, 10, length = 100)
-plot(x, jd(x, 0), type = "l")
-plot(x, jd(x, 0.25), type = "l")
-plot(x, jd(x, 0.5), type = "l")
-plot(x, jd(x, 1), type = "l")
-plot(x, jd(x, 2), type = "l")
-plot(x, jd(x, -1), type = "l")
-plot(x, jd(x, -2), type = "l")
+plot(x, mt(x, 0), type = "l")
+plot(x, mt(x, 0.25), type = "l")
+plot(x, mt(x, 0.5), type = "l")
+plot(x, mt(x, 1), type = "l")
+plot(x, mt(x, 2), type = "l")
+plot(x, mt(x, -1), type = "l")
+plot(x, mt(x, -2), type = "l")
 }
 \references{
   J. John and N. Draper. "An alternative family of
