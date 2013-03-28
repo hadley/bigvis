@@ -61,7 +61,7 @@ best_h <- function(x, h_init = NULL, ..., tol = 1e-2, control = list()) {
   } else if (rel_dist(h, widths) < 1e-3) {
     warning("h close to lower bound: smoothing not needed", call. = FALSE)
   }
-  structure(h, evaluations = res$counts[1])
+  structure(h, evaluations = res$counts[1], conv = res$convergence)
 }
 
 rel_dist <- function(x, y) {
