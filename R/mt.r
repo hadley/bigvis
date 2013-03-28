@@ -44,3 +44,14 @@ inv_mt <- function(x, lambda) {
     sign(x) * ((abs(x) * lambda + 1) ^ (1 / lambda) - 1)
    }
 }
+
+#' @rdname mt
+#' @export
+mt_trans <- function(lambda) {
+  stopifnot(require("scales"))
+
+  trans_new("modulo",
+    function(x) mt(x, lambda),
+    function(x) inv_mt(x, lambda)
+  )
+}

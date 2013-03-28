@@ -1,11 +1,14 @@
 \name{mt}
 \alias{inv_mt}
 \alias{mt}
+\alias{mt_trans}
 \title{Modulus transformation (and its inverse).}
 \usage{
   mt(x, lambda)
 
   inv_mt(x, lambda)
+
+  mt_trans(lambda)
 }
 \arguments{
   \item{x}{values to transform}
