@@ -143,7 +143,7 @@ class BinnedVectors {
 };
 
 
-RCPP_EXPOSED_AS(BinnedVectorReference);
-RCPP_EXPOSED_WRAP(BinnedVectorReference);
-RCPP_EXPOSED_AS(BinnedVectors);
-RCPP_EXPOSED_WRAP(BinnedVectors);
+RCPP_EXPOSED_AS(BinnedVectorReference)
+RCPP_EXPOSED_WRAP(BinnedVectorReference)
+RCPP_EXPOSED_AS(BinnedVectors)
+RCPP_EXPOSED_WRAP(BinnedVectors)

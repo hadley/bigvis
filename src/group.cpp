@@ -28,8 +28,8 @@ RCPP_MODULE(Group) {
   .const_method("width", &GroupFixed::width)
   ;
 }
-RCPP_EXPOSED_AS(GroupFixed);
-RCPP_EXPOSED_WRAP(GroupFixed);
+RCPP_EXPOSED_AS(GroupFixed)
+RCPP_EXPOSED_WRAP(GroupFixed)
 
 
 // [[Rcpp::export]]

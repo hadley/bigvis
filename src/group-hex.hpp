@@ -19,8 +19,8 @@ class GroupHex {
                 double x_width, double y_width, 
                 double x_origin, double y_origin, 
                 double x_max)
-       : x_(x), y_(y), x_width_(x_width), y_width_(y_width), 
-          x_origin_(x_origin), y_origin_(y_origin) {
+       : x_(x), y_(y), x_width_(x_width), x_origin_(x_origin), 
+          y_width_(y_width), y_origin_(y_origin) {
       if (x.size() != y.size()) stop("x & y are not the same size");
       x_bins = x_max / x_width_ + 1;
     }
