@@ -19,7 +19,7 @@ The bigvis package is structured around the following workflow:
 
 * if you're working with counts, you might want to `standardise()`
 
-* visualise the results with `autoplot()`
+* visualise the results with `autoplot()` (you'll need to load `ggplot2` to use this)
 
 ## Weighted statistics
 
