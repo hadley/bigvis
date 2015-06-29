@@ -6,7 +6,7 @@ Since bigvis is not currently available on CRAN, the easiest way to try it out i
 
 ```R
 # install.packages("devtools")
-devtools::install_github("bigvis")
+devtools::install_github("hadley/bigvis")
 ```
 
 ## Workflow
