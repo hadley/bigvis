@@ -41,14 +41,15 @@ of bandwidth makes little difference visually, and we're unlikely to have
 sufficient data to make a statistically significant choice anyway.
 }
 \examples{
+\donttest{
 x <- rchallenge(1e4)
 xsum <- condense(bin(x, 1 / 10))
-h <- best_h(xsum, control = list(trace = 1, REPORT = 1))
-h <- best_h(xsum)
+h <- best_h(xsum, control = list(trace = 3, REPORT = 1))
 
 if (require("ggplot2")) {
 autoplot(xsum)
 autoplot(smooth(xsum, h))
+}
 }
 }
 \seealso{

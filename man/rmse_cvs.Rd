@@ -25,6 +25,7 @@ bandwidths, \code{rmse_cvs} computes for a multiple vectors of bandwidths,
 stored as a data frame.
 }
 \examples{
+\donttest{
 set.seed(1014)
 # 1d -----------------------------
 x <- rchallenge(1e4)
@@ -45,6 +46,7 @@ xysum <- condense(bin(x, 1 / 10), bin(y, 1 / 100))
 cvs <- rmse_cvs(xysum, h_grid(xysum, 10))
 if (require("ggplot2")) {
 qplot(x, y, data = cvs, size = err)
+}
 }
 }
 \seealso{

@@ -27,14 +27,15 @@
 #'   needed (i.e. the estimate is on the lower bounds), a warning is thrown.
 #' @export
 #' @examples
+#' \donttest{
 #' x <- rchallenge(1e4)
 #' xsum <- condense(bin(x, 1 / 10))
-#' h <- best_h(xsum, control = list(trace = 1, REPORT = 1))
-#' h <- best_h(xsum)
+#' h <- best_h(xsum, control = list(trace = 3, REPORT = 1))
 #'
 #' if (require("ggplot2")) {
 #' autoplot(xsum)
 #' autoplot(smooth(xsum, h))
+#' }
 #' }
 best_h <- function(x, h_init = NULL, ..., tol = 1e-2, control = list()) {
   stopifnot(is.condensed(x))

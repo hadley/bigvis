@@ -12,6 +12,7 @@
 #' @family bandwidth estimation functions
 #' @export
 #' @examples
+#' \donttest{
 #' set.seed(1014)
 #' # 1d -----------------------------
 #' x <- rchallenge(1e4)
@@ -32,6 +33,7 @@
 #' cvs <- rmse_cvs(xysum, h_grid(xysum, 10))
 #' if (require("ggplot2")) {
 #' qplot(x, y, data = cvs, size = err)
+#' }
 #' }
 rmse_cvs <- function(x, hs = h_grid(x), ...) {
   rmse_1 <- function(i) {
