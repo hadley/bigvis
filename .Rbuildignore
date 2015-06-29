@@ -3,3 +3,4 @@ notes.md
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^src/condense-gen\.r$
