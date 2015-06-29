@@ -1,13 +1,11 @@
 Package: bigvis
-Version: 0.1
+Version: 0.1.0.9000
 Title: Tools for visualisation of big data sets
 Description: Tools for visualising large datasets.
 Authors@R: c(
-    person("Hadley", "Wickham", role = c("aut", "cre"),
-    email = "hadley@rice.edu"),
+    person("Hadley", "Wickham", role = c("aut", "cre"), , "hadley@rstudio.com"),
     person("Yue", "Hue", role = "aut"),
-    person("R Core team", role = "ctb",
-    comment = "guess_bandwidth adapted from stats::bw.SJ")
+    person("R Core team", role = "ctb", comment = "guess_bandwidth adapted from stats::bw.SJ")
     )
 Depends:
     Rcpp
@@ -17,7 +15,9 @@ Suggests:
     plyr,
     ggplot2
 LazyData: true
-LinkingTo: Rcpp, BH
+LinkingTo: 
+    Rcpp, 
+    BH
 License: GPL (>= 2)
 Collate:
     'standardise.r'
