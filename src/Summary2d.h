@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "stats.hpp"
+#include "stats.h"
 using namespace Rcpp;
 
 class Summary2d {

@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include <bigvis.h>
-#include "group.hpp"
-#include "summary.hpp"
+#include "group.h"
+#include "summary.h"
 
 template<typename Stat>
 List condense(const BinnedVectors& group, const NumericVector& z, 

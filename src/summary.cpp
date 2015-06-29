@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "summary.hpp"
+#include "summary.h"
 using namespace Rcpp;
 
 template<typename Summary>

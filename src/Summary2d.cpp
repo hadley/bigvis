@@ -1,3 +1,3 @@
 #include <Rcpp.h>
-#include "Summary2d.hpp"
+#include "Summary2d.h"
 using namespace Rcpp;

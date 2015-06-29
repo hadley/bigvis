@@ -1,6 +1,6 @@
 #include <Rcpp.h>
-#include "group.hpp"
-#include "group-hex.hpp"
+#include "group.h"
+#include "group-hex.h"
 using namespace Rcpp;
 
 template<typename Group>

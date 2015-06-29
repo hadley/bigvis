@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <Rcpp.h>
-#include "group.hpp"
-#include "Summary2d.hpp"
+#include "group.h"
+#include "Summary2d.h"
 #include <boost/shared_ptr.hpp>
 using namespace Rcpp;
 
