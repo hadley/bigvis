@@ -1,5 +1,8 @@
 # bigvis
 
+[![Travis-CI Build Status](https://travis-ci.org/hadley/bigvis.svg?branch=master)](https://travis-ci.org/hadley/bigvis)
+[![Coverage Status](https://img.shields.io/codecov/c/github/hadley/bigvis/master.svg)](https://codecov.io/github/hadley/bigvis?branch=master)
+
 The bigvis package provides tools for exploratory data analysis of __large datasets__ (10-100 million obs). The aim is to have most operations take less than 5 seconds on commodity hardware, even for 100,000,000 data points.
 
 Since bigvis is not currently available on CRAN, the easiest way to try it out is to:

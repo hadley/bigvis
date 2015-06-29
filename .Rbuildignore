@@ -2,3 +2,4 @@ bench
 notes.md
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
