@@ -13,7 +13,8 @@ Imports:
     methods
 Suggests:
     plyr,
-    ggplot2
+    ggplot2,
+    scales
 LazyData: true
 LinkingTo: 
     Rcpp, 

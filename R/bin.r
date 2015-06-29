@@ -1,3 +1,4 @@
+
 #' Create a binned variable.
 #'
 #' @details
@@ -41,15 +42,6 @@ bin <- function(x, width = find_width(x), origin = find_origin(x, width),
 
   BigVis$BinnedVector$new(x, name, width, origin)
 }
-
-setMethod("show", "Rcpp_BinnedVector", function(object) {
-  cat("Binned [", object$size(), "]. ",
-    "Width: ", object$width(), " Origin: ", object$origin(), "\n", sep = "")
-})
-
-setMethod("as.integer", "Rcpp_BinnedVector", function(x, ...) {
-  vapply(seq_len(x$size()), x$bin_i, integer(1))
-})
 
 
 is.binned <- function(x) {

@@ -106,6 +106,6 @@ Ops.condensed <- function(e1, e2) {
 #' @keywords internal
 round_any.condensed <- function(x, accuracy, f = round) {
   gvars <- group_vars(x)
-  x[gvars] <- lapply(x[gvars], round_any, accuracy = accuracy, f = f)
+  x[gvars] <- lapply(x[gvars], plyr::round_any, accuracy = accuracy, f = f)
   rebin(x)
 }

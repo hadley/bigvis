@@ -48,9 +48,7 @@ inv_mt <- function(x, lambda) {
 #' @rdname mt
 #' @export
 mt_trans <- function(lambda) {
-  stopifnot(require("scales"))
-
-  trans_new("modulo",
+  scales::trans_new("modulo",
     function(x) mt(x, lambda),
     function(x) inv_mt(x, lambda)
   )

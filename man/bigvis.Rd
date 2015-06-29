@@ -2,9 +2,19 @@
 % Please edit documentation in R/bigvis.r
 \docType{package}
 \name{bigvis}
+\alias{as.integer,Rcpp_BinnedVector-method}
 \alias{bigvis}
 \alias{bigvis-package}
+\alias{show,Rcpp_BinnedVector-method}
 \title{The big vis package.}
+\usage{
+\S4method{show}{Rcpp_BinnedVector}(object)
+
+\S4method{as.integer}{Rcpp_BinnedVector}(x, ...)
+}
+\arguments{
+\item{x,object,...}{Generic args}
+}
 \description{
 The big vis package.
 }

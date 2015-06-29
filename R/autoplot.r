@@ -57,18 +57,18 @@ autoplot.condensed <- function(x, var = last(summary_vars(x)), ...) {
 plot_total_1 <- function(x, var = ".count", show_na = TRUE, log = "") {
   xvar <- names(x)[[1]]
 
-  plot <- ggplot(x[-1, ], aes_string(x = xvar, y = var)) +
-    geom_line(na.rm = TRUE)
+  plot <- ggplot2::ggplot(x[-1, ], ggplot2::aes_string(x = xvar, y = var)) +
+    ggplot2::geom_line(na.rm = TRUE)
 
   if (show_na) {
     plot <- plot + na_layer(x, var)
   }
 
   if (logv(log, "y")) {
-    plot <- plot + scale_y_continuous(trans = "log1p")
+    plot <- plot + ggplot2::scale_y_continuous(trans = "log1p")
   }
   if (logv(log, "x")) {
-    plot <- plot + scale_x_log10()
+    plot <- plot + ggplot2::scale_x_log10()
   }
 
   plot
@@ -82,16 +82,16 @@ plot_total_2 <- function(x, var = ".count", show_na = TRUE, log = "") {
 
   fill_trans <- if (logv(log, "z")) "log1p" else "identity"
 
-  plot <- ggplot(x[miss == 0, ], aes_string(x = xvar, y = yvar)) +
-    geom_raster(aes_string(fill = var)) +
-    scale_fill_gradient(low = "grey90", high = "black", trans = fill_trans) +
-    expand_limits(fill = 0)
+  plot <- ggplot2::ggplot(x[miss == 0, ], ggplot2::aes_string(x = xvar, y = yvar)) +
+    ggplot2::geom_raster(ggplot2::aes_string(fill = var)) +
+    ggplot2::scale_fill_gradient(low = "grey90", high = "black", trans = fill_trans) +
+    ggplot2::expand_limits(fill = 0)
 
   if (show_na) {
   }
 
-  plot <- plot + if (logv(log, "x")) scale_x_log10()
-  plot <- plot + if (logv(log, "y")) scale_y_log10()
+  plot <- plot + if (logv(log, "x")) ggplot2::scale_x_log10()
+  plot <- plot + if (logv(log, "y")) ggplot2::scale_y_log10()
 
   plot
 }
@@ -100,14 +100,14 @@ plot_summary_1 <- function(x, var = ".mean", show_na = TRUE,
                                     show_n = x %contains% ".count", log = NULL) {
   xvar <- names(x)[[1]]
 
-  plot <- ggplot(x[-1, ], aes_string(x = xvar, y = var)) +
-    geom_line(na.rm = TRUE) +
-    scale_size_area()
+  plot <- ggplot2::ggplot(x[-1, ], ggplot2::aes_string(x = xvar, y = var)) +
+    ggplot2::geom_line(na.rm = TRUE) +
+    ggplot2::scale_size_area()
 
   if (show_n) {
     plot <- plot +
-      geom_point(aes_string(color = ".count"), na.rm = TRUE) +
-      scale_colour_gradient(trans = "log10")
+      ggplot2::geom_point(ggplot2::aes_string(color = ".count"), na.rm = TRUE) +
+      ggplot2::scale_colour_gradient(trans = "log10")
   }
 
   if (show_na) {
@@ -124,15 +124,15 @@ plot_summary_2 <- function(x, var = ".mean", show_na = TRUE, log = "") {
 
   miss <- is.na(x[[1]]) + 2 * is.na(x[[2]])
 
-  plot <- ggplot(x[miss == 0, ], aes_string(x = xvar, y = yvar)) +
-    geom_tile(aes_string(fill = var)) +
-    scale_fill_gradient2()
+  plot <- ggplot2::ggplot(x[miss == 0, ], ggplot2::aes_string(x = xvar, y = yvar)) +
+    ggplot2::geom_tile(ggplot2::aes_string(fill = var)) +
+    ggplot2::scale_fill_gradient2()
 
   if (show_na) {
   }
 
-  plot <- plot + if (logv(log, "x")) scale_x_log10()
-  plot <- plot + if (logv(log, "y")) scale_y_log10()
+  plot <- plot + if (logv(log, "x")) ggplot2::scale_x_log10()
+  plot <- plot + if (logv(log, "y")) ggplot2::scale_y_log10()
 
   plot
 }
@@ -142,7 +142,7 @@ na_layer <- function(x, var) {
   if (length(val) == 0 || is.na(val) || val == 0) return()
 
   xloc <- miss_poss(x[[1]])
-  annotate("text", x = xloc, y = val, colour = "red", label = "NA",
+  ggplot2::annotate("text", x = xloc, y = val, colour = "red", label = "NA",
     size = 3)
 }
 
