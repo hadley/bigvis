@@ -26,27 +26,27 @@ dgrid <- function(x, width, origin = 0, nbins = NULL) {
 #' @rdname dgrid
 is.dgrid <- function(x) inherits(x, "dgrid")
 
-#' @S3method [ dgrid
+#' @export
 "[.dgrid" <- function(x, ...) {
   dgrid(NextMethod(), width = attr(x, "width"),
     origin = attr(x, "origin"), nbins = attr(x, "nbins"))
 }
 
-#' @S3method min dgrid
+#' @export
 min.dgrid <- function(x, ...) attr(x, "origin")
-#' @S3method max dgrid
+#' @export
 max.dgrid <- function(x, ...) {
   min(x) + attr(x, "nbins") * attr(x, "width")
 }
-#' @S3method range dgrid
+#' @export
 range.dgrid <- function(x, ...) c(min(x), max(x))
 
-#' @S3method as.integer dgrid
+#' @export
 as.integer.dgrid <- function(x, ...) {
   as.integer((unclass(x) - attr(x, "origin")) / attr(x, "width") + 1L)
 }
 
-#' @S3method as.data.frame dgrid
+#' @export
 as.data.frame.dgrid <- function(x, ...) {
   n <- length(x)
   list <- list(x)

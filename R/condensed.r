@@ -54,9 +54,9 @@ is.condensed <- function(x) inherits(x, "condensed")
 #' @export
 #' @rdname condensed
 as.condensed <- function(x) UseMethod("as.condensed")
-#' @S3method as.condensed condensed
+#' @export
 as.condensed.condensed <- function(x) x
-#' @S3method as.condensed data.frame
+#' @export
 as.condensed.data.frame <- function(x) {
   structure(x, class = c("condensed", class(x)))
 }
@@ -74,14 +74,14 @@ group_vars <- function(x) {
 gcol <- function(x) length(group_vars(x))
 
 
-#' @S3method Math condensed
+#' @export
 Math.condensed <- function(x, ...) {
   generic <- match.fun(.Generic)
   x[[1]] <- generic(x[[1]], ...)
   rebin(x)
 }
 
-#' @S3method Ops condensed
+#' @export
 Ops.condensed <- function(e1, e2) {
   logical_ops <- c("==", "!=", "<", "<=", ">=", ">")
   math_ops <- c("+", "-", "*", "/", "^", "%%", "%/%")

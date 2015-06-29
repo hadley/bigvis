@@ -49,14 +49,14 @@ ranged <- function(x, range = frange(x, finite = TRUE)) {
 #' @keywords internal
 is.ranged <- function(x) inherits(x, "ranged")
 
-#' @S3method min ranged
+#' @export
 min.ranged <- function(x, ...) attr(x, "range")[1]
-#' @S3method max ranged
+#' @export
 max.ranged <- function(x, ...) attr(x, "range")[2]
-#' @S3method range ranged
+#' @export
 range.ranged <- function(x, ...) attr(x, "range")
 
-#' @S3method print ranged
+#' @export
 print.ranged <- function(x, ...) {
   rng <- attr(x, "range")
   # attr(x, "range") <- NULL
@@ -66,14 +66,14 @@ print.ranged <- function(x, ...) {
     sep = "")
 }
 
-#' @S3method str ranged
+#' @export
 str.ranged <- function(object, ...) {
   rng <- attr(object, "range")
   cat(" Ranged [1:", length(object), "] ", format(rng[1]), "--", format(rng[2]),
     "\n", sep = "")
 }
 
-#' @S3method Ops ranged
+#' @export
 Ops.ranged <- function(e1, e2) {
   attr(e1, "range") <- NULL
   class(e1) <- NULL
@@ -81,14 +81,14 @@ Ops.ranged <- function(e1, e2) {
   NextMethod(e1, e2)
 }
 
-#' @S3method [<- ranged
+#' @export
 "[<-.ranged" <- function(x, ..., value) {
   attr(x, "range") <- NULL
   attr(x, "class") <- NULL
   NextMethod(x, ..., value = value)
 }
 
-#' @S3method as.data.frame ranged
+#' @export
 as.data.frame.ranged <- function(x, ...) {
   n <- length(x)
   x <- list(x)
