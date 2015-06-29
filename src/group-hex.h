@@ -6,8 +6,8 @@
  * Copyright (C) 2012 Mike Bostock (mbostock at gmail dot com)
  */
 class GroupHex {
-    const Fast<NumericVector> x_;
-    const Fast<NumericVector> y_;
+    const NumericVector x_;
+    const NumericVector y_;
     double x_width_;
     double x_origin_;
     double y_width_;
@@ -34,7 +34,7 @@ class GroupHex {
         (pj % 2 ? 0.5 : 0);
       int pi = px;
 
-       if (abs(py1) * 3 > 1) {
+       if (fabs(py1) * 3 > 1) {
         double px1 = px - pi,
                pi2 = pi + (px < pi ? -1 : 1) / 2,
                pj2 = pj + (py < pj ? -1 : 1),

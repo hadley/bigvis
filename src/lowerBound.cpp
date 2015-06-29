@@ -10,7 +10,7 @@ IntegerVector lowerBound(const NumericVector& x, const NumericVector& breaks) {
   IntegerVector out(n);
 
   for (int i = 0; i < n; i++) {
-    NumericVector::iterator it =
+    NumericVector::const_iterator it =
       std::lower_bound(breaks.begin(), breaks.end(), x[i]);
     if (it == breaks.end()) --it;
     out[i] = it - breaks.begin() + 1;
